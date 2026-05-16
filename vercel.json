@@ -1,24 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python",
-      "config": {
-        "includeFiles": [
-          "**/*",
-          "css/**",
-          "js/**",
-          "*.html",
-          "*.pkl"
-        ]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.py"
-    }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/((?!api/).*)", "destination": "/$1" }
   ]
 }
