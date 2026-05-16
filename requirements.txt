@@ -4,5 +4,6 @@ pandas
 scikit-learn
 pymongo[srv]
 dnspython
-tinydb
+python-dotenv
+joblib
 waitress
