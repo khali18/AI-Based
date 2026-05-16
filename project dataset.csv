@@ -1,0 +1,1001 @@
+Batch_ID,Medicine_Name,Category,Manufacturer,Manufacturing_Date,Expiry_Date,Unit_Cost_USD,Selling_Price_USD,Quantity_In_Stock,Reorder_Level,Sales_Last_30_Days,Storage_Condition,Days_to_Expiry,Daily_Consumption_Rate,Days_to_Exhaust_Stock,Expiry_Risk_Level,AI_Recommendation
+BATCH-1000,Lisinopril,Cardiology,Pfizer,2023-07-23,2024-08-20,2.21,3.86,67,20,566,Refrigerated,232,18.8666666666666,3.5512367491166,Low Risk,No immediate action required
+BATCH-1001,Metformin,Diabetes,AstraZeneca,2023-12-20,2026-11-21,33.31,56.21,421,96,38,Cool Dry Place,1055,1.26666666666666,332.368421052631,Low Risk,No immediate action required
+BATCH-1002,Ibuprofen,Analgesics,Cipla,2023-04-20,2024-05-10,15.92,22.78,457,35,448,Refrigerated,130,14.9333333333333,30.6026785714285,Low Risk,No immediate action required
+BATCH-1003,Metformin,Diabetes,Pfizer,2023-10-02,2026-03-23,16.83,24.39,25,95,74,Room Temperature,812,2.46666666666666,10.1351351351351,Low Risk,Reorder stock soon
+BATCH-1004,Atorvastatin,Cardiology,Pfizer,2023-06-16,2024-09-08,33.21,45.78,153,34,254,Cool Dry Place,251,8.46666666666666,18.0708661417322,Low Risk,No immediate action required
+BATCH-1005,Azithromycin,Antibiotics,Cipla,2023-09-26,2026-07-14,36.06,60.42,438,66,563,Room Temperature,925,18.7666666666666,23.3392539964476,Low Risk,No immediate action required
+BATCH-1006,Losartan,Cardiology,AstraZeneca,2023-01-31,2024-12-23,33.28,40.1,279,26,81,Refrigerated,357,2.7,103.333333333333,Low Risk,No immediate action required
+BATCH-1007,Azithromycin,Antibiotics,Pfizer,2023-06-30,2024-10-03,46.92,56.88,94,94,84,Cool Dry Place,276,2.8,33.5714285714285,Low Risk,Reorder stock soon
+BATCH-1008,Amoxicillin,Antibiotics,Pfizer,2023-03-02,2024-07-04,35.33,60.4,464,99,374,Room Temperature,185,12.4666666666666,37.2192513368983,Low Risk,No immediate action required
+BATCH-1009,Amoxicillin,Antibiotics,Sanofi,2023-07-17,2026-04-19,18.03,23.5,156,69,163,Room Temperature,839,5.43333333333333,28.7116564417177,Low Risk,No immediate action required
+BATCH-1010,Amlodipine,Cardiology,Sanofi,2023-10-25,2025-07-18,23.83,29.49,256,53,469,Refrigerated,564,15.6333333333333,16.3752665245202,Low Risk,No immediate action required
+BATCH-1011,Omeprazole,Gastroenterology,Pfizer,2023-11-15,2025-05-28,32.28,55.8,78,67,197,Room Temperature,513,6.56666666666666,11.8781725888324,Low Risk,No immediate action required
+BATCH-1012,Metoprolol,Cardiology,Novartis,2023-06-27,2025-10-17,18.74,24.77,111,74,353,Room Temperature,655,11.7666666666666,9.43342776203966,Low Risk,No immediate action required
+BATCH-1013,Amoxicillin,Antibiotics,Cipla,2023-12-16,2025-04-24,19.71,34.15,218,46,595,Room Temperature,479,19.8333333333333,10.9915966386554,Low Risk,No immediate action required
+BATCH-1014,Ibuprofen,Analgesics,Merck,2023-04-30,2024-09-05,40.51,66.06,57,44,205,Refrigerated,248,6.83333333333333,8.34146341463414,Low Risk,No immediate action required
+BATCH-1015,Azithromycin,Antibiotics,Merck,2023-07-20,2026-06-28,23.41,37.93,95,31,135,Room Temperature,909,4.5,21.1111111111111,Low Risk,No immediate action required
+BATCH-1016,Amoxicillin,Antibiotics,Novartis,2023-04-03,2025-11-11,30.91,53.13,147,61,532,Cool Dry Place,680,17.7333333333333,8.28947368421052,Low Risk,No immediate action required
+BATCH-1017,Lisinopril,Cardiology,Novartis,2023-09-28,2025-08-10,15.09,21.66,415,77,172,Cool Dry Place,587,5.73333333333333,72.3837209302325,Low Risk,No immediate action required
+BATCH-1018,Omeprazole,Gastroenterology,Sanofi,2023-06-10,2026-05-23,40.33,52.18,411,49,526,Room Temperature,873,17.5333333333333,23.4410646387832,Low Risk,No immediate action required
+BATCH-1019,Omeprazole,Gastroenterology,AstraZeneca,2023-02-12,2025-11-30,13.33,22.18,300,80,33,Room Temperature,699,1.1,272.727272727272,Low Risk,No immediate action required
+BATCH-1020,Losartan,Cardiology,Sanofi,2023-11-04,2026-01-11,3.37,4.33,173,23,345,Refrigerated,741,11.5,15.0434782608695,Low Risk,No immediate action required
+BATCH-1021,Lisinopril,Cardiology,GlaxoSmithKline,2023-12-17,2026-07-19,19.82,24.72,334,100,558,Refrigerated,930,18.6,17.9569892473118,Low Risk,No immediate action required
+BATCH-1022,Ibuprofen,Analgesics,Novartis,2023-12-07,2026-10-12,35.51,53.02,447,80,14,Refrigerated,1015,0.466666666666666,957.857142857142,Low Risk,No immediate action required
+BATCH-1023,Losartan,Cardiology,Cipla,2023-03-11,2025-01-27,29.19,42.74,390,64,148,Refrigerated,392,4.93333333333333,79.054054054054,Low Risk,No immediate action required
+BATCH-1024,Metoprolol,Cardiology,Sanofi,2023-12-24,2025-09-24,17.42,21.58,210,90,366,Room Temperature,632,12.2,17.2131147540983,Low Risk,No immediate action required
+BATCH-1025,Ibuprofen,Analgesics,GlaxoSmithKline,2023-02-28,2024-12-13,47.94,67.73,33,33,499,Cool Dry Place,347,16.6333333333333,1.98396793587174,Low Risk,Reorder stock soon
+BATCH-1026,Metoprolol,Cardiology,Merck,2023-04-07,2024-10-05,48.94,66.04,428,98,364,Refrigerated,278,12.1333333333333,35.2747252747252,Low Risk,No immediate action required
+BATCH-1027,Amlodipine,Cardiology,Sanofi,2023-08-06,2025-01-07,39.79,58.43,297,80,505,Refrigerated,372,16.8333333333333,17.6435643564356,Low Risk,No immediate action required
+BATCH-1028,Ibuprofen,Analgesics,Merck,2023-04-13,2026-02-05,1.88,2.92,144,51,279,Room Temperature,766,9.3,15.4838709677419,Low Risk,No immediate action required
+BATCH-1029,Ibuprofen,Analgesics,Merck,2023-07-12,2026-01-25,36.24,56.3,457,94,208,Cool Dry Place,755,6.93333333333333,65.9134615384615,Low Risk,No immediate action required
+BATCH-1030,Gabapentin,Neurology,AstraZeneca,2023-04-27,2025-06-14,17.4,29.62,433,89,521,Refrigerated,530,17.3666666666666,24.9328214971209,Low Risk,No immediate action required
+BATCH-1031,Gabapentin,Neurology,Merck,2023-03-14,2025-05-26,13.29,20.67,258,79,41,Refrigerated,511,1.36666666666666,188.780487804878,Low Risk,No immediate action required
+BATCH-1032,Levothyroxine,Endocrinology,Pfizer,2023-09-19,2026-03-14,8.31,12.27,282,82,510,Refrigerated,803,17.0,16.5882352941176,Low Risk,No immediate action required
+BATCH-1033,Paracetamol,Analgesics,Novartis,2023-02-26,2024-09-04,39.51,48.37,467,81,399,Refrigerated,247,13.3,35.1127819548872,Low Risk,No immediate action required
+BATCH-1034,Amlodipine,Cardiology,GlaxoSmithKline,2023-08-21,2026-01-10,32.76,51.63,196,60,78,Cool Dry Place,740,2.6,75.3846153846153,Low Risk,No immediate action required
+BATCH-1035,Metoprolol,Cardiology,Sanofi,2023-03-21,2024-05-21,35.44,49.28,300,51,317,Room Temperature,141,10.5666666666666,28.391167192429,Low Risk,No immediate action required
+BATCH-1036,Metformin,Diabetes,Sanofi,2023-07-04,2026-05-25,5.19,8.53,247,68,394,Refrigerated,875,13.1333333333333,18.8071065989847,Low Risk,No immediate action required
+BATCH-1037,Atorvastatin,Cardiology,Pfizer,2023-05-20,2024-12-11,32.07,43.15,222,50,93,Cool Dry Place,345,3.1,71.6129032258064,Low Risk,No immediate action required
+BATCH-1038,Amoxicillin,Antibiotics,Sanofi,2023-10-14,2024-12-12,30.12,50.03,244,33,335,Room Temperature,346,11.1666666666666,21.8507462686567,Low Risk,No immediate action required
+BATCH-1039,Gabapentin,Neurology,Cipla,2023-09-24,2026-05-31,6.19,7.43,419,69,90,Room Temperature,881,3.0,139.666666666666,Low Risk,No immediate action required
+BATCH-1040,Gabapentin,Neurology,Pfizer,2023-03-30,2024-08-14,34.35,55.99,109,42,451,Room Temperature,226,15.0333333333333,7.25055432372505,Low Risk,No immediate action required
+BATCH-1041,Omeprazole,Gastroenterology,Novartis,2023-11-14,2026-08-11,19.18,23.4,149,84,229,Cool Dry Place,953,7.63333333333333,19.5196506550218,Low Risk,No immediate action required
+BATCH-1042,Gabapentin,Neurology,Sanofi,2023-11-23,2026-08-26,30.35,49.8,444,82,573,Refrigerated,968,19.1,23.2460732984293,Low Risk,No immediate action required
+BATCH-1043,Albuterol,Respiratory,GlaxoSmithKline,2023-12-14,2026-08-01,44.75,65.7,368,88,369,Cool Dry Place,943,12.3,29.9186991869918,Low Risk,No immediate action required
+BATCH-1044,Atorvastatin,Cardiology,Sanofi,2023-03-27,2025-07-28,6.99,10.61,172,71,161,Room Temperature,574,5.36666666666666,32.0496894409937,Low Risk,No immediate action required
+BATCH-1045,Paracetamol,Analgesics,Novartis,2023-02-28,2025-02-24,7.77,9.84,444,30,495,Room Temperature,420,16.5,26.9090909090909,Low Risk,No immediate action required
+BATCH-1046,Albuterol,Respiratory,Cipla,2023-03-25,2025-06-10,19.55,26.67,148,38,342,Room Temperature,526,11.4,12.9824561403508,Low Risk,No immediate action required
+BATCH-1047,Levothyroxine,Endocrinology,Cipla,2023-06-20,2025-07-25,28.05,44.42,137,77,504,Refrigerated,571,16.8,8.1547619047619,Low Risk,No immediate action required
+BATCH-1048,Losartan,Cardiology,Cipla,2023-04-23,2024-05-20,19.93,26.63,436,78,489,Cool Dry Place,140,16.3,26.7484662576687,Low Risk,No immediate action required
+BATCH-1049,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-08-07,2024-08-15,3.25,5.72,135,69,355,Room Temperature,227,11.8333333333333,11.4084507042253,Low Risk,No immediate action required
+BATCH-1050,Omeprazole,Gastroenterology,Pfizer,2023-11-29,2025-03-27,47.71,81.24,36,73,82,Room Temperature,451,2.73333333333333,13.170731707317,Low Risk,Reorder stock soon
+BATCH-1051,Ibuprofen,Analgesics,Sanofi,2023-09-09,2024-12-18,4.98,6.95,51,76,209,Refrigerated,352,6.96666666666666,7.32057416267942,Low Risk,Reorder stock soon
+BATCH-1052,Atorvastatin,Cardiology,Pfizer,2023-11-14,2025-02-18,15.19,20.12,152,28,479,Refrigerated,414,15.9666666666666,9.51983298538622,Low Risk,No immediate action required
+BATCH-1053,Amlodipine,Cardiology,GlaxoSmithKline,2023-03-19,2025-05-02,19.8,31.53,156,74,286,Cool Dry Place,487,9.53333333333333,16.3636363636363,Low Risk,No immediate action required
+BATCH-1054,Metoprolol,Cardiology,GlaxoSmithKline,2023-05-22,2025-04-05,31.88,50.12,385,59,348,Cool Dry Place,460,11.6,33.1896551724137,Low Risk,No immediate action required
+BATCH-1055,Lisinopril,Cardiology,Pfizer,2023-12-12,2026-10-21,2.63,3.19,286,41,172,Room Temperature,1024,5.73333333333333,49.8837209302325,Low Risk,No immediate action required
+BATCH-1056,Metformin,Diabetes,Pfizer,2023-08-28,2025-12-25,26.59,46.5,113,49,172,Room Temperature,724,5.73333333333333,19.7093023255813,Low Risk,No immediate action required
+BATCH-1057,Metoprolol,Cardiology,Sanofi,2023-07-24,2024-08-16,15.43,23.24,433,49,56,Cool Dry Place,228,1.86666666666666,231.964285714285,High Risk,Redistribute to high-demand departments immediately
+BATCH-1058,Paracetamol,Analgesics,Pfizer,2023-12-22,2026-04-02,10.35,15.89,392,81,369,Cool Dry Place,822,12.3,31.8699186991869,Low Risk,No immediate action required
+BATCH-1059,Ibuprofen,Analgesics,Novartis,2023-06-28,2024-07-08,12.62,19.64,171,70,434,Room Temperature,189,14.4666666666666,11.8202764976958,Low Risk,No immediate action required
+BATCH-1060,Sertraline,Psychiatry,Merck,2023-07-03,2025-12-23,46.54,62.13,471,84,141,Refrigerated,722,4.7,100.212765957446,Low Risk,No immediate action required
+BATCH-1061,Ibuprofen,Analgesics,AstraZeneca,2023-10-10,2026-04-26,43.4,76.8,77,52,456,Refrigerated,846,15.2,5.06578947368421,Low Risk,No immediate action required
+BATCH-1062,Gabapentin,Neurology,Merck,2023-05-27,2025-07-16,47.94,75.55,294,96,2,Room Temperature,562,0.0666666666666666,4410.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1063,Metoprolol,Cardiology,Sanofi,2023-08-19,2026-04-21,39.91,60.08,430,97,179,Cool Dry Place,841,5.96666666666666,72.0670391061452,Low Risk,No immediate action required
+BATCH-1064,Gabapentin,Neurology,Sanofi,2023-09-03,2026-04-17,37.98,57.98,275,78,502,Room Temperature,837,16.7333333333333,16.4342629482071,Low Risk,No immediate action required
+BATCH-1065,Amoxicillin,Antibiotics,Sanofi,2023-08-05,2025-09-11,37.56,67.17,318,48,200,Refrigerated,619,6.66666666666666,47.6999999999999,Low Risk,No immediate action required
+BATCH-1066,Losartan,Cardiology,AstraZeneca,2023-12-11,2026-06-01,38.34,64.85,195,96,338,Room Temperature,882,11.2666666666666,17.3076923076923,Low Risk,No immediate action required
+BATCH-1067,Metformin,Diabetes,GlaxoSmithKline,2023-04-16,2026-03-07,5.84,9.6,26,26,338,Refrigerated,796,11.2666666666666,2.3076923076923,Low Risk,Reorder stock soon
+BATCH-1068,Ibuprofen,Analgesics,AstraZeneca,2023-10-27,2026-04-03,32.84,57.62,316,98,252,Cool Dry Place,823,8.4,37.6190476190476,Low Risk,No immediate action required
+BATCH-1069,Albuterol,Respiratory,Novartis,2023-01-02,2024-08-28,3.18,4.98,103,95,505,Room Temperature,240,16.8333333333333,6.11881188118811,Low Risk,No immediate action required
+BATCH-1070,Sertraline,Psychiatry,Sanofi,2023-11-29,2026-07-18,30.26,48.25,290,79,373,Refrigerated,929,12.4333333333333,23.3243967828418,Low Risk,No immediate action required
+BATCH-1071,Omeprazole,Gastroenterology,AstraZeneca,2023-04-06,2026-03-18,33.88,47.06,256,95,43,Cool Dry Place,807,1.43333333333333,178.60465116279,Low Risk,No immediate action required
+BATCH-1072,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-12-15,2025-10-03,32.84,44.59,317,80,77,Room Temperature,641,2.56666666666666,123.506493506493,Low Risk,No immediate action required
+BATCH-1073,Omeprazole,Gastroenterology,AstraZeneca,2023-09-29,2026-06-03,49.7,68.98,212,57,217,Cool Dry Place,884,7.23333333333333,29.3087557603686,Low Risk,No immediate action required
+BATCH-1074,Gabapentin,Neurology,AstraZeneca,2023-09-07,2026-03-07,4.35,6.75,168,43,579,Refrigerated,796,19.3,8.70466321243523,Low Risk,No immediate action required
+BATCH-1075,Levothyroxine,Endocrinology,Pfizer,2023-04-25,2024-07-22,3.44,5.59,315,68,195,Cool Dry Place,203,6.5,48.4615384615384,Low Risk,No immediate action required
+BATCH-1076,Metformin,Diabetes,Pfizer,2023-04-13,2025-05-10,37.34,48.63,58,20,400,Refrigerated,495,13.3333333333333,4.35,Low Risk,No immediate action required
+BATCH-1077,Amlodipine,Cardiology,Merck,2023-10-06,2025-08-20,18.74,25.77,249,76,102,Cool Dry Place,597,3.4,73.235294117647,Low Risk,No immediate action required
+BATCH-1078,Amoxicillin,Antibiotics,Sanofi,2023-12-19,2025-09-12,27.9,48.89,305,38,569,Room Temperature,620,18.9666666666666,16.0808435852372,Low Risk,No immediate action required
+BATCH-1079,Ibuprofen,Analgesics,GlaxoSmithKline,2023-12-09,2026-10-12,3.42,5.44,115,72,402,Cool Dry Place,1015,13.4,8.5820895522388,Low Risk,No immediate action required
+BATCH-1080,Sertraline,Psychiatry,Pfizer,2023-03-24,2024-12-24,2.04,2.73,247,24,215,Room Temperature,358,7.16666666666666,34.4651162790697,Low Risk,No immediate action required
+BATCH-1081,Losartan,Cardiology,Novartis,2023-12-07,2025-06-06,39.45,63.28,82,73,371,Room Temperature,522,12.3666666666666,6.63072776280323,Low Risk,No immediate action required
+BATCH-1082,Levothyroxine,Endocrinology,Cipla,2023-09-03,2025-10-26,18.42,30.66,240,76,23,Cool Dry Place,664,0.766666666666666,313.043478260869,Low Risk,No immediate action required
+BATCH-1083,Metformin,Diabetes,GlaxoSmithKline,2023-05-16,2025-03-13,12.86,17.18,479,62,60,Refrigerated,437,2.0,239.5,Low Risk,No immediate action required
+BATCH-1084,Levothyroxine,Endocrinology,Pfizer,2023-11-18,2024-12-30,13.8,18.02,241,94,283,Cool Dry Place,364,9.43333333333333,25.547703180212,Low Risk,No immediate action required
+BATCH-1085,Losartan,Cardiology,GlaxoSmithKline,2023-03-07,2025-11-05,5.39,6.94,262,35,493,Cool Dry Place,674,16.4333333333333,15.9432048681541,Low Risk,No immediate action required
+BATCH-1086,Losartan,Cardiology,Sanofi,2023-04-06,2026-02-12,20.75,28.75,481,99,149,Refrigerated,773,4.96666666666666,96.8456375838926,Low Risk,No immediate action required
+BATCH-1087,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-12-13,2026-02-14,18.36,27.92,399,96,365,Cool Dry Place,775,12.1666666666666,32.7945205479452,Low Risk,No immediate action required
+BATCH-1088,Ibuprofen,Analgesics,Sanofi,2023-11-07,2025-08-18,33.71,47.06,147,71,260,Room Temperature,595,8.66666666666666,16.9615384615384,Low Risk,No immediate action required
+BATCH-1089,Albuterol,Respiratory,Pfizer,2023-05-18,2024-12-12,36.29,63.79,176,65,16,Refrigerated,346,0.533333333333333,330.0,Low Risk,No immediate action required
+BATCH-1090,Azithromycin,Antibiotics,Merck,2023-02-27,2025-01-17,29.04,42.66,203,60,24,Refrigerated,382,0.8,253.75,Low Risk,No immediate action required
+BATCH-1091,Sertraline,Psychiatry,Merck,2023-02-03,2025-09-22,16.89,27.04,37,54,544,Cool Dry Place,630,18.1333333333333,2.04044117647058,Low Risk,Reorder stock soon
+BATCH-1092,Azithromycin,Antibiotics,Cipla,2023-01-08,2024-09-27,32.43,49.77,120,100,164,Cool Dry Place,270,5.46666666666666,21.9512195121951,Low Risk,No immediate action required
+BATCH-1093,Amlodipine,Cardiology,Merck,2023-02-12,2025-04-24,30.41,47.1,348,66,494,Cool Dry Place,479,16.4666666666666,21.1336032388664,Low Risk,No immediate action required
+BATCH-1094,Omeprazole,Gastroenterology,Cipla,2023-06-20,2025-06-22,35.2,45.46,283,61,550,Cool Dry Place,538,18.3333333333333,15.4363636363636,Low Risk,No immediate action required
+BATCH-1095,Sertraline,Psychiatry,Cipla,2023-08-11,2025-04-19,38.78,61.22,226,94,547,Refrigerated,474,18.2333333333333,12.3948811700182,Low Risk,No immediate action required
+BATCH-1096,Azithromycin,Antibiotics,Cipla,2023-08-30,2026-08-21,28.83,41.24,442,50,235,Cool Dry Place,963,7.83333333333333,56.4255319148936,Low Risk,No immediate action required
+BATCH-1097,Atorvastatin,Cardiology,Sanofi,2023-02-16,2024-05-20,3.71,5.23,32,64,554,Room Temperature,140,18.4666666666666,1.73285198555956,Low Risk,Reorder stock soon
+BATCH-1098,Albuterol,Respiratory,AstraZeneca,2023-03-16,2025-12-24,41.09,58.08,405,36,422,Room Temperature,723,14.0666666666666,28.7914691943127,Low Risk,No immediate action required
+BATCH-1099,Omeprazole,Gastroenterology,Pfizer,2023-06-10,2024-12-20,19.7,27.03,183,99,237,Room Temperature,354,7.9,23.1645569620253,Low Risk,No immediate action required
+BATCH-1100,Gabapentin,Neurology,Merck,2023-08-25,2024-12-26,16.91,28.39,369,85,158,Room Temperature,360,5.26666666666666,70.0632911392405,Low Risk,No immediate action required
+BATCH-1101,Metoprolol,Cardiology,Merck,2023-06-29,2026-01-01,10.58,16.6,462,75,471,Room Temperature,731,15.7,29.4267515923566,Low Risk,No immediate action required
+BATCH-1102,Amoxicillin,Antibiotics,AstraZeneca,2023-08-04,2024-11-04,7.0,12.43,166,38,473,Cool Dry Place,308,15.7666666666666,10.5285412262156,Low Risk,No immediate action required
+BATCH-1103,Azithromycin,Antibiotics,GlaxoSmithKline,2023-09-30,2026-06-15,47.83,80.96,41,54,440,Room Temperature,896,14.6666666666666,2.79545454545454,Low Risk,Reorder stock soon
+BATCH-1104,Sertraline,Psychiatry,AstraZeneca,2023-04-28,2025-07-26,2.08,3.56,49,95,258,Refrigerated,572,8.6,5.69767441860465,Low Risk,Reorder stock soon
+BATCH-1105,Paracetamol,Analgesics,AstraZeneca,2023-10-26,2025-05-24,20.64,28.49,233,39,425,Room Temperature,509,14.1666666666666,16.4470588235294,Low Risk,No immediate action required
+BATCH-1106,Atorvastatin,Cardiology,Pfizer,2023-07-18,2025-07-27,16.27,23.86,6,55,42,Room Temperature,573,1.4,4.28571428571428,Low Risk,Reorder stock soon
+BATCH-1107,Metoprolol,Cardiology,Merck,2023-09-14,2025-04-19,38.74,67.26,185,77,541,Refrigerated,474,18.0333333333333,10.2587800369685,Low Risk,No immediate action required
+BATCH-1108,Amlodipine,Cardiology,Merck,2023-05-13,2024-12-09,7.1,11.27,384,49,478,Refrigerated,343,15.9333333333333,24.1004184100418,Low Risk,No immediate action required
+BATCH-1109,Omeprazole,Gastroenterology,Pfizer,2023-10-15,2025-01-04,9.69,16.89,19,89,437,Refrigerated,369,14.5666666666666,1.30434782608695,Low Risk,Reorder stock soon
+BATCH-1110,Ibuprofen,Analgesics,Merck,2023-08-18,2026-07-13,45.63,79.27,392,59,455,Cool Dry Place,924,15.1666666666666,25.8461538461538,Low Risk,No immediate action required
+BATCH-1111,Lisinopril,Cardiology,Novartis,2023-10-17,2026-07-10,35.53,46.2,394,56,559,Refrigerated,921,18.6333333333333,21.1449016100178,Low Risk,No immediate action required
+BATCH-1112,Omeprazole,Gastroenterology,Merck,2023-04-08,2024-10-27,16.06,27.64,406,98,538,Refrigerated,300,17.9333333333333,22.6394052044609,Low Risk,No immediate action required
+BATCH-1113,Paracetamol,Analgesics,Merck,2023-10-15,2026-04-20,31.05,44.58,238,90,45,Room Temperature,840,1.5,158.666666666666,Low Risk,No immediate action required
+BATCH-1114,Metformin,Diabetes,Merck,2023-09-27,2026-01-26,24.42,31.97,252,26,138,Cool Dry Place,756,4.6,54.7826086956521,Low Risk,No immediate action required
+BATCH-1115,Metformin,Diabetes,AstraZeneca,2023-06-03,2025-06-11,36.87,47.27,159,72,197,Cool Dry Place,527,6.56666666666666,24.2131979695431,Low Risk,No immediate action required
+BATCH-1116,Ibuprofen,Analgesics,Novartis,2023-02-13,2026-01-06,33.84,54.38,289,54,156,Room Temperature,736,5.2,55.576923076923,Low Risk,No immediate action required
+BATCH-1117,Metformin,Diabetes,Novartis,2023-03-09,2025-03-24,37.79,53.02,221,21,579,Cool Dry Place,448,19.3,11.4507772020725,Low Risk,No immediate action required
+BATCH-1118,Gabapentin,Neurology,Cipla,2023-04-14,2025-09-03,35.47,42.71,6,22,233,Refrigerated,611,7.76666666666666,0.772532188841201,Low Risk,Reorder stock soon
+BATCH-1119,Losartan,Cardiology,Merck,2023-08-31,2025-06-14,49.82,88.23,41,30,577,Cool Dry Place,530,19.2333333333333,2.1317157712305,Low Risk,No immediate action required
+BATCH-1120,Amoxicillin,Antibiotics,Novartis,2023-10-26,2026-05-27,24.36,43.23,426,52,7,Refrigerated,877,0.233333333333333,1825.71428571428,High Risk,Redistribute to high-demand departments immediately
+BATCH-1121,Gabapentin,Neurology,AstraZeneca,2023-05-10,2025-12-02,23.69,36.63,278,48,168,Cool Dry Place,701,5.6,49.6428571428571,Low Risk,No immediate action required
+BATCH-1122,Lisinopril,Cardiology,Pfizer,2023-05-30,2026-01-23,49.75,73.41,57,65,251,Room Temperature,753,8.36666666666666,6.81274900398406,Low Risk,Reorder stock soon
+BATCH-1123,Azithromycin,Antibiotics,Pfizer,2023-11-02,2025-04-16,48.85,87.09,443,43,310,Room Temperature,471,10.3333333333333,42.8709677419354,Low Risk,No immediate action required
+BATCH-1124,Sertraline,Psychiatry,Novartis,2023-02-28,2024-12-30,15.42,25.51,80,46,266,Cool Dry Place,364,8.86666666666666,9.02255639097744,Low Risk,No immediate action required
+BATCH-1125,Ibuprofen,Analgesics,Merck,2023-11-14,2026-02-24,37.86,67.33,476,60,420,Room Temperature,785,14.0,34.0,Low Risk,No immediate action required
+BATCH-1126,Losartan,Cardiology,Merck,2023-12-08,2025-06-25,26.7,44.56,179,63,255,Room Temperature,541,8.5,21.0588235294117,Low Risk,No immediate action required
+BATCH-1127,Metoprolol,Cardiology,Merck,2023-10-01,2025-09-02,48.84,68.63,291,39,318,Cool Dry Place,610,10.6,27.4528301886792,Low Risk,No immediate action required
+BATCH-1128,Omeprazole,Gastroenterology,Pfizer,2023-07-26,2026-02-26,25.62,43.76,206,44,4,Room Temperature,787,0.133333333333333,1545.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1129,Metformin,Diabetes,Merck,2023-11-03,2025-07-11,11.39,17.55,166,43,233,Room Temperature,557,7.76666666666666,21.3733905579399,Low Risk,No immediate action required
+BATCH-1130,Paracetamol,Analgesics,GlaxoSmithKline,2023-02-19,2024-12-19,44.13,66.48,160,38,513,Cool Dry Place,353,17.1,9.35672514619883,Low Risk,No immediate action required
+BATCH-1131,Gabapentin,Neurology,AstraZeneca,2023-11-25,2026-07-21,9.53,12.23,100,57,88,Room Temperature,932,2.93333333333333,34.090909090909,Low Risk,No immediate action required
+BATCH-1132,Gabapentin,Neurology,Sanofi,2023-02-04,2024-10-27,27.23,42.45,82,78,93,Room Temperature,300,3.1,26.4516129032258,Low Risk,No immediate action required
+BATCH-1133,Metoprolol,Cardiology,Merck,2023-09-29,2025-01-22,4.08,6.21,268,53,540,Refrigerated,387,18.0,14.8888888888888,Low Risk,No immediate action required
+BATCH-1134,Sertraline,Psychiatry,GlaxoSmithKline,2023-09-10,2025-04-30,33.89,48.46,259,54,323,Refrigerated,485,10.7666666666666,24.0557275541795,Low Risk,No immediate action required
+BATCH-1135,Sertraline,Psychiatry,AstraZeneca,2023-02-27,2026-02-22,20.19,28.29,324,52,7,Cool Dry Place,783,0.233333333333333,1388.57142857142,High Risk,Redistribute to high-demand departments immediately
+BATCH-1136,Metformin,Diabetes,Merck,2023-06-08,2026-03-11,46.67,81.0,453,35,410,Refrigerated,800,13.6666666666666,33.1463414634146,Low Risk,No immediate action required
+BATCH-1137,Gabapentin,Neurology,Sanofi,2023-07-26,2026-03-30,37.35,50.91,252,23,321,Room Temperature,819,10.7,23.5514018691588,Low Risk,No immediate action required
+BATCH-1138,Lisinopril,Cardiology,Pfizer,2023-06-29,2025-08-15,42.28,70.2,80,22,174,Room Temperature,592,5.8,13.7931034482758,Low Risk,No immediate action required
+BATCH-1139,Azithromycin,Antibiotics,Cipla,2023-04-11,2024-08-01,11.51,14.23,72,75,445,Refrigerated,213,14.8333333333333,4.85393258426966,Low Risk,Reorder stock soon
+BATCH-1140,Amoxicillin,Antibiotics,Sanofi,2023-05-25,2024-10-02,10.18,17.03,105,43,229,Cool Dry Place,275,7.63333333333333,13.7554585152838,Low Risk,No immediate action required
+BATCH-1141,Amlodipine,Cardiology,GlaxoSmithKline,2023-08-24,2026-08-09,4.2,7.43,11,44,340,Cool Dry Place,951,11.3333333333333,0.970588235294117,Low Risk,Reorder stock soon
+BATCH-1142,Gabapentin,Neurology,Cipla,2023-10-12,2026-09-29,49.38,77.32,434,59,196,Refrigerated,1002,6.53333333333333,66.4285714285714,Low Risk,No immediate action required
+BATCH-1143,Losartan,Cardiology,Novartis,2023-09-18,2026-07-22,34.05,46.93,470,35,315,Room Temperature,933,10.5,44.7619047619047,Low Risk,No immediate action required
+BATCH-1144,Levothyroxine,Endocrinology,Pfizer,2023-09-03,2026-05-31,39.06,65.38,333,96,286,Cool Dry Place,881,9.53333333333333,34.9300699300699,Low Risk,No immediate action required
+BATCH-1145,Sertraline,Psychiatry,Merck,2023-06-24,2024-06-24,42.56,66.86,386,31,473,Cool Dry Place,175,15.7666666666666,24.4820295983086,Low Risk,No immediate action required
+BATCH-1146,Ibuprofen,Analgesics,Sanofi,2023-06-24,2026-06-04,25.92,40.84,36,70,12,Room Temperature,885,0.4,90.0,Low Risk,Reorder stock soon
+BATCH-1147,Gabapentin,Neurology,AstraZeneca,2023-01-03,2025-04-06,25.38,37.67,29,20,304,Cool Dry Place,461,10.1333333333333,2.86184210526315,Low Risk,No immediate action required
+BATCH-1148,Atorvastatin,Cardiology,Novartis,2023-03-19,2025-03-08,48.8,71.8,179,55,147,Cool Dry Place,432,4.9,36.5306122448979,Low Risk,No immediate action required
+BATCH-1149,Metoprolol,Cardiology,AstraZeneca,2023-02-02,2024-04-27,42.27,73.2,75,98,527,Cool Dry Place,117,17.5666666666666,4.26944971537001,Low Risk,Reorder stock soon
+BATCH-1150,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-07-17,2024-08-28,37.83,54.95,370,96,503,Cool Dry Place,240,16.7666666666666,22.0675944333996,Low Risk,No immediate action required
+BATCH-1151,Omeprazole,Gastroenterology,Pfizer,2023-04-26,2025-09-24,29.15,47.51,258,98,457,Refrigerated,632,15.2333333333333,16.9365426695842,Low Risk,No immediate action required
+BATCH-1152,Azithromycin,Antibiotics,Merck,2023-02-20,2025-02-10,32.79,54.6,489,60,69,Refrigerated,406,2.3,212.608695652173,Low Risk,No immediate action required
+BATCH-1153,Lisinopril,Cardiology,Sanofi,2023-06-20,2024-10-05,45.48,67.94,291,64,553,Cool Dry Place,278,18.4333333333333,15.7866184448462,Low Risk,No immediate action required
+BATCH-1154,Metformin,Diabetes,Merck,2023-01-14,2024-09-03,33.88,44.3,285,44,88,Room Temperature,246,2.93333333333333,97.1590909090909,Low Risk,No immediate action required
+BATCH-1155,Losartan,Cardiology,AstraZeneca,2023-10-31,2024-11-09,45.79,70.12,386,62,115,Room Temperature,313,3.83333333333333,100.695652173913,Low Risk,No immediate action required
+BATCH-1156,Azithromycin,Antibiotics,Novartis,2023-09-28,2025-02-05,29.45,49.52,447,33,517,Refrigerated,401,17.2333333333333,25.9381044487427,Low Risk,No immediate action required
+BATCH-1157,Omeprazole,Gastroenterology,Merck,2023-10-06,2025-09-05,37.79,62.43,165,89,299,Refrigerated,613,9.96666666666666,16.5551839464882,Low Risk,No immediate action required
+BATCH-1158,Gabapentin,Neurology,AstraZeneca,2023-11-23,2026-09-01,26.58,40.02,147,68,239,Refrigerated,974,7.96666666666666,18.4518828451882,Low Risk,No immediate action required
+BATCH-1159,Paracetamol,Analgesics,GlaxoSmithKline,2023-09-13,2025-08-12,8.12,11.15,388,28,413,Room Temperature,589,13.7666666666666,28.18401937046,Low Risk,No immediate action required
+BATCH-1160,Albuterol,Respiratory,AstraZeneca,2023-08-25,2026-08-17,20.15,26.3,300,46,533,Cool Dry Place,959,17.7666666666666,16.8855534709193,Low Risk,No immediate action required
+BATCH-1161,Atorvastatin,Cardiology,Merck,2023-02-03,2024-08-18,42.73,58.45,239,40,87,Room Temperature,230,2.9,82.4137931034482,Low Risk,No immediate action required
+BATCH-1162,Sertraline,Psychiatry,Novartis,2023-01-14,2025-06-19,25.5,41.28,100,71,176,Refrigerated,535,5.86666666666666,17.0454545454545,Low Risk,No immediate action required
+BATCH-1163,Ibuprofen,Analgesics,AstraZeneca,2023-06-18,2026-04-14,40.07,59.37,168,27,81,Room Temperature,834,2.7,62.2222222222222,Low Risk,No immediate action required
+BATCH-1164,Sertraline,Psychiatry,Pfizer,2023-01-24,2024-05-09,29.7,50.97,300,87,489,Room Temperature,129,16.3,18.4049079754601,Low Risk,No immediate action required
+BATCH-1165,Metoprolol,Cardiology,GlaxoSmithKline,2023-10-17,2025-12-04,11.94,17.06,37,52,62,Room Temperature,703,2.06666666666666,17.9032258064516,Low Risk,Reorder stock soon
+BATCH-1166,Azithromycin,Antibiotics,Merck,2023-11-05,2026-03-05,32.12,52.47,188,26,235,Cool Dry Place,794,7.83333333333333,24.0,Low Risk,No immediate action required
+BATCH-1167,Metformin,Diabetes,AstraZeneca,2023-02-12,2025-07-16,3.18,3.99,378,98,408,Cool Dry Place,562,13.6,27.7941176470588,Low Risk,No immediate action required
+BATCH-1168,Albuterol,Respiratory,Pfizer,2023-10-17,2025-05-20,33.89,45.1,135,26,575,Room Temperature,505,19.1666666666666,7.04347826086956,Low Risk,No immediate action required
+BATCH-1169,Azithromycin,Antibiotics,Pfizer,2023-01-19,2025-12-22,37.63,45.33,272,76,549,Room Temperature,721,18.3,14.863387978142,Low Risk,No immediate action required
+BATCH-1170,Losartan,Cardiology,AstraZeneca,2023-08-25,2026-01-09,35.29,56.88,222,30,545,Refrigerated,739,18.1666666666666,12.2201834862385,Low Risk,No immediate action required
+BATCH-1171,Metoprolol,Cardiology,Cipla,2023-08-19,2025-08-22,22.94,29.67,113,79,364,Cool Dry Place,599,12.1333333333333,9.31318681318681,Low Risk,No immediate action required
+BATCH-1172,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-08-05,2025-07-21,23.08,38.59,53,72,389,Cool Dry Place,567,12.9666666666666,4.08740359897172,Low Risk,Reorder stock soon
+BATCH-1173,Amoxicillin,Antibiotics,AstraZeneca,2023-10-27,2026-04-11,30.63,48.97,306,98,488,Cool Dry Place,831,16.2666666666666,18.811475409836,Low Risk,No immediate action required
+BATCH-1174,Omeprazole,Gastroenterology,Merck,2023-04-13,2025-02-26,4.85,6.86,409,62,506,Cool Dry Place,422,16.8666666666666,24.2490118577075,Low Risk,No immediate action required
+BATCH-1175,Amoxicillin,Antibiotics,Cipla,2023-01-30,2024-06-09,22.43,38.86,115,72,502,Room Temperature,160,16.7333333333333,6.87250996015936,Low Risk,No immediate action required
+BATCH-1176,Metformin,Diabetes,AstraZeneca,2023-12-20,2026-07-25,49.2,64.43,237,28,427,Refrigerated,936,14.2333333333333,16.6510538641686,Low Risk,No immediate action required
+BATCH-1177,Amoxicillin,Antibiotics,Cipla,2023-10-23,2026-09-17,37.17,63.49,17,46,525,Room Temperature,990,17.5,0.971428571428571,Low Risk,Reorder stock soon
+BATCH-1178,Albuterol,Respiratory,AstraZeneca,2023-01-10,2025-01-23,45.5,55.3,499,53,336,Refrigerated,388,11.2,44.5535714285714,Low Risk,No immediate action required
+BATCH-1179,Lisinopril,Cardiology,Sanofi,2023-04-05,2025-02-27,28.74,49.81,318,50,381,Room Temperature,423,12.7,25.0393700787401,Low Risk,No immediate action required
+BATCH-1180,Losartan,Cardiology,GlaxoSmithKline,2023-10-15,2025-09-24,28.04,40.84,386,69,490,Room Temperature,632,16.3333333333333,23.6326530612244,Low Risk,No immediate action required
+BATCH-1181,Paracetamol,Analgesics,Novartis,2023-05-29,2026-03-14,36.06,51.37,98,98,316,Refrigerated,803,10.5333333333333,9.30379746835443,Low Risk,Reorder stock soon
+BATCH-1182,Albuterol,Respiratory,GlaxoSmithKline,2023-08-12,2026-02-23,21.83,38.79,43,64,184,Cool Dry Place,784,6.13333333333333,7.01086956521739,Low Risk,Reorder stock soon
+BATCH-1183,Lisinopril,Cardiology,GlaxoSmithKline,2023-11-25,2025-06-28,29.37,38.55,342,59,335,Cool Dry Place,544,11.1666666666666,30.6268656716417,Low Risk,No immediate action required
+BATCH-1184,Levothyroxine,Endocrinology,Merck,2023-04-07,2025-02-26,23.14,29.56,234,94,308,Cool Dry Place,422,10.2666666666666,22.7922077922077,Low Risk,No immediate action required
+BATCH-1185,Metformin,Diabetes,Pfizer,2023-08-30,2025-12-02,38.83,51.27,134,36,256,Refrigerated,701,8.53333333333333,15.703125,Low Risk,No immediate action required
+BATCH-1186,Lisinopril,Cardiology,Novartis,2023-03-09,2024-12-15,43.32,61.11,41,60,288,Room Temperature,349,9.6,4.27083333333333,Low Risk,Reorder stock soon
+BATCH-1187,Paracetamol,Analgesics,Pfizer,2023-10-11,2025-07-20,28.87,35.95,355,74,3,Refrigerated,566,0.1,3550.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1188,Levothyroxine,Endocrinology,Cipla,2023-12-24,2026-07-02,31.24,40.29,54,32,486,Room Temperature,913,16.2,3.33333333333333,Low Risk,No immediate action required
+BATCH-1189,Amlodipine,Cardiology,Cipla,2023-12-17,2025-01-23,11.21,16.67,487,75,28,Cool Dry Place,388,0.933333333333333,521.785714285714,High Risk,Redistribute to high-demand departments immediately
+BATCH-1190,Sertraline,Psychiatry,AstraZeneca,2023-11-09,2025-05-21,38.82,52.86,133,55,469,Room Temperature,506,15.6333333333333,8.50746268656716,Low Risk,No immediate action required
+BATCH-1191,Amlodipine,Cardiology,Merck,2023-05-27,2025-09-16,46.97,73.68,124,82,217,Cool Dry Place,624,7.23333333333333,17.1428571428571,Low Risk,No immediate action required
+BATCH-1192,Atorvastatin,Cardiology,Cipla,2023-02-19,2025-10-28,8.13,10.69,260,60,39,Cool Dry Place,666,1.3,200.0,Low Risk,No immediate action required
+BATCH-1193,Albuterol,Respiratory,Pfizer,2023-02-25,2025-11-19,37.85,46.76,418,30,486,Cool Dry Place,688,16.2,25.8024691358024,Low Risk,No immediate action required
+BATCH-1194,Metformin,Diabetes,Cipla,2023-07-05,2025-06-24,14.35,24.6,141,58,551,Refrigerated,540,18.3666666666666,7.67695099818511,Low Risk,No immediate action required
+BATCH-1195,Lisinopril,Cardiology,Sanofi,2023-11-05,2025-03-02,38.34,56.78,382,73,468,Cool Dry Place,426,15.6,24.4871794871794,Low Risk,No immediate action required
+BATCH-1196,Amoxicillin,Antibiotics,Sanofi,2023-12-08,2025-01-06,28.51,40.52,149,90,452,Room Temperature,371,15.0666666666666,9.88938053097345,Low Risk,No immediate action required
+BATCH-1197,Levothyroxine,Endocrinology,Pfizer,2023-02-08,2025-01-04,39.56,47.67,171,74,109,Room Temperature,369,3.63333333333333,47.0642201834862,Low Risk,No immediate action required
+BATCH-1198,Paracetamol,Analgesics,Cipla,2023-04-25,2025-03-04,7.87,10.35,88,60,284,Refrigerated,428,9.46666666666666,9.29577464788732,Low Risk,No immediate action required
+BATCH-1199,Amoxicillin,Antibiotics,Merck,2023-09-11,2025-06-17,33.93,49.52,91,93,504,Cool Dry Place,533,16.8,5.41666666666666,Low Risk,Reorder stock soon
+BATCH-1200,Ibuprofen,Analgesics,GlaxoSmithKline,2023-06-04,2024-10-02,43.55,67.16,465,70,558,Cool Dry Place,275,18.6,24.9999999999999,Low Risk,No immediate action required
+BATCH-1201,Amlodipine,Cardiology,Sanofi,2023-05-30,2025-11-24,23.03,32.26,64,90,300,Room Temperature,693,10.0,6.4,Low Risk,Reorder stock soon
+BATCH-1202,Gabapentin,Neurology,Cipla,2023-10-06,2025-10-21,21.8,27.98,308,57,12,Room Temperature,659,0.4,770.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1203,Azithromycin,Antibiotics,Cipla,2023-02-23,2025-02-09,16.71,28.21,195,81,589,Cool Dry Place,405,19.6333333333333,9.9320882852292,Low Risk,No immediate action required
+BATCH-1204,Losartan,Cardiology,Pfizer,2023-04-23,2025-07-13,9.1,11.07,383,75,397,Cool Dry Place,559,13.2333333333333,28.9420654911838,Low Risk,No immediate action required
+BATCH-1205,Levothyroxine,Endocrinology,Pfizer,2023-10-02,2025-09-04,32.87,53.36,331,44,383,Refrigerated,612,12.7666666666666,25.9268929503916,Low Risk,No immediate action required
+BATCH-1206,Omeprazole,Gastroenterology,Pfizer,2023-10-16,2026-02-02,26.34,42.66,401,81,147,Room Temperature,763,4.9,81.8367346938775,Low Risk,No immediate action required
+BATCH-1207,Lisinopril,Cardiology,Pfizer,2023-09-04,2025-08-23,19.31,32.82,329,43,146,Cool Dry Place,600,4.86666666666666,67.6027397260274,Low Risk,No immediate action required
+BATCH-1208,Metformin,Diabetes,Pfizer,2023-09-27,2024-10-10,49.54,68.25,206,94,219,Refrigerated,283,7.3,28.2191780821917,Low Risk,No immediate action required
+BATCH-1209,Metformin,Diabetes,Cipla,2023-08-12,2026-02-14,47.8,73.61,171,44,161,Cool Dry Place,775,5.36666666666666,31.863354037267,Low Risk,No immediate action required
+BATCH-1210,Metformin,Diabetes,Sanofi,2023-04-16,2025-01-01,22.46,37.84,246,50,545,Refrigerated,366,18.1666666666666,13.5412844036697,Low Risk,No immediate action required
+BATCH-1211,Omeprazole,Gastroenterology,Merck,2023-01-30,2024-11-09,37.38,47.83,169,25,358,Cool Dry Place,313,11.9333333333333,14.1620111731843,Low Risk,No immediate action required
+BATCH-1212,Paracetamol,Analgesics,Novartis,2023-03-09,2024-04-06,11.37,20.09,118,68,203,Cool Dry Place,96,6.76666666666666,17.4384236453201,Low Risk,No immediate action required
+BATCH-1213,Metformin,Diabetes,AstraZeneca,2023-08-09,2025-07-27,44.85,78.22,202,58,284,Refrigerated,573,9.46666666666666,21.338028169014,Low Risk,No immediate action required
+BATCH-1214,Metformin,Diabetes,Sanofi,2023-05-19,2026-03-28,10.98,16.44,159,44,87,Cool Dry Place,817,2.9,54.8275862068965,Low Risk,No immediate action required
+BATCH-1215,Metoprolol,Cardiology,Cipla,2023-09-14,2026-02-16,44.38,54.39,136,86,61,Room Temperature,777,2.03333333333333,66.8852459016393,Low Risk,No immediate action required
+BATCH-1216,Ibuprofen,Analgesics,Cipla,2023-09-29,2026-07-19,46.41,83.15,288,59,68,Room Temperature,930,2.26666666666666,127.058823529411,Low Risk,No immediate action required
+BATCH-1217,Amoxicillin,Antibiotics,Novartis,2023-08-02,2025-12-07,42.77,73.08,170,50,472,Refrigerated,706,15.7333333333333,10.8050847457627,Low Risk,No immediate action required
+BATCH-1218,Metoprolol,Cardiology,AstraZeneca,2023-05-26,2025-05-14,3.18,5.23,94,70,290,Room Temperature,499,9.66666666666666,9.72413793103448,Low Risk,No immediate action required
+BATCH-1219,Sertraline,Psychiatry,Merck,2023-11-13,2025-04-28,11.01,15.66,58,64,352,Refrigerated,483,11.7333333333333,4.94318181818181,Low Risk,Reorder stock soon
+BATCH-1220,Atorvastatin,Cardiology,AstraZeneca,2023-10-31,2026-06-25,24.29,31.76,280,20,524,Room Temperature,906,17.4666666666666,16.030534351145,Low Risk,No immediate action required
+BATCH-1221,Levothyroxine,Endocrinology,Merck,2023-06-18,2024-07-25,16.85,29.93,149,64,42,Cool Dry Place,206,1.4,106.428571428571,Low Risk,No immediate action required
+BATCH-1222,Paracetamol,Analgesics,Pfizer,2023-10-01,2025-10-29,39.01,56.04,320,100,533,Refrigerated,667,17.7666666666666,18.0112570356472,Low Risk,No immediate action required
+BATCH-1223,Sertraline,Psychiatry,Novartis,2023-01-17,2025-07-14,6.93,12.17,276,87,226,Cool Dry Place,560,7.53333333333333,36.6371681415929,Low Risk,No immediate action required
+BATCH-1224,Omeprazole,Gastroenterology,Pfizer,2023-05-26,2025-09-26,2.25,3.55,68,94,557,Cool Dry Place,634,18.5666666666666,3.66247755834829,Low Risk,Reorder stock soon
+BATCH-1225,Azithromycin,Antibiotics,Novartis,2023-06-26,2025-03-01,29.51,43.85,64,91,56,Refrigerated,425,1.86666666666666,34.2857142857142,Low Risk,Reorder stock soon
+BATCH-1226,Sertraline,Psychiatry,Cipla,2023-08-03,2025-01-28,19.03,31.11,68,60,502,Room Temperature,393,16.7333333333333,4.06374501992031,Low Risk,No immediate action required
+BATCH-1227,Metoprolol,Cardiology,GlaxoSmithKline,2023-01-09,2024-02-29,20.54,33.55,75,58,113,Refrigerated,59,3.76666666666666,19.9115044247787,Medium Risk,Monitor closely and run discount/promotion
+BATCH-1228,Atorvastatin,Cardiology,Cipla,2023-07-18,2025-03-25,20.49,33.89,112,61,460,Cool Dry Place,449,15.3333333333333,7.30434782608695,Low Risk,No immediate action required
+BATCH-1229,Gabapentin,Neurology,AstraZeneca,2023-05-08,2024-12-12,47.73,58.8,319,38,17,Room Temperature,346,0.566666666666666,562.941176470588,High Risk,Redistribute to high-demand departments immediately
+BATCH-1230,Metformin,Diabetes,Merck,2023-04-15,2026-01-22,4.56,8.16,7,61,91,Room Temperature,752,3.03333333333333,2.3076923076923,Low Risk,Reorder stock soon
+BATCH-1231,Atorvastatin,Cardiology,GlaxoSmithKline,2023-09-19,2026-05-20,8.7,13.89,38,82,206,Room Temperature,870,6.86666666666666,5.53398058252427,Low Risk,Reorder stock soon
+BATCH-1232,Metoprolol,Cardiology,AstraZeneca,2023-11-07,2026-02-26,30.7,53.21,190,60,246,Room Temperature,787,8.2,23.170731707317,Low Risk,No immediate action required
+BATCH-1233,Omeprazole,Gastroenterology,Novartis,2023-06-30,2024-11-16,24.89,44.15,320,91,556,Refrigerated,320,18.5333333333333,17.2661870503597,Low Risk,No immediate action required
+BATCH-1234,Lisinopril,Cardiology,Cipla,2023-12-27,2026-09-28,11.36,16.99,190,95,420,Room Temperature,1001,14.0,13.5714285714285,Low Risk,No immediate action required
+BATCH-1235,Losartan,Cardiology,Novartis,2023-10-31,2025-11-24,44.98,57.0,46,63,190,Room Temperature,693,6.33333333333333,7.26315789473684,Low Risk,Reorder stock soon
+BATCH-1236,Gabapentin,Neurology,Novartis,2023-09-03,2025-06-03,3.12,5.21,318,73,9,Room Temperature,519,0.3,1060.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1237,Metoprolol,Cardiology,GlaxoSmithKline,2023-03-14,2024-04-24,23.24,32.7,92,78,101,Room Temperature,114,3.36666666666666,27.3267326732673,Low Risk,No immediate action required
+BATCH-1238,Paracetamol,Analgesics,Cipla,2023-07-18,2025-04-21,4.71,7.66,474,68,323,Cool Dry Place,476,10.7666666666666,44.0247678018575,Low Risk,No immediate action required
+BATCH-1239,Omeprazole,Gastroenterology,Cipla,2023-03-26,2024-12-02,7.35,10.0,462,65,315,Cool Dry Place,336,10.5,44.0,Low Risk,No immediate action required
+BATCH-1240,Amoxicillin,Antibiotics,Pfizer,2023-06-05,2025-01-24,9.6,12.38,452,44,293,Room Temperature,389,9.76666666666666,46.2798634812286,Low Risk,No immediate action required
+BATCH-1241,Albuterol,Respiratory,Pfizer,2023-10-27,2024-12-03,17.85,30.91,494,31,565,Room Temperature,337,18.8333333333333,26.2300884955752,Low Risk,No immediate action required
+BATCH-1242,Albuterol,Respiratory,Novartis,2023-03-20,2024-12-17,8.83,15.0,381,58,51,Cool Dry Place,351,1.7,224.117647058823,Low Risk,No immediate action required
+BATCH-1243,Sertraline,Psychiatry,Pfizer,2023-05-29,2025-06-09,47.78,69.69,235,22,28,Cool Dry Place,525,0.933333333333333,251.785714285714,Low Risk,No immediate action required
+BATCH-1244,Albuterol,Respiratory,Cipla,2023-10-31,2025-06-07,3.5,4.34,280,67,550,Cool Dry Place,523,18.3333333333333,15.2727272727272,Low Risk,No immediate action required
+BATCH-1245,Amlodipine,Cardiology,Cipla,2023-03-13,2025-03-19,25.98,45.88,345,49,401,Refrigerated,443,13.3666666666666,25.8104738154613,Low Risk,No immediate action required
+BATCH-1246,Lisinopril,Cardiology,Cipla,2023-02-10,2025-01-06,29.74,47.67,452,48,120,Refrigerated,371,4.0,113.0,Low Risk,No immediate action required
+BATCH-1247,Albuterol,Respiratory,GlaxoSmithKline,2023-03-20,2026-03-15,8.5,15.0,40,70,170,Cool Dry Place,804,5.66666666666666,7.05882352941176,Low Risk,Reorder stock soon
+BATCH-1248,Lisinopril,Cardiology,GlaxoSmithKline,2023-07-06,2026-05-07,45.67,67.28,440,98,71,Cool Dry Place,857,2.36666666666666,185.915492957746,Low Risk,No immediate action required
+BATCH-1249,Omeprazole,Gastroenterology,Pfizer,2023-06-07,2025-06-17,19.6,25.02,47,99,567,Refrigerated,533,18.9,2.48677248677248,Low Risk,Reorder stock soon
+BATCH-1250,Amlodipine,Cardiology,Cipla,2023-03-07,2024-08-12,6.08,8.23,45,83,428,Refrigerated,224,14.2666666666666,3.15420560747663,Low Risk,Reorder stock soon
+BATCH-1251,Gabapentin,Neurology,GlaxoSmithKline,2023-03-01,2025-10-07,8.68,10.74,394,78,171,Room Temperature,645,5.7,69.1228070175438,Low Risk,No immediate action required
+BATCH-1252,Losartan,Cardiology,Merck,2023-12-07,2026-04-08,15.23,26.72,47,83,445,Cool Dry Place,828,14.8333333333333,3.16853932584269,Low Risk,Reorder stock soon
+BATCH-1253,Metoprolol,Cardiology,Pfizer,2023-07-15,2024-08-17,5.07,6.45,31,93,444,Cool Dry Place,229,14.8,2.09459459459459,Low Risk,Reorder stock soon
+BATCH-1254,Lisinopril,Cardiology,GlaxoSmithKline,2023-11-05,2025-04-07,22.1,37.89,294,100,35,Refrigerated,462,1.16666666666666,251.999999999999,Low Risk,No immediate action required
+BATCH-1255,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-04-28,2025-03-02,7.16,12.4,402,96,567,Cool Dry Place,426,18.9,21.2698412698412,Low Risk,No immediate action required
+BATCH-1256,Paracetamol,Analgesics,Cipla,2023-06-14,2026-06-10,37.51,66.2,340,52,79,Refrigerated,891,2.63333333333333,129.113924050632,Low Risk,No immediate action required
+BATCH-1257,Losartan,Cardiology,GlaxoSmithKline,2023-07-08,2024-12-04,40.35,61.83,67,30,507,Room Temperature,338,16.9,3.96449704142011,Low Risk,No immediate action required
+BATCH-1258,Amlodipine,Cardiology,GlaxoSmithKline,2023-10-24,2025-10-26,15.71,27.98,388,70,106,Room Temperature,664,3.53333333333333,109.811320754716,Low Risk,No immediate action required
+BATCH-1259,Amoxicillin,Antibiotics,Cipla,2023-10-13,2025-11-04,33.19,54.95,60,33,156,Cool Dry Place,673,5.2,11.5384615384615,Low Risk,No immediate action required
+BATCH-1260,Amlodipine,Cardiology,GlaxoSmithKline,2023-02-07,2024-04-26,2.76,4.84,150,92,483,Refrigerated,116,16.1,9.3167701863354,Low Risk,No immediate action required
+BATCH-1261,Metformin,Diabetes,GlaxoSmithKline,2023-02-16,2024-08-25,41.87,68.56,496,75,534,Cool Dry Place,237,17.8,27.8651685393258,Low Risk,No immediate action required
+BATCH-1262,Gabapentin,Neurology,Merck,2023-03-09,2026-02-04,16.59,23.31,290,86,464,Refrigerated,765,15.4666666666666,18.75,Low Risk,No immediate action required
+BATCH-1263,Amoxicillin,Antibiotics,Sanofi,2023-12-01,2025-09-03,21.6,31.15,231,67,561,Refrigerated,611,18.7,12.3529411764705,Low Risk,No immediate action required
+BATCH-1264,Albuterol,Respiratory,Pfizer,2023-04-01,2024-05-31,39.67,60.74,138,88,396,Room Temperature,151,13.2,10.4545454545454,Low Risk,No immediate action required
+BATCH-1265,Gabapentin,Neurology,Cipla,2023-11-03,2025-09-19,39.53,48.6,500,69,308,Room Temperature,627,10.2666666666666,48.7012987012987,Low Risk,No immediate action required
+BATCH-1266,Albuterol,Respiratory,AstraZeneca,2023-12-18,2026-03-25,13.29,17.51,200,40,27,Cool Dry Place,814,0.9,222.222222222222,Low Risk,No immediate action required
+BATCH-1267,Atorvastatin,Cardiology,Novartis,2023-09-05,2025-11-03,19.53,26.42,494,43,210,Cool Dry Place,672,7.0,70.5714285714285,Low Risk,No immediate action required
+BATCH-1268,Levothyroxine,Endocrinology,Sanofi,2023-04-05,2025-09-09,28.47,36.19,225,37,10,Room Temperature,617,0.333333333333333,675.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1269,Albuterol,Respiratory,Novartis,2023-10-07,2024-11-04,46.68,78.13,166,76,255,Refrigerated,308,8.5,19.5294117647058,Low Risk,No immediate action required
+BATCH-1270,Albuterol,Respiratory,AstraZeneca,2023-09-19,2026-02-08,36.92,55.21,68,40,150,Cool Dry Place,769,5.0,13.6,Low Risk,No immediate action required
+BATCH-1271,Levothyroxine,Endocrinology,Merck,2023-01-01,2025-03-02,37.1,55.25,266,86,259,Cool Dry Place,426,8.63333333333333,30.8108108108108,Low Risk,No immediate action required
+BATCH-1272,Amlodipine,Cardiology,Merck,2023-04-16,2024-05-17,23.25,30.68,103,79,150,Cool Dry Place,137,5.0,20.6,Low Risk,No immediate action required
+BATCH-1273,Paracetamol,Analgesics,AstraZeneca,2023-05-03,2025-01-23,9.92,14.27,163,95,363,Room Temperature,388,12.1,13.4710743801652,Low Risk,No immediate action required
+BATCH-1274,Metformin,Diabetes,GlaxoSmithKline,2023-03-10,2025-10-04,23.49,30.32,309,68,199,Room Temperature,642,6.63333333333333,46.5829145728643,Low Risk,No immediate action required
+BATCH-1275,Amoxicillin,Antibiotics,Pfizer,2023-01-12,2025-02-12,14.48,25.35,280,95,489,Cool Dry Place,408,16.3,17.1779141104294,Low Risk,No immediate action required
+BATCH-1276,Losartan,Cardiology,Sanofi,2023-12-01,2026-10-26,16.21,19.5,298,22,597,Refrigerated,1029,19.9,14.9748743718592,Low Risk,No immediate action required
+BATCH-1277,Amoxicillin,Antibiotics,Cipla,2023-05-27,2026-05-20,12.17,15.6,466,93,410,Room Temperature,870,13.6666666666666,34.0975609756097,Low Risk,No immediate action required
+BATCH-1278,Amlodipine,Cardiology,Merck,2023-05-28,2025-07-03,27.98,34.97,211,30,252,Refrigerated,549,8.4,25.1190476190476,Low Risk,No immediate action required
+BATCH-1279,Omeprazole,Gastroenterology,Novartis,2023-06-27,2025-02-12,35.71,49.29,12,88,317,Refrigerated,408,10.5666666666666,1.13564668769716,Low Risk,Reorder stock soon
+BATCH-1280,Ibuprofen,Analgesics,Pfizer,2023-06-09,2024-11-28,16.43,20.0,498,32,524,Room Temperature,332,17.4666666666666,28.5114503816793,Low Risk,No immediate action required
+BATCH-1281,Levothyroxine,Endocrinology,Sanofi,2023-05-20,2026-04-07,2.32,2.96,147,80,9,Refrigerated,827,0.3,490.0,Low Risk,No immediate action required
+BATCH-1282,Amoxicillin,Antibiotics,Sanofi,2023-12-21,2025-03-07,18.97,24.72,258,66,240,Cool Dry Place,431,8.0,32.25,Low Risk,No immediate action required
+BATCH-1283,Albuterol,Respiratory,Merck,2023-05-03,2025-05-28,48.13,62.58,444,85,222,Refrigerated,513,7.4,60.0,Low Risk,No immediate action required
+BATCH-1284,Amoxicillin,Antibiotics,Sanofi,2023-04-01,2025-05-24,26.23,38.73,143,76,479,Refrigerated,509,15.9666666666666,8.95615866388309,Low Risk,No immediate action required
+BATCH-1285,Atorvastatin,Cardiology,Merck,2023-09-29,2024-11-11,46.21,66.32,393,68,5,Refrigerated,315,0.166666666666666,2358.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1286,Metformin,Diabetes,GlaxoSmithKline,2023-05-10,2024-07-10,37.24,58.99,166,76,469,Room Temperature,191,15.6333333333333,10.6183368869936,Low Risk,No immediate action required
+BATCH-1287,Amoxicillin,Antibiotics,Sanofi,2023-04-19,2025-05-17,16.3,25.98,299,48,44,Room Temperature,502,1.46666666666666,203.863636363636,Low Risk,No immediate action required
+BATCH-1288,Levothyroxine,Endocrinology,Pfizer,2023-06-09,2026-05-21,30.7,39.06,87,58,344,Room Temperature,871,11.4666666666666,7.58720930232558,Low Risk,No immediate action required
+BATCH-1289,Levothyroxine,Endocrinology,Cipla,2023-08-17,2026-05-27,24.8,32.69,385,89,408,Cool Dry Place,877,13.6,28.3088235294117,Low Risk,No immediate action required
+BATCH-1290,Atorvastatin,Cardiology,GlaxoSmithKline,2023-04-14,2025-08-13,25.67,32.46,475,26,69,Room Temperature,590,2.3,206.521739130434,Low Risk,No immediate action required
+BATCH-1291,Atorvastatin,Cardiology,Cipla,2023-08-07,2026-02-22,36.7,62.7,419,80,260,Cool Dry Place,783,8.66666666666666,48.3461538461538,Low Risk,No immediate action required
+BATCH-1292,Albuterol,Respiratory,Cipla,2023-09-15,2025-11-16,49.88,79.01,18,75,538,Cool Dry Place,685,17.9333333333333,1.00371747211895,Low Risk,Reorder stock soon
+BATCH-1293,Gabapentin,Neurology,AstraZeneca,2023-10-05,2026-07-19,30.27,50.95,108,99,355,Refrigerated,930,11.8333333333333,9.12676056338028,Low Risk,No immediate action required
+BATCH-1294,Metoprolol,Cardiology,Pfizer,2023-04-25,2025-11-21,17.12,29.14,438,93,268,Room Temperature,690,8.93333333333333,49.0298507462686,Low Risk,No immediate action required
+BATCH-1295,Sertraline,Psychiatry,Cipla,2023-09-08,2025-07-26,48.56,80.99,252,57,143,Cool Dry Place,572,4.76666666666666,52.8671328671328,Low Risk,No immediate action required
+BATCH-1296,Gabapentin,Neurology,GlaxoSmithKline,2023-11-18,2026-07-18,33.56,54.2,492,30,29,Refrigerated,929,0.966666666666666,508.965517241379,Low Risk,No immediate action required
+BATCH-1297,Paracetamol,Analgesics,Merck,2023-01-01,2024-09-06,22.75,35.84,214,88,281,Room Temperature,249,9.36666666666666,22.8469750889679,Low Risk,No immediate action required
+BATCH-1298,Metoprolol,Cardiology,Merck,2023-03-15,2025-05-14,31.55,44.08,350,68,439,Refrigerated,499,14.6333333333333,23.9179954441913,Low Risk,No immediate action required
+BATCH-1299,Metoprolol,Cardiology,Novartis,2023-12-17,2025-08-05,8.89,15.85,394,46,323,Refrigerated,582,10.7666666666666,36.594427244582,Low Risk,No immediate action required
+BATCH-1300,Sertraline,Psychiatry,GlaxoSmithKline,2023-08-16,2025-09-09,1.64,2.76,329,47,168,Room Temperature,617,5.6,58.75,Low Risk,No immediate action required
+BATCH-1301,Gabapentin,Neurology,GlaxoSmithKline,2023-12-05,2025-02-04,26.0,37.11,335,58,510,Cool Dry Place,400,17.0,19.7058823529411,Low Risk,No immediate action required
+BATCH-1302,Metoprolol,Cardiology,Sanofi,2023-07-08,2025-12-26,4.16,6.04,426,96,111,Refrigerated,725,3.7,115.135135135135,Low Risk,No immediate action required
+BATCH-1303,Paracetamol,Analgesics,Cipla,2023-06-12,2026-04-11,10.86,19.21,309,92,433,Room Temperature,831,14.4333333333333,21.4087759815242,Low Risk,No immediate action required
+BATCH-1304,Metformin,Diabetes,Pfizer,2023-02-24,2024-11-02,42.63,57.87,220,88,349,Refrigerated,306,11.6333333333333,18.9111747851002,Low Risk,No immediate action required
+BATCH-1305,Levothyroxine,Endocrinology,Novartis,2023-06-27,2025-11-25,35.5,46.37,379,51,235,Room Temperature,694,7.83333333333333,48.3829787234042,Low Risk,No immediate action required
+BATCH-1306,Atorvastatin,Cardiology,GlaxoSmithKline,2023-07-21,2026-04-07,14.28,18.09,360,57,135,Cool Dry Place,827,4.5,80.0,Low Risk,No immediate action required
+BATCH-1307,Amlodipine,Cardiology,AstraZeneca,2023-01-19,2025-05-26,33.76,57.72,339,79,41,Room Temperature,511,1.36666666666666,248.048780487804,Low Risk,No immediate action required
+BATCH-1308,Metoprolol,Cardiology,Sanofi,2023-03-23,2024-06-02,11.77,17.47,407,28,296,Cool Dry Place,153,9.86666666666666,41.25,Low Risk,No immediate action required
+BATCH-1309,Amoxicillin,Antibiotics,Sanofi,2023-06-22,2026-06-08,43.55,75.0,312,61,37,Room Temperature,889,1.23333333333333,252.972972972972,Low Risk,No immediate action required
+BATCH-1310,Lisinopril,Cardiology,GlaxoSmithKline,2023-07-29,2026-02-13,44.24,66.38,60,93,325,Room Temperature,774,10.8333333333333,5.53846153846153,Low Risk,Reorder stock soon
+BATCH-1311,Omeprazole,Gastroenterology,Sanofi,2023-08-11,2025-05-22,36.14,54.98,195,63,60,Cool Dry Place,507,2.0,97.5,Low Risk,No immediate action required
+BATCH-1312,Losartan,Cardiology,GlaxoSmithKline,2023-05-26,2024-10-27,7.54,10.82,266,97,549,Room Temperature,300,18.3,14.535519125683,Low Risk,No immediate action required
+BATCH-1313,Metoprolol,Cardiology,Novartis,2023-03-29,2026-03-16,29.08,38.57,160,73,206,Cool Dry Place,805,6.86666666666666,23.3009708737864,Low Risk,No immediate action required
+BATCH-1314,Atorvastatin,Cardiology,Novartis,2023-05-13,2025-04-08,21.3,32.88,298,33,187,Refrigerated,463,6.23333333333333,47.807486631016,Low Risk,No immediate action required
+BATCH-1315,Losartan,Cardiology,Pfizer,2023-02-05,2025-01-31,30.63,48.7,186,54,314,Room Temperature,396,10.4666666666666,17.7707006369426,Low Risk,No immediate action required
+BATCH-1316,Losartan,Cardiology,GlaxoSmithKline,2023-07-23,2024-07-30,40.03,68.92,43,92,91,Cool Dry Place,211,3.03333333333333,14.1758241758241,Low Risk,Reorder stock soon
+BATCH-1317,Sertraline,Psychiatry,Pfizer,2023-07-21,2025-07-26,24.7,41.41,194,84,516,Cool Dry Place,572,17.2,11.2790697674418,Low Risk,No immediate action required
+BATCH-1318,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-11-25,2026-07-07,5.8,10.35,160,95,59,Refrigerated,918,1.96666666666666,81.3559322033898,Low Risk,No immediate action required
+BATCH-1319,Paracetamol,Analgesics,AstraZeneca,2023-01-22,2024-04-14,42.7,71.62,28,36,418,Room Temperature,104,13.9333333333333,2.00956937799043,Low Risk,Reorder stock soon
+BATCH-1320,Atorvastatin,Cardiology,Pfizer,2023-05-26,2026-01-25,12.95,20.1,106,71,49,Room Temperature,755,1.63333333333333,64.8979591836734,Low Risk,No immediate action required
+BATCH-1321,Lisinopril,Cardiology,Merck,2023-04-16,2025-08-14,15.15,23.79,88,26,402,Room Temperature,591,13.4,6.56716417910447,Low Risk,No immediate action required
+BATCH-1322,Lisinopril,Cardiology,Novartis,2023-08-14,2024-08-22,43.15,53.0,324,81,383,Refrigerated,234,12.7666666666666,25.3785900783289,Low Risk,No immediate action required
+BATCH-1323,Gabapentin,Neurology,Cipla,2023-10-01,2025-09-27,22.8,33.31,116,33,36,Room Temperature,635,1.2,96.6666666666666,Low Risk,No immediate action required
+BATCH-1324,Metformin,Diabetes,AstraZeneca,2023-01-30,2024-04-25,9.22,11.37,7,71,355,Room Temperature,115,11.8333333333333,0.591549295774647,Low Risk,Reorder stock soon
+BATCH-1325,Amlodipine,Cardiology,Novartis,2023-07-06,2025-02-03,16.78,20.15,256,22,184,Room Temperature,399,6.13333333333333,41.7391304347826,Low Risk,No immediate action required
+BATCH-1326,Paracetamol,Analgesics,AstraZeneca,2023-05-25,2026-02-01,38.7,65.4,180,63,279,Refrigerated,762,9.3,19.3548387096774,Low Risk,No immediate action required
+BATCH-1327,Metformin,Diabetes,GlaxoSmithKline,2023-12-09,2026-10-18,8.19,13.92,251,69,460,Cool Dry Place,1021,15.3333333333333,16.3695652173913,Low Risk,No immediate action required
+BATCH-1328,Sertraline,Psychiatry,Merck,2023-05-07,2025-02-03,43.0,68.64,143,72,444,Cool Dry Place,399,14.8,9.66216216216216,Low Risk,No immediate action required
+BATCH-1329,Albuterol,Respiratory,Novartis,2023-11-14,2026-05-27,18.97,33.03,122,55,408,Room Temperature,877,13.6,8.97058823529411,Low Risk,No immediate action required
+BATCH-1330,Lisinopril,Cardiology,Novartis,2023-11-27,2026-10-16,5.6,8.53,77,94,583,Room Temperature,1019,19.4333333333333,3.96226415094339,Low Risk,Reorder stock soon
+BATCH-1331,Lisinopril,Cardiology,AstraZeneca,2023-01-15,2025-10-15,19.1,23.71,345,74,75,Refrigerated,653,2.5,138.0,Low Risk,No immediate action required
+BATCH-1332,Losartan,Cardiology,GlaxoSmithKline,2023-04-19,2024-07-08,37.33,52.79,277,54,182,Cool Dry Place,189,6.06666666666666,45.6593406593406,Low Risk,No immediate action required
+BATCH-1333,Metformin,Diabetes,AstraZeneca,2023-04-17,2025-03-02,18.99,25.4,71,71,259,Room Temperature,426,8.63333333333333,8.22393822393822,Low Risk,Reorder stock soon
+BATCH-1334,Ibuprofen,Analgesics,GlaxoSmithKline,2023-09-16,2024-10-23,17.0,20.86,160,48,469,Room Temperature,296,15.6333333333333,10.2345415778251,Low Risk,No immediate action required
+BATCH-1335,Ibuprofen,Analgesics,Cipla,2023-07-16,2025-08-03,23.93,34.23,432,89,331,Cool Dry Place,580,11.0333333333333,39.1540785498489,Low Risk,No immediate action required
+BATCH-1336,Albuterol,Respiratory,GlaxoSmithKline,2023-09-06,2025-01-22,43.37,74.59,25,26,518,Room Temperature,387,17.2666666666666,1.44787644787644,Low Risk,Reorder stock soon
+BATCH-1337,Omeprazole,Gastroenterology,Sanofi,2023-07-17,2025-04-26,13.08,20.75,378,78,582,Refrigerated,481,19.4,19.4845360824742,Low Risk,No immediate action required
+BATCH-1338,Ibuprofen,Analgesics,Novartis,2023-04-08,2025-02-20,29.81,41.34,449,21,567,Cool Dry Place,416,18.9,23.7566137566137,Low Risk,No immediate action required
+BATCH-1339,Atorvastatin,Cardiology,AstraZeneca,2023-02-26,2025-09-07,42.63,60.21,461,46,276,Cool Dry Place,615,9.2,50.1086956521739,Low Risk,No immediate action required
+BATCH-1340,Ibuprofen,Analgesics,GlaxoSmithKline,2023-12-26,2025-10-26,39.18,55.37,326,71,238,Refrigerated,664,7.93333333333333,41.0924369747899,Low Risk,No immediate action required
+BATCH-1341,Omeprazole,Gastroenterology,Cipla,2023-12-13,2025-12-09,22.48,34.3,88,37,389,Refrigerated,708,12.9666666666666,6.7866323907455,Low Risk,No immediate action required
+BATCH-1342,Lisinopril,Cardiology,Cipla,2023-02-21,2025-12-25,3.15,5.22,150,58,590,Room Temperature,724,19.6666666666666,7.62711864406779,Low Risk,No immediate action required
+BATCH-1343,Metoprolol,Cardiology,GlaxoSmithKline,2023-05-16,2024-07-26,29.73,50.69,157,55,514,Room Temperature,207,17.1333333333333,9.16342412451361,Low Risk,No immediate action required
+BATCH-1344,Sertraline,Psychiatry,Merck,2023-08-21,2026-04-20,19.73,33.86,168,51,207,Refrigerated,840,6.9,24.3478260869565,Low Risk,No immediate action required
+BATCH-1345,Azithromycin,Antibiotics,GlaxoSmithKline,2023-05-03,2024-07-03,13.63,23.93,234,29,76,Cool Dry Place,184,2.53333333333333,92.3684210526315,Low Risk,No immediate action required
+BATCH-1346,Losartan,Cardiology,Pfizer,2023-07-22,2026-07-06,20.37,33.62,466,84,69,Refrigerated,917,2.3,202.608695652173,Low Risk,No immediate action required
+BATCH-1347,Azithromycin,Antibiotics,Novartis,2023-02-06,2024-12-07,35.05,46.34,286,87,172,Room Temperature,341,5.73333333333333,49.8837209302325,Low Risk,No immediate action required
+BATCH-1348,Sertraline,Psychiatry,AstraZeneca,2023-02-12,2025-09-11,13.01,19.64,403,44,441,Refrigerated,619,14.7,27.4149659863945,Low Risk,No immediate action required
+BATCH-1349,Paracetamol,Analgesics,Novartis,2023-09-14,2025-10-14,10.55,16.18,64,71,95,Room Temperature,652,3.16666666666666,20.2105263157894,Low Risk,Reorder stock soon
+BATCH-1350,Omeprazole,Gastroenterology,Pfizer,2023-10-08,2025-09-23,48.37,60.77,416,22,407,Room Temperature,631,13.5666666666666,30.6633906633906,Low Risk,No immediate action required
+BATCH-1351,Atorvastatin,Cardiology,GlaxoSmithKline,2023-06-26,2025-11-25,30.36,41.52,231,36,298,Refrigerated,694,9.93333333333333,23.2550335570469,Low Risk,No immediate action required
+BATCH-1352,Lisinopril,Cardiology,Pfizer,2023-10-24,2025-08-12,41.29,64.15,406,52,565,Cool Dry Place,589,18.8333333333333,21.5575221238938,Low Risk,No immediate action required
+BATCH-1353,Paracetamol,Analgesics,Merck,2023-05-08,2025-11-10,31.4,50.79,15,54,509,Refrigerated,679,16.9666666666666,0.884086444007858,Low Risk,Reorder stock soon
+BATCH-1354,Paracetamol,Analgesics,Merck,2023-05-29,2025-11-29,11.46,17.71,247,90,151,Cool Dry Place,698,5.03333333333333,49.0728476821192,Low Risk,No immediate action required
+BATCH-1355,Albuterol,Respiratory,Cipla,2023-07-31,2025-05-31,27.0,45.23,319,98,122,Room Temperature,516,4.06666666666666,78.4426229508196,Low Risk,No immediate action required
+BATCH-1356,Levothyroxine,Endocrinology,Pfizer,2023-04-27,2025-12-29,36.94,62.9,427,92,482,Refrigerated,728,16.0666666666666,26.5767634854771,Low Risk,No immediate action required
+BATCH-1357,Atorvastatin,Cardiology,Merck,2023-03-03,2024-05-03,21.84,33.21,422,65,393,Refrigerated,123,13.1,32.2137404580152,Low Risk,No immediate action required
+BATCH-1358,Amoxicillin,Antibiotics,Merck,2023-06-27,2025-03-14,17.74,27.83,443,63,58,Room Temperature,438,1.93333333333333,229.137931034482,Low Risk,No immediate action required
+BATCH-1359,Amoxicillin,Antibiotics,Novartis,2023-06-07,2025-03-10,16.79,28.37,272,49,513,Cool Dry Place,434,17.1,15.906432748538,Low Risk,No immediate action required
+BATCH-1360,Sertraline,Psychiatry,GlaxoSmithKline,2023-06-22,2026-05-23,4.61,6.8,136,78,390,Cool Dry Place,873,13.0,10.4615384615384,Low Risk,No immediate action required
+BATCH-1361,Metoprolol,Cardiology,Sanofi,2023-06-25,2024-09-13,43.95,73.77,410,91,280,Room Temperature,256,9.33333333333333,43.9285714285714,Low Risk,No immediate action required
+BATCH-1362,Albuterol,Respiratory,Merck,2023-12-20,2026-07-19,22.98,35.96,371,42,559,Room Temperature,930,18.6333333333333,19.9105545617173,Low Risk,No immediate action required
+BATCH-1363,Albuterol,Respiratory,AstraZeneca,2023-10-25,2025-10-19,4.24,6.2,283,65,93,Cool Dry Place,657,3.1,91.2903225806451,Low Risk,No immediate action required
+BATCH-1364,Atorvastatin,Cardiology,Pfizer,2023-11-12,2026-01-18,42.08,74.84,113,66,411,Cool Dry Place,748,13.7,8.24817518248175,Low Risk,No immediate action required
+BATCH-1365,Metoprolol,Cardiology,Merck,2023-07-20,2026-03-31,21.64,35.76,151,62,151,Refrigerated,820,5.03333333333333,30.0,Low Risk,No immediate action required
+BATCH-1366,Losartan,Cardiology,AstraZeneca,2023-05-16,2026-02-21,28.05,38.84,165,25,288,Cool Dry Place,782,9.6,17.1875,Low Risk,No immediate action required
+BATCH-1367,Metformin,Diabetes,Cipla,2023-04-03,2026-03-16,35.91,58.53,371,26,591,Refrigerated,805,19.7,18.8324873096446,Low Risk,No immediate action required
+BATCH-1368,Lisinopril,Cardiology,Sanofi,2023-01-18,2025-11-15,47.77,63.55,318,88,171,Cool Dry Place,684,5.7,55.7894736842105,Low Risk,No immediate action required
+BATCH-1369,Omeprazole,Gastroenterology,AstraZeneca,2023-11-16,2026-06-19,28.36,42.97,263,45,550,Room Temperature,900,18.3333333333333,14.3454545454545,Low Risk,No immediate action required
+BATCH-1370,Paracetamol,Analgesics,GlaxoSmithKline,2023-08-18,2026-02-16,13.47,19.16,291,70,169,Refrigerated,777,5.63333333333333,51.6568047337278,Low Risk,No immediate action required
+BATCH-1371,Levothyroxine,Endocrinology,Cipla,2023-10-02,2026-06-23,14.24,22.77,12,62,209,Room Temperature,904,6.96666666666666,1.72248803827751,Low Risk,Reorder stock soon
+BATCH-1372,Losartan,Cardiology,Pfizer,2023-10-15,2026-06-09,9.75,13.69,413,40,34,Room Temperature,890,1.13333333333333,364.411764705882,Low Risk,No immediate action required
+BATCH-1373,Atorvastatin,Cardiology,Pfizer,2023-03-13,2026-01-02,27.58,35.78,166,74,386,Refrigerated,732,12.8666666666666,12.901554404145,Low Risk,No immediate action required
+BATCH-1374,Levothyroxine,Endocrinology,Cipla,2023-09-21,2025-04-02,37.1,65.99,327,45,219,Room Temperature,457,7.3,44.7945205479452,Low Risk,No immediate action required
+BATCH-1375,Losartan,Cardiology,Pfizer,2023-01-27,2025-12-14,41.5,67.03,380,78,220,Room Temperature,713,7.33333333333333,51.8181818181818,Low Risk,No immediate action required
+BATCH-1376,Paracetamol,Analgesics,Merck,2023-10-25,2025-07-04,19.82,28.25,415,39,542,Refrigerated,550,18.0666666666666,22.970479704797,Low Risk,No immediate action required
+BATCH-1377,Paracetamol,Analgesics,Cipla,2023-12-19,2025-07-19,47.3,65.96,172,78,570,Cool Dry Place,565,19.0,9.05263157894736,Low Risk,No immediate action required
+BATCH-1378,Metoprolol,Cardiology,Merck,2023-07-28,2025-01-03,2.96,4.78,64,56,541,Room Temperature,368,18.0333333333333,3.54898336414048,Low Risk,No immediate action required
+BATCH-1379,Ibuprofen,Analgesics,Novartis,2023-07-04,2025-05-13,15.25,24.93,485,43,542,Room Temperature,498,18.0666666666666,26.8450184501845,Low Risk,No immediate action required
+BATCH-1380,Omeprazole,Gastroenterology,Sanofi,2023-08-09,2025-10-11,29.34,40.05,298,59,376,Cool Dry Place,649,12.5333333333333,23.7765957446808,Low Risk,No immediate action required
+BATCH-1381,Azithromycin,Antibiotics,Novartis,2023-10-17,2025-08-22,33.96,44.62,437,39,176,Room Temperature,599,5.86666666666666,74.4886363636363,Low Risk,No immediate action required
+BATCH-1382,Azithromycin,Antibiotics,Cipla,2023-10-17,2025-02-17,43.33,60.34,192,71,473,Cool Dry Place,413,15.7666666666666,12.1775898520084,Low Risk,No immediate action required
+BATCH-1383,Gabapentin,Neurology,Sanofi,2023-02-01,2024-10-03,1.79,2.64,122,60,270,Refrigerated,276,9.0,13.5555555555555,Low Risk,No immediate action required
+BATCH-1384,Omeprazole,Gastroenterology,AstraZeneca,2023-09-15,2025-03-06,40.55,65.04,215,76,100,Cool Dry Place,430,3.33333333333333,64.5,Low Risk,No immediate action required
+BATCH-1385,Ibuprofen,Analgesics,Sanofi,2023-11-26,2025-03-23,32.68,40.43,59,27,565,Room Temperature,447,18.8333333333333,3.13274336283185,Low Risk,No immediate action required
+BATCH-1386,Amlodipine,Cardiology,Merck,2023-04-14,2024-04-29,31.45,42.33,74,21,444,Cool Dry Place,119,14.8,5.0,Low Risk,No immediate action required
+BATCH-1387,Losartan,Cardiology,AstraZeneca,2024-01-01,2026-09-05,42.24,70.7,358,49,277,Room Temperature,978,9.23333333333333,38.7725631768953,Low Risk,No immediate action required
+BATCH-1388,Amoxicillin,Antibiotics,Pfizer,2023-06-28,2024-09-20,22.65,27.91,165,67,52,Cool Dry Place,263,1.73333333333333,95.1923076923077,Low Risk,No immediate action required
+BATCH-1389,Metformin,Diabetes,AstraZeneca,2023-01-11,2024-10-01,32.94,42.29,380,27,158,Room Temperature,274,5.26666666666666,72.1518987341772,Low Risk,No immediate action required
+BATCH-1390,Omeprazole,Gastroenterology,Cipla,2023-05-10,2025-04-17,13.68,23.75,358,82,192,Refrigerated,472,6.4,55.9375,Low Risk,No immediate action required
+BATCH-1391,Paracetamol,Analgesics,GlaxoSmithKline,2023-07-13,2026-01-06,29.39,37.31,310,81,209,Room Temperature,736,6.96666666666666,44.4976076555023,Low Risk,No immediate action required
+BATCH-1392,Omeprazole,Gastroenterology,Merck,2023-02-01,2025-06-18,32.29,40.45,46,96,387,Refrigerated,534,12.9,3.56589147286821,Low Risk,Reorder stock soon
+BATCH-1393,Metformin,Diabetes,Pfizer,2023-11-28,2026-03-03,28.24,47.94,389,94,387,Cool Dry Place,792,12.9,30.1550387596899,Low Risk,No immediate action required
+BATCH-1394,Albuterol,Respiratory,Novartis,2023-08-14,2026-03-04,32.43,49.66,41,21,355,Refrigerated,793,11.8333333333333,3.46478873239436,Low Risk,No immediate action required
+BATCH-1395,Losartan,Cardiology,AstraZeneca,2023-04-12,2025-10-27,45.39,73.18,21,26,553,Cool Dry Place,665,18.4333333333333,1.13924050632911,Low Risk,Reorder stock soon
+BATCH-1396,Losartan,Cardiology,Merck,2023-08-01,2026-05-06,12.17,20.47,244,49,36,Refrigerated,856,1.2,203.333333333333,Low Risk,No immediate action required
+BATCH-1397,Gabapentin,Neurology,Cipla,2023-05-05,2024-05-06,20.73,34.97,337,25,34,Room Temperature,126,1.13333333333333,297.35294117647,High Risk,Redistribute to high-demand departments immediately
+BATCH-1398,Paracetamol,Analgesics,Cipla,2023-07-30,2025-10-25,32.31,43.99,494,20,24,Room Temperature,663,0.8,617.5,Low Risk,No immediate action required
+BATCH-1399,Omeprazole,Gastroenterology,Pfizer,2023-08-23,2025-05-04,23.85,39.31,377,64,572,Refrigerated,489,19.0666666666666,19.7727272727272,Low Risk,No immediate action required
+BATCH-1400,Atorvastatin,Cardiology,Merck,2023-01-07,2024-03-01,13.11,17.87,153,62,182,Room Temperature,60,6.06666666666666,25.2197802197802,Medium Risk,Monitor closely and run discount/promotion
+BATCH-1401,Sertraline,Psychiatry,AstraZeneca,2023-12-23,2025-01-20,3.94,5.6,261,38,301,Refrigerated,385,10.0333333333333,26.0132890365448,Low Risk,No immediate action required
+BATCH-1402,Amlodipine,Cardiology,GlaxoSmithKline,2023-09-18,2026-06-08,41.53,58.37,298,97,188,Refrigerated,889,6.26666666666666,47.5531914893617,Low Risk,No immediate action required
+BATCH-1403,Sertraline,Psychiatry,Novartis,2023-06-11,2024-07-26,2.13,3.19,232,21,396,Refrigerated,207,13.2,17.5757575757575,Low Risk,No immediate action required
+BATCH-1404,Omeprazole,Gastroenterology,Merck,2023-12-11,2025-11-02,4.13,5.06,136,82,341,Room Temperature,671,11.3666666666666,11.9648093841642,Low Risk,No immediate action required
+BATCH-1405,Amlodipine,Cardiology,Novartis,2023-07-17,2026-01-07,32.33,46.95,468,56,592,Refrigerated,737,19.7333333333333,23.7162162162162,Low Risk,No immediate action required
+BATCH-1406,Paracetamol,Analgesics,Pfizer,2023-03-20,2024-09-06,49.74,76.96,196,59,87,Refrigerated,249,2.9,67.5862068965517,Low Risk,No immediate action required
+BATCH-1407,Metoprolol,Cardiology,AstraZeneca,2023-10-20,2025-01-22,32.52,40.72,344,78,154,Cool Dry Place,387,5.13333333333333,67.012987012987,Low Risk,No immediate action required
+BATCH-1408,Metoprolol,Cardiology,Merck,2023-01-23,2025-07-19,38.8,55.78,436,47,301,Room Temperature,565,10.0333333333333,43.4551495016611,Low Risk,No immediate action required
+BATCH-1409,Amlodipine,Cardiology,AstraZeneca,2023-02-14,2024-08-19,6.18,8.34,500,83,487,Refrigerated,231,16.2333333333333,30.8008213552361,Low Risk,No immediate action required
+BATCH-1410,Amoxicillin,Antibiotics,Pfizer,2023-03-03,2025-11-28,9.45,11.87,199,67,272,Room Temperature,697,9.06666666666666,21.9485294117647,Low Risk,No immediate action required
+BATCH-1411,Paracetamol,Analgesics,Cipla,2023-03-16,2024-08-14,22.22,28.95,176,80,566,Refrigerated,226,18.8666666666666,9.3286219081272,Low Risk,No immediate action required
+BATCH-1412,Metformin,Diabetes,AstraZeneca,2023-02-07,2025-04-14,13.05,18.51,303,38,318,Cool Dry Place,469,10.6,28.5849056603773,Low Risk,No immediate action required
+BATCH-1413,Losartan,Cardiology,Merck,2023-10-14,2026-04-28,4.36,5.44,38,27,173,Cool Dry Place,848,5.76666666666666,6.58959537572254,Low Risk,No immediate action required
+BATCH-1414,Albuterol,Respiratory,Novartis,2023-08-21,2025-03-17,37.61,64.71,37,53,512,Refrigerated,441,17.0666666666666,2.16796875,Low Risk,Reorder stock soon
+BATCH-1415,Paracetamol,Analgesics,Pfizer,2023-01-04,2025-01-27,16.73,20.57,474,41,287,Room Temperature,392,9.56666666666666,49.5470383275261,Low Risk,No immediate action required
+BATCH-1416,Amoxicillin,Antibiotics,Novartis,2023-03-06,2025-09-22,31.56,48.79,67,95,304,Refrigerated,630,10.1333333333333,6.61184210526315,Low Risk,Reorder stock soon
+BATCH-1417,Levothyroxine,Endocrinology,Pfizer,2023-11-04,2025-08-14,28.73,43.48,172,77,53,Room Temperature,591,1.76666666666666,97.3584905660377,Low Risk,No immediate action required
+BATCH-1418,Omeprazole,Gastroenterology,Sanofi,2023-01-07,2024-08-12,2.36,3.25,39,66,290,Refrigerated,224,9.66666666666666,4.03448275862068,Low Risk,Reorder stock soon
+BATCH-1419,Gabapentin,Neurology,AstraZeneca,2023-08-23,2024-09-07,45.25,66.46,316,32,12,Refrigerated,250,0.4,790.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1420,Levothyroxine,Endocrinology,AstraZeneca,2023-02-18,2025-03-22,26.59,32.09,125,65,544,Refrigerated,446,18.1333333333333,6.89338235294117,Low Risk,No immediate action required
+BATCH-1421,Metformin,Diabetes,Pfizer,2023-07-02,2025-10-05,34.74,54.42,258,91,120,Refrigerated,643,4.0,64.5,Low Risk,No immediate action required
+BATCH-1422,Omeprazole,Gastroenterology,Sanofi,2023-12-07,2025-10-03,46.11,76.22,477,92,93,Refrigerated,641,3.1,153.870967741935,Low Risk,No immediate action required
+BATCH-1423,Ibuprofen,Analgesics,Cipla,2023-11-09,2025-11-16,29.1,40.51,408,68,76,Cool Dry Place,685,2.53333333333333,161.052631578947,Low Risk,No immediate action required
+BATCH-1424,Losartan,Cardiology,Merck,2023-01-25,2025-10-25,38.63,62.42,478,79,246,Cool Dry Place,663,8.2,58.2926829268292,Low Risk,No immediate action required
+BATCH-1425,Paracetamol,Analgesics,GlaxoSmithKline,2023-03-27,2025-02-16,19.38,34.24,26,34,79,Cool Dry Place,412,2.63333333333333,9.87341772151898,Low Risk,Reorder stock soon
+BATCH-1426,Levothyroxine,Endocrinology,Pfizer,2023-06-07,2025-05-09,28.09,41.2,45,23,131,Cool Dry Place,494,4.36666666666666,10.3053435114503,Low Risk,No immediate action required
+BATCH-1427,Amlodipine,Cardiology,GlaxoSmithKline,2023-08-07,2026-06-26,18.26,27.68,123,62,506,Room Temperature,907,16.8666666666666,7.29249011857707,Low Risk,No immediate action required
+BATCH-1428,Ibuprofen,Analgesics,Novartis,2023-06-27,2025-10-05,29.77,40.75,497,35,560,Cool Dry Place,643,18.6666666666666,26.625,Low Risk,No immediate action required
+BATCH-1429,Losartan,Cardiology,Merck,2023-04-16,2024-04-23,43.35,68.81,198,24,416,Cool Dry Place,113,13.8666666666666,14.2788461538461,Low Risk,No immediate action required
+BATCH-1430,Lisinopril,Cardiology,Sanofi,2023-10-03,2025-05-31,6.11,8.94,308,59,188,Room Temperature,516,6.26666666666666,49.1489361702127,Low Risk,No immediate action required
+BATCH-1431,Azithromycin,Antibiotics,Merck,2023-11-28,2026-01-17,22.97,36.37,489,95,212,Cool Dry Place,747,7.06666666666666,69.1981132075471,Low Risk,No immediate action required
+BATCH-1432,Gabapentin,Neurology,Pfizer,2023-10-25,2025-06-25,48.75,82.93,468,98,233,Refrigerated,541,7.76666666666666,60.2575107296137,Low Risk,No immediate action required
+BATCH-1433,Sertraline,Psychiatry,Cipla,2023-06-01,2024-07-26,10.91,15.98,140,98,407,Cool Dry Place,207,13.5666666666666,10.3194103194103,Low Risk,No immediate action required
+BATCH-1434,Atorvastatin,Cardiology,Merck,2023-01-22,2024-07-31,43.09,73.72,174,90,600,Cool Dry Place,212,20.0,8.7,Low Risk,No immediate action required
+BATCH-1435,Azithromycin,Antibiotics,Pfizer,2023-01-05,2024-06-29,32.48,44.86,447,81,383,Refrigerated,180,12.7666666666666,35.0130548302872,Low Risk,No immediate action required
+BATCH-1436,Lisinopril,Cardiology,Sanofi,2023-05-07,2025-07-21,24.16,30.75,455,80,11,Room Temperature,567,0.366666666666666,1240.90909090909,High Risk,Redistribute to high-demand departments immediately
+BATCH-1437,Amlodipine,Cardiology,GlaxoSmithKline,2023-11-05,2026-08-11,9.99,16.36,116,45,56,Room Temperature,953,1.86666666666666,62.1428571428571,Low Risk,No immediate action required
+BATCH-1438,Losartan,Cardiology,Merck,2023-02-05,2024-08-17,25.73,40.8,43,45,522,Room Temperature,229,17.4,2.47126436781609,Low Risk,Reorder stock soon
+BATCH-1439,Lisinopril,Cardiology,Sanofi,2023-09-11,2026-07-02,29.35,45.67,410,23,351,Room Temperature,913,11.7,35.042735042735,Low Risk,No immediate action required
+BATCH-1440,Sertraline,Psychiatry,Sanofi,2023-04-16,2025-07-27,24.7,40.72,37,38,372,Refrigerated,573,12.4,2.98387096774193,Low Risk,Reorder stock soon
+BATCH-1441,Lisinopril,Cardiology,Cipla,2023-11-21,2025-08-20,8.63,13.15,235,87,489,Room Temperature,597,16.3,14.4171779141104,Low Risk,No immediate action required
+BATCH-1442,Metoprolol,Cardiology,Merck,2023-03-27,2025-10-09,10.66,15.54,218,24,44,Room Temperature,647,1.46666666666666,148.636363636363,Low Risk,No immediate action required
+BATCH-1443,Gabapentin,Neurology,Novartis,2023-06-03,2024-12-29,36.94,64.63,462,95,333,Room Temperature,363,11.1,41.6216216216216,Low Risk,No immediate action required
+BATCH-1444,Paracetamol,Analgesics,Merck,2023-10-25,2026-07-01,38.16,64.49,488,66,108,Refrigerated,912,3.6,135.555555555555,Low Risk,No immediate action required
+BATCH-1445,Paracetamol,Analgesics,Merck,2023-04-20,2025-09-27,9.12,13.6,321,87,429,Cool Dry Place,635,14.3,22.4475524475524,Low Risk,No immediate action required
+BATCH-1446,Levothyroxine,Endocrinology,AstraZeneca,2023-06-07,2025-07-24,44.79,54.78,183,62,267,Refrigerated,570,8.9,20.5617977528089,Low Risk,No immediate action required
+BATCH-1447,Levothyroxine,Endocrinology,Pfizer,2023-03-28,2024-06-21,40.99,68.57,30,53,270,Cool Dry Place,172,9.0,3.33333333333333,Low Risk,Reorder stock soon
+BATCH-1448,Paracetamol,Analgesics,Merck,2023-08-12,2025-12-21,14.68,18.85,216,21,505,Cool Dry Place,720,16.8333333333333,12.8316831683168,Low Risk,No immediate action required
+BATCH-1449,Albuterol,Respiratory,Novartis,2023-11-09,2025-12-08,13.66,22.98,98,40,385,Refrigerated,707,12.8333333333333,7.63636363636363,Low Risk,No immediate action required
+BATCH-1450,Losartan,Cardiology,GlaxoSmithKline,2023-05-29,2025-12-28,28.66,41.31,332,71,159,Refrigerated,727,5.3,62.6415094339622,Low Risk,No immediate action required
+BATCH-1451,Metformin,Diabetes,Cipla,2023-12-07,2026-06-16,44.56,59.86,54,29,302,Room Temperature,897,10.0666666666666,5.36423841059602,Low Risk,No immediate action required
+BATCH-1452,Metoprolol,Cardiology,Sanofi,2023-09-28,2026-05-11,49.13,75.13,213,94,184,Cool Dry Place,861,6.13333333333333,34.7282608695652,Low Risk,No immediate action required
+BATCH-1453,Paracetamol,Analgesics,Merck,2023-09-19,2025-05-22,12.34,19.64,442,39,323,Room Temperature,507,10.7666666666666,41.0526315789473,Low Risk,No immediate action required
+BATCH-1454,Lisinopril,Cardiology,Cipla,2023-05-10,2025-01-07,27.24,46.77,88,28,227,Refrigerated,372,7.56666666666666,11.6299559471365,Low Risk,No immediate action required
+BATCH-1455,Metoprolol,Cardiology,Novartis,2023-05-12,2026-02-10,32.54,43.1,327,72,60,Room Temperature,771,2.0,163.5,Low Risk,No immediate action required
+BATCH-1456,Levothyroxine,Endocrinology,Sanofi,2023-02-18,2024-10-05,39.84,69.17,435,57,370,Cool Dry Place,278,12.3333333333333,35.2702702702702,Low Risk,No immediate action required
+BATCH-1457,Omeprazole,Gastroenterology,AstraZeneca,2023-05-07,2024-12-03,21.33,33.81,197,38,125,Room Temperature,337,4.16666666666666,47.2799999999999,Low Risk,No immediate action required
+BATCH-1458,Azithromycin,Antibiotics,Cipla,2023-05-29,2026-05-01,36.42,50.27,375,23,375,Cool Dry Place,851,12.5,30.0,Low Risk,No immediate action required
+BATCH-1459,Losartan,Cardiology,GlaxoSmithKline,2023-11-16,2025-09-12,33.82,57.44,178,41,336,Refrigerated,620,11.2,15.8928571428571,Low Risk,No immediate action required
+BATCH-1460,Azithromycin,Antibiotics,Pfizer,2023-01-29,2025-06-10,40.18,70.37,413,51,256,Room Temperature,526,8.53333333333333,48.3984375,Low Risk,No immediate action required
+BATCH-1461,Sertraline,Psychiatry,Cipla,2023-11-01,2026-03-24,11.48,14.07,161,40,451,Cool Dry Place,813,15.0333333333333,10.7095343680709,Low Risk,No immediate action required
+BATCH-1462,Levothyroxine,Endocrinology,Cipla,2023-11-01,2025-02-11,43.65,69.59,95,79,189,Refrigerated,407,6.3,15.079365079365,Low Risk,No immediate action required
+BATCH-1463,Losartan,Cardiology,GlaxoSmithKline,2023-11-12,2025-05-23,37.6,47.63,151,82,587,Room Temperature,508,19.5666666666666,7.71720613287904,Low Risk,No immediate action required
+BATCH-1464,Metformin,Diabetes,Pfizer,2023-07-20,2025-02-01,45.41,69.46,77,60,335,Refrigerated,397,11.1666666666666,6.8955223880597,Low Risk,No immediate action required
+BATCH-1465,Omeprazole,Gastroenterology,Cipla,2023-07-23,2025-01-20,15.97,23.49,379,80,141,Room Temperature,385,4.7,80.6382978723404,Low Risk,No immediate action required
+BATCH-1466,Metformin,Diabetes,GlaxoSmithKline,2023-08-09,2025-09-08,9.78,16.44,41,44,397,Cool Dry Place,616,13.2333333333333,3.09823677581864,Low Risk,Reorder stock soon
+BATCH-1467,Losartan,Cardiology,Cipla,2023-10-08,2025-07-10,10.46,18.71,335,55,137,Room Temperature,556,4.56666666666666,73.3576642335766,Low Risk,No immediate action required
+BATCH-1468,Paracetamol,Analgesics,Sanofi,2023-12-30,2025-12-17,22.03,35.16,119,83,528,Cool Dry Place,716,17.6,6.76136363636363,Low Risk,No immediate action required
+BATCH-1469,Sertraline,Psychiatry,GlaxoSmithKline,2023-10-26,2026-01-31,7.82,11.66,109,63,236,Room Temperature,761,7.86666666666666,13.8559322033898,Low Risk,No immediate action required
+BATCH-1470,Ibuprofen,Analgesics,Novartis,2023-01-22,2024-07-30,19.38,33.23,442,36,22,Refrigerated,211,0.733333333333333,602.727272727272,High Risk,Redistribute to high-demand departments immediately
+BATCH-1471,Sertraline,Psychiatry,Merck,2023-11-10,2025-05-23,48.05,71.95,430,28,322,Room Temperature,508,10.7333333333333,40.0621118012422,Low Risk,No immediate action required
+BATCH-1472,Omeprazole,Gastroenterology,AstraZeneca,2023-09-29,2026-04-22,26.74,42.71,307,28,244,Refrigerated,842,8.13333333333333,37.7459016393442,Low Risk,No immediate action required
+BATCH-1473,Lisinopril,Cardiology,Cipla,2023-07-18,2025-11-19,18.04,30.68,423,46,97,Room Temperature,688,3.23333333333333,130.824742268041,Low Risk,No immediate action required
+BATCH-1474,Paracetamol,Analgesics,AstraZeneca,2023-10-17,2026-03-21,22.07,38.09,355,63,496,Room Temperature,810,16.5333333333333,21.4717741935483,Low Risk,No immediate action required
+BATCH-1475,Metoprolol,Cardiology,GlaxoSmithKline,2023-07-23,2024-09-24,22.1,30.3,149,84,252,Cool Dry Place,267,8.4,17.7380952380952,Low Risk,No immediate action required
+BATCH-1476,Sertraline,Psychiatry,Sanofi,2023-07-05,2025-03-04,41.99,59.74,335,91,94,Refrigerated,428,3.13333333333333,106.914893617021,Low Risk,No immediate action required
+BATCH-1477,Atorvastatin,Cardiology,GlaxoSmithKline,2023-05-17,2025-03-24,40.96,66.46,299,83,257,Cool Dry Place,448,8.56666666666666,34.9027237354085,Low Risk,No immediate action required
+BATCH-1478,Losartan,Cardiology,AstraZeneca,2023-04-09,2025-08-10,42.02,75.11,419,36,36,Cool Dry Place,587,1.2,349.166666666666,Low Risk,No immediate action required
+BATCH-1479,Atorvastatin,Cardiology,Cipla,2023-04-09,2025-09-02,13.24,18.95,353,58,329,Cool Dry Place,610,10.9666666666666,32.1884498480243,Low Risk,No immediate action required
+BATCH-1480,Amlodipine,Cardiology,Pfizer,2023-10-12,2025-10-17,28.89,45.56,104,99,386,Room Temperature,655,12.8666666666666,8.08290155440414,Low Risk,No immediate action required
+BATCH-1481,Ibuprofen,Analgesics,GlaxoSmithKline,2023-05-26,2025-07-15,13.95,21.63,193,58,518,Room Temperature,561,17.2666666666666,11.1776061776061,Low Risk,No immediate action required
+BATCH-1482,Metoprolol,Cardiology,Cipla,2023-04-20,2026-02-15,11.72,17.78,187,86,512,Cool Dry Place,776,17.0666666666666,10.95703125,Low Risk,No immediate action required
+BATCH-1483,Atorvastatin,Cardiology,Novartis,2023-03-24,2024-10-27,17.33,28.54,58,76,282,Cool Dry Place,300,9.4,6.17021276595744,Low Risk,Reorder stock soon
+BATCH-1484,Ibuprofen,Analgesics,Novartis,2023-06-16,2024-07-09,11.53,20.63,62,65,200,Cool Dry Place,190,6.66666666666666,9.29999999999999,Low Risk,Reorder stock soon
+BATCH-1485,Azithromycin,Antibiotics,Sanofi,2023-12-20,2026-03-14,17.88,25.41,45,89,593,Room Temperature,803,19.7666666666666,2.27655986509274,Low Risk,Reorder stock soon
+BATCH-1486,Metformin,Diabetes,Novartis,2023-11-18,2025-08-27,16.16,27.63,114,72,182,Room Temperature,604,6.06666666666666,18.7912087912087,Low Risk,No immediate action required
+BATCH-1487,Losartan,Cardiology,Cipla,2023-10-30,2026-09-02,38.58,53.83,386,47,160,Refrigerated,975,5.33333333333333,72.375,Low Risk,No immediate action required
+BATCH-1488,Metformin,Diabetes,Merck,2023-04-05,2026-01-08,21.69,26.38,12,31,4,Cool Dry Place,738,0.133333333333333,90.0,Low Risk,Reorder stock soon
+BATCH-1489,Omeprazole,Gastroenterology,Pfizer,2023-02-11,2024-08-30,39.24,56.05,127,23,427,Room Temperature,242,14.2333333333333,8.92271662763466,Low Risk,No immediate action required
+BATCH-1490,Atorvastatin,Cardiology,GlaxoSmithKline,2023-03-24,2024-10-01,3.52,4.45,440,25,106,Room Temperature,274,3.53333333333333,124.528301886792,Low Risk,No immediate action required
+BATCH-1491,Gabapentin,Neurology,Cipla,2023-09-21,2025-10-27,28.13,41.88,61,78,219,Cool Dry Place,665,7.3,8.35616438356164,Low Risk,Reorder stock soon
+BATCH-1492,Levothyroxine,Endocrinology,Novartis,2023-06-14,2026-02-12,27.28,33.9,65,53,442,Cool Dry Place,773,14.7333333333333,4.41176470588235,Low Risk,No immediate action required
+BATCH-1493,Azithromycin,Antibiotics,GlaxoSmithKline,2023-04-14,2024-07-10,9.09,15.39,479,100,274,Room Temperature,191,9.13333333333333,52.4452554744525,Low Risk,No immediate action required
+BATCH-1494,Azithromycin,Antibiotics,Sanofi,2023-12-14,2025-09-11,16.83,25.86,265,74,402,Cool Dry Place,619,13.4,19.776119402985,Low Risk,No immediate action required
+BATCH-1495,Lisinopril,Cardiology,Pfizer,2023-01-05,2025-12-15,16.73,24.39,156,22,64,Cool Dry Place,714,2.13333333333333,73.125,Low Risk,No immediate action required
+BATCH-1496,Lisinopril,Cardiology,Novartis,2023-08-23,2025-03-24,24.35,35.1,157,78,435,Cool Dry Place,448,14.5,10.8275862068965,Low Risk,No immediate action required
+BATCH-1497,Metoprolol,Cardiology,Sanofi,2023-12-27,2025-01-11,34.56,59.82,249,88,112,Cool Dry Place,376,3.73333333333333,66.6964285714285,Low Risk,No immediate action required
+BATCH-1498,Amlodipine,Cardiology,Novartis,2023-08-06,2026-05-22,11.3,19.55,424,28,516,Cool Dry Place,872,17.2,24.6511627906976,Low Risk,No immediate action required
+BATCH-1499,Lisinopril,Cardiology,Merck,2023-07-26,2025-12-09,45.95,60.47,348,92,510,Refrigerated,708,17.0,20.4705882352941,Low Risk,No immediate action required
+BATCH-1500,Amoxicillin,Antibiotics,Merck,2023-10-24,2026-01-11,2.63,4.32,148,33,246,Refrigerated,741,8.2,18.0487804878048,Low Risk,No immediate action required
+BATCH-1501,Paracetamol,Analgesics,Cipla,2023-02-03,2024-03-15,40.42,67.57,247,95,0,Room Temperature,74,0.0,247000.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1502,Gabapentin,Neurology,AstraZeneca,2023-04-07,2024-09-26,5.45,8.65,211,49,191,Room Temperature,269,6.36666666666666,33.1413612565445,Low Risk,No immediate action required
+BATCH-1503,Metoprolol,Cardiology,Merck,2023-12-28,2025-04-27,19.1,33.22,381,74,81,Room Temperature,482,2.7,141.111111111111,Low Risk,No immediate action required
+BATCH-1504,Amoxicillin,Antibiotics,Novartis,2023-12-17,2026-08-18,27.84,44.63,79,47,61,Room Temperature,960,2.03333333333333,38.8524590163934,Low Risk,No immediate action required
+BATCH-1505,Gabapentin,Neurology,Novartis,2023-09-16,2025-12-30,13.01,19.88,190,88,578,Refrigerated,729,19.2666666666666,9.86159169550173,Low Risk,No immediate action required
+BATCH-1506,Amlodipine,Cardiology,AstraZeneca,2023-03-22,2025-06-24,21.68,26.55,457,74,463,Room Temperature,540,15.4333333333333,29.6112311015118,Low Risk,No immediate action required
+BATCH-1507,Losartan,Cardiology,Pfizer,2023-01-17,2024-05-14,46.81,70.71,484,60,85,Refrigerated,134,2.83333333333333,170.823529411764,High Risk,Redistribute to high-demand departments immediately
+BATCH-1508,Ibuprofen,Analgesics,GlaxoSmithKline,2023-01-16,2025-07-01,1.62,2.86,58,43,183,Refrigerated,547,6.1,9.50819672131147,Low Risk,No immediate action required
+BATCH-1509,Sertraline,Psychiatry,Cipla,2023-09-10,2026-02-12,46.94,75.53,458,59,279,Room Temperature,773,9.3,49.2473118279569,Low Risk,No immediate action required
+BATCH-1510,Amlodipine,Cardiology,AstraZeneca,2023-09-26,2025-07-16,19.52,24.07,440,100,588,Cool Dry Place,562,19.6,22.4489795918367,Low Risk,No immediate action required
+BATCH-1511,Paracetamol,Analgesics,Merck,2023-01-01,2024-08-30,39.5,60.9,116,46,355,Refrigerated,242,11.8333333333333,9.80281690140845,Low Risk,No immediate action required
+BATCH-1512,Amoxicillin,Antibiotics,Pfizer,2023-11-23,2026-06-21,35.97,63.47,256,63,581,Room Temperature,902,19.3666666666666,13.2185886402753,Low Risk,No immediate action required
+BATCH-1513,Omeprazole,Gastroenterology,Cipla,2023-04-09,2025-10-13,19.62,27.13,6,54,113,Cool Dry Place,651,3.76666666666666,1.5929203539823,Low Risk,Reorder stock soon
+BATCH-1514,Azithromycin,Antibiotics,Sanofi,2023-09-08,2026-07-11,26.1,31.89,459,52,367,Refrigerated,922,12.2333333333333,37.5204359673024,Low Risk,No immediate action required
+BATCH-1515,Atorvastatin,Cardiology,Pfizer,2023-11-02,2025-06-22,7.03,10.9,476,55,22,Room Temperature,538,0.733333333333333,649.090909090909,High Risk,Redistribute to high-demand departments immediately
+BATCH-1516,Paracetamol,Analgesics,Sanofi,2023-08-02,2025-01-10,26.94,48.29,454,65,270,Room Temperature,375,9.0,50.4444444444444,Low Risk,No immediate action required
+BATCH-1517,Albuterol,Respiratory,AstraZeneca,2023-09-15,2024-11-25,11.38,14.36,463,58,405,Cool Dry Place,329,13.5,34.2962962962963,Low Risk,No immediate action required
+BATCH-1518,Atorvastatin,Cardiology,Merck,2023-01-06,2024-04-16,46.04,69.65,342,70,578,Cool Dry Place,106,19.2666666666666,17.7508650519031,Low Risk,No immediate action required
+BATCH-1519,Omeprazole,Gastroenterology,Merck,2023-09-20,2026-01-15,37.51,67.51,144,67,364,Refrigerated,745,12.1333333333333,11.8681318681318,Low Risk,No immediate action required
+BATCH-1520,Amoxicillin,Antibiotics,Sanofi,2023-01-23,2024-10-17,15.74,25.2,427,77,593,Room Temperature,290,19.7666666666666,21.6020236087689,Low Risk,No immediate action required
+BATCH-1521,Azithromycin,Antibiotics,Sanofi,2023-04-15,2024-11-09,31.06,41.36,372,41,296,Cool Dry Place,313,9.86666666666666,37.7027027027027,Low Risk,No immediate action required
+BATCH-1522,Omeprazole,Gastroenterology,Cipla,2023-08-08,2026-05-13,2.53,4.34,452,98,362,Cool Dry Place,863,12.0666666666666,37.4585635359116,Low Risk,No immediate action required
+BATCH-1523,Metformin,Diabetes,Cipla,2023-05-23,2026-02-27,33.22,54.22,19,35,455,Refrigerated,788,15.1666666666666,1.25274725274725,Low Risk,Reorder stock soon
+BATCH-1524,Metoprolol,Cardiology,Sanofi,2023-06-15,2025-06-28,32.44,43.23,63,99,99,Cool Dry Place,544,3.3,19.090909090909,Low Risk,Reorder stock soon
+BATCH-1525,Atorvastatin,Cardiology,Merck,2023-02-27,2025-02-21,13.67,21.61,262,55,335,Cool Dry Place,417,11.1666666666666,23.4626865671641,Low Risk,No immediate action required
+BATCH-1526,Omeprazole,Gastroenterology,Cipla,2023-08-17,2026-08-07,49.87,87.6,112,69,434,Cool Dry Place,949,14.4666666666666,7.74193548387096,Low Risk,No immediate action required
+BATCH-1527,Sertraline,Psychiatry,Sanofi,2023-10-03,2025-10-24,4.94,6.93,184,81,419,Refrigerated,662,13.9666666666666,13.1742243436754,Low Risk,No immediate action required
+BATCH-1528,Amlodipine,Cardiology,Cipla,2023-04-01,2025-11-23,24.19,33.82,374,41,519,Cool Dry Place,692,17.3,21.6184971098265,Low Risk,No immediate action required
+BATCH-1529,Lisinopril,Cardiology,Pfizer,2023-10-07,2026-05-22,16.31,22.31,487,21,597,Room Temperature,872,19.9,24.4723618090452,Low Risk,No immediate action required
+BATCH-1530,Atorvastatin,Cardiology,Pfizer,2023-06-27,2026-01-05,5.49,7.23,281,57,357,Room Temperature,735,11.9,23.6134453781512,Low Risk,No immediate action required
+BATCH-1531,Losartan,Cardiology,Sanofi,2023-04-13,2024-12-11,41.92,73.58,399,81,53,Room Temperature,345,1.76666666666666,225.849056603773,Low Risk,No immediate action required
+BATCH-1532,Omeprazole,Gastroenterology,Pfizer,2023-12-03,2026-06-15,4.84,6.81,287,70,404,Refrigerated,896,13.4666666666666,21.3118811881188,Low Risk,No immediate action required
+BATCH-1533,Metformin,Diabetes,AstraZeneca,2023-01-11,2024-07-18,19.41,28.34,300,88,249,Refrigerated,199,8.3,36.144578313253,Low Risk,No immediate action required
+BATCH-1534,Gabapentin,Neurology,Novartis,2023-02-17,2024-07-22,19.35,29.43,256,97,325,Refrigerated,203,10.8333333333333,23.6307692307692,Low Risk,No immediate action required
+BATCH-1535,Metformin,Diabetes,Pfizer,2023-10-06,2024-12-13,19.29,27.32,233,84,522,Room Temperature,347,17.4,13.3908045977011,Low Risk,No immediate action required
+BATCH-1536,Albuterol,Respiratory,Pfizer,2023-03-18,2025-06-14,26.59,44.0,62,36,469,Refrigerated,530,15.6333333333333,3.96588486140724,Low Risk,No immediate action required
+BATCH-1537,Azithromycin,Antibiotics,Novartis,2023-05-18,2024-06-04,46.64,69.52,220,78,330,Room Temperature,155,11.0,20.0,Low Risk,No immediate action required
+BATCH-1538,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-01-27,2024-09-23,45.4,78.69,320,44,103,Cool Dry Place,266,3.43333333333333,93.2038834951456,Low Risk,No immediate action required
+BATCH-1539,Metoprolol,Cardiology,Merck,2023-06-20,2025-03-26,5.24,9.18,386,97,77,Refrigerated,450,2.56666666666666,150.38961038961,Low Risk,No immediate action required
+BATCH-1540,Albuterol,Respiratory,Novartis,2023-03-29,2026-02-18,9.35,15.38,210,90,506,Refrigerated,779,16.8666666666666,12.4505928853754,Low Risk,No immediate action required
+BATCH-1541,Ibuprofen,Analgesics,Pfizer,2023-12-26,2026-03-22,40.02,54.67,232,43,407,Cool Dry Place,811,13.5666666666666,17.1007371007371,Low Risk,No immediate action required
+BATCH-1542,Lisinopril,Cardiology,Pfizer,2023-04-13,2026-01-20,48.4,87.1,98,87,490,Room Temperature,750,16.3333333333333,6.0,Low Risk,No immediate action required
+BATCH-1543,Sertraline,Psychiatry,Merck,2023-01-15,2026-01-05,36.78,49.87,31,85,532,Refrigerated,735,17.7333333333333,1.74812030075187,Low Risk,Reorder stock soon
+BATCH-1544,Levothyroxine,Endocrinology,Pfizer,2023-02-11,2025-04-29,5.44,6.86,347,57,104,Room Temperature,484,3.46666666666666,100.096153846153,Low Risk,No immediate action required
+BATCH-1545,Atorvastatin,Cardiology,Merck,2023-11-11,2025-10-25,24.3,32.48,148,79,463,Room Temperature,663,15.4333333333333,9.58963282937365,Low Risk,No immediate action required
+BATCH-1546,Amoxicillin,Antibiotics,Sanofi,2023-10-10,2026-06-08,13.39,21.31,434,29,414,Room Temperature,889,13.8,31.4492753623188,Low Risk,No immediate action required
+BATCH-1547,Losartan,Cardiology,Pfizer,2023-12-09,2024-12-18,30.98,55.4,338,26,478,Room Temperature,352,15.9333333333333,21.2133891213389,Low Risk,No immediate action required
+BATCH-1548,Gabapentin,Neurology,Pfizer,2023-06-06,2024-09-04,40.84,57.59,355,50,97,Cool Dry Place,247,3.23333333333333,109.793814432989,Low Risk,No immediate action required
+BATCH-1549,Amoxicillin,Antibiotics,AstraZeneca,2023-01-10,2024-07-04,42.96,53.66,467,43,124,Room Temperature,185,4.13333333333333,112.983870967741,Low Risk,No immediate action required
+BATCH-1550,Omeprazole,Gastroenterology,Novartis,2023-11-09,2025-01-20,30.24,38.06,36,26,491,Room Temperature,385,16.3666666666666,2.19959266802443,Low Risk,No immediate action required
+BATCH-1551,Sertraline,Psychiatry,Merck,2023-09-29,2026-03-17,24.28,29.48,388,33,112,Room Temperature,806,3.73333333333333,103.928571428571,Low Risk,No immediate action required
+BATCH-1552,Losartan,Cardiology,Pfizer,2023-03-24,2025-07-19,35.35,55.02,157,52,219,Refrigerated,565,7.3,21.5068493150684,Low Risk,No immediate action required
+BATCH-1553,Losartan,Cardiology,Novartis,2023-05-08,2025-01-19,41.11,49.57,193,60,220,Cool Dry Place,384,7.33333333333333,26.3181818181818,Low Risk,No immediate action required
+BATCH-1554,Paracetamol,Analgesics,Pfizer,2023-12-29,2026-06-19,24.03,36.27,493,78,363,Refrigerated,900,12.1,40.7438016528925,Low Risk,No immediate action required
+BATCH-1555,Amoxicillin,Antibiotics,AstraZeneca,2023-02-17,2024-11-20,13.89,24.42,128,61,121,Room Temperature,324,4.03333333333333,31.7355371900826,Low Risk,No immediate action required
+BATCH-1556,Azithromycin,Antibiotics,Cipla,2023-01-01,2025-02-16,11.69,20.5,33,51,87,Refrigerated,412,2.9,11.3793103448275,Low Risk,Reorder stock soon
+BATCH-1557,Atorvastatin,Cardiology,GlaxoSmithKline,2023-11-18,2026-07-06,30.32,37.27,80,27,169,Room Temperature,917,5.63333333333333,14.2011834319526,Low Risk,No immediate action required
+BATCH-1558,Lisinopril,Cardiology,Novartis,2023-04-15,2024-12-24,37.69,66.3,243,59,276,Cool Dry Place,358,9.2,26.4130434782608,Low Risk,No immediate action required
+BATCH-1559,Metoprolol,Cardiology,AstraZeneca,2023-11-07,2025-05-20,36.87,54.26,160,23,481,Cool Dry Place,505,16.0333333333333,9.97920997920997,Low Risk,No immediate action required
+BATCH-1560,Lisinopril,Cardiology,Merck,2023-06-23,2024-08-19,30.45,45.31,43,70,600,Cool Dry Place,231,20.0,2.15,Low Risk,Reorder stock soon
+BATCH-1561,Metformin,Diabetes,Cipla,2023-11-28,2026-01-29,29.72,42.43,155,79,297,Room Temperature,759,9.9,15.6565656565656,Low Risk,No immediate action required
+BATCH-1562,Losartan,Cardiology,GlaxoSmithKline,2023-01-16,2025-05-06,5.8,8.85,154,64,8,Cool Dry Place,491,0.266666666666666,577.5,High Risk,Redistribute to high-demand departments immediately
+BATCH-1563,Gabapentin,Neurology,Cipla,2023-03-18,2024-09-27,41.22,50.56,298,30,334,Cool Dry Place,270,11.1333333333333,26.7664670658682,Low Risk,No immediate action required
+BATCH-1564,Losartan,Cardiology,AstraZeneca,2023-07-17,2025-06-06,5.66,7.88,477,82,490,Room Temperature,522,16.3333333333333,29.204081632653,Low Risk,No immediate action required
+BATCH-1565,Paracetamol,Analgesics,Cipla,2023-03-15,2025-06-14,5.31,8.96,451,96,549,Refrigerated,530,18.3,24.6448087431694,Low Risk,No immediate action required
+BATCH-1566,Gabapentin,Neurology,Sanofi,2023-11-21,2025-09-16,29.14,35.79,421,54,467,Cool Dry Place,624,15.5666666666666,27.0449678800856,Low Risk,No immediate action required
+BATCH-1567,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-07-24,2025-06-30,25.91,45.63,155,100,367,Cool Dry Place,546,12.2333333333333,12.6702997275204,Low Risk,No immediate action required
+BATCH-1568,Albuterol,Respiratory,Pfizer,2023-12-26,2026-01-09,48.11,63.35,443,22,388,Refrigerated,739,12.9333333333333,34.2525773195876,Low Risk,No immediate action required
+BATCH-1569,Lisinopril,Cardiology,GlaxoSmithKline,2023-11-24,2024-11-25,7.64,10.87,161,30,590,Cool Dry Place,329,19.6666666666666,8.1864406779661,Low Risk,No immediate action required
+BATCH-1570,Amlodipine,Cardiology,Novartis,2023-09-18,2025-03-31,16.76,20.78,255,42,0,Cool Dry Place,455,0.0,255000.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1571,Albuterol,Respiratory,Pfizer,2023-02-14,2025-07-31,10.09,16.32,266,82,176,Room Temperature,577,5.86666666666666,45.340909090909,Low Risk,No immediate action required
+BATCH-1572,Albuterol,Respiratory,Merck,2023-11-05,2025-02-23,21.3,26.78,161,97,3,Refrigerated,419,0.1,1610.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1573,Lisinopril,Cardiology,Sanofi,2023-02-09,2024-11-19,2.7,3.68,250,22,214,Room Temperature,323,7.13333333333333,35.0467289719626,Low Risk,No immediate action required
+BATCH-1574,Ibuprofen,Analgesics,Cipla,2023-09-02,2026-01-10,11.08,19.08,383,62,469,Cool Dry Place,740,15.6333333333333,24.4989339019189,Low Risk,No immediate action required
+BATCH-1575,Atorvastatin,Cardiology,Merck,2023-02-18,2024-06-21,39.5,47.49,414,45,347,Room Temperature,172,11.5666666666666,35.7925072046109,Low Risk,No immediate action required
+BATCH-1576,Azithromycin,Antibiotics,Merck,2023-10-25,2025-01-02,45.17,67.16,202,30,321,Cool Dry Place,367,10.7,18.8785046728971,Low Risk,No immediate action required
+BATCH-1577,Levothyroxine,Endocrinology,Pfizer,2023-11-05,2025-07-26,28.63,49.94,124,22,226,Room Temperature,572,7.53333333333333,16.4601769911504,Low Risk,No immediate action required
+BATCH-1578,Sertraline,Psychiatry,Cipla,2023-03-25,2024-11-26,19.15,31.24,481,27,363,Cool Dry Place,330,12.1,39.7520661157024,Low Risk,No immediate action required
+BATCH-1579,Metformin,Diabetes,Sanofi,2023-02-15,2025-10-15,5.5,7.99,437,61,351,Room Temperature,653,11.7,37.3504273504273,Low Risk,No immediate action required
+BATCH-1580,Sertraline,Psychiatry,GlaxoSmithKline,2023-07-23,2025-10-11,46.03,79.56,27,34,530,Refrigerated,649,17.6666666666666,1.52830188679245,Low Risk,Reorder stock soon
+BATCH-1581,Amoxicillin,Antibiotics,Sanofi,2023-05-05,2026-02-03,47.98,64.22,353,91,148,Refrigerated,764,4.93333333333333,71.554054054054,Low Risk,No immediate action required
+BATCH-1582,Losartan,Cardiology,Novartis,2023-08-08,2025-06-12,41.05,72.03,220,100,562,Room Temperature,528,18.7333333333333,11.7437722419928,Low Risk,No immediate action required
+BATCH-1583,Amlodipine,Cardiology,Novartis,2023-07-14,2025-12-09,46.91,65.6,293,37,244,Refrigerated,708,8.13333333333333,36.0245901639344,Low Risk,No immediate action required
+BATCH-1584,Amlodipine,Cardiology,Novartis,2023-09-13,2026-04-14,5.35,8.9,472,42,337,Refrigerated,834,11.2333333333333,42.0178041543026,Low Risk,No immediate action required
+BATCH-1585,Atorvastatin,Cardiology,GlaxoSmithKline,2023-06-10,2024-09-10,26.4,41.39,419,58,26,Refrigerated,253,0.866666666666666,483.461538461538,High Risk,Redistribute to high-demand departments immediately
+BATCH-1586,Metoprolol,Cardiology,GlaxoSmithKline,2023-04-18,2025-07-27,2.22,3.9,362,90,146,Room Temperature,573,4.86666666666666,74.3835616438356,Low Risk,No immediate action required
+BATCH-1587,Losartan,Cardiology,Pfizer,2023-12-02,2026-11-05,35.32,58.11,411,63,189,Cool Dry Place,1039,6.3,65.2380952380952,Low Risk,No immediate action required
+BATCH-1588,Sertraline,Psychiatry,Novartis,2023-12-09,2026-08-28,11.28,18.13,135,72,532,Cool Dry Place,970,17.7333333333333,7.61278195488721,Low Risk,No immediate action required
+BATCH-1589,Paracetamol,Analgesics,Pfizer,2023-09-03,2026-04-10,40.61,55.04,144,21,551,Cool Dry Place,830,18.3666666666666,7.84029038112522,Low Risk,No immediate action required
+BATCH-1590,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-11-15,2025-02-26,45.47,68.73,98,63,232,Refrigerated,422,7.73333333333333,12.6724137931034,Low Risk,No immediate action required
+BATCH-1591,Amlodipine,Cardiology,Novartis,2023-09-05,2025-12-30,19.66,28.06,178,27,248,Refrigerated,729,8.26666666666666,21.5322580645161,Low Risk,No immediate action required
+BATCH-1592,Paracetamol,Analgesics,Pfizer,2023-09-29,2025-05-15,8.5,13.65,28,38,332,Refrigerated,500,11.0666666666666,2.53012048192771,Low Risk,Reorder stock soon
+BATCH-1593,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-07-12,2025-12-06,23.01,36.56,184,86,32,Cool Dry Place,705,1.06666666666666,172.5,Low Risk,No immediate action required
+BATCH-1594,Amlodipine,Cardiology,Pfizer,2023-05-28,2025-04-11,42.79,58.04,217,26,373,Refrigerated,466,12.4333333333333,17.4530831099195,Low Risk,No immediate action required
+BATCH-1595,Levothyroxine,Endocrinology,Sanofi,2023-07-01,2026-05-01,35.17,45.82,386,22,286,Refrigerated,851,9.53333333333333,40.4895104895104,Low Risk,No immediate action required
+BATCH-1596,Levothyroxine,Endocrinology,Merck,2023-09-04,2025-11-27,29.13,41.61,340,83,416,Cool Dry Place,696,13.8666666666666,24.5192307692307,Low Risk,No immediate action required
+BATCH-1597,Lisinopril,Cardiology,Sanofi,2023-11-21,2025-04-17,42.5,75.05,424,72,387,Refrigerated,472,12.9,32.8682170542635,Low Risk,No immediate action required
+BATCH-1598,Sertraline,Psychiatry,AstraZeneca,2023-11-24,2026-10-05,12.18,14.83,436,37,94,Cool Dry Place,1008,3.13333333333333,139.148936170212,Low Risk,No immediate action required
+BATCH-1599,Omeprazole,Gastroenterology,Cipla,2023-12-21,2025-09-17,24.6,32.79,232,30,81,Refrigerated,625,2.7,85.9259259259259,Low Risk,No immediate action required
+BATCH-1600,Amoxicillin,Antibiotics,AstraZeneca,2023-08-27,2025-10-24,10.14,14.73,336,71,387,Refrigerated,662,12.9,26.0465116279069,Low Risk,No immediate action required
+BATCH-1601,Paracetamol,Analgesics,Sanofi,2023-11-08,2026-09-04,20.71,31.99,96,77,395,Cool Dry Place,977,13.1666666666666,7.29113924050633,Low Risk,No immediate action required
+BATCH-1602,Sertraline,Psychiatry,Pfizer,2023-04-16,2026-01-01,21.74,35.37,412,38,123,Refrigerated,731,4.1,100.487804878048,Low Risk,No immediate action required
+BATCH-1603,Ibuprofen,Analgesics,AstraZeneca,2023-09-01,2025-01-05,43.95,60.69,486,93,107,Cool Dry Place,370,3.56666666666666,136.26168224299,Low Risk,No immediate action required
+BATCH-1604,Albuterol,Respiratory,Novartis,2023-02-13,2025-01-29,4.92,6.79,181,33,158,Room Temperature,394,5.26666666666666,34.3670886075949,Low Risk,No immediate action required
+BATCH-1605,Metformin,Diabetes,AstraZeneca,2023-11-19,2026-10-10,22.03,31.48,340,54,98,Cool Dry Place,1013,3.26666666666666,104.081632653061,Low Risk,No immediate action required
+BATCH-1606,Albuterol,Respiratory,GlaxoSmithKline,2023-05-06,2025-10-22,49.45,59.78,117,35,160,Cool Dry Place,660,5.33333333333333,21.9375,Low Risk,No immediate action required
+BATCH-1607,Sertraline,Psychiatry,Merck,2023-06-20,2025-06-04,35.62,54.46,452,91,453,Cool Dry Place,520,15.1,29.933774834437,Low Risk,No immediate action required
+BATCH-1608,Sertraline,Psychiatry,AstraZeneca,2023-03-10,2025-07-13,10.75,18.5,352,73,6,Cool Dry Place,559,0.2,1760.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1609,Albuterol,Respiratory,Sanofi,2023-07-30,2025-09-30,26.15,37.87,315,82,507,Room Temperature,638,16.9,18.6390532544378,Low Risk,No immediate action required
+BATCH-1610,Azithromycin,Antibiotics,Pfizer,2023-07-12,2025-11-01,12.75,17.47,279,26,387,Refrigerated,670,12.9,21.6279069767441,Low Risk,No immediate action required
+BATCH-1611,Ibuprofen,Analgesics,Sanofi,2023-05-07,2025-11-27,11.39,14.23,173,76,129,Cool Dry Place,696,4.3,40.2325581395348,Low Risk,No immediate action required
+BATCH-1612,Metformin,Diabetes,Novartis,2023-10-25,2025-08-22,1.79,2.31,362,46,151,Refrigerated,599,5.03333333333333,71.9205298013245,Low Risk,No immediate action required
+BATCH-1613,Omeprazole,Gastroenterology,Cipla,2023-09-08,2025-03-09,44.05,76.34,433,66,525,Refrigerated,433,17.5,24.7428571428571,Low Risk,No immediate action required
+BATCH-1614,Amoxicillin,Antibiotics,Sanofi,2023-03-05,2025-01-02,17.65,22.65,226,83,236,Room Temperature,367,7.86666666666666,28.728813559322,Low Risk,No immediate action required
+BATCH-1615,Metoprolol,Cardiology,Merck,2023-12-06,2026-12-05,14.19,17.04,352,99,250,Refrigerated,1069,8.33333333333333,42.2399999999999,Low Risk,No immediate action required
+BATCH-1616,Amoxicillin,Antibiotics,Novartis,2023-10-28,2024-11-28,49.17,63.11,192,62,490,Cool Dry Place,332,16.3333333333333,11.7551020408163,Low Risk,No immediate action required
+BATCH-1617,Metformin,Diabetes,Novartis,2023-01-02,2025-12-04,21.55,26.17,195,35,392,Cool Dry Place,703,13.0666666666666,14.9234693877551,Low Risk,No immediate action required
+BATCH-1618,Atorvastatin,Cardiology,GlaxoSmithKline,2023-10-28,2025-06-16,39.91,71.56,442,52,543,Cool Dry Place,532,18.1,24.4198895027624,Low Risk,No immediate action required
+BATCH-1619,Sertraline,Psychiatry,GlaxoSmithKline,2023-11-20,2026-04-07,8.51,14.31,273,36,204,Cool Dry Place,827,6.8,40.1470588235294,Low Risk,No immediate action required
+BATCH-1620,Lisinopril,Cardiology,Sanofi,2023-06-02,2026-01-24,19.96,34.35,449,20,142,Room Temperature,754,4.73333333333333,94.8591549295774,Low Risk,No immediate action required
+BATCH-1621,Omeprazole,Gastroenterology,Pfizer,2023-08-09,2026-03-23,43.71,66.92,153,50,554,Cool Dry Place,812,18.4666666666666,8.28519855595668,Low Risk,No immediate action required
+BATCH-1622,Omeprazole,Gastroenterology,Novartis,2023-07-01,2024-09-14,38.61,52.31,17,24,220,Cool Dry Place,257,7.33333333333333,2.31818181818181,Low Risk,Reorder stock soon
+BATCH-1623,Gabapentin,Neurology,Novartis,2023-10-21,2026-08-29,6.21,8.17,479,22,515,Cool Dry Place,971,17.1666666666666,27.9029126213592,Low Risk,No immediate action required
+BATCH-1624,Gabapentin,Neurology,Cipla,2023-08-07,2025-04-06,36.94,52.89,131,43,129,Refrigerated,461,4.3,30.4651162790697,Low Risk,No immediate action required
+BATCH-1625,Amlodipine,Cardiology,Novartis,2023-09-18,2026-01-01,45.22,79.63,438,71,93,Cool Dry Place,731,3.1,141.290322580645,Low Risk,No immediate action required
+BATCH-1626,Amlodipine,Cardiology,Pfizer,2023-05-17,2025-06-10,13.66,21.21,232,62,595,Room Temperature,526,19.8333333333333,11.6974789915966,Low Risk,No immediate action required
+BATCH-1627,Metformin,Diabetes,AstraZeneca,2023-04-28,2025-12-26,41.98,61.63,239,25,272,Refrigerated,725,9.06666666666666,26.360294117647,Low Risk,No immediate action required
+BATCH-1628,Lisinopril,Cardiology,Cipla,2023-03-16,2024-04-25,27.45,37.14,33,20,364,Room Temperature,115,12.1333333333333,2.71978021978022,Low Risk,No immediate action required
+BATCH-1629,Gabapentin,Neurology,GlaxoSmithKline,2023-04-20,2024-05-27,26.87,35.94,402,48,146,Cool Dry Place,147,4.86666666666666,82.6027397260274,Low Risk,No immediate action required
+BATCH-1630,Levothyroxine,Endocrinology,AstraZeneca,2023-01-07,2024-09-09,41.12,53.46,72,49,149,Refrigerated,252,4.96666666666666,14.496644295302,Low Risk,No immediate action required
+BATCH-1631,Amoxicillin,Antibiotics,Pfizer,2023-04-05,2024-07-26,44.88,61.32,255,27,383,Room Temperature,207,12.7666666666666,19.9738903394255,Low Risk,No immediate action required
+BATCH-1632,Amlodipine,Cardiology,Sanofi,2023-03-12,2024-08-03,5.66,9.54,41,65,15,Room Temperature,215,0.5,82.0,Low Risk,Reorder stock soon
+BATCH-1633,Sertraline,Psychiatry,AstraZeneca,2023-07-06,2024-07-09,31.55,40.12,70,80,560,Cool Dry Place,190,18.6666666666666,3.74999999999999,Low Risk,Reorder stock soon
+BATCH-1634,Lisinopril,Cardiology,Sanofi,2023-03-30,2024-09-30,30.12,41.32,102,68,461,Cool Dry Place,273,15.3666666666666,6.63774403470715,Low Risk,No immediate action required
+BATCH-1635,Losartan,Cardiology,Pfizer,2023-09-23,2026-08-31,46.06,76.47,435,46,305,Refrigerated,973,10.1666666666666,42.7868852459016,Low Risk,No immediate action required
+BATCH-1636,Amoxicillin,Antibiotics,Novartis,2023-05-22,2026-02-11,8.28,12.72,439,65,281,Refrigerated,772,9.36666666666666,46.8683274021352,Low Risk,No immediate action required
+BATCH-1637,Omeprazole,Gastroenterology,Merck,2023-12-16,2026-05-04,30.78,40.47,116,22,183,Refrigerated,854,6.1,19.0163934426229,Low Risk,No immediate action required
+BATCH-1638,Albuterol,Respiratory,AstraZeneca,2023-10-01,2026-08-28,11.58,18.37,250,97,79,Refrigerated,970,2.63333333333333,94.9367088607595,Low Risk,No immediate action required
+BATCH-1639,Omeprazole,Gastroenterology,Merck,2023-04-19,2024-12-23,5.84,10.44,342,38,223,Refrigerated,357,7.43333333333333,46.0089686098654,Low Risk,No immediate action required
+BATCH-1640,Ibuprofen,Analgesics,Pfizer,2023-01-04,2024-07-19,23.81,40.16,271,56,267,Room Temperature,200,8.9,30.4494382022471,Low Risk,No immediate action required
+BATCH-1641,Azithromycin,Antibiotics,Pfizer,2023-05-04,2024-08-19,30.87,45.44,203,87,18,Room Temperature,231,0.6,338.333333333333,High Risk,Redistribute to high-demand departments immediately
+BATCH-1642,Losartan,Cardiology,AstraZeneca,2023-04-06,2025-12-01,39.13,66.49,231,21,557,Cool Dry Place,700,18.5666666666666,12.4416517055655,Low Risk,No immediate action required
+BATCH-1643,Omeprazole,Gastroenterology,Pfizer,2023-12-01,2025-05-04,23.92,30.8,433,76,512,Room Temperature,489,17.0666666666666,25.37109375,Low Risk,No immediate action required
+BATCH-1644,Losartan,Cardiology,Pfizer,2023-11-13,2025-04-14,18.81,29.58,476,100,571,Refrigerated,469,19.0333333333333,25.0087565674255,Low Risk,No immediate action required
+BATCH-1645,Amlodipine,Cardiology,Novartis,2023-11-27,2026-03-01,4.21,6.79,94,32,174,Cool Dry Place,790,5.8,16.2068965517241,Low Risk,No immediate action required
+BATCH-1646,Sertraline,Psychiatry,GlaxoSmithKline,2023-08-30,2026-05-28,47.9,61.07,29,88,200,Refrigerated,878,6.66666666666666,4.35,Low Risk,Reorder stock soon
+BATCH-1647,Albuterol,Respiratory,Pfizer,2023-12-12,2025-03-16,11.65,16.67,104,91,408,Refrigerated,440,13.6,7.64705882352941,Low Risk,No immediate action required
+BATCH-1648,Losartan,Cardiology,Cipla,2023-07-14,2026-01-20,22.84,34.08,203,42,553,Cool Dry Place,750,18.4333333333333,11.0126582278481,Low Risk,No immediate action required
+BATCH-1649,Azithromycin,Antibiotics,GlaxoSmithKline,2023-07-01,2025-04-30,10.61,15.93,77,20,33,Cool Dry Place,485,1.1,70.0,Low Risk,No immediate action required
+BATCH-1650,Amlodipine,Cardiology,GlaxoSmithKline,2023-10-20,2026-08-20,39.09,66.8,336,56,300,Cool Dry Place,962,10.0,33.6,Low Risk,No immediate action required
+BATCH-1651,Lisinopril,Cardiology,Novartis,2023-09-06,2025-01-24,17.0,23.95,458,40,111,Cool Dry Place,389,3.7,123.783783783783,Low Risk,No immediate action required
+BATCH-1652,Metoprolol,Cardiology,AstraZeneca,2023-05-16,2026-05-13,13.35,17.19,66,50,360,Refrigerated,863,12.0,5.5,Low Risk,No immediate action required
+BATCH-1653,Paracetamol,Analgesics,Sanofi,2023-12-04,2026-05-09,17.36,23.32,466,50,423,Refrigerated,859,14.1,33.0496453900709,Low Risk,No immediate action required
+BATCH-1654,Metformin,Diabetes,Pfizer,2023-01-19,2025-01-13,10.96,17.71,127,38,133,Cool Dry Place,378,4.43333333333333,28.6466165413533,Low Risk,No immediate action required
+BATCH-1655,Metformin,Diabetes,Pfizer,2023-12-05,2024-12-08,42.94,74.48,418,36,77,Cool Dry Place,342,2.56666666666666,162.857142857142,Low Risk,No immediate action required
+BATCH-1656,Amlodipine,Cardiology,Merck,2023-07-03,2025-06-24,47.56,79.19,426,30,223,Refrigerated,540,7.43333333333333,57.3094170403587,Low Risk,No immediate action required
+BATCH-1657,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-08-07,2026-04-11,41.47,68.79,296,34,403,Refrigerated,831,13.4333333333333,22.0347394540942,Low Risk,No immediate action required
+BATCH-1658,Omeprazole,Gastroenterology,Novartis,2023-06-17,2025-07-28,16.83,27.2,426,39,219,Room Temperature,574,7.3,58.3561643835616,Low Risk,No immediate action required
+BATCH-1659,Omeprazole,Gastroenterology,Pfizer,2023-07-23,2026-01-20,14.64,23.16,23,79,496,Cool Dry Place,750,16.5333333333333,1.39112903225806,Low Risk,Reorder stock soon
+BATCH-1660,Levothyroxine,Endocrinology,Pfizer,2023-05-18,2025-01-20,18.62,33.36,38,21,565,Refrigerated,385,18.8333333333333,2.01769911504424,Low Risk,No immediate action required
+BATCH-1661,Paracetamol,Analgesics,Cipla,2023-08-12,2025-09-03,2.21,3.45,107,61,545,Refrigerated,611,18.1666666666666,5.88990825688073,Low Risk,No immediate action required
+BATCH-1662,Levothyroxine,Endocrinology,Pfizer,2023-02-16,2025-07-18,38.91,50.4,416,90,393,Room Temperature,564,13.1,31.7557251908396,Low Risk,No immediate action required
+BATCH-1663,Amlodipine,Cardiology,Novartis,2023-02-07,2024-10-03,2.55,4.28,156,91,51,Cool Dry Place,276,1.7,91.7647058823529,Low Risk,No immediate action required
+BATCH-1664,Gabapentin,Neurology,GlaxoSmithKline,2023-06-26,2024-11-11,43.74,64.21,153,68,238,Cool Dry Place,315,7.93333333333333,19.2857142857142,Low Risk,No immediate action required
+BATCH-1665,Sertraline,Psychiatry,Novartis,2023-05-14,2025-01-09,20.75,28.83,181,28,469,Room Temperature,374,15.6333333333333,11.5778251599147,Low Risk,No immediate action required
+BATCH-1666,Azithromycin,Antibiotics,Novartis,2023-11-12,2025-05-04,47.26,64.75,420,82,374,Room Temperature,489,12.4666666666666,33.6898395721925,Low Risk,No immediate action required
+BATCH-1667,Metformin,Diabetes,AstraZeneca,2023-11-19,2026-04-18,44.72,76.41,310,86,87,Refrigerated,838,2.9,106.896551724137,Low Risk,No immediate action required
+BATCH-1668,Paracetamol,Analgesics,Cipla,2023-02-21,2024-09-22,39.59,55.52,225,90,128,Refrigerated,265,4.26666666666666,52.734375,Low Risk,No immediate action required
+BATCH-1669,Albuterol,Respiratory,Pfizer,2023-09-08,2024-10-19,3.72,5.36,209,47,31,Room Temperature,292,1.03333333333333,202.258064516129,Low Risk,No immediate action required
+BATCH-1670,Ibuprofen,Analgesics,Cipla,2023-08-23,2024-12-14,35.44,57.22,374,30,377,Room Temperature,348,12.5666666666666,29.761273209549,Low Risk,No immediate action required
+BATCH-1671,Azithromycin,Antibiotics,Novartis,2023-05-10,2025-12-09,13.7,21.33,104,33,548,Room Temperature,708,18.2666666666666,5.6934306569343,Low Risk,No immediate action required
+BATCH-1672,Atorvastatin,Cardiology,Cipla,2023-05-28,2026-02-22,47.66,70.83,102,27,46,Cool Dry Place,783,1.53333333333333,66.5217391304347,Low Risk,No immediate action required
+BATCH-1673,Metformin,Diabetes,Novartis,2023-06-09,2024-08-28,26.24,42.89,7,71,238,Room Temperature,240,7.93333333333333,0.88235294117647,Low Risk,Reorder stock soon
+BATCH-1674,Lisinopril,Cardiology,Sanofi,2023-01-28,2024-09-11,48.55,81.2,116,53,91,Room Temperature,254,3.03333333333333,38.2417582417582,Low Risk,No immediate action required
+BATCH-1675,Metoprolol,Cardiology,AstraZeneca,2023-02-02,2025-12-19,34.61,41.63,390,81,214,Refrigerated,718,7.13333333333333,54.6728971962616,Low Risk,No immediate action required
+BATCH-1676,Metformin,Diabetes,Pfizer,2023-10-26,2026-10-13,14.99,26.24,327,73,422,Cool Dry Place,1016,14.0666666666666,23.2464454976303,Low Risk,No immediate action required
+BATCH-1677,Omeprazole,Gastroenterology,Pfizer,2023-12-14,2026-06-30,12.11,18.83,301,64,149,Room Temperature,911,4.96666666666666,60.6040268456375,Low Risk,No immediate action required
+BATCH-1678,Gabapentin,Neurology,Sanofi,2023-01-16,2024-07-11,26.21,34.8,334,49,417,Room Temperature,192,13.9,24.0287769784172,Low Risk,No immediate action required
+BATCH-1679,Metformin,Diabetes,Cipla,2023-12-01,2025-04-12,34.39,60.6,229,52,317,Room Temperature,467,10.5666666666666,21.6719242902208,Low Risk,No immediate action required
+BATCH-1680,Amoxicillin,Antibiotics,Pfizer,2023-12-06,2026-03-17,21.74,34.69,188,96,106,Room Temperature,806,3.53333333333333,53.2075471698113,Low Risk,No immediate action required
+BATCH-1681,Paracetamol,Analgesics,Merck,2023-08-06,2026-02-01,6.91,9.15,55,46,540,Cool Dry Place,762,18.0,3.05555555555555,Low Risk,No immediate action required
+BATCH-1682,Lisinopril,Cardiology,Novartis,2023-06-27,2026-01-12,41.39,64.76,398,40,210,Cool Dry Place,742,7.0,56.8571428571428,Low Risk,No immediate action required
+BATCH-1683,Paracetamol,Analgesics,Cipla,2023-05-17,2024-11-04,25.99,44.86,304,61,560,Cool Dry Place,308,18.6666666666666,16.2857142857142,Low Risk,No immediate action required
+BATCH-1684,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-08-02,2025-04-26,6.5,7.89,288,85,310,Room Temperature,481,10.3333333333333,27.8709677419354,Low Risk,No immediate action required
+BATCH-1685,Paracetamol,Analgesics,Pfizer,2023-09-12,2025-11-27,3.12,4.07,317,35,6,Room Temperature,696,0.2,1585.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1686,Levothyroxine,Endocrinology,Pfizer,2023-06-13,2024-07-26,17.7,31.78,368,87,203,Room Temperature,207,6.76666666666666,54.3842364532019,Low Risk,No immediate action required
+BATCH-1687,Sertraline,Psychiatry,Cipla,2023-10-18,2025-07-18,10.91,14.32,463,23,83,Cool Dry Place,564,2.76666666666666,167.349397590361,Low Risk,No immediate action required
+BATCH-1688,Amoxicillin,Antibiotics,Pfizer,2023-08-22,2026-06-08,9.14,13.25,243,97,165,Room Temperature,889,5.5,44.1818181818181,Low Risk,No immediate action required
+BATCH-1689,Sertraline,Psychiatry,GlaxoSmithKline,2023-08-25,2025-11-07,45.13,64.21,36,59,379,Cool Dry Place,676,12.6333333333333,2.84960422163588,Low Risk,Reorder stock soon
+BATCH-1690,Atorvastatin,Cardiology,Pfizer,2023-01-21,2025-08-05,19.24,31.08,471,51,380,Refrigerated,582,12.6666666666666,37.1842105263157,Low Risk,No immediate action required
+BATCH-1691,Azithromycin,Antibiotics,Merck,2023-11-07,2026-01-09,14.22,18.98,123,20,338,Refrigerated,739,11.2666666666666,10.9171597633136,Low Risk,No immediate action required
+BATCH-1692,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-07-29,2025-12-07,20.47,29.8,286,21,401,Room Temperature,706,13.3666666666666,21.3965087281795,Low Risk,No immediate action required
+BATCH-1693,Levothyroxine,Endocrinology,AstraZeneca,2023-10-06,2025-09-27,11.51,17.4,469,37,600,Cool Dry Place,635,20.0,23.45,Low Risk,No immediate action required
+BATCH-1694,Atorvastatin,Cardiology,Cipla,2023-12-19,2025-06-10,2.79,4.68,197,21,28,Room Temperature,526,0.933333333333333,211.071428571428,Low Risk,No immediate action required
+BATCH-1695,Lisinopril,Cardiology,Merck,2023-04-21,2024-07-31,38.01,46.64,47,99,155,Cool Dry Place,212,5.16666666666666,9.09677419354838,Low Risk,Reorder stock soon
+BATCH-1696,Gabapentin,Neurology,Pfizer,2023-10-25,2025-07-22,14.1,20.98,176,76,591,Refrigerated,568,19.7,8.93401015228426,Low Risk,No immediate action required
+BATCH-1697,Metoprolol,Cardiology,Pfizer,2023-03-21,2025-01-25,46.49,59.35,309,39,312,Room Temperature,390,10.4,29.7115384615384,Low Risk,No immediate action required
+BATCH-1698,Gabapentin,Neurology,Pfizer,2023-02-28,2024-11-08,19.55,30.48,496,65,599,Refrigerated,312,19.9666666666666,24.8414023372287,Low Risk,No immediate action required
+BATCH-1699,Atorvastatin,Cardiology,AstraZeneca,2023-12-19,2026-06-04,17.64,25.13,35,91,549,Cool Dry Place,885,18.3,1.91256830601092,Low Risk,Reorder stock soon
+BATCH-1700,Paracetamol,Analgesics,Sanofi,2023-03-14,2025-12-05,48.48,65.68,93,65,225,Room Temperature,704,7.5,12.4,Low Risk,No immediate action required
+BATCH-1701,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-05-17,2026-01-04,45.2,76.49,460,24,242,Room Temperature,734,8.06666666666666,57.0247933884297,Low Risk,No immediate action required
+BATCH-1702,Sertraline,Psychiatry,AstraZeneca,2023-03-06,2025-12-29,7.75,12.86,371,52,558,Refrigerated,728,18.6,19.9462365591397,Low Risk,No immediate action required
+BATCH-1703,Amoxicillin,Antibiotics,AstraZeneca,2023-08-06,2026-03-11,11.52,16.6,26,41,57,Cool Dry Place,800,1.9,13.6842105263157,Low Risk,Reorder stock soon
+BATCH-1704,Albuterol,Respiratory,Novartis,2023-12-28,2025-12-18,29.28,38.48,463,24,373,Cool Dry Place,717,12.4333333333333,37.2386058981233,Low Risk,No immediate action required
+BATCH-1705,Metoprolol,Cardiology,Cipla,2023-03-14,2025-04-17,4.48,7.25,98,40,497,Room Temperature,472,16.5666666666666,5.91549295774647,Low Risk,No immediate action required
+BATCH-1706,Ibuprofen,Analgesics,Sanofi,2023-08-28,2025-02-18,40.65,49.93,238,37,433,Room Temperature,414,14.4333333333333,16.4896073903002,Low Risk,No immediate action required
+BATCH-1707,Gabapentin,Neurology,Merck,2023-07-12,2024-10-22,21.51,35.09,203,76,597,Refrigerated,295,19.9,10.2010050251256,Low Risk,No immediate action required
+BATCH-1708,Lisinopril,Cardiology,Pfizer,2023-02-06,2024-12-29,29.96,36.8,241,38,51,Room Temperature,363,1.7,141.764705882352,Low Risk,No immediate action required
+BATCH-1709,Amlodipine,Cardiology,Sanofi,2023-03-19,2026-03-13,2.98,5.01,36,72,398,Room Temperature,802,13.2666666666666,2.71356783919597,Low Risk,Reorder stock soon
+BATCH-1710,Paracetamol,Analgesics,GlaxoSmithKline,2023-07-02,2025-03-25,24.52,39.37,403,88,496,Room Temperature,449,16.5333333333333,24.3749999999999,Low Risk,No immediate action required
+BATCH-1711,Gabapentin,Neurology,Merck,2023-11-12,2026-05-24,10.75,16.8,185,57,222,Cool Dry Place,874,7.4,25.0,Low Risk,No immediate action required
+BATCH-1712,Metoprolol,Cardiology,Novartis,2023-07-30,2025-02-04,41.04,61.35,333,28,175,Cool Dry Place,400,5.83333333333333,57.0857142857142,Low Risk,No immediate action required
+BATCH-1713,Levothyroxine,Endocrinology,Novartis,2023-07-02,2025-01-26,2.27,3.93,369,80,18,Room Temperature,391,0.6,615.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1714,Gabapentin,Neurology,GlaxoSmithKline,2023-06-21,2026-02-05,48.33,73.18,459,49,404,Refrigerated,766,13.4666666666666,34.0841584158415,Low Risk,No immediate action required
+BATCH-1715,Lisinopril,Cardiology,Pfizer,2023-12-28,2026-03-06,42.79,66.96,243,65,405,Refrigerated,795,13.5,18.0,Low Risk,No immediate action required
+BATCH-1716,Gabapentin,Neurology,Novartis,2023-11-22,2024-12-05,31.06,38.58,195,40,149,Cool Dry Place,339,4.96666666666666,39.2617449664429,Low Risk,No immediate action required
+BATCH-1717,Gabapentin,Neurology,AstraZeneca,2023-02-06,2024-05-27,20.53,35.75,319,48,10,Cool Dry Place,147,0.333333333333333,957.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1718,Levothyroxine,Endocrinology,Novartis,2023-09-28,2025-06-29,11.31,15.65,144,75,207,Cool Dry Place,545,6.9,20.8695652173913,Low Risk,No immediate action required
+BATCH-1719,Amoxicillin,Antibiotics,Novartis,2023-04-27,2025-11-19,5.53,9.45,133,30,83,Room Temperature,688,2.76666666666666,48.0722891566265,Low Risk,No immediate action required
+BATCH-1720,Lisinopril,Cardiology,Cipla,2023-04-06,2025-10-22,49.03,63.16,141,21,170,Refrigerated,660,5.66666666666666,24.8823529411764,Low Risk,No immediate action required
+BATCH-1721,Gabapentin,Neurology,Pfizer,2023-01-27,2025-10-02,30.72,41.74,191,38,220,Cool Dry Place,640,7.33333333333333,26.0454545454545,Low Risk,No immediate action required
+BATCH-1722,Ibuprofen,Analgesics,Cipla,2023-10-12,2025-07-07,46.82,63.77,114,34,579,Room Temperature,553,19.3,5.90673575129533,Low Risk,No immediate action required
+BATCH-1723,Gabapentin,Neurology,Pfizer,2023-05-14,2025-01-01,38.34,46.78,333,61,155,Refrigerated,366,5.16666666666666,64.4516129032258,Low Risk,No immediate action required
+BATCH-1724,Albuterol,Respiratory,Merck,2023-04-05,2025-09-14,35.64,51.8,323,25,579,Cool Dry Place,622,19.3,16.7357512953367,Low Risk,No immediate action required
+BATCH-1725,Amlodipine,Cardiology,Cipla,2023-08-02,2025-03-01,48.72,80.35,271,40,147,Refrigerated,425,4.9,55.3061224489795,Low Risk,No immediate action required
+BATCH-1726,Lisinopril,Cardiology,GlaxoSmithKline,2023-09-08,2026-08-06,9.59,16.31,468,69,595,Room Temperature,948,19.8333333333333,23.5966386554621,Low Risk,No immediate action required
+BATCH-1727,Amlodipine,Cardiology,GlaxoSmithKline,2023-03-09,2024-11-05,24.13,41.44,437,66,380,Cool Dry Place,309,12.6666666666666,34.5,Low Risk,No immediate action required
+BATCH-1728,Amlodipine,Cardiology,GlaxoSmithKline,2023-05-05,2024-09-22,41.66,58.98,478,72,573,Cool Dry Place,265,19.1,25.0261780104712,Low Risk,No immediate action required
+BATCH-1729,Amoxicillin,Antibiotics,Merck,2023-09-26,2026-02-18,41.31,68.47,122,29,458,Cool Dry Place,779,15.2666666666666,7.99126637554585,Low Risk,No immediate action required
+BATCH-1730,Ibuprofen,Analgesics,Cipla,2023-07-27,2026-02-01,49.77,84.03,364,76,117,Room Temperature,762,3.9,93.3333333333333,Low Risk,No immediate action required
+BATCH-1731,Atorvastatin,Cardiology,Cipla,2023-05-10,2024-12-09,20.78,35.75,420,66,241,Cool Dry Place,343,8.03333333333333,52.2821576763485,Low Risk,No immediate action required
+BATCH-1732,Metformin,Diabetes,Sanofi,2023-11-13,2026-01-30,34.18,59.03,270,25,35,Room Temperature,760,1.16666666666666,231.428571428571,Low Risk,No immediate action required
+BATCH-1733,Azithromycin,Antibiotics,AstraZeneca,2023-11-13,2026-06-22,19.6,29.77,242,76,440,Cool Dry Place,903,14.6666666666666,16.5,Low Risk,No immediate action required
+BATCH-1734,Azithromycin,Antibiotics,Merck,2023-02-09,2024-04-25,28.17,39.17,216,33,528,Room Temperature,115,17.6,12.2727272727272,Low Risk,No immediate action required
+BATCH-1735,Ibuprofen,Analgesics,Sanofi,2023-01-12,2025-12-01,28.81,37.41,410,64,182,Room Temperature,700,6.06666666666666,67.5824175824175,Low Risk,No immediate action required
+BATCH-1736,Lisinopril,Cardiology,GlaxoSmithKline,2023-06-25,2024-07-01,8.5,13.46,393,71,44,Refrigerated,182,1.46666666666666,267.954545454545,High Risk,Redistribute to high-demand departments immediately
+BATCH-1737,Paracetamol,Analgesics,GlaxoSmithKline,2023-08-08,2025-09-24,27.58,48.84,420,61,431,Room Temperature,632,14.3666666666666,29.2343387470997,Low Risk,No immediate action required
+BATCH-1738,Omeprazole,Gastroenterology,Merck,2023-11-16,2024-11-25,33.36,54.47,472,55,434,Refrigerated,329,14.4666666666666,32.626728110599,Low Risk,No immediate action required
+BATCH-1739,Gabapentin,Neurology,Cipla,2023-06-26,2024-08-29,16.18,22.89,489,38,120,Cool Dry Place,241,4.0,122.25,Low Risk,No immediate action required
+BATCH-1740,Atorvastatin,Cardiology,Novartis,2023-09-18,2024-11-23,47.08,60.14,115,99,203,Room Temperature,327,6.76666666666666,16.9950738916256,Low Risk,No immediate action required
+BATCH-1741,Amlodipine,Cardiology,Cipla,2023-10-31,2025-08-06,47.49,71.31,299,46,116,Cool Dry Place,583,3.86666666666666,77.3275862068965,Low Risk,No immediate action required
+BATCH-1742,Omeprazole,Gastroenterology,Sanofi,2023-01-12,2024-06-08,40.7,49.9,245,67,259,Refrigerated,159,8.63333333333333,28.3783783783783,Low Risk,No immediate action required
+BATCH-1743,Metformin,Diabetes,Pfizer,2023-12-30,2025-09-02,34.46,49.09,160,81,550,Cool Dry Place,610,18.3333333333333,8.72727272727272,Low Risk,No immediate action required
+BATCH-1744,Amoxicillin,Antibiotics,Merck,2023-06-28,2025-07-19,26.73,32.33,378,75,37,Room Temperature,565,1.23333333333333,306.486486486486,Low Risk,No immediate action required
+BATCH-1745,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-04-03,2024-08-12,44.82,59.85,193,44,121,Refrigerated,224,4.03333333333333,47.8512396694214,Low Risk,No immediate action required
+BATCH-1746,Levothyroxine,Endocrinology,Sanofi,2023-09-07,2025-10-23,5.66,7.3,89,31,74,Room Temperature,661,2.46666666666666,36.081081081081,Low Risk,No immediate action required
+BATCH-1747,Amlodipine,Cardiology,Sanofi,2023-05-14,2024-05-18,35.94,53.82,411,81,401,Cool Dry Place,138,13.3666666666666,30.7481296758104,Low Risk,No immediate action required
+BATCH-1748,Omeprazole,Gastroenterology,AstraZeneca,2023-01-06,2024-07-18,37.08,62.7,206,41,117,Refrigerated,199,3.9,52.8205128205128,Low Risk,No immediate action required
+BATCH-1749,Paracetamol,Analgesics,Merck,2023-11-10,2026-03-13,32.46,50.24,19,28,226,Cool Dry Place,802,7.53333333333333,2.52212389380531,Low Risk,Reorder stock soon
+BATCH-1750,Metoprolol,Cardiology,GlaxoSmithKline,2023-10-20,2026-04-12,22.76,36.57,81,62,553,Cool Dry Place,832,18.4333333333333,4.39421338155515,Low Risk,No immediate action required
+BATCH-1751,Sertraline,Psychiatry,AstraZeneca,2023-03-25,2024-04-28,14.63,21.08,176,57,398,Room Temperature,118,13.2666666666666,13.2663316582914,Low Risk,No immediate action required
+BATCH-1752,Metformin,Diabetes,Cipla,2023-10-22,2026-02-02,27.07,38.99,163,21,490,Room Temperature,763,16.3333333333333,9.97959183673469,Low Risk,No immediate action required
+BATCH-1753,Lisinopril,Cardiology,Sanofi,2023-01-06,2024-06-27,3.81,5.92,36,68,587,Refrigerated,178,19.5666666666666,1.83986371379897,Low Risk,Reorder stock soon
+BATCH-1754,Metoprolol,Cardiology,Cipla,2023-12-12,2026-03-24,10.72,18.05,200,89,421,Room Temperature,813,14.0333333333333,14.251781472684,Low Risk,No immediate action required
+BATCH-1755,Sertraline,Psychiatry,Merck,2023-02-27,2025-09-05,4.32,6.07,326,91,195,Cool Dry Place,613,6.5,50.1538461538461,Low Risk,No immediate action required
+BATCH-1756,Sertraline,Psychiatry,Sanofi,2023-05-20,2024-06-11,33.75,59.22,236,58,238,Cool Dry Place,162,7.93333333333333,29.7478991596638,Low Risk,No immediate action required
+BATCH-1757,Albuterol,Respiratory,Pfizer,2023-05-23,2025-05-14,42.81,65.37,229,77,403,Cool Dry Place,499,13.4333333333333,17.0471464019851,Low Risk,No immediate action required
+BATCH-1758,Azithromycin,Antibiotics,GlaxoSmithKline,2023-10-03,2024-12-14,28.23,49.86,69,82,169,Room Temperature,348,5.63333333333333,12.2485207100591,Low Risk,Reorder stock soon
+BATCH-1759,Metformin,Diabetes,GlaxoSmithKline,2023-10-23,2026-06-02,35.93,49.09,77,63,557,Refrigerated,883,18.5666666666666,4.14721723518851,Low Risk,No immediate action required
+BATCH-1760,Amoxicillin,Antibiotics,Cipla,2023-05-02,2025-11-30,29.29,41.96,462,99,82,Cool Dry Place,699,2.73333333333333,169.024390243902,Low Risk,No immediate action required
+BATCH-1761,Omeprazole,Gastroenterology,AstraZeneca,2023-04-04,2025-09-15,31.17,45.08,364,33,15,Refrigerated,623,0.5,728.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1762,Amlodipine,Cardiology,AstraZeneca,2023-08-26,2025-07-07,8.03,11.03,250,50,417,Cool Dry Place,553,13.9,17.9856115107913,Low Risk,No immediate action required
+BATCH-1763,Albuterol,Respiratory,GlaxoSmithKline,2023-04-02,2025-01-28,43.34,76.49,20,77,467,Refrigerated,393,15.5666666666666,1.2847965738758,Low Risk,Reorder stock soon
+BATCH-1764,Levothyroxine,Endocrinology,Pfizer,2023-12-28,2025-03-15,7.63,11.9,62,44,177,Refrigerated,439,5.9,10.5084745762711,Low Risk,No immediate action required
+BATCH-1765,Amoxicillin,Antibiotics,AstraZeneca,2023-11-25,2026-05-07,4.28,5.88,27,63,392,Cool Dry Place,857,13.0666666666666,2.06632653061224,Low Risk,Reorder stock soon
+BATCH-1766,Azithromycin,Antibiotics,Sanofi,2023-03-03,2024-05-30,21.74,36.65,37,82,193,Cool Dry Place,150,6.43333333333333,5.75129533678756,Low Risk,Reorder stock soon
+BATCH-1767,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-06-04,2025-07-20,35.84,55.01,53,55,404,Cool Dry Place,566,13.4666666666666,3.93564356435643,Low Risk,Reorder stock soon
+BATCH-1768,Azithromycin,Antibiotics,AstraZeneca,2023-06-11,2025-07-25,33.64,50.8,220,63,362,Refrigerated,571,12.0666666666666,18.232044198895,Low Risk,No immediate action required
+BATCH-1769,Gabapentin,Neurology,Merck,2023-09-10,2025-03-25,40.96,58.34,275,92,65,Cool Dry Place,449,2.16666666666666,126.923076923076,Low Risk,No immediate action required
+BATCH-1770,Lisinopril,Cardiology,Sanofi,2023-04-18,2025-10-05,29.31,36.51,251,86,384,Room Temperature,643,12.8,19.609375,Low Risk,No immediate action required
+BATCH-1771,Amlodipine,Cardiology,Pfizer,2023-04-03,2025-12-23,27.11,47.57,29,40,534,Cool Dry Place,722,17.8,1.62921348314606,Low Risk,Reorder stock soon
+BATCH-1772,Lisinopril,Cardiology,AstraZeneca,2023-10-11,2026-04-20,47.97,74.59,29,20,253,Room Temperature,840,8.43333333333333,3.43873517786561,Low Risk,No immediate action required
+BATCH-1773,Albuterol,Respiratory,AstraZeneca,2023-01-06,2025-05-05,49.96,74.26,328,84,478,Refrigerated,490,15.9333333333333,20.5857740585774,Low Risk,No immediate action required
+BATCH-1774,Lisinopril,Cardiology,Sanofi,2023-05-13,2025-07-02,7.23,9.88,340,77,443,Room Temperature,548,14.7666666666666,23.0248306997742,Low Risk,No immediate action required
+BATCH-1775,Paracetamol,Analgesics,Novartis,2023-03-25,2024-11-29,12.33,18.98,23,63,86,Cool Dry Place,333,2.86666666666666,8.02325581395348,Low Risk,Reorder stock soon
+BATCH-1776,Gabapentin,Neurology,Cipla,2023-10-21,2026-04-18,39.72,65.51,331,54,139,Refrigerated,838,4.63333333333333,71.4388489208633,Low Risk,No immediate action required
+BATCH-1777,Atorvastatin,Cardiology,AstraZeneca,2023-01-27,2026-01-05,28.07,48.18,231,59,5,Cool Dry Place,735,0.166666666666666,1386.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1778,Gabapentin,Neurology,Sanofi,2023-02-04,2024-10-27,6.13,7.52,179,35,542,Refrigerated,300,18.0666666666666,9.90774907749077,Low Risk,No immediate action required
+BATCH-1779,Ibuprofen,Analgesics,Merck,2023-11-01,2025-09-17,6.14,10.5,303,63,40,Cool Dry Place,625,1.33333333333333,227.25,Low Risk,No immediate action required
+BATCH-1780,Albuterol,Respiratory,AstraZeneca,2023-04-13,2026-03-31,15.81,25.3,294,73,284,Room Temperature,820,9.46666666666666,31.056338028169,Low Risk,No immediate action required
+BATCH-1781,Paracetamol,Analgesics,AstraZeneca,2023-07-05,2025-10-06,4.73,7.72,174,42,556,Room Temperature,644,18.5333333333333,9.38848920863309,Low Risk,No immediate action required
+BATCH-1782,Losartan,Cardiology,Novartis,2023-09-13,2025-06-08,8.56,14.06,419,98,205,Room Temperature,524,6.83333333333333,61.3170731707317,Low Risk,No immediate action required
+BATCH-1783,Ibuprofen,Analgesics,Cipla,2023-03-20,2024-04-23,8.48,13.63,358,99,279,Refrigerated,113,9.3,38.4946236559139,Low Risk,No immediate action required
+BATCH-1784,Atorvastatin,Cardiology,AstraZeneca,2023-08-08,2026-07-22,10.27,17.88,369,68,38,Cool Dry Place,933,1.26666666666666,291.315789473684,Low Risk,No immediate action required
+BATCH-1785,Amoxicillin,Antibiotics,Novartis,2023-02-11,2025-09-18,31.4,41.9,467,44,370,Cool Dry Place,626,12.3333333333333,37.8648648648648,Low Risk,No immediate action required
+BATCH-1786,Gabapentin,Neurology,Sanofi,2023-07-23,2024-10-04,31.61,41.52,440,69,488,Refrigerated,277,16.2666666666666,27.0491803278688,Low Risk,No immediate action required
+BATCH-1787,Atorvastatin,Cardiology,GlaxoSmithKline,2023-12-01,2026-11-10,25.64,37.09,483,20,412,Refrigerated,1044,13.7333333333333,35.1699029126213,Low Risk,No immediate action required
+BATCH-1788,Sertraline,Psychiatry,Novartis,2023-09-10,2026-04-27,30.02,53.4,83,27,341,Cool Dry Place,847,11.3666666666666,7.30205278592375,Low Risk,No immediate action required
+BATCH-1789,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-10-07,2026-04-13,13.88,22.54,207,68,445,Refrigerated,833,14.8333333333333,13.9550561797752,Low Risk,No immediate action required
+BATCH-1790,Levothyroxine,Endocrinology,Merck,2023-07-05,2025-11-12,14.57,20.42,173,76,460,Refrigerated,681,15.3333333333333,11.2826086956521,Low Risk,No immediate action required
+BATCH-1791,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-04-10,2025-03-17,30.59,53.18,300,32,457,Cool Dry Place,441,15.2333333333333,19.6936542669584,Low Risk,No immediate action required
+BATCH-1792,Amoxicillin,Antibiotics,AstraZeneca,2023-12-24,2025-01-07,12.9,21.08,258,76,391,Cool Dry Place,372,13.0333333333333,19.7953964194373,Low Risk,No immediate action required
+BATCH-1793,Amlodipine,Cardiology,GlaxoSmithKline,2023-03-17,2025-02-07,1.55,2.52,339,21,413,Cool Dry Place,403,13.7666666666666,24.6246973365617,Low Risk,No immediate action required
+BATCH-1794,Ibuprofen,Analgesics,GlaxoSmithKline,2023-10-09,2026-02-08,43.54,76.23,298,58,545,Room Temperature,769,18.1666666666666,16.4036697247706,Low Risk,No immediate action required
+BATCH-1795,Lisinopril,Cardiology,Novartis,2023-01-24,2025-05-06,12.37,16.25,76,60,86,Cool Dry Place,491,2.86666666666666,26.5116279069767,Low Risk,No immediate action required
+BATCH-1796,Atorvastatin,Cardiology,Novartis,2023-07-05,2025-02-19,36.11,49.01,488,45,61,Refrigerated,415,2.03333333333333,240.0,Low Risk,No immediate action required
+BATCH-1797,Metformin,Diabetes,GlaxoSmithKline,2023-05-30,2026-05-17,5.88,10.45,333,96,213,Refrigerated,867,7.1,46.9014084507042,Low Risk,No immediate action required
+BATCH-1798,Atorvastatin,Cardiology,Novartis,2023-01-21,2024-12-20,6.48,8.94,335,77,209,Refrigerated,354,6.96666666666666,48.0861244019138,Low Risk,No immediate action required
+BATCH-1799,Metformin,Diabetes,Pfizer,2023-06-19,2025-11-04,30.69,43.48,242,71,111,Cool Dry Place,673,3.7,65.4054054054054,Low Risk,No immediate action required
+BATCH-1800,Ibuprofen,Analgesics,Novartis,2023-11-28,2026-04-28,48.26,61.41,5,84,547,Refrigerated,848,18.2333333333333,0.274223034734917,Low Risk,Reorder stock soon
+BATCH-1801,Ibuprofen,Analgesics,Merck,2023-05-20,2024-08-17,20.04,33.02,176,89,590,Room Temperature,229,19.6666666666666,8.94915254237288,Low Risk,No immediate action required
+BATCH-1802,Metoprolol,Cardiology,Pfizer,2023-02-12,2025-02-02,21.79,36.88,71,66,588,Refrigerated,398,19.6,3.62244897959183,Low Risk,No immediate action required
+BATCH-1803,Levothyroxine,Endocrinology,Cipla,2023-04-02,2024-05-02,35.88,60.8,227,29,535,Refrigerated,122,17.8333333333333,12.7289719626168,Low Risk,No immediate action required
+BATCH-1804,Amlodipine,Cardiology,Cipla,2023-09-10,2025-08-01,38.4,55.32,438,52,381,Room Temperature,578,12.7,34.4881889763779,Low Risk,No immediate action required
+BATCH-1805,Losartan,Cardiology,AstraZeneca,2023-03-31,2024-05-11,43.61,55.36,132,77,378,Room Temperature,131,12.6,10.4761904761904,Low Risk,No immediate action required
+BATCH-1806,Azithromycin,Antibiotics,Cipla,2023-07-08,2025-01-24,36.34,61.44,329,46,19,Refrigerated,389,0.633333333333333,519.473684210526,High Risk,Redistribute to high-demand departments immediately
+BATCH-1807,Atorvastatin,Cardiology,Sanofi,2023-12-05,2026-07-27,38.89,65.08,497,80,61,Cool Dry Place,938,2.03333333333333,244.426229508196,Low Risk,No immediate action required
+BATCH-1808,Gabapentin,Neurology,Novartis,2023-07-02,2026-04-02,14.52,18.83,88,92,261,Cool Dry Place,822,8.7,10.1149425287356,Low Risk,Reorder stock soon
+BATCH-1809,Sertraline,Psychiatry,Merck,2023-12-02,2025-11-19,8.4,11.94,293,53,66,Refrigerated,688,2.2,133.181818181818,Low Risk,No immediate action required
+BATCH-1810,Omeprazole,Gastroenterology,Cipla,2023-12-25,2025-06-26,34.75,52.21,182,93,21,Refrigerated,542,0.7,260.0,Low Risk,No immediate action required
+BATCH-1811,Omeprazole,Gastroenterology,Novartis,2023-03-16,2025-10-22,22.22,36.44,452,96,398,Room Temperature,660,13.2666666666666,34.0703517587939,Low Risk,No immediate action required
+BATCH-1812,Ibuprofen,Analgesics,AstraZeneca,2023-11-28,2025-03-01,46.02,70.91,284,34,537,Room Temperature,425,17.9,15.8659217877094,Low Risk,No immediate action required
+BATCH-1813,Azithromycin,Antibiotics,AstraZeneca,2023-02-08,2025-09-20,3.82,6.31,193,49,420,Cool Dry Place,628,14.0,13.7857142857142,Low Risk,No immediate action required
+BATCH-1814,Metoprolol,Cardiology,Pfizer,2023-04-22,2025-07-16,26.17,43.57,36,89,410,Refrigerated,562,13.6666666666666,2.63414634146341,Low Risk,Reorder stock soon
+BATCH-1815,Lisinopril,Cardiology,Pfizer,2023-10-13,2025-07-19,35.18,49.11,381,71,198,Refrigerated,565,6.6,57.7272727272727,Low Risk,No immediate action required
+BATCH-1816,Amoxicillin,Antibiotics,AstraZeneca,2023-06-19,2026-04-19,12.37,20.65,353,36,550,Refrigerated,839,18.3333333333333,19.2545454545454,Low Risk,No immediate action required
+BATCH-1817,Omeprazole,Gastroenterology,Pfizer,2023-12-06,2025-03-17,20.54,35.72,139,30,57,Room Temperature,441,1.9,73.1578947368421,Low Risk,No immediate action required
+BATCH-1818,Gabapentin,Neurology,GlaxoSmithKline,2023-08-31,2025-02-28,22.58,32.77,209,45,464,Cool Dry Place,424,15.4666666666666,13.5129310344827,Low Risk,No immediate action required
+BATCH-1819,Omeprazole,Gastroenterology,Novartis,2023-11-06,2026-10-06,20.53,29.73,213,100,3,Room Temperature,1009,0.1,2130.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1820,Ibuprofen,Analgesics,GlaxoSmithKline,2023-05-31,2024-06-24,27.24,44.64,263,51,409,Refrigerated,175,13.6333333333333,19.2909535452322,Low Risk,No immediate action required
+BATCH-1821,Albuterol,Respiratory,GlaxoSmithKline,2023-08-28,2026-08-20,18.08,24.48,343,92,513,Cool Dry Place,962,17.1,20.0584795321637,Low Risk,No immediate action required
+BATCH-1822,Amlodipine,Cardiology,GlaxoSmithKline,2023-01-29,2025-09-10,32.02,51.62,293,65,30,Cool Dry Place,618,1.0,293.0,Low Risk,No immediate action required
+BATCH-1823,Losartan,Cardiology,GlaxoSmithKline,2023-04-21,2025-05-28,24.51,37.07,337,84,524,Refrigerated,513,17.4666666666666,19.2938931297709,Low Risk,No immediate action required
+BATCH-1824,Azithromycin,Antibiotics,Pfizer,2023-06-23,2025-09-18,8.22,10.2,194,99,30,Refrigerated,626,1.0,194.0,Low Risk,No immediate action required
+BATCH-1825,Atorvastatin,Cardiology,AstraZeneca,2023-05-02,2026-04-03,5.66,10.06,232,69,107,Room Temperature,823,3.56666666666666,65.0467289719626,Low Risk,No immediate action required
+BATCH-1826,Amlodipine,Cardiology,GlaxoSmithKline,2023-04-04,2025-11-26,14.71,25.25,37,35,325,Refrigerated,695,10.8333333333333,3.41538461538461,Low Risk,No immediate action required
+BATCH-1827,Albuterol,Respiratory,Pfizer,2023-01-07,2024-01-13,33.19,43.46,446,65,67,Cool Dry Place,12,2.23333333333333,199.701492537313,High Risk,Redistribute to high-demand departments immediately
+BATCH-1828,Omeprazole,Gastroenterology,Cipla,2023-07-25,2026-06-20,6.98,8.79,112,78,321,Room Temperature,901,10.7,10.4672897196261,Low Risk,No immediate action required
+BATCH-1829,Albuterol,Respiratory,Merck,2023-08-23,2025-05-12,37.99,64.84,493,65,307,Room Temperature,497,10.2333333333333,48.1758957654723,Low Risk,No immediate action required
+BATCH-1830,Losartan,Cardiology,Sanofi,2023-09-16,2025-02-13,10.9,14.04,22,53,225,Room Temperature,409,7.5,2.93333333333333,Low Risk,Reorder stock soon
+BATCH-1831,Atorvastatin,Cardiology,GlaxoSmithKline,2023-05-01,2025-06-02,13.47,22.94,64,46,596,Cool Dry Place,518,19.8666666666666,3.22147651006711,Low Risk,No immediate action required
+BATCH-1832,Metoprolol,Cardiology,Cipla,2023-04-12,2025-06-27,36.77,52.86,355,27,598,Cool Dry Place,543,19.9333333333333,17.8093645484949,Low Risk,No immediate action required
+BATCH-1833,Metformin,Diabetes,Cipla,2023-05-26,2026-03-14,29.04,47.41,455,21,157,Room Temperature,803,5.23333333333333,86.9426751592356,Low Risk,No immediate action required
+BATCH-1834,Paracetamol,Analgesics,AstraZeneca,2023-08-01,2025-02-05,45.51,74.56,184,20,568,Cool Dry Place,401,18.9333333333333,9.71830985915493,Low Risk,No immediate action required
+BATCH-1835,Gabapentin,Neurology,GlaxoSmithKline,2023-06-22,2025-11-04,45.84,76.47,111,71,233,Cool Dry Place,673,7.76666666666666,14.2918454935622,Low Risk,No immediate action required
+BATCH-1836,Metoprolol,Cardiology,GlaxoSmithKline,2023-01-14,2025-02-20,3.15,4.16,292,69,484,Refrigerated,416,16.1333333333333,18.099173553719,Low Risk,No immediate action required
+BATCH-1837,Amlodipine,Cardiology,GlaxoSmithKline,2023-05-22,2024-07-22,38.06,63.62,313,22,67,Room Temperature,203,2.23333333333333,140.149253731343,Low Risk,No immediate action required
+BATCH-1838,Losartan,Cardiology,Pfizer,2023-02-03,2024-02-09,44.62,77.89,324,79,435,Cool Dry Place,39,14.5,22.3448275862068,Medium Risk,Monitor closely and run discount/promotion
+BATCH-1839,Omeprazole,Gastroenterology,Pfizer,2023-08-26,2025-12-08,17.03,27.1,300,37,292,Refrigerated,707,9.73333333333333,30.8219178082191,Low Risk,No immediate action required
+BATCH-1840,Atorvastatin,Cardiology,GlaxoSmithKline,2023-03-27,2025-12-16,9.61,15.07,24,46,231,Cool Dry Place,715,7.7,3.11688311688311,Low Risk,Reorder stock soon
+BATCH-1841,Lisinopril,Cardiology,Pfizer,2023-05-26,2026-02-12,45.08,62.89,303,86,71,Room Temperature,773,2.36666666666666,128.028169014084,Low Risk,No immediate action required
+BATCH-1842,Azithromycin,Antibiotics,Sanofi,2023-09-05,2026-06-23,40.64,48.81,454,72,1,Cool Dry Place,904,0.0333333333333333,13620.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1843,Lisinopril,Cardiology,Pfizer,2023-08-04,2024-10-31,12.81,22.87,457,87,368,Refrigerated,304,12.2666666666666,37.2554347826086,Low Risk,No immediate action required
+BATCH-1844,Azithromycin,Antibiotics,Pfizer,2023-02-26,2025-11-01,5.92,10.23,59,29,134,Cool Dry Place,670,4.46666666666666,13.2089552238805,Low Risk,No immediate action required
+BATCH-1845,Ibuprofen,Analgesics,GlaxoSmithKline,2023-03-24,2025-03-03,42.43,58.38,334,40,487,Room Temperature,427,16.2333333333333,20.5749486652977,Low Risk,No immediate action required
+BATCH-1846,Lisinopril,Cardiology,Merck,2023-11-28,2025-10-25,12.16,19.5,104,89,20,Room Temperature,663,0.666666666666666,156.0,Low Risk,No immediate action required
+BATCH-1847,Metformin,Diabetes,AstraZeneca,2023-09-21,2024-10-13,47.15,73.38,36,63,179,Cool Dry Place,286,5.96666666666666,6.03351955307262,Low Risk,Reorder stock soon
+BATCH-1848,Amoxicillin,Antibiotics,GlaxoSmithKline,2023-08-31,2025-07-09,6.99,9.34,69,80,446,Refrigerated,555,14.8666666666666,4.64125560538116,Low Risk,Reorder stock soon
+BATCH-1849,Albuterol,Respiratory,AstraZeneca,2023-02-19,2025-12-25,4.4,6.13,134,45,212,Cool Dry Place,724,7.06666666666666,18.9622641509433,Low Risk,No immediate action required
+BATCH-1850,Metformin,Diabetes,Sanofi,2023-09-19,2026-07-04,20.15,25.99,162,24,165,Room Temperature,915,5.5,29.4545454545454,Low Risk,No immediate action required
+BATCH-1851,Metformin,Diabetes,Sanofi,2023-11-08,2025-05-09,26.75,36.83,472,35,33,Refrigerated,494,1.1,429.090909090909,Low Risk,No immediate action required
+BATCH-1852,Amoxicillin,Antibiotics,Pfizer,2023-11-25,2025-07-22,23.72,42.64,332,38,339,Room Temperature,568,11.3,29.3805309734513,Low Risk,No immediate action required
+BATCH-1853,Sertraline,Psychiatry,AstraZeneca,2023-05-01,2025-02-27,2.95,3.9,26,29,345,Room Temperature,423,11.5,2.26086956521739,Low Risk,Reorder stock soon
+BATCH-1854,Amoxicillin,Antibiotics,AstraZeneca,2023-04-18,2024-06-13,4.94,8.1,98,51,425,Room Temperature,164,14.1666666666666,6.91764705882353,Low Risk,No immediate action required
+BATCH-1855,Amlodipine,Cardiology,Sanofi,2023-05-12,2025-05-15,17.15,21.67,457,69,417,Room Temperature,500,13.9,32.8776978417266,Low Risk,No immediate action required
+BATCH-1856,Atorvastatin,Cardiology,Sanofi,2023-03-08,2025-03-04,47.97,69.15,453,25,87,Cool Dry Place,428,2.9,156.206896551724,Low Risk,No immediate action required
+BATCH-1857,Sertraline,Psychiatry,Merck,2023-10-25,2025-11-19,7.63,10.57,230,82,254,Refrigerated,688,8.46666666666666,27.1653543307086,Low Risk,No immediate action required
+BATCH-1858,Amoxicillin,Antibiotics,Sanofi,2023-04-23,2024-05-08,22.33,27.78,99,88,13,Room Temperature,128,0.433333333333333,228.461538461538,High Risk,Redistribute to high-demand departments immediately
+BATCH-1859,Levothyroxine,Endocrinology,Novartis,2023-06-03,2026-03-06,21.98,31.93,186,84,331,Refrigerated,795,11.0333333333333,16.858006042296,Low Risk,No immediate action required
+BATCH-1860,Metformin,Diabetes,AstraZeneca,2023-09-02,2024-11-24,16.46,22.54,8,80,290,Cool Dry Place,328,9.66666666666666,0.827586206896551,Low Risk,Reorder stock soon
+BATCH-1861,Losartan,Cardiology,GlaxoSmithKline,2023-04-02,2024-11-04,27.97,36.32,306,98,393,Cool Dry Place,308,13.1,23.3587786259541,Low Risk,No immediate action required
+BATCH-1862,Lisinopril,Cardiology,Sanofi,2023-04-03,2025-12-03,33.68,54.0,182,38,37,Room Temperature,702,1.23333333333333,147.567567567567,Low Risk,No immediate action required
+BATCH-1863,Losartan,Cardiology,Cipla,2023-05-01,2026-01-01,36.75,55.93,449,68,399,Room Temperature,731,13.3,33.7593984962406,Low Risk,No immediate action required
+BATCH-1864,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-01-23,2024-02-26,6.57,10.76,36,51,325,Cool Dry Place,56,10.8333333333333,3.32307692307692,Medium Risk,Monitor closely and run discount/promotion
+BATCH-1865,Sertraline,Psychiatry,Merck,2023-02-07,2024-08-13,46.86,84.18,53,84,164,Cool Dry Place,225,5.46666666666666,9.69512195121951,Low Risk,Reorder stock soon
+BATCH-1866,Losartan,Cardiology,Pfizer,2023-10-11,2025-01-18,13.65,19.82,386,40,176,Cool Dry Place,383,5.86666666666666,65.7954545454545,Low Risk,No immediate action required
+BATCH-1867,Amoxicillin,Antibiotics,Pfizer,2023-01-21,2025-04-28,14.83,20.85,368,45,356,Refrigerated,483,11.8666666666666,31.0112359550561,Low Risk,No immediate action required
+BATCH-1868,Metoprolol,Cardiology,Sanofi,2023-11-06,2025-06-08,23.39,41.11,112,95,15,Cool Dry Place,524,0.5,224.0,Low Risk,No immediate action required
+BATCH-1869,Ibuprofen,Analgesics,GlaxoSmithKline,2023-12-14,2025-02-22,18.97,30.66,11,23,520,Cool Dry Place,418,17.3333333333333,0.634615384615384,Low Risk,Reorder stock soon
+BATCH-1870,Lisinopril,Cardiology,AstraZeneca,2023-04-28,2024-07-09,45.25,64.54,16,48,447,Room Temperature,190,14.9,1.0738255033557,Low Risk,Reorder stock soon
+BATCH-1871,Albuterol,Respiratory,Novartis,2023-03-08,2026-01-15,38.36,64.13,308,41,453,Room Temperature,745,15.1,20.3973509933774,Low Risk,No immediate action required
+BATCH-1872,Paracetamol,Analgesics,Merck,2023-08-03,2024-10-03,39.3,48.34,445,64,289,Room Temperature,276,9.63333333333333,46.1937716262975,Low Risk,No immediate action required
+BATCH-1873,Omeprazole,Gastroenterology,Merck,2023-03-17,2025-09-27,46.21,72.02,93,41,486,Cool Dry Place,635,16.2,5.74074074074074,Low Risk,No immediate action required
+BATCH-1874,Metoprolol,Cardiology,GlaxoSmithKline,2023-03-24,2025-06-08,30.28,53.22,224,99,566,Room Temperature,524,18.8666666666666,11.8727915194346,Low Risk,No immediate action required
+BATCH-1875,Azithromycin,Antibiotics,AstraZeneca,2023-02-24,2025-02-10,12.82,17.15,125,25,225,Room Temperature,406,7.5,16.6666666666666,Low Risk,No immediate action required
+BATCH-1876,Azithromycin,Antibiotics,Cipla,2023-04-01,2025-01-09,39.44,64.37,423,20,594,Room Temperature,374,19.8,21.3636363636363,Low Risk,No immediate action required
+BATCH-1877,Ibuprofen,Analgesics,Cipla,2023-12-15,2026-06-03,49.61,65.25,111,56,217,Refrigerated,884,7.23333333333333,15.3456221198156,Low Risk,No immediate action required
+BATCH-1878,Lisinopril,Cardiology,Sanofi,2023-03-19,2025-11-17,49.52,74.5,308,77,324,Cool Dry Place,686,10.8,28.5185185185185,Low Risk,No immediate action required
+BATCH-1879,Omeprazole,Gastroenterology,Sanofi,2023-08-07,2024-11-14,33.06,50.19,77,21,412,Cool Dry Place,318,13.7333333333333,5.60679611650485,Low Risk,No immediate action required
+BATCH-1880,Levothyroxine,Endocrinology,Novartis,2023-04-16,2025-02-11,38.48,49.04,464,56,483,Refrigerated,407,16.1,28.8198757763975,Low Risk,No immediate action required
+BATCH-1881,Amoxicillin,Antibiotics,Cipla,2023-11-27,2025-03-14,37.17,50.28,303,33,127,Room Temperature,438,4.23333333333333,71.5748031496063,Low Risk,No immediate action required
+BATCH-1882,Amlodipine,Cardiology,AstraZeneca,2023-08-14,2026-01-02,27.63,46.1,15,43,236,Refrigerated,732,7.86666666666666,1.90677966101694,Low Risk,Reorder stock soon
+BATCH-1883,Sertraline,Psychiatry,Cipla,2023-05-02,2024-11-05,38.7,51.12,339,32,126,Refrigerated,309,4.2,80.7142857142857,Low Risk,No immediate action required
+BATCH-1884,Omeprazole,Gastroenterology,AstraZeneca,2023-05-09,2025-01-16,30.76,42.39,197,55,268,Cool Dry Place,381,8.93333333333333,22.0522388059701,Low Risk,No immediate action required
+BATCH-1885,Metoprolol,Cardiology,Cipla,2023-06-03,2024-12-15,7.13,11.34,309,40,552,Refrigerated,349,18.4,16.7934782608695,Low Risk,No immediate action required
+BATCH-1886,Levothyroxine,Endocrinology,AstraZeneca,2023-10-29,2026-01-17,47.85,76.75,311,30,1,Refrigerated,747,0.0333333333333333,9330.0,High Risk,Redistribute to high-demand departments immediately
+BATCH-1887,Gabapentin,Neurology,Pfizer,2023-03-09,2025-08-11,18.58,24.51,391,29,479,Refrigerated,588,15.9666666666666,24.4885177453027,Low Risk,No immediate action required
+BATCH-1888,Albuterol,Respiratory,AstraZeneca,2023-12-29,2025-03-08,17.5,26.11,351,36,494,Cool Dry Place,432,16.4666666666666,21.3157894736842,Low Risk,No immediate action required
+BATCH-1889,Sertraline,Psychiatry,Cipla,2023-07-31,2024-10-04,38.88,49.13,12,29,346,Refrigerated,277,11.5333333333333,1.04046242774566,Low Risk,Reorder stock soon
+BATCH-1890,Levothyroxine,Endocrinology,Cipla,2023-04-10,2024-07-04,1.63,2.47,44,44,548,Room Temperature,185,18.2666666666666,2.40875912408759,Low Risk,Reorder stock soon
+BATCH-1891,Sertraline,Psychiatry,Novartis,2023-03-23,2024-08-27,43.77,66.62,410,40,145,Refrigerated,239,4.83333333333333,84.8275862068965,Low Risk,No immediate action required
+BATCH-1892,Amlodipine,Cardiology,AstraZeneca,2023-09-21,2025-07-17,21.37,26.81,138,69,145,Cool Dry Place,563,4.83333333333333,28.551724137931,Low Risk,No immediate action required
+BATCH-1893,Metoprolol,Cardiology,Cipla,2023-06-27,2024-10-02,27.86,47.17,479,93,120,Refrigerated,275,4.0,119.75,Low Risk,No immediate action required
+BATCH-1894,Paracetamol,Analgesics,Pfizer,2023-05-17,2025-12-03,15.7,26.46,423,91,456,Cool Dry Place,702,15.2,27.828947368421,Low Risk,No immediate action required
+BATCH-1895,Atorvastatin,Cardiology,GlaxoSmithKline,2023-07-03,2024-08-13,14.49,19.01,321,82,599,Room Temperature,225,19.9666666666666,16.0767946577629,Low Risk,No immediate action required
+BATCH-1896,Lisinopril,Cardiology,Cipla,2023-06-23,2024-08-08,4.33,6.57,260,66,378,Cool Dry Place,220,12.6,20.6349206349206,Low Risk,No immediate action required
+BATCH-1897,Ibuprofen,Analgesics,AstraZeneca,2023-07-30,2024-09-30,24.05,36.98,7,41,72,Refrigerated,273,2.4,2.91666666666666,Low Risk,Reorder stock soon
+BATCH-1898,Atorvastatin,Cardiology,Cipla,2023-01-19,2025-08-30,13.18,17.1,113,20,101,Refrigerated,607,3.36666666666666,33.5643564356435,Low Risk,No immediate action required
+BATCH-1899,Lisinopril,Cardiology,Cipla,2023-12-19,2025-12-31,49.14,64.75,332,46,36,Room Temperature,730,1.2,276.666666666666,Low Risk,No immediate action required
+BATCH-1900,Amoxicillin,Antibiotics,Cipla,2023-04-11,2025-11-28,26.53,33.19,37,37,441,Cool Dry Place,697,14.7,2.51700680272108,Low Risk,Reorder stock soon
+BATCH-1901,Metoprolol,Cardiology,AstraZeneca,2023-12-14,2026-07-31,1.8,2.89,106,86,283,Refrigerated,942,9.43333333333333,11.2367491166077,Low Risk,No immediate action required
+BATCH-1902,Amlodipine,Cardiology,Novartis,2023-01-30,2024-11-19,40.81,70.31,439,70,369,Refrigerated,323,12.3,35.6910569105691,Low Risk,No immediate action required
+BATCH-1903,Sertraline,Psychiatry,Pfizer,2023-12-26,2025-11-13,29.07,49.88,252,49,444,Cool Dry Place,682,14.8,17.027027027027,Low Risk,No immediate action required
+BATCH-1904,Lisinopril,Cardiology,Sanofi,2023-04-29,2025-11-08,11.87,17.72,122,58,430,Cool Dry Place,677,14.3333333333333,8.51162790697674,Low Risk,No immediate action required
+BATCH-1905,Lisinopril,Cardiology,AstraZeneca,2023-09-10,2026-05-05,8.76,14.71,39,100,251,Room Temperature,855,8.36666666666666,4.6613545816733,Low Risk,Reorder stock soon
+BATCH-1906,Amlodipine,Cardiology,Pfizer,2023-07-02,2026-02-02,35.26,57.44,78,97,490,Cool Dry Place,763,16.3333333333333,4.77551020408163,Low Risk,Reorder stock soon
+BATCH-1907,Lisinopril,Cardiology,GlaxoSmithKline,2023-09-10,2025-04-21,34.21,48.15,350,27,468,Refrigerated,476,15.6,22.4358974358974,Low Risk,No immediate action required
+BATCH-1908,Losartan,Cardiology,Pfizer,2023-07-23,2026-07-03,38.9,63.28,333,29,249,Room Temperature,914,8.3,40.1204819277108,Low Risk,No immediate action required
+BATCH-1909,Azithromycin,Antibiotics,Novartis,2023-09-16,2025-11-25,13.22,21.64,430,98,103,Cool Dry Place,694,3.43333333333333,125.242718446601,Low Risk,No immediate action required
+BATCH-1910,Metformin,Diabetes,Cipla,2023-06-17,2025-09-25,49.61,81.32,417,39,384,Room Temperature,633,12.8,32.578125,Low Risk,No immediate action required
+BATCH-1911,Gabapentin,Neurology,Cipla,2023-07-25,2025-10-28,32.07,43.9,10,52,187,Room Temperature,666,6.23333333333333,1.60427807486631,Low Risk,Reorder stock soon
+BATCH-1912,Sertraline,Psychiatry,AstraZeneca,2023-10-19,2026-09-02,48.35,81.39,108,48,67,Refrigerated,975,2.23333333333333,48.3582089552238,Low Risk,No immediate action required
+BATCH-1913,Metoprolol,Cardiology,Pfizer,2023-11-27,2026-03-19,39.43,59.81,430,22,195,Cool Dry Place,808,6.5,66.1538461538461,Low Risk,No immediate action required
+BATCH-1914,Paracetamol,Analgesics,Novartis,2023-11-08,2026-08-30,34.69,50.0,184,46,28,Cool Dry Place,972,0.933333333333333,197.142857142857,Low Risk,No immediate action required
+BATCH-1915,Paracetamol,Analgesics,Novartis,2023-11-24,2026-03-07,15.38,23.69,253,59,353,Cool Dry Place,796,11.7666666666666,21.5014164305949,Low Risk,No immediate action required
+BATCH-1916,Ibuprofen,Analgesics,Pfizer,2023-04-01,2024-11-15,43.4,74.76,423,27,336,Room Temperature,319,11.2,37.7678571428571,Low Risk,No immediate action required
+BATCH-1917,Metoprolol,Cardiology,Cipla,2023-05-11,2025-11-06,13.95,17.76,376,73,239,Cool Dry Place,675,7.96666666666666,47.1966527196652,Low Risk,No immediate action required
+BATCH-1918,Levothyroxine,Endocrinology,Novartis,2023-12-09,2026-10-07,1.9,2.84,441,85,28,Refrigerated,1010,0.933333333333333,472.5,Low Risk,No immediate action required
+BATCH-1919,Amlodipine,Cardiology,Merck,2023-01-13,2025-08-21,47.36,72.05,88,85,6,Room Temperature,598,0.2,440.0,Low Risk,No immediate action required
+BATCH-1920,Amoxicillin,Antibiotics,Merck,2023-03-09,2024-11-22,30.24,37.63,125,91,183,Room Temperature,326,6.1,20.4918032786885,Low Risk,No immediate action required
+BATCH-1921,Losartan,Cardiology,GlaxoSmithKline,2023-07-30,2025-06-01,28.36,35.92,155,73,501,Room Temperature,517,16.7,9.2814371257485,Low Risk,No immediate action required
+BATCH-1922,Gabapentin,Neurology,Pfizer,2023-07-27,2025-05-09,33.47,47.09,166,23,336,Room Temperature,494,11.2,14.8214285714285,Low Risk,No immediate action required
+BATCH-1923,Amoxicillin,Antibiotics,AstraZeneca,2023-08-06,2026-07-16,8.02,10.54,412,73,465,Cool Dry Place,927,15.5,26.5806451612903,Low Risk,No immediate action required
+BATCH-1924,Sertraline,Psychiatry,Merck,2023-10-21,2024-12-09,11.46,16.07,235,20,274,Refrigerated,343,9.13333333333333,25.7299270072992,Low Risk,No immediate action required
+BATCH-1925,Losartan,Cardiology,Sanofi,2023-04-01,2024-06-15,21.04,34.41,295,39,464,Cool Dry Place,166,15.4666666666666,19.0732758620689,Low Risk,No immediate action required
+BATCH-1926,Atorvastatin,Cardiology,Novartis,2023-01-05,2025-11-26,48.34,78.0,467,89,122,Room Temperature,695,4.06666666666666,114.83606557377,Low Risk,No immediate action required
+BATCH-1927,Gabapentin,Neurology,Pfizer,2023-12-23,2026-03-09,23.8,29.73,309,95,551,Cool Dry Place,798,18.3666666666666,16.8239564428312,Low Risk,No immediate action required
+BATCH-1928,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-09-27,2026-06-24,38.66,49.73,280,36,290,Refrigerated,905,9.66666666666666,28.9655172413793,Low Risk,No immediate action required
+BATCH-1929,Losartan,Cardiology,Novartis,2023-01-26,2025-12-17,29.1,38.73,252,48,53,Room Temperature,716,1.76666666666666,142.641509433962,Low Risk,No immediate action required
+BATCH-1930,Atorvastatin,Cardiology,Sanofi,2023-12-12,2026-04-21,43.28,55.2,45,96,85,Refrigerated,841,2.83333333333333,15.8823529411764,Low Risk,Reorder stock soon
+BATCH-1931,Omeprazole,Gastroenterology,Sanofi,2023-01-18,2024-11-27,47.6,75.48,34,89,163,Room Temperature,331,5.43333333333333,6.25766871165644,Low Risk,Reorder stock soon
+BATCH-1932,Amoxicillin,Antibiotics,Merck,2023-06-05,2025-08-17,35.49,59.68,327,71,126,Refrigerated,594,4.2,77.8571428571428,Low Risk,No immediate action required
+BATCH-1933,Amoxicillin,Antibiotics,Merck,2023-10-13,2025-02-27,6.27,9.65,274,62,309,Room Temperature,423,10.3,26.6019417475728,Low Risk,No immediate action required
+BATCH-1934,Sertraline,Psychiatry,Pfizer,2023-09-08,2024-12-16,49.73,74.67,406,45,576,Room Temperature,350,19.2,21.1458333333333,Low Risk,No immediate action required
+BATCH-1935,Albuterol,Respiratory,Novartis,2023-01-28,2024-12-28,27.72,38.08,29,45,406,Cool Dry Place,362,13.5333333333333,2.14285714285714,Low Risk,Reorder stock soon
+BATCH-1936,Ibuprofen,Analgesics,Merck,2023-10-18,2026-06-14,17.99,28.27,153,37,475,Refrigerated,895,15.8333333333333,9.66315789473684,Low Risk,No immediate action required
+BATCH-1937,Metoprolol,Cardiology,Merck,2023-05-20,2025-12-01,47.08,58.84,457,61,586,Room Temperature,700,19.5333333333333,23.39590443686,Low Risk,No immediate action required
+BATCH-1938,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-04-13,2025-09-02,42.34,52.82,20,59,276,Room Temperature,610,9.2,2.17391304347826,Low Risk,Reorder stock soon
+BATCH-1939,Metoprolol,Cardiology,Sanofi,2023-06-20,2025-12-16,35.45,58.2,293,46,198,Refrigerated,715,6.6,44.3939393939394,Low Risk,No immediate action required
+BATCH-1940,Albuterol,Respiratory,GlaxoSmithKline,2023-07-28,2025-01-11,49.41,70.03,394,22,177,Cool Dry Place,376,5.9,66.7796610169491,Low Risk,No immediate action required
+BATCH-1941,Albuterol,Respiratory,Pfizer,2023-04-29,2026-02-04,13.57,22.26,199,53,491,Room Temperature,765,16.3666666666666,12.1588594704684,Low Risk,No immediate action required
+BATCH-1942,Amoxicillin,Antibiotics,Cipla,2023-04-10,2025-12-18,31.32,49.96,5,100,203,Room Temperature,717,6.76666666666666,0.738916256157635,Low Risk,Reorder stock soon
+BATCH-1943,Lisinopril,Cardiology,AstraZeneca,2023-05-09,2025-07-06,34.82,57.54,457,82,493,Room Temperature,552,16.4333333333333,27.8093306288032,Low Risk,No immediate action required
+BATCH-1944,Amlodipine,Cardiology,Cipla,2023-09-11,2025-02-22,25.44,31.04,346,88,169,Cool Dry Place,418,5.63333333333333,61.4201183431952,Low Risk,No immediate action required
+BATCH-1945,Paracetamol,Analgesics,Novartis,2023-01-19,2025-01-17,29.84,42.69,110,40,433,Refrigerated,382,14.4333333333333,7.62124711316397,Low Risk,No immediate action required
+BATCH-1946,Losartan,Cardiology,GlaxoSmithKline,2023-12-16,2026-01-02,49.47,65.81,291,55,140,Refrigerated,732,4.66666666666666,62.3571428571428,Low Risk,No immediate action required
+BATCH-1947,Azithromycin,Antibiotics,Cipla,2023-10-18,2026-10-17,40.15,62.99,214,51,534,Refrigerated,1020,17.8,12.0224719101123,Low Risk,No immediate action required
+BATCH-1948,Azithromycin,Antibiotics,Novartis,2023-12-17,2025-01-31,3.69,4.84,398,58,274,Cool Dry Place,396,9.13333333333333,43.5766423357664,Low Risk,No immediate action required
+BATCH-1949,Amlodipine,Cardiology,Merck,2023-01-08,2025-05-22,26.8,41.58,179,77,322,Room Temperature,507,10.7333333333333,16.6770186335403,Low Risk,No immediate action required
+BATCH-1950,Paracetamol,Analgesics,AstraZeneca,2023-09-02,2025-11-22,13.84,21.72,279,61,495,Room Temperature,691,16.5,16.9090909090909,Low Risk,No immediate action required
+BATCH-1951,Atorvastatin,Cardiology,AstraZeneca,2023-04-09,2026-03-14,43.5,72.59,202,95,193,Room Temperature,803,6.43333333333333,31.3989637305699,Low Risk,No immediate action required
+BATCH-1952,Levothyroxine,Endocrinology,Novartis,2023-10-18,2026-09-25,28.81,41.51,172,91,356,Cool Dry Place,998,11.8666666666666,14.4943820224719,Low Risk,No immediate action required
+BATCH-1953,Levothyroxine,Endocrinology,AstraZeneca,2023-11-06,2025-11-28,15.86,28.23,162,87,289,Refrigerated,697,9.63333333333333,16.8166089965397,Low Risk,No immediate action required
+BATCH-1954,Metoprolol,Cardiology,Cipla,2023-12-21,2025-03-12,37.91,49.54,211,55,271,Refrigerated,436,9.03333333333333,23.3579335793357,Low Risk,No immediate action required
+BATCH-1955,Levothyroxine,Endocrinology,Novartis,2023-12-23,2026-08-11,1.94,3.03,104,55,174,Cool Dry Place,953,5.8,17.9310344827586,Low Risk,No immediate action required
+BATCH-1956,Metoprolol,Cardiology,Novartis,2023-03-27,2024-05-11,31.02,42.71,408,53,348,Room Temperature,131,11.6,35.1724137931034,Low Risk,No immediate action required
+BATCH-1957,Albuterol,Respiratory,AstraZeneca,2023-02-17,2025-07-01,28.8,43.81,260,29,470,Cool Dry Place,547,15.6666666666666,16.595744680851,Low Risk,No immediate action required
+BATCH-1958,Atorvastatin,Cardiology,Merck,2023-09-18,2025-09-20,47.05,64.3,33,43,403,Refrigerated,628,13.4333333333333,2.45657568238213,Low Risk,Reorder stock soon
+BATCH-1959,Atorvastatin,Cardiology,Novartis,2023-03-27,2024-05-27,15.37,22.63,439,91,183,Room Temperature,147,6.1,71.9672131147541,Low Risk,No immediate action required
+BATCH-1960,Losartan,Cardiology,Sanofi,2023-06-27,2024-08-27,4.04,4.95,24,73,353,Cool Dry Place,239,11.7666666666666,2.03966005665722,Low Risk,Reorder stock soon
+BATCH-1961,Losartan,Cardiology,Novartis,2023-08-10,2024-10-14,12.56,20.96,75,80,430,Cool Dry Place,287,14.3333333333333,5.23255813953488,Low Risk,Reorder stock soon
+BATCH-1962,Metoprolol,Cardiology,Cipla,2023-07-21,2024-09-02,33.85,54.68,19,88,198,Cool Dry Place,245,6.6,2.87878787878787,Low Risk,Reorder stock soon
+BATCH-1963,Metformin,Diabetes,AstraZeneca,2023-06-24,2026-04-05,39.94,65.82,305,52,439,Refrigerated,825,14.6333333333333,20.8428246013667,Low Risk,No immediate action required
+BATCH-1964,Gabapentin,Neurology,Pfizer,2023-09-08,2025-01-16,39.36,55.53,456,37,552,Cool Dry Place,381,18.4,24.7826086956521,Low Risk,No immediate action required
+BATCH-1965,Levothyroxine,Endocrinology,Merck,2023-12-01,2025-12-06,45.69,57.82,304,85,552,Cool Dry Place,705,18.4,16.5217391304347,Low Risk,No immediate action required
+BATCH-1966,Ibuprofen,Analgesics,Pfizer,2023-12-10,2025-07-02,17.76,22.3,261,79,102,Room Temperature,548,3.4,76.7647058823529,Low Risk,No immediate action required
+BATCH-1967,Paracetamol,Analgesics,Cipla,2023-09-03,2025-11-05,14.81,23.72,426,30,327,Room Temperature,674,10.9,39.0825688073394,Low Risk,No immediate action required
+BATCH-1968,Paracetamol,Analgesics,Novartis,2023-10-31,2025-03-26,23.02,40.12,231,57,171,Cool Dry Place,450,5.7,40.5263157894736,Low Risk,No immediate action required
+BATCH-1969,Paracetamol,Analgesics,Novartis,2023-02-06,2025-03-17,2.11,3.38,40,97,359,Room Temperature,441,11.9666666666666,3.34261838440111,Low Risk,Reorder stock soon
+BATCH-1970,Azithromycin,Antibiotics,Sanofi,2023-07-11,2026-05-27,26.95,34.2,492,43,424,Refrigerated,877,14.1333333333333,34.8113207547169,Low Risk,No immediate action required
+BATCH-1971,Levothyroxine,Endocrinology,Merck,2023-11-20,2025-08-29,46.03,81.81,50,66,576,Cool Dry Place,606,19.2,2.60416666666666,Low Risk,Reorder stock soon
+BATCH-1972,Lisinopril,Cardiology,GlaxoSmithKline,2023-12-29,2026-05-16,9.9,15.1,314,64,516,Cool Dry Place,866,17.2,18.2558139534883,Low Risk,No immediate action required
+BATCH-1973,Omeprazole,Gastroenterology,Pfizer,2023-08-20,2025-03-12,6.35,11.33,422,99,201,Refrigerated,436,6.7,62.9850746268656,Low Risk,No immediate action required
+BATCH-1974,Lisinopril,Cardiology,Pfizer,2023-07-03,2024-11-01,47.4,84.76,73,35,355,Room Temperature,305,11.8333333333333,6.16901408450704,Low Risk,No immediate action required
+BATCH-1975,Metoprolol,Cardiology,AstraZeneca,2023-08-14,2025-10-28,14.66,21.61,487,88,230,Refrigerated,666,7.66666666666666,63.5217391304347,Low Risk,No immediate action required
+BATCH-1976,Losartan,Cardiology,AstraZeneca,2023-11-10,2026-05-06,17.91,31.97,183,56,211,Refrigerated,856,7.03333333333333,26.0189573459715,Low Risk,No immediate action required
+BATCH-1977,Albuterol,Respiratory,Cipla,2023-05-06,2024-09-12,34.3,43.61,211,98,217,Cool Dry Place,255,7.23333333333333,29.1705069124423,Low Risk,No immediate action required
+BATCH-1978,Losartan,Cardiology,AstraZeneca,2023-07-18,2024-12-25,14.72,21.24,300,65,281,Room Temperature,359,9.36666666666666,32.0284697508896,Low Risk,No immediate action required
+BATCH-1979,Omeprazole,Gastroenterology,GlaxoSmithKline,2023-09-24,2026-08-17,13.27,21.8,456,94,528,Room Temperature,959,17.6,25.9090909090909,Low Risk,No immediate action required
+BATCH-1980,Omeprazole,Gastroenterology,AstraZeneca,2023-10-28,2024-11-29,5.11,7.74,159,57,534,Refrigerated,333,17.8,8.93258426966292,Low Risk,No immediate action required
+BATCH-1981,Albuterol,Respiratory,GlaxoSmithKline,2023-06-08,2025-04-29,24.8,34.82,196,52,11,Refrigerated,484,0.366666666666666,534.545454545454,High Risk,Redistribute to high-demand departments immediately
+BATCH-1982,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-08-08,2025-03-26,46.59,57.79,233,76,565,Refrigerated,450,18.8333333333333,12.3716814159292,Low Risk,No immediate action required
+BATCH-1983,Metformin,Diabetes,Novartis,2023-09-07,2026-04-21,45.77,65.32,252,54,200,Cool Dry Place,841,6.66666666666666,37.8,Low Risk,No immediate action required
+BATCH-1984,Metformin,Diabetes,Pfizer,2023-07-21,2025-12-12,48.06,58.45,59,93,505,Room Temperature,711,16.8333333333333,3.5049504950495,Low Risk,Reorder stock soon
+BATCH-1985,Atorvastatin,Cardiology,Novartis,2023-09-18,2024-10-15,7.38,12.06,497,90,256,Refrigerated,288,8.53333333333333,58.2421875,Low Risk,No immediate action required
+BATCH-1986,Albuterol,Respiratory,Merck,2023-05-11,2025-05-14,36.17,44.04,291,83,375,Room Temperature,499,12.5,23.28,Low Risk,No immediate action required
+BATCH-1987,Levothyroxine,Endocrinology,Cipla,2023-08-10,2025-07-02,38.63,51.76,163,57,9,Room Temperature,548,0.3,543.333333333333,Low Risk,No immediate action required
+BATCH-1988,Azithromycin,Antibiotics,Cipla,2023-04-15,2026-02-17,41.38,62.93,79,75,324,Cool Dry Place,778,10.8,7.31481481481481,Low Risk,No immediate action required
+BATCH-1989,Gabapentin,Neurology,AstraZeneca,2023-08-18,2026-04-09,5.84,10.05,208,71,176,Room Temperature,829,5.86666666666666,35.4545454545454,Low Risk,No immediate action required
+BATCH-1990,Amlodipine,Cardiology,GlaxoSmithKline,2023-04-26,2025-10-21,20.69,32.28,247,53,230,Room Temperature,659,7.66666666666666,32.2173913043478,Low Risk,No immediate action required
+BATCH-1991,Gabapentin,Neurology,Sanofi,2023-05-22,2026-05-08,20.76,29.24,290,72,554,Cool Dry Place,858,18.4666666666666,15.7039711191335,Low Risk,No immediate action required
+BATCH-1992,Sertraline,Psychiatry,GlaxoSmithKline,2023-09-24,2024-11-26,14.51,22.64,388,54,315,Refrigerated,330,10.5,36.9523809523809,Low Risk,No immediate action required
+BATCH-1993,Paracetamol,Analgesics,Pfizer,2023-11-12,2025-04-15,20.31,26.49,288,98,590,Refrigerated,470,19.6666666666666,14.6440677966101,Low Risk,No immediate action required
+BATCH-1994,Levothyroxine,Endocrinology,GlaxoSmithKline,2023-11-29,2026-06-24,23.51,30.74,487,79,156,Room Temperature,905,5.2,93.6538461538461,Low Risk,No immediate action required
+BATCH-1995,Metformin,Diabetes,AstraZeneca,2023-11-15,2025-08-13,40.08,69.17,380,84,571,Refrigerated,590,19.0333333333333,19.9649737302977,Low Risk,No immediate action required
+BATCH-1996,Levothyroxine,Endocrinology,Novartis,2023-08-06,2024-10-27,38.96,48.34,319,76,297,Room Temperature,300,9.9,32.2222222222222,Low Risk,No immediate action required
+BATCH-1997,Losartan,Cardiology,AstraZeneca,2023-11-24,2025-08-16,8.65,13.06,313,94,334,Cool Dry Place,593,11.1333333333333,28.1137724550898,Low Risk,No immediate action required
+BATCH-1998,Sertraline,Psychiatry,AstraZeneca,2023-07-11,2024-11-28,21.03,25.81,212,24,516,Cool Dry Place,332,17.2,12.3255813953488,Low Risk,No immediate action required
+BATCH-1999,Paracetamol,Analgesics,Merck,2023-01-20,2024-01-21,28.03,44.6,380,27,317,Room Temperature,20,10.5666666666666,35.9621451104101,High Risk,Redistribute to high-demand departments immediately

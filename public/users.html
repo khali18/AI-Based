@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - User Management</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <style>
+        .profile-upload-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px dashed var(--card-border);
+        }
+        .image-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only active"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">System Admin</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Staff Management</h1>
+            <button class="btn" style="width: auto; padding: 10px 25px;" onclick="openUserModal()"><i class="fa-solid fa-user-plus"></i> Add New Staff Member</button>
+        </header>
+
+        <section class="table-section glass">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Staff Role</th>
+                            <th>Current Status</th>
+                            <th>Administrative Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-body">
+                        <tr><td colspan="4" class="loading-td"><div class="spinner"></div> Loading staff...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- User Management Modal -->
+        <div id="user-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">Add New Staff</h2>
+                    <button class="close-modal" onclick="closeUserModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-error" style="color:var(--danger); font-size:0.85rem; margin-bottom:1rem; display:none;"></div>
+                    
+                    <label>Username</label>
+                    <input type="text" id="staff-username" placeholder="Enter username...">
+                    
+                    <label>Assigned Role</label>
+                    <select id="staff-role">
+                        <option value="pharmacist">Pharmacist</option>
+                        <option value="admin">System Admin</option>
+                    </select>
+                    
+                    <label>Access Password</label>
+                    <input type="password" id="staff-password" placeholder="Set password...">
+
+                    <label>Profile Picture</label>
+                    <div class="profile-upload-area">
+                        <div id="image-preview" class="image-preview">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div style="flex:1">
+                            <input type="file" id="staff-image" accept="image/*" style="margin-bottom: 5px;">
+                            <p style="font-size: 0.75rem; color: var(--text-muted);">Recommended: Square 200x200px</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top:1rem;">
+                        <button class="btn btn-secondary" style="flex: 1;" onclick="closeUserModal()">Cancel</button>
+                        <button class="btn" id="modal-save-btn" style="flex: 1;" onclick="saveUser()">Confirm & Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/app.js?v=10"></script>
+</body>
+</html>
