@@ -23,8 +23,12 @@ def initialize_database():
         db = client.get_database() 
         inventory_coll, sales_coll, users_coll, settings_coll = \
             db['inventory'], db['sales'], db['users'], db['settings']
-        return True
     except: return False
+    
+    # Seed new Admin if empty
+    if users_coll and users_coll.count_documents({}) == 0:
+        users_coll.insert_one({"username": "sheripha", "password": "admin123", "role": "admin"})
+    return True
 
 initialize_database()
 intelligence = PharmacyIntelligenceLayer(inventory_coll)
@@ -50,6 +54,11 @@ def get_dashboard():
 @app.route('/api/login', methods=['POST'])
 def login():
     if users_coll is None: return jsonify({"success": False, "error": "Database not connected"}), 500
+    if users_coll.count_documents({}) == 0:
+        users_coll.insert_many([
+            {"username": "sheripha", "password": "admin123", "role": "admin"},
+            {"username": "pharm", "password": "pharm123", "role": "pharmacist"}
+        ])
     data = request.json
     user = users_coll.find_one({"username": data.get('username'), "password": data.get('password')})
     if user: return jsonify({"success": True, "role": user.get('role'), "username": user.get('username')})
