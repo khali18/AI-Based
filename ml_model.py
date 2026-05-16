@@ -14,8 +14,9 @@ class PharmacyIntelligenceLayer:
         self.model = RandomForestRegressor(n_estimators=100, random_state=42)
         self.category_encoder = LabelEncoder()
         self.categories_ = []
-        self.MODEL_PATH = 'model.pkl'
-        self.ENCODER_PATH = 'encoder.pkl'
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        self.MODEL_PATH = os.path.join(BASE_DIR, 'model.pkl')
+        self.ENCODER_PATH = os.path.join(BASE_DIR, 'encoder.pkl')
         
     def train_demand_forecast_model(self):
         """

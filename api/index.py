@@ -2,6 +2,10 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+import os
+import sys
+# Add parent directory to sys.path so ml_model can be found on Vercel
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pymongo import MongoClient
 from ml_model import PharmacyIntelligenceLayer
 import datetime
