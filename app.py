@@ -5,73 +5,96 @@ from pymongo import MongoClient
 from ml_model import PharmacyIntelligenceLayer
 import datetime
 
-app = Flask(__name__, static_folder=os.path.abspath(os.path.dirname(__file__)))
+app = Flask(__name__)
 CORS(app)
 
-# Use direct os.environ for Vercel
+# Use current directory for static files
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# Global database handles
 MONGO_URI = os.environ.get('MONGO_URI')
-inventory_coll = None
-sales_coll = None
-users_coll = None
-settings_coll = None
+_db_cache = {}
 
-def initialize_database():
-    global inventory_coll, sales_coll, users_coll, settings_coll
-    if not MONGO_URI: return False
-    try:
-        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-        db = client.get_database() 
-        inventory_coll, sales_coll, users_coll, settings_coll = \
-            db['inventory'], db['sales'], db['users'], db['settings']
-    except: return False
-    
-    # Seed new Admin if empty
-    if users_coll and users_coll.count_documents({}) == 0:
-        users_coll.insert_one({"username": "sheripha", "password": "admin123", "role": "admin"})
-    return True
+def get_db():
+    if 'db' not in _db_cache:
+        if not MONGO_URI: return None
+        try:
+            client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+            _db_cache['db'] = client.get_database()
+        except: return None
+    return _db_cache['db']
 
-initialize_database()
-intelligence = PharmacyIntelligenceLayer(inventory_coll)
-intelligence.load_model()
+def get_coll(name):
+    db = get_db()
+    return db[name] if db is not None else None
+
+# Initialize AI Layer (Lazy)
+_ai_cache = {}
+def get_ai():
+    if 'ai' not in _ai_cache:
+        inv = get_coll('inventory')
+        ai = PharmacyIntelligenceLayer(inv)
+        ai.load_model()
+        _ai_cache['ai'] = ai
+    return _ai_cache['ai']
 
 @app.route('/api/dashboard')
 def get_dashboard():
-    if not MONGO_URI:
-        return jsonify({"success": False, "error": "MONGO_URI is missing in Vercel settings"}), 500
-    if inventory_coll is None:
-        return jsonify({"success": False, "error": "Database connection failed"}), 500
+    inv = get_coll('inventory')
+    sales = get_coll('sales')
+    if inv is None: return jsonify({"success": False, "error": "DB Disconnected"}), 500
     
-    items = list(inventory_coll.find())
+    items = list(inv.find())
     today = datetime.datetime.now().strftime("%Y-%m-%d")
-    revenue = sum(s.get('total_ghs', 0) for s in sales_coll.find({"date": today}))
+    revenue = sum(s.get('total_ghs', 0) for s in sales.find({"date": today})) if sales else 0
+    
     return jsonify({
-        "totalItems": len(items), "totalStockValue": round(sum(i.get('Quantity_In_Stock', 0) * i.get('Selling_Price_USD', 0) for i in items), 2),
-        "todayRevenue": round(revenue, 2), "lowStockCount": inventory_coll.count_documents({"$expr": {"$lte": ["$Quantity_In_Stock", "$Reorder_Level"]}}),
+        "totalItems": len(items),
+        "totalStockValue": round(sum(i.get('Quantity_In_Stock', 0) * i.get('Selling_Price_USD', 0) for i in items), 2),
+        "todayRevenue": round(revenue, 2),
+        "lowStockCount": inv.count_documents({"$expr": {"$lte": ["$Quantity_In_Stock", "$Reorder_Level"]}}),
         "expiredOrNearExpiryCount": sum(1 for i in items if i.get('Days_to_Expiry', 0) <= 30),
         "riskCount": {"High Risk": sum(1 for i in items if i.get('Expiry_Risk_Level') == 'High Risk'), "Medium Risk": 0, "Low Risk": 0}
     })
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    if users_coll is None: return jsonify({"success": False, "error": "Database not connected"}), 500
-    if users_coll.count_documents({}) == 0:
-        users_coll.insert_many([
-            {"username": "sheripha", "password": "admin123", "role": "admin"},
-            {"username": "pharm", "password": "pharm123", "role": "pharmacist"}
-        ])
+    users = get_coll('users')
+    if users is None: return jsonify({"success": False, "error": "DB Offline"}), 500
+    
+    # Ensure default user exists
+    if users.count_documents({}) == 0:
+        users.insert_one({"username": "sheripha", "password": "admin123", "role": "admin"})
+
     data = request.json
-    user = users_coll.find_one({"username": data.get('username'), "password": data.get('password')})
+    user = users.find_one({"username": data.get('username'), "password": data.get('password')})
     if user: return jsonify({"success": True, "role": user.get('role'), "username": user.get('username')})
     return jsonify({"success": False}), 401
 
+@app.route('/api/inventory', methods=['GET'])
+def get_inventory():
+    inv = get_coll('inventory')
+    if inv is None: return jsonify([]), 500
+    return jsonify(list(inv.find({}, {"_id": 0})))
+
+@app.route('/api/settings', methods=['GET'])
+def get_settings():
+    st = get_coll('settings')
+    if st is None: return jsonify({}), 500
+    return jsonify(st.find_one({}, {"_id": 0}) or {})
+
+# CATCH-ALL ROUTE
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
     if path.startswith('api/'): return jsonify({"success": False}), 404
-    full_path = os.path.join(app.static_folder, path)
+    
+    # Try file in root
+    full_path = os.path.join(BASE_DIR, path)
     if path and os.path.exists(full_path) and os.path.isfile(full_path):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(BASE_DIR, path)
+    
+    return send_from_directory(BASE_DIR, 'index.html')
 
 if __name__ == '__main__':
     from waitress import serve
