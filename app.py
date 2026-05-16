@@ -82,6 +82,9 @@ def login():
 
 @app.route('/api/dashboard', methods=['GET'])
 def get_dashboard():
+    if inventory_coll is None:
+        return jsonify({"success": False, "message": "Database not initialized. Check MONGO_URI."}), 500
+        
     items = list(inventory_coll.find())
     total_val = sum((i.get('Quantity_In_Stock', 0) * i.get('Selling_Price_USD', 0)) for i in items)
     low_stock = inventory_coll.count_documents({"$expr": {"$lte": ["$Quantity_In_Stock", "$Reorder_Level"]}})
