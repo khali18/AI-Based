@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Inventory</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <!-- Barcode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">System Admin</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Complete Inventory</h1>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="inventory-search" placeholder="Search by name, category, or batch...">
+                </div>
+                <button class="btn btn-secondary" onclick="printReport()"><i class="fa-solid fa-print"></i> Export PDF</button>
+                <button class="btn btn-secondary" onclick="loadInventory()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Theme</button>
+                <button class="btn" style="background:var(--primary);color:white;" onclick="openAddProductModal()">
+                    <i class="fa-solid fa-plus"></i> Add Product
+                </button>
+            </div>
+        </header>
+
+        <!-- Inventory Table -->
+        <section class="table-section glass">
+            <div class="table-container">
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Batch ID</th>
+                            <th>Medicine Name</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Unit Cost</th>
+                            <th>Selling Price</th>
+                            <th>Total Value</th>
+                            <th>Expiry Date</th>
+                            <th>Risk Level</th>
+                            <th>AI Action</th>
+                            <th>Barcode</th>
+                            <th class="actions-col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-body">
+                        <tr><td colspan="9" class="loading-td"><div class="spinner"></div> Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div class="modal-overlay" id="add-product-modal" style="display:flex;display:none;">
+        <div class="modal-content" style="max-width:560px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-pills" style="color:var(--primary);"></i> Add New Product</h2>
+                <button onclick="closeAddProductModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+                    <div>
+                        <label>Medicine Name *</label>
+                        <input type="text" id="ap-name" placeholder="e.g. Amoxicillin">
+                    </div>
+                    <div>
+                        <label>Category *</label>
+                        <select id="ap-category">
+                            <option>Antibiotics</option>
+                            <option>Analgesics</option>
+                            <option>Cardiology</option>
+                            <option>Diabetes</option>
+                            <option>Respiratory</option>
+                            <option>Neurology</option>
+                            <option>Gastroenterology</option>
+                            <option>Endocrinology</option>
+                            <option>Psychiatry</option>
+                            <option>General</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Manufacturer *</label>
+                        <input type="text" id="ap-manufacturer" placeholder="e.g. Pfizer">
+                    </div>
+                    <div>
+                        <label>Manufacturing Date *</label>
+                        <input type="date" id="ap-mfg-date">
+                    </div>
+                    <div>
+                        <label>Quantity In Stock *</label>
+                        <input type="number" id="ap-qty" placeholder="e.g. 500" min="0">
+                    </div>
+                    <div>
+                        <label>Reorder Level *</label>
+                        <input type="number" id="ap-reorder" placeholder="e.g. 50" min="0">
+                    </div>
+                    <div>
+                        <label>Unit Cost (GH₵) *</label>
+                        <input type="number" id="ap-cost" placeholder="e.g. 181.25" step="0.01" min="0">
+                    </div>
+                    <div>
+                        <label>Selling Price (GH₵) *</label>
+                        <input type="number" id="ap-price" placeholder="e.g. 290.00" step="0.01" min="0">
+                    </div>
+                    <div>
+                        <label>Expiry Date *</label>
+                        <input type="date" id="ap-expiry-date" min="">
+                    </div>
+                    <div>
+                        <label>Sales Last 30 Days</label>
+                        <input type="number" id="ap-sales" placeholder="e.g. 120" min="0" value="0">
+                    </div>
+                </div>
+                <div id="ap-error" style="color:var(--danger);font-size:0.85rem;margin-top:0.5rem;display:none;"></div>
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn btn-secondary" onclick="closeAddProductModal()" style="flex:1;">Cancel</button>
+                <button class="btn" onclick="saveNewProduct()" style="flex:2;background:var(--primary);color:white;"><i class="fa-solid fa-floppy-disk"></i> Save Product</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div class="modal-overlay" id="edit-product-modal" style="display:flex;display:none;">
+        <div class="modal-content" style="max-width:560px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-pills" style="color:var(--primary);"></i> Edit Product</h2>
+                <button onclick="closeEditProductModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="ep-batch-id">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;">
+                    <div>
+                        <label>Medicine Name *</label>
+                        <input type="text" id="ep-name" placeholder="e.g. Amoxicillin">
+                    </div>
+                    <div>
+                        <label>Category *</label>
+                        <select id="ep-category">
+                            <option>Antibiotics</option>
+                            <option>Analgesics</option>
+                            <option>Cardiology</option>
+                            <option>Diabetes</option>
+                            <option>Respiratory</option>
+                            <option>Neurology</option>
+                            <option>Gastroenterology</option>
+                            <option>Endocrinology</option>
+                            <option>Psychiatry</option>
+                            <option>General</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Manufacturer *</label>
+                        <input type="text" id="ep-manufacturer" placeholder="e.g. Pfizer">
+                    </div>
+                    <div>
+                        <label>Manufacturing Date *</label>
+                        <input type="date" id="ep-mfg-date">
+                    </div>
+                    <div>
+                        <label>Quantity In Stock *</label>
+                        <input type="number" id="ep-qty" placeholder="e.g. 500" min="0">
+                    </div>
+                    <div>
+                        <label>Reorder Level *</label>
+                        <input type="number" id="ep-reorder" placeholder="e.g. 50" min="0">
+                    </div>
+                    <div>
+                        <label>Unit Cost (GH₵) *</label>
+                        <input type="number" id="ep-cost" placeholder="e.g. 181.25" step="0.01" min="0">
+                    </div>
+                    <div>
+                        <label>Selling Price (GH₵) *</label>
+                        <input type="number" id="ep-price" placeholder="e.g. 290.00" step="0.01" min="0">
+                    </div>
+                    <div>
+                        <label>Expiry Date *</label>
+                        <input type="date" id="ep-expiry-date" min="">
+                    </div>
+                    <div>
+                        <label>Sales Last 30 Days</label>
+                        <input type="number" id="ep-sales" placeholder="e.g. 120" min="0">
+                    </div>
+                </div>
+                <div id="ep-error" style="color:var(--danger);font-size:0.85rem;margin-top:0.5rem;display:none;"></div>
+            </div>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn btn-secondary" onclick="closeEditProductModal()" style="flex:1;">Cancel</button>
+                <button class="btn" onclick="saveEditedProduct()" style="flex:2;background:var(--primary);color:white;"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js?v=7"></script>
+    <script>
+        // Init inventory specific logic
+        document.addEventListener('DOMContentLoaded', () => {
+            loadInventory();
+            const searchInput = document.getElementById('inventory-search');
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    loadInventory(e.target.value);
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

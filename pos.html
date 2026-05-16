@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Point of Sale (POS)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <!-- Barcode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <style>
+        .pos-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        .pos-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pos-item:hover { background: rgba(255, 255, 255, 0.1); }
+        .cart-box {
+            padding: 1.5rem;
+            position: sticky;
+            top: 20px;
+        }
+        .cart-list { margin-top: 1rem; margin-bottom: 2rem; }
+        .cart-row {
+            display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--card-border);
+        }
+        .total-box {
+            font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; border-top: 2px solid var(--card-border); padding-top: 10px;
+            display: flex; justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only active"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Pharm+Staff&background=10b981&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">Pharmacist</p>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <h1>Point of Sale (Dispensing)</h1>
+            <div style="display:flex; gap: 1rem;">
+                <div class="search-bar" style="border: 2px solid var(--primary);">
+                    <i class="fa-solid fa-barcode"></i>
+                    <input type="text" id="barcode-scan" placeholder="Quick Scan (Barcode ID)..." autofocus>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="pos-search" placeholder="Search by name/batch..." onkeyup="loadPOSSearch()">
+                </div>
+            </div>
+        </header>
+
+        <section class="pos-grid">
+            <!-- Product List -->
+            <div class="glass" style="padding: 1.5rem;">
+                <h3><i class="fa-solid fa-pills"></i> Inventory Catalog</h3>
+                <div class="search-results" id="pos-inventory-list">
+                    <p style="color:var(--text-muted); padding:10px;">Select a medicine to add to cart...</p>
+                </div>
+            </div>
+
+            <!-- Cart Details -->
+            <div class="glass cart-box">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Dispense Cart</h3>
+                <div class="cart-list" id="pos-cart-list">
+                    <!-- Cart items generate here -->
+                </div>
+                <div class="total-box">
+                    <span>Total:</span>
+                    <span id="pos-total">GH₵ 0.00</span>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Customer Name (Optional)</label>
+                    <input type="text" id="customer-name" placeholder="Enter name if provided..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1.5px solid var(--card-border); margin-top: 5px; font-family: 'Outfit';">
+                </div>
+
+                <button class="btn" style="width: 100%; font-size:1.1rem; padding: 15px;" onclick="checkoutPOS()"><i class="fa-solid fa-credit-card"></i> Process Dispense</button>
+            </div>
+        </section>
+    </main>
+    <!-- Hidden Receipt for Printing -->
+    <div id="receipt-container">
+        <div class="receipt-header">
+            <h2>Ghana National Hospital</h2>
+            <p>Accra Central District, Ghana</p>
+            <p>Tel: +233 44 555 666</p>
+            <p>--------------------------------</p>
+            <p id="receipt-date"></p>
+            <p id="receipt-id"></p>
+        </div>
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="receipt-items"></tbody>
+        </table>
+        <div class="receipt-total" id="receipt-grand-total"></div>
+        <div class="receipt-footer">
+            <p>Thank you for choosing MedAI.</p>
+            <p>Quality Healthcare, Scalable AI.</p>
+            <svg id="receipt-barcode"></svg>
+        </div>
+    </div>
+
+    <script src="/js/app.js?v=10"></script>
+    <script>
+        // Scanner logic
+        const scanner = document.getElementById('barcode-scan');
+        scanner.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const code = e.target.value.trim();
+                handleBarcodeScan(code);
+                e.target.value = ''; // clear
+            }
+        });
+    </script>
+</body>
+</html>

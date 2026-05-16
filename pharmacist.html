@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Pharmacist Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only active"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Pharm+Staff&background=10b981&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">Pharmacist</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Pharmacist Action Station</h1>
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search for medicine to dispense..." disabled>
+            </div>
+        </header>
+
+        <section class="kpi-cards" style="margin-bottom: 2rem;">
+            <div class="card glass">
+                <div class="card-icon green"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="card-info">
+                    <h3>My Revenue Today</h3>
+                    <p id="pharm-sales-today">GH₵ 0.00</p>
+                </div>
+            </div>
+            <div class="card glass">
+                <div class="card-icon blue"><i class="fa-solid fa-receipt"></i></div>
+                <div class="card-info">
+                    <h3>My Transactions</h3>
+                    <p id="pharm-txn-count">Loading...</p>
+                </div>
+            </div>
+            <div class="card glass" style="cursor:pointer;" onclick="window.location='/pos.html'">
+                <div class="card-icon orange"><i class="fa-solid fa-cash-register"></i></div>
+                <div class="card-info">
+                    <h3>Quick Action</h3>
+                    <p style="font-size:1rem;">Open POS →</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Personal Transaction History -->
+        <section class="table-section glass" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1.2rem;"><i class="fa-solid fa-clock-rotate-left" style="color:var(--primary);"></i> My Transaction History</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Items Dispensed</th>
+                            <th>Amount (GH₵)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="my-sales-body">
+                        <tr><td colspan="4" class="loading-td"><div class="spinner"></div> Fetching your records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Expiry Alerts -->
+        <section class="dashboard-grid" style="grid-template-columns: 1fr;">
+            <div class="ai-recommendations glass">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Immediate Action Required (High Risk Expiries)</h3>
+                <ul id="ai-list" class="recommendation-list" style="max-height: 400px;">
+                    <li><div class="spinner"></div> Scanning inventory for risks...</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="/js/app.js?v=10"></script>
+</body>
+</html>
