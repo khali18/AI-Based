@@ -57,6 +57,22 @@ def login():
     if user: return jsonify({"success": True, "role": user.get('role'), "username": user.get('username')})
     return jsonify({"success": False}), 401
 
+@app.route('/api/register', methods=['POST'])
+def register():
+    users = get_coll('users')
+    if users is None: return jsonify({"success": False, "error": "DB Offline"}), 500
+    
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+    role = data.get('role', 'pharmacist')
+
+    if users.find_one({"username": username}):
+        return jsonify({"success": False, "message": "Username already exists"}), 400
+    
+    users.insert_one({"username": username, "password": password, "role": role})
+    return jsonify({"success": True, "username": username, "role": role})
+
 @app.route('/api/inventory', methods=['GET'])
 def get_inv():
     inv = get_coll('inventory')
