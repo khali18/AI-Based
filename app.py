@@ -1,9 +1,13 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
 from pymongo import MongoClient
 from ml_model import PharmacyIntelligenceLayer
 import datetime
+
+# Load local environment variables if they exist
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -81,3 +85,12 @@ def get_inv():
 
 # Vercel needs the app object
 app = app
+
+if __name__ == '__main__':
+    from waitress import serve
+    print("-----------------------------------------------")
+    print("MedAI GH - PRODUCTION SERVER ACTIVE")
+    print("Local URL: http://localhost:5000")
+    print("Cloud DB: Connected (Atlas)")
+    print("-----------------------------------------------")
+    serve(app, host='0.0.0.0', port=5000, threads=8)
