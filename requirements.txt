@@ -2,5 +2,7 @@ flask
 flask-cors
 pandas
 scikit-learn
+pymongo[srv]
+dnspython
 tinydb
 waitress
