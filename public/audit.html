@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - System Audit Logs</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only active"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">System Admin</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>System Audit Trail</h1>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <button class="btn btn-secondary" onclick="printReport()"><i class="fa-solid fa-print"></i> Export PDF</button>
+                <button class="btn btn-secondary" onclick="loadAuditLogs()"><i class="fa-solid fa-rotate-right"></i> Refresh Logs</button>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Theme</button>
+            </div>
+        </header>
+
+        <div id="session-container">
+            <!-- Session cards will be injected here -->
+            <div style="text-align:center; padding: 40px; color:var(--text-muted);">
+                <div class="spinner" style="margin: 0 auto 15px;"></div>
+                Synchronizing system activity...
+            </div>
+        </div>
+    </main>
+
+    <style>
+        #session-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .session-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .session-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 20px rgba(13, 138, 188, 0.1);
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .session-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .session-user-info h3 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .session-user-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .session-meta {
+            text-align: right;
+        }
+
+        .session-revenue {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .session-tx-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .session-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .status-active { color: #10b981; }
+        .status-closed { color: var(--text-muted); }
+
+        .details-toggle {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--text-main);
+            text-align: left;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .details-toggle:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .details-content {
+            display: none;
+            margin-top: 1rem;
+            border-top: 1px dashed var(--card-border);
+            padding-top: 1rem;
+        }
+
+        .details-content.active {
+            display: block;
+        }
+
+        .audit-detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .audit-detail-table th {
+            text-align: left;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .audit-detail-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+    </style>
+
+    <script src="/js/app.js?v=5"></script>
+</body>
+</html>

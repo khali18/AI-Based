@@ -3,187 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedAI GH - Pharmacist Portal</title>
+    <title>MedAI - Pharmacist Portal</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=3.0">
-    <style>
-        .search-box { position: relative; width: 100%; margin-bottom: 2rem; }
-        .search-box input { width: 100%; padding: 1.2rem 3.5rem; background: var(--glass); border: 1px solid var(--card-border); border-radius: 14px; color: #fff; font-size: 1.1rem; }
-        .search-box i { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--primary); }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid var(--card-border); }
-    </style>
+    <link rel="stylesheet" href="/css/style.css?v=2">
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fa-solid fa-notes-medical"></i>
-                <h2 class="text-gradient">MedAI GH</h2>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only active"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Pharm+Staff&background=10b981&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">Pharmacist</p>
             </div>
-            
-            <ul class="nav-links">
-                <li><a href="/pharmacist.html" class="active"><i class="fa-solid fa-cash-register"></i> Dispensing</a></li>
-                <li><a href="#"><i class="fa-solid fa-clipboard-list"></i> My Sales</a></li>
-                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i> Inventory Search</a></li>
-            </ul>
+        </div>
+    </nav>
 
-            <div class="user-profile glass" style="padding: 1rem; display: flex; align-items: center; gap: 12px; margin-top: auto;">
-                <img id="user-avatar" src="https://ui-avatars.com/api/?name=User&background=00897b&color=fff" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%;">
-                <div>
-                    <p style="font-size: 0.9rem; font-weight: 600;" id="user-name">Staff Name</p>
-                    <p style="font-size: 0.75rem; color: var(--text-muted);">Pharmacist</p>
-                </div>
-                <i class="fa-solid fa-right-from-bracket" style="margin-left: auto; cursor: pointer; color: var(--danger);" onclick="logout()"></i>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Pharmacist Action Station</h1>
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search for medicine to dispense..." disabled>
             </div>
-        </aside>
+        </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <div>
-                    <h1 class="animate-fade-in">Medicine Dispensing</h1>
-                    <p style="color: var(--text-muted);">Scan or search for medicine to proceed with checkout.</p>
-                </div>
-                <div class="glass" style="padding: 10px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px;">
-                    <i class="fa-solid fa-calendar-day" style="color: var(--primary);"></i>
-                    <span id="current-date">May 16, 2026</span>
-                </div>
-            </header>
-
-            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem;" class="animate-fade-in">
-                <!-- Dispensing Area -->
-                <div>
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="med-search" placeholder="Search by medicine name or batch ID..." onkeyup="searchMedicine()">
-                    </div>
-
-                    <div class="glass table-container" style="margin-top: 0;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Medicine</th>
-                                    <th>Stock</th>
-                                    <th>Price (GH₵)</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="med-results">
-                                <!-- Search results -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Checkout Sidebar -->
-                <div class="glass" style="padding: 2rem; display: flex; flex-direction: column; height: fit-content;">
-                    <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-cart-shopping" style="color: var(--primary);"></i> Checkout Cart</h3>
-                    <div id="cart-container" style="flex: 1; margin-bottom: 2rem;">
-                        <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Cart is empty</p>
-                    </div>
-
-                    <div class="glass-heavy" style="padding: 1.5rem; margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span>Total Payable</span>
-                            <span style="font-weight: 700; font-size: 1.2rem; color: var(--secondary);" id="cart-total">GH₵ 0.00</span>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary" style="width: 100%; padding: 15px; justify-content: center; font-size: 1.1rem;" onclick="processCheckout()">
-                        Complete Transaction <i class="fa-solid fa-circle-check"></i>
-                    </button>
+        <section class="kpi-cards" style="margin-bottom: 2rem;">
+            <div class="card glass">
+                <div class="card-icon green"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="card-info">
+                    <h3>My Revenue Today</h3>
+                    <p id="pharm-sales-today">GH₵ 0.00</p>
                 </div>
             </div>
-        </main>
-    </div>
+            <div class="card glass">
+                <div class="card-icon blue"><i class="fa-solid fa-receipt"></i></div>
+                <div class="card-info">
+                    <h3>My Transactions</h3>
+                    <p id="pharm-txn-count">Loading...</p>
+                </div>
+            </div>
+            <div class="card glass" style="cursor:pointer;" onclick="window.location='/pos.html'">
+                <div class="card-icon orange"><i class="fa-solid fa-cash-register"></i></div>
+                <div class="card-info">
+                    <h3>Quick Action</h3>
+                    <p style="font-size:1rem;">Open POS →</p>
+                </div>
+            </div>
+        </section>
 
-    <script>
-        if (!localStorage.getItem('medai_username')) window.location.href = '/login.html';
-        document.getElementById('user-name').innerText = localStorage.getItem('medai_username');
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        <!-- My Personal Transaction History -->
+        <section class="table-section glass" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1.2rem;"><i class="fa-solid fa-clock-rotate-left" style="color:var(--primary);"></i> My Transaction History</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Items Dispensed</th>
+                            <th>Amount (GH₵)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="my-sales-body">
+                        <tr><td colspan="4" class="loading-td"><div class="spinner"></div> Fetching your records...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-        let cart = [];
-        let allMeds = [];
+        <!-- Expiry Alerts -->
+        <section class="dashboard-grid" style="grid-template-columns: 1fr;">
+            <div class="ai-recommendations glass">
+                <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger);"></i> Immediate Action Required (High Risk Expiries)</h3>
+                <ul id="ai-list" class="recommendation-list" style="max-height: 400px;">
+                    <li><div class="spinner"></div> Scanning inventory for risks...</li>
+                </ul>
+            </div>
+        </section>
 
-        async function init() {
-            const res = await fetch('/api/inventory');
-            allMeds = await res.json();
-            searchMedicine(); // initial load
-        }
+    </main>
 
-        function searchMedicine() {
-            const q = document.getElementById('med-search').value.toLowerCase();
-            const results = allMeds.filter(m => m.Medicine_Name.toLowerCase().includes(q) || m.Batch_ID.toLowerCase().includes(q));
-            const tbody = document.getElementById('med-results');
-            tbody.innerHTML = '';
-
-            results.slice(0, 10).forEach(med => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>
-                        <div style="font-weight: 600;">${med.Medicine_Name}</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">${med.Batch_ID}</div>
-                    </td>
-                    <td>${med.Quantity_In_Stock} units</td>
-                    <td style="font-weight: 600;">${med.Selling_Price_USD}</td>
-                    <td><button class="btn btn-primary" style="padding: 5px 12px; font-size: 0.8rem;" onclick="addToCart('${med.Batch_ID}')"><i class="fa-solid fa-plus"></i> Add</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function addToCart(batchId) {
-            const med = allMeds.find(m => m.Batch_ID === batchId);
-            const inCart = cart.find(c => c.Batch_ID === batchId);
-            if (inCart) {
-                inCart.qty++;
-            } else {
-                cart.push({ ...med, qty: 1 });
-            }
-            renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-container');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Cart is empty</p>';
-                document.getElementById('cart-total').innerText = 'GH₵ 0.00';
-                return;
-            }
-
-            container.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                total += item.Selling_Price_USD * item.qty;
-                const div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <div>
-                        <div style="font-weight: 500;">${item.Medicine_Name}</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">${item.qty} x GH₵ ${item.Selling_Price_USD}</div>
-                    </div>
-                    <div style="font-weight: 600;">GH₵ ${(item.qty * item.Selling_Price_USD).toFixed(2)}</div>
-                `;
-                container.appendChild(div);
-            });
-            document.getElementById('cart-total').innerText = `GH₵ ${total.toFixed(2)}`;
-        }
-
-        async function processCheckout() {
-            if (cart.length === 0) return alert("Cart is empty!");
-            alert("Transaction Successful! Dispensing medicine...");
-            cart = [];
-            renderCart();
-        }
-
-        function logout() {
-            localStorage.clear();
-            window.location.href = '/login.html';
-        }
-
-        init();
-    </script>
+    <script src="/js/app.js?v=10"></script>
 </body>
 </html>

@@ -3,326 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedAI GH - System Administrator</title>
+    <title>MedAI - Pharmacy Expiry Prediction</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css?v=3.0">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <!-- Barcode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fa-solid fa-notes-medical"></i>
-                <h2 class="text-gradient">MedAI GH</h2>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">System Admin</p>
             </div>
-            
-            <ul class="nav-links">
-                <li><a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li><a href="#" onclick="switchTab('inventory')" id="nav-inventory"><i class="fa-solid fa-boxes-stacked"></i> Full Inventory</a></li>
-                <li><a href="#" onclick="switchTab('analytics')" id="nav-analytics"><i class="fa-solid fa-chart-line"></i> Analytics & Reports</a></li>
-                <li><a href="#" onclick="switchTab('staff')" id="nav-staff"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
-                <li><a href="#" onclick="switchTab('settings')" id="nav-settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
-            </ul>
+        </div>
+    </nav>
 
-            <div class="user-profile glass" style="padding: 1rem; display: flex; align-items: center; gap: 12px; margin-top: auto;">
-                <img id="user-avatar" src="https://ui-avatars.com/api/?name=Admin&background=00897b&color=fff" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%;">
-                <div>
-                    <p style="font-size: 0.9rem; font-weight: 600;" id="user-name">Admin User</p>
-                    <p style="font-size: 0.75rem; color: var(--text-muted);">System Admin</p>
-                </div>
-                <i class="fa-solid fa-right-from-bracket" style="margin-left: auto; cursor: pointer; color: var(--danger);" onclick="logout()"></i>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Dashboard Tab -->
-            <section id="tab-dashboard" style="display: block;">
-                <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
-                    <div>
-                        <h1 class="animate-fade-in">Hospital Intelligence Overview</h1>
-                        <p style="color: var(--text-muted);">Real-time monitoring and AI-assisted inventory foresight.</p>
-                    </div>
-                    <button class="btn btn-primary" onclick="switchTab('inventory')"><i class="fa-solid fa-boxes"></i> View Inventory</button>
-                </header>
-            <div class="stats-grid animate-fade-in">
-                <div class="stat-card glass">
-                    <div class="stat-icon" style="background: rgba(0, 137, 123, 0.1); color: var(--primary);">
-                        <i class="fa-solid fa-pills"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Total Stock Value</h3>
-                        <div class="value" id="stat-total-value">GH₵ 0.00</div>
-                    </div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-icon" style="background: rgba(255, 193, 7, 0.1); color: var(--secondary);">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Low Stock Items</h3>
-                        <div class="value" id="stat-low-stock">0</div>
-                    </div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-icon" style="background: rgba(255, 82, 82, 0.1); color: var(--danger);">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>High Expiry Risk</h3>
-                        <div class="value" id="stat-expiry-risk">0</div>
-                    </div>
-                </div>
-                <div class="stat-card glass">
-                    <div class="stat-icon" style="background: rgba(76, 175, 80, 0.1); color: var(--success);">
-                        <i class="fa-solid fa-money-bill-trend-up"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Today's Revenue</h3>
-                        <div class="value" id="stat-revenue">GH₵ 0.00</div>
-                    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div>
+                <h1>AI Stock & Expiry Prediction Engine</h1>
+                <div class="sync-indicator">
+                    <i class="fa-solid fa-circle"></i>
+                    <span>Clinical Data Sync: Active</span>
                 </div>
             </div>
-
-            <!-- Main Grid -->
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;" class="animate-fade-in">
-                <!-- Recent Inventory -->
-                <div class="glass table-container">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                        <h3>Critical Inventory Tracking</h3>
-                        <a href="#" style="color: var(--primary); font-size: 0.85rem; text-decoration: none;">View Full Inventory</a>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Medicine Name</th>
-                                <th>Batch ID</th>
-                                <th>Stock</th>
-                                <th>Risk Level</th>
-                                <th>Prediction</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventory-table">
-                            <!-- Data populated by JS -->
-                        </tbody>
-                    </table>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Scanning network..." disabled>
                 </div>
+                <button class="btn btn-secondary" onclick="loadDashboardData()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Theme</button>
+            </div>
+        </header>
 
-                <!-- AI Insights -->
-                <div class="glass" style="padding: 1.5rem;">
-                    <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-brain" style="color: var(--secondary);"></i> AI Assistant Insights</h3>
-                    <div id="ai-insights" style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="glass-heavy" style="padding: 1rem; border-left: 4px solid var(--primary);">
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">System Intelligence</p>
-                            <p style="font-weight: 500;">Predictive models are analyzing stock consumption rates...</p>
-                        </div>
-                    </div>
+        <!-- KPI Cards -->
+        <section class="kpi-cards">
+            <div class="card glass">
+                <div class="card-icon blue"><i class="fa-solid fa-box-open"></i></div>
+                <div class="card-info">
+                    <h3>Total Items</h3>
+                    <p id="kpi-total">Loading...</p>
                 </div>
             </div>
+            <!-- NEW REVENUE CARD -->
+            <div class="card glass">
+                <div class="card-icon green"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="card-info">
+                    <h3>Today's Revenue</h3>
+                    <p id="kpi-revenue-today">Loading...</p>
                 </div>
-            </section>
+            </div>
+            <div class="card glass">
+                <div class="card-icon green"><i class="fa-solid fa-wallet"></i></div>
+                <div class="card-info">
+                    <h3>Stock Value</h3>
+                    <p id="kpi-value">Loading...</p>
+                </div>
+            </div>
+            <div class="card glass">
+                <div class="card-icon orange"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="card-info">
+                    <h3>Low Stock</h3>
+                    <p id="kpi-low-stock">Loading...</p>
+                </div>
+            </div>
+            <div class="card glass">
+                <div class="card-icon red"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div class="card-info">
+                    <h3>Critical Expiry</h3>
+                    <p id="kpi-expiry">Loading...</p>
+                </div>
+            </div>
+        </section>
 
-            <!-- Full Inventory Tab -->
-            <section id="tab-inventory" style="display: none;" class="animate-fade-in">
-                <header style="margin-bottom: 2.5rem;">
-                    <h1>Comprehensive Inventory</h1>
-                    <p style="color: var(--text-muted);">Complete catalog of all pharmacy items.</p>
-                </header>
-                <div class="glass table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Medicine Name</th>
-                                <th>Category</th>
-                                <th>Batch ID</th>
-                                <th>Stock</th>
-                                <th>Reorder Level</th>
-                                <th>Selling Price</th>
-                                <th>Expiry Risk</th>
-                            </tr>
-                        </thead>
-                        <tbody id="full-inventory-table">
-                            <!-- Populated by JS -->
-                        </tbody>
-                    </table>
+        <!-- Charts & AI Recommendations & Recent Activity -->
+        <section class="dashboard-grid">
+            <div class="chart-container glass">
+                <h3>Stock Distribution by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="ai-recommendations glass">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                    <h3 style="margin:0;"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary);"></i> Automated Expiry Risk Classifier</h3>
+                    <button class="btn btn-small" style="background-color:#25D366; color:white;" onclick="simulateSMSBroadcast()">
+                        <i class="fa-brands fa-whatsapp"></i> Broadcast Alerts
+                    </button>
                 </div>
-            </section>
+                <ul id="ai-list" class="recommendation-list">
+                    <!-- Dynamic list items -->
+                    <li><div class="spinner"></div> Classifying Risk Tiers...</li>
+                </ul>
+            </div>
+        </section>
 
-            <!-- Analytics & Reports Tab -->
-            <section id="tab-analytics" style="display: none;" class="animate-fade-in">
-                <header style="margin-bottom: 2.5rem; display: flex; justify-content: space-between;">
-                    <div>
-                        <h1>Multi-Timeframe Reports</h1>
-                        <p style="color: var(--text-muted);">Financial and clinical analytics.</p>
-                    </div>
-                    <div class="glass" style="padding: 10px; border-radius: 8px;">
-                        <select style="background: transparent; border: none; color: white; outline: none; font-family: inherit;">
-                            <option>Today</option>
-                            <option>This Month</option>
-                            <option>This Year</option>
-                        </select>
-                    </div>
-                </header>
-                <div class="glass" style="padding: 3rem; text-align: center; color: var(--text-muted);">
-                    <i class="fa-solid fa-chart-pie" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary);"></i>
-                    <h2>Analytics Engine Active</h2>
-                    <p>Sales data will appear here once transactions are recorded.</p>
-                </div>
-            </section>
+        <!-- Recent Activity Module -->
+        <section class="glass" style="margin-top: 1.5rem; padding: 1.5rem;">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent System Activity (Audit Feed)</h3>
+            <div class="table-container" style="margin-top: 1rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-audit-body">
+                        <tr><td colspan="3" class="loading-td"><div class="spinner"></div> Fetching logs...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: right; margin-top: 1rem;">
+                <a href="/audit.html" style="color:var(--primary); font-weight:600; text-decoration:none;">View Full Audit Trail <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </main>
 
-            <!-- Staff Management Tab -->
-            <section id="tab-staff" style="display: none;" class="animate-fade-in">
-                <header style="margin-bottom: 2.5rem;">
-                    <h1>Staff Management</h1>
-                    <p style="color: var(--text-muted);">Manage pharmacists and administrative accounts.</p>
-                </header>
-                <div class="glass table-container">
-                    <table>
-                        <thead>
-                            <tr><th>Name</th><th>Role</th><th>Status</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Admin User</td><td>System Admin</td><td><span class="badge badge-success">Active</span></td></tr>
-                            <tr><td>Staff Pharmacist</td><td>Pharmacist</td><td><span class="badge badge-success">Active</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Settings Tab -->
-            <section id="tab-settings" style="display: none;" class="animate-fade-in">
-                <header style="margin-bottom: 2.5rem;">
-                    <h1>System Settings</h1>
-                    <p style="color: var(--text-muted);">Configure MedAI GH platform preferences.</p>
-                </header>
-                <div class="glass" style="padding: 2rem;">
-                    <p style="color: var(--text-muted);">Settings module initialized and secured.</p>
-                </div>
-            </section>
-        </main>
+    <!-- XAI Modal -->
+    <div id="xai-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 550px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-brain" style="color:var(--primary);"></i> Explainable AI Insight</h2>
+                <button style="background:none; border:none; font-size:1.5rem; cursor:pointer;" onclick="document.getElementById('xai-modal').style.display='none'">&times;</button>
+            </div>
+            <div id="xai-body" style="line-height:1.6; font-size:0.95rem; color:var(--text-main);">
+                <!-- Dynamic Content injected by JS -->
+            </div>
+            <button class="btn" style="width:100%; margin-top:20px;" onclick="document.getElementById('xai-modal').style.display='none'">Understand</button>
+        </div>
     </div>
 
-    <script>
-        // Check Auth
-        if (!localStorage.getItem('medai_username') || localStorage.getItem('medai_role') !== 'admin') {
-            window.location.href = '/login.html';
-        }
-
-        document.getElementById('user-name').innerText = localStorage.getItem('medai_username');
-        document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${localStorage.getItem('medai_username')}&background=00897b&color=fff`;
-
-        function logout() {
-            localStorage.clear();
-            window.location.href = '/login.html';
-        }
-
-        function switchTab(tabId) {
-            // Hide all sections
-            document.querySelectorAll('main > section').forEach(sec => sec.style.display = 'none');
-            // Remove active class from navs
-            document.querySelectorAll('.nav-links a').forEach(nav => nav.classList.remove('active'));
+    <!-- SMS Modal -->
+    <div id="sms-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px; text-align: center;">
+            <div class="modal-header" style="justify-content: center; margin-bottom: 1rem;">
+                <h2 style="font-size: 1.3rem;"><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> LIVE WhatsApp Alerts</h2>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom: 15px;">Send real alerts via the WhatsApp API. <br>To get your API Key, send <strong>"I allow callmebot to send me messages"</strong> to <strong>+34 644 49 61 27</strong> on WhatsApp.</p>
+            <input type="text" id="sms-phone" placeholder="Target Phone Number (e.g. +233509156707)" style="width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; font-size: 1rem; text-align: center;">
             
-            // Show target
-            document.getElementById('tab-' + tabId).style.display = 'block';
-            document.getElementById('nav-' + tabId).classList.add('active');
-        }
+            <input type="password" id="sms-apikey" placeholder="Paste your API Key here" style="width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 10px; margin-bottom: 20px; font-size: 1rem; text-align: center;">
 
-        let fullInventoryLoaded = false;
-        async function loadDashboard() {
-            try {
-                const res = await fetch('/api/dashboard');
-                const data = await res.json();
-                
-                document.getElementById('stat-total-value').innerText = `GH₵ ${parseFloat(data.totalStockValue).toLocaleString()}`;
-                document.getElementById('stat-low-stock').innerText = data.lowStockCount;
-                document.getElementById('stat-expiry-risk').innerText = data.expiredOrNearExpiryCount;
-                document.getElementById('stat-revenue').innerText = `GH₵ ${data.todayRevenue || '0.00'}`;
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn btn-secondary" style="width: 50%;" onclick="document.getElementById('sms-modal').style.display='none'">Cancel</button>
+                <button class="btn" style="width: 50%; background-color:#25D366; color:white;" onclick="confirmSMSBroadcast()">Transmit to phone!</button>
+            </div>
+        </div>
+    </div>
 
-                // Load critical items
-                const invRes = await fetch('/api/inventory');
-                const items = await invRes.json();
-                const table = document.getElementById('inventory-table');
-                table.innerHTML = '';
-                
-                // Populate AI Insights dynamically
-                const aiInsightsContainer = document.getElementById('ai-insights');
-                aiInsightsContainer.innerHTML = '';
-                let insightCount = 0;
+    <!-- Toast Notification Container -->
+    <div id="toast-container" style="position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px;"></div>
 
-                items.slice(0, 8).forEach(item => {
-                    const row = document.createElement('tr');
-                    
-                    // Map Expiry Risk
-                    const riskLabel = item.Expiry_Risk_Level || (item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium Risk' : 'Low Risk'));
-                    const riskClass = riskLabel.includes('High') ? 'badge-danger' : (riskLabel.includes('Medium') ? 'badge-warning' : 'badge-success');
-                    
-                    // Map ML Predictions
-                    const daysToExhaust = item.ML_Predicted_Days_To_Exhaust !== undefined ? item.ML_Predicted_Days_To_Exhaust : 'N/A';
-                    
-                    row.innerHTML = `
-                        <td style="font-weight: 500;">${item.Medicine_Name}</td>
-                        <td style="color: var(--text-muted); font-size: 0.85rem;">${item.Batch_ID}</td>
-                        <td>${item.Quantity_In_Stock} <span style="font-size: 0.75rem; color: var(--text-muted);">units</span></td>
-                        <td><span class="badge ${riskClass}">${riskLabel}</span></td>
-                        <td style="color: var(--primary); font-weight: 600;">${daysToExhaust} days</td>
-                    `;
-                    table.appendChild(row);
-
-                    // Add high risk / stockout predictions to AI Insights panel
-                    if ((riskLabel.includes('High') || (daysToExhaust !== 'N/A' && daysToExhaust <= 30)) && insightCount < 3) {
-                        const insightDiv = document.createElement('div');
-                        insightDiv.className = 'glass-heavy';
-                        insightDiv.style = 'padding: 1rem; border-left: 4px solid ' + (riskLabel.includes('High') ? 'var(--danger)' : 'var(--primary)') + ';';
-                        insightDiv.innerHTML = `
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">${item.Medicine_Name} (${item.Batch_ID})</p>
-                            <p style="font-weight: 600; margin-bottom: 5px;">AI Forecast: Stockout in ${daysToExhaust} days</p>
-                            <p style="font-size: 0.85rem; color: var(--secondary); font-weight: 500;"><i class="fa-solid fa-lightbulb"></i> Recommendation: ${item.AI_Recommendation || 'Monitor closely'}</p>
-                        `;
-                        aiInsightsContainer.appendChild(insightDiv);
-                        insightCount++;
-                    }
-                });
-
-                // Fallback if no critical items
-                if (insightCount === 0) {
-                    aiInsightsContainer.innerHTML = `
-                        <div class="glass-heavy" style="padding: 1rem; border-left: 4px solid var(--success);">
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">System Intelligence</p>
-                            <p style="font-weight: 500;">All stock levels stable. No critical stockout or expiry threats forecasted.</p>
-                        </div>
-                    `;
-                }
-
-                // Populate full inventory tab only once to save rendering
-                if (!fullInventoryLoaded) {
-                    const fullTable = document.getElementById('full-inventory-table');
-                    fullTable.innerHTML = '';
-                    items.forEach(item => {
-                        const row = document.createElement('tr');
-                        const riskLabel = item.Expiry_Risk_Level || (item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium Risk' : 'Low Risk'));
-                        const riskClass = riskLabel.includes('High') ? 'badge-danger' : (riskLabel.includes('Medium') ? 'badge-warning' : 'badge-success');
-                        row.innerHTML = `
-                            <td style="font-weight: 500;">${item.Medicine_Name}</td>
-                            <td>${item.Category || 'General'}</td>
-                            <td style="color: var(--text-muted); font-size: 0.85rem;">${item.Batch_ID}</td>
-                            <td>${item.Quantity_In_Stock} units</td>
-                            <td>${item.Reorder_Level} units</td>
-                            <td style="color: var(--primary);">GH₵ ${item.Selling_Price_USD}</td>
-                            <td><span class="badge ${riskClass}">${riskLabel}</span></td>
-                        `;
-                        fullTable.appendChild(row);
-                    });
-                    fullInventoryLoaded = true;
-                }
-
-            } catch (err) {
-                console.error("Failed to load dashboard:", err);
-            }
-        }
-
-        loadDashboard();
-        setInterval(loadDashboard, 30000); // Auto-refresh every 30s
-    </script>
+    <script src="/js/app.js?v=12"></script>
 </body>
 </html>

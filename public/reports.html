@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Automated Reports</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <style>
+        .report-controls {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px;
+            border-radius: 40px;
+            width: fit-content;
+            margin: 0 auto 2rem;
+            border: 1px solid var(--card-border);
+        }
+        .report-btn {
+            padding: 8px 24px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .report-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+        }
+        .report-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .summary-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .summary-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only active"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">System Admin</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Hospital Intelligence & Prediction Reports</h1>
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-secondary" style="width: auto; padding: 10px 20px;" onclick="exportToCSV()"><i class="fa-solid fa-file-csv"></i> Export Sales (CSV)</button>
+                <button class="btn" style="width: auto; padding: 10px 20px;" onclick="printReport()"><i class="fa-solid fa-print"></i> Print Official Report</button>
+            </div>
+        </header>
+        
+        <div class="report-controls">
+            <button class="report-btn active" onclick="switchReport('today', this)">Today</button>
+            <button class="report-btn" onclick="switchReport('month', this)">This Month</button>
+            <button class="report-btn" onclick="switchReport('year', this)">This Year</button>
+        </div>
+
+        <section class="report-summary">
+            <div class="summary-card glass">
+                <h4>Total Revenue</h4>
+                <p id="sum-revenue">GH₵ 0.00</p>
+            </div>
+            <div class="summary-card glass">
+                <h4>Transactions</h4>
+                <p id="sum-txn">0</p>
+            </div>
+            <div class="summary-card glass">
+                <h4>Items Sold</h4>
+                <p id="sum-items">0</p>
+            </div>
+        </section>
+
+        <!-- Inventory Table -->
+        <section class="table-section glass">
+            <h3 id="report-facility-title" style="margin-bottom: 1rem;">Ghana National Hospital - Stock Valuation & Alert Summary</h3>
+            <div class="table-container">
+                <table id="report-table">
+                    <thead>
+                        <tr>
+                            <th>Metric Description</th>
+                            <th>Calculated Overview</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-body">
+                        <tr><td colspan="2" class="loading-td"><div class="spinner"></div> Generating internal reports...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/app.js?v=4"></script>
+</body>
+</html>
