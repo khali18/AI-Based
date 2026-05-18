@@ -1,9 +1,16 @@
 {
-  "rewrites": [
-    { "source": "/api/health",    "destination": "/api/health.py" },
-    { "source": "/api/login",     "destination": "/api/login.py" },
-    { "source": "/api/register",  "destination": "/api/register.py" },
-    { "source": "/api/dashboard", "destination": "/api/dashboard.py" },
-    { "source": "/api/inventory", "destination": "/api/inventory.py" }
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    { "src": "/api/health", "dest": "/api/health.py" },
+    { "src": "/api/login", "dest": "/api/login.py" },
+    { "src": "/api/register", "dest": "/api/register.py" },
+    { "src": "/api/dashboard", "dest": "/api/dashboard.py" },
+    { "src": "/api/inventory", "dest": "/api/inventory.py" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
