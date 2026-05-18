@@ -2,7 +2,7 @@ import json
 import os
 from http.server import BaseHTTPRequestHandler
 
-MONGO_URI = os.environ.get('MONGO_URI', '')
+MONGO_URI = 'mongodb+srv://sheripha2_db_user:Admin123@cluster0.xpjpg6o.mongodb.net/medai_gh?retryWrites=true&w=majority&appName=Cluster0'
 
 def get_db():
     if not MONGO_URI:
