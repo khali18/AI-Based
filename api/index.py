@@ -7,7 +7,6 @@ import sys
 # Add parent directory to sys.path so ml_model can be found on Vercel
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from pymongo import MongoClient
-from ml_model import PharmacyIntelligenceLayer
 import datetime
 
 # Load local environment variables if they exist
@@ -31,6 +30,7 @@ def get_coll(name):
 # AI Layer Helper
 def get_ai():
     if 'ai' not in _cache:
+        from ml_model import PharmacyIntelligenceLayer
         inv = get_coll('inventory')
         ai = PharmacyIntelligenceLayer(inv)
         ai.load_model()
