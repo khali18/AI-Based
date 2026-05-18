@@ -18,11 +18,11 @@
             </div>
             
             <ul class="nav-links">
-                <li><a href="/index.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
-                <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
-                <li><a href="#"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
-                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li><a href="#" onclick="switchTab('dashboard')" id="nav-dashboard" class="active"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="#" onclick="switchTab('inventory')" id="nav-inventory"><i class="fa-solid fa-boxes-stacked"></i> Full Inventory</a></li>
+                <li><a href="#" onclick="switchTab('analytics')" id="nav-analytics"><i class="fa-solid fa-chart-line"></i> Analytics & Reports</a></li>
+                <li><a href="#" onclick="switchTab('staff')" id="nav-staff"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+                <li><a href="#" onclick="switchTab('settings')" id="nav-settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
             </ul>
 
             <div class="user-profile glass" style="padding: 1rem; display: flex; align-items: center; gap: 12px; margin-top: auto;">
@@ -37,15 +37,15 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
-                <div>
-                    <h1 class="animate-fade-in">Hospital Intelligence Overview</h1>
-                    <p style="color: var(--text-muted);">Real-time monitoring and AI-assisted inventory foresight.</p>
-                </div>
-                <button class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add New Medicine</button>
-            </header>
-
-            <!-- Stats Grid -->
+            <!-- Dashboard Tab -->
+            <section id="tab-dashboard" style="display: block;">
+                <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
+                    <div>
+                        <h1 class="animate-fade-in">Hospital Intelligence Overview</h1>
+                        <p style="color: var(--text-muted);">Real-time monitoring and AI-assisted inventory foresight.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="switchTab('inventory')"><i class="fa-solid fa-boxes"></i> View Inventory</button>
+                </header>
             <div class="stats-grid animate-fade-in">
                 <div class="stat-card glass">
                     <div class="stat-icon" style="background: rgba(0, 137, 123, 0.1); color: var(--primary);">
@@ -120,6 +120,86 @@
                     </div>
                 </div>
             </div>
+                </div>
+            </section>
+
+            <!-- Full Inventory Tab -->
+            <section id="tab-inventory" style="display: none;" class="animate-fade-in">
+                <header style="margin-bottom: 2.5rem;">
+                    <h1>Comprehensive Inventory</h1>
+                    <p style="color: var(--text-muted);">Complete catalog of all pharmacy items.</p>
+                </header>
+                <div class="glass table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Category</th>
+                                <th>Batch ID</th>
+                                <th>Stock</th>
+                                <th>Reorder Level</th>
+                                <th>Selling Price</th>
+                                <th>Expiry Risk</th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-inventory-table">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics & Reports Tab -->
+            <section id="tab-analytics" style="display: none;" class="animate-fade-in">
+                <header style="margin-bottom: 2.5rem; display: flex; justify-content: space-between;">
+                    <div>
+                        <h1>Multi-Timeframe Reports</h1>
+                        <p style="color: var(--text-muted);">Financial and clinical analytics.</p>
+                    </div>
+                    <div class="glass" style="padding: 10px; border-radius: 8px;">
+                        <select style="background: transparent; border: none; color: white; outline: none; font-family: inherit;">
+                            <option>Today</option>
+                            <option>This Month</option>
+                            <option>This Year</option>
+                        </select>
+                    </div>
+                </header>
+                <div class="glass" style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                    <i class="fa-solid fa-chart-pie" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary);"></i>
+                    <h2>Analytics Engine Active</h2>
+                    <p>Sales data will appear here once transactions are recorded.</p>
+                </div>
+            </section>
+
+            <!-- Staff Management Tab -->
+            <section id="tab-staff" style="display: none;" class="animate-fade-in">
+                <header style="margin-bottom: 2.5rem;">
+                    <h1>Staff Management</h1>
+                    <p style="color: var(--text-muted);">Manage pharmacists and administrative accounts.</p>
+                </header>
+                <div class="glass table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Admin User</td><td>System Admin</td><td><span class="badge badge-success">Active</span></td></tr>
+                            <tr><td>Staff Pharmacist</td><td>Pharmacist</td><td><span class="badge badge-success">Active</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="tab-settings" style="display: none;" class="animate-fade-in">
+                <header style="margin-bottom: 2.5rem;">
+                    <h1>System Settings</h1>
+                    <p style="color: var(--text-muted);">Configure MedAI GH platform preferences.</p>
+                </header>
+                <div class="glass" style="padding: 2rem;">
+                    <p style="color: var(--text-muted);">Settings module initialized and secured.</p>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -137,6 +217,18 @@
             window.location.href = '/login.html';
         }
 
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('main > section').forEach(sec => sec.style.display = 'none');
+            // Remove active class from navs
+            document.querySelectorAll('.nav-links a').forEach(nav => nav.classList.remove('active'));
+            
+            // Show target
+            document.getElementById('tab-' + tabId).style.display = 'block';
+            document.getElementById('nav-' + tabId).classList.add('active');
+        }
+
+        let fullInventoryLoaded = false;
         async function loadDashboard() {
             try {
                 const res = await fetch('/api/dashboard');
@@ -167,6 +259,28 @@
                     `;
                     table.appendChild(row);
                 });
+
+                // Populate full inventory tab only once to save rendering
+                if (!fullInventoryLoaded) {
+                    const fullTable = document.getElementById('full-inventory-table');
+                    fullTable.innerHTML = '';
+                    items.forEach(item => {
+                        const row = document.createElement('tr');
+                        const riskClass = item.Days_to_Expiry <= 30 ? 'badge-danger' : (item.Days_to_Expiry <= 90 ? 'badge-warning' : 'badge-success');
+                        const riskLabel = item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium' : 'Low Risk');
+                        row.innerHTML = `
+                            <td style="font-weight: 500;">${item.Medicine_Name}</td>
+                            <td>${item.Category || 'General'}</td>
+                            <td style="color: var(--text-muted); font-size: 0.85rem;">${item.Batch_ID}</td>
+                            <td>${item.Quantity_In_Stock} units</td>
+                            <td>${item.Reorder_Level} units</td>
+                            <td style="color: var(--primary);">GH₵ ${item.Selling_Price_USD}</td>
+                            <td><span class="badge ${riskClass}">${riskLabel}</span></td>
+                        `;
+                        fullTable.appendChild(row);
+                    });
+                    fullInventoryLoaded = true;
+                }
 
             } catch (err) {
                 console.error("Failed to load dashboard:", err);
