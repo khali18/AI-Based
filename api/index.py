@@ -14,7 +14,7 @@ CORS(app)
 def serve_index():
     return app.send_static_file('index.html')
 
-MONGO_URI = 'mongodb+srv://sheripha2_db_user:Admin123@cluster0.xpjpg6o.mongodb.net/medai_gh?retryWrites=true&w=majority&appName=Cluster0'
+MONGO_URI = os.getenv('MONGO_URI') or 'mongodb+srv://sheripha2_db_user:Admin123@cluster0.xpjpg6o.mongodb.net/medai_gh?retryWrites=true&w=majority&appName=Cluster0'
 _db_cache = {}
 
 def get_db():
