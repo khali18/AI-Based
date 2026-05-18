@@ -24,6 +24,7 @@ def get_db():
         try:
             client = MongoClient(
                 MONGO_URI,
+                tlsCAFile=certifi.where(),
                 serverSelectionTimeoutMS=8000,
                 connectTimeoutMS=8000,
                 socketTimeoutMS=8000
