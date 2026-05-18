@@ -1,19 +1,21 @@
 import json
 import os
 from http.server import BaseHTTPRequestHandler
-from pymongo import MongoClient
 
 MONGO_URI = os.environ.get('MONGO_URI', '')
 
 def get_db():
     if not MONGO_URI:
-        return None
+        return None, "MONGO_URI environment variable not set in Vercel dashboard"
     try:
+        from pymongo import MongoClient
         client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=8000,
                              connectTimeoutMS=8000, socketTimeoutMS=8000)
-        return client.get_database()
-    except:
-        return None
+        return client.get_database(), None
+    except ImportError:
+        return None, "pymongo not installed"
+    except Exception as e:
+        return None, str(e)
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -29,9 +31,9 @@ class handler(BaseHTTPRequestHandler):
             body = self.rfile.read(length)
             data = json.loads(body) if body else {}
 
-            db = get_db()
+            db, err = get_db()
             if db is None:
-                return self._respond(500, {"success": False, "error": "DB Offline"})
+                return self._respond(500, {"success": False, "error": err or "DB Offline"})
 
             users = db['users']
 
