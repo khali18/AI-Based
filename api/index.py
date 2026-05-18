@@ -7,8 +7,13 @@ import datetime
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../public', static_url_path='')
 CORS(app)
+
+@app.route('/')
+def serve_index():
+    return app.send_static_file('index.html')
+
 
 MONGO_URI = os.environ.get('MONGO_URI')
 _db_cache = {}

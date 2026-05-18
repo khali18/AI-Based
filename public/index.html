@@ -245,20 +245,54 @@
                 const table = document.getElementById('inventory-table');
                 table.innerHTML = '';
                 
+                // Populate AI Insights dynamically
+                const aiInsightsContainer = document.getElementById('ai-insights');
+                aiInsightsContainer.innerHTML = '';
+                let insightCount = 0;
+
                 items.slice(0, 8).forEach(item => {
                     const row = document.createElement('tr');
-                    const riskClass = item.Days_to_Expiry <= 30 ? 'badge-danger' : (item.Days_to_Expiry <= 90 ? 'badge-warning' : 'badge-success');
-                    const riskLabel = item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium' : 'Low Risk');
+                    
+                    // Map Expiry Risk
+                    const riskLabel = item.Expiry_Risk_Level || (item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium Risk' : 'Low Risk'));
+                    const riskClass = riskLabel.includes('High') ? 'badge-danger' : (riskLabel.includes('Medium') ? 'badge-warning' : 'badge-success');
+                    
+                    // Map ML Predictions
+                    const daysToExhaust = item.ML_Predicted_Days_To_Exhaust !== undefined ? item.ML_Predicted_Days_To_Exhaust : 'N/A';
                     
                     row.innerHTML = `
                         <td style="font-weight: 500;">${item.Medicine_Name}</td>
                         <td style="color: var(--text-muted); font-size: 0.85rem;">${item.Batch_ID}</td>
                         <td>${item.Quantity_In_Stock} <span style="font-size: 0.75rem; color: var(--text-muted);">units</span></td>
                         <td><span class="badge ${riskClass}">${riskLabel}</span></td>
-                        <td style="color: var(--primary); font-weight: 600;">${item.Days_to_Exhaust_Stock} days</td>
+                        <td style="color: var(--primary); font-weight: 600;">${daysToExhaust} days</td>
                     `;
                     table.appendChild(row);
+
+                    // Add high risk / stockout predictions to AI Insights panel
+                    if ((riskLabel.includes('High') || (daysToExhaust !== 'N/A' && daysToExhaust <= 30)) && insightCount < 3) {
+                        const insightDiv = document.createElement('div');
+                        insightDiv.className = 'glass-heavy';
+                        insightDiv.style = 'padding: 1rem; border-left: 4px solid ' + (riskLabel.includes('High') ? 'var(--danger)' : 'var(--primary)') + ';';
+                        insightDiv.innerHTML = `
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">${item.Medicine_Name} (${item.Batch_ID})</p>
+                            <p style="font-weight: 600; margin-bottom: 5px;">AI Forecast: Stockout in ${daysToExhaust} days</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary); font-weight: 500;"><i class="fa-solid fa-lightbulb"></i> Recommendation: ${item.AI_Recommendation || 'Monitor closely'}</p>
+                        `;
+                        aiInsightsContainer.appendChild(insightDiv);
+                        insightCount++;
+                    }
                 });
+
+                // Fallback if no critical items
+                if (insightCount === 0) {
+                    aiInsightsContainer.innerHTML = `
+                        <div class="glass-heavy" style="padding: 1rem; border-left: 4px solid var(--success);">
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">System Intelligence</p>
+                            <p style="font-weight: 500;">All stock levels stable. No critical stockout or expiry threats forecasted.</p>
+                        </div>
+                    `;
+                }
 
                 // Populate full inventory tab only once to save rendering
                 if (!fullInventoryLoaded) {
@@ -266,8 +300,8 @@
                     fullTable.innerHTML = '';
                     items.forEach(item => {
                         const row = document.createElement('tr');
-                        const riskClass = item.Days_to_Expiry <= 30 ? 'badge-danger' : (item.Days_to_Expiry <= 90 ? 'badge-warning' : 'badge-success');
-                        const riskLabel = item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium' : 'Low Risk');
+                        const riskLabel = item.Expiry_Risk_Level || (item.Days_to_Expiry <= 30 ? 'High Risk' : (item.Days_to_Expiry <= 90 ? 'Medium Risk' : 'Low Risk'));
+                        const riskClass = riskLabel.includes('High') ? 'badge-danger' : (riskLabel.includes('Medium') ? 'badge-warning' : 'badge-success');
                         row.innerHTML = `
                             <td style="font-weight: 500;">${item.Medicine_Name}</td>
                             <td>${item.Category || 'General'}</td>
