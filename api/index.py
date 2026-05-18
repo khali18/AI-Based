@@ -423,11 +423,13 @@ def manage_users():
             if file and file.filename != '':
                 ext = file.filename.rsplit('.', 1)[-1].lower()
                 if ext in ['png', 'jpg', 'jpeg', 'gif']:
-                    os.makedirs('../public/uploads/profiles', exist_ok=True)
-                    filename = f"{username}_profile.{ext}"
-                    filepath = os.path.join('../public/uploads/profiles', filename)
-                    file.save(filepath)
-                    profile_pic_url = f"/uploads/profiles/{filename}"
+                    try:
+                        import base64
+                        file_data = file.read()
+                        base64_data = base64.b64encode(file_data).decode('utf-8')
+                        profile_pic_url = f"data:image/{ext};base64,{base64_data}"
+                    except Exception as upload_err:
+                        print(f"Base64 Upload Conversion Error: {upload_err}")
 
         if action == 'add':
             if users.find_one({"username": username}):
