@@ -82,7 +82,7 @@ def get_dashboard():
         return jsonify({"success": False, "error": "DB Offline"}), 500
     try:
         # Load settings
-        settings = settings_coll.find_one({}, {"_id": 0}) if settings_coll else None
+        settings = settings_coll.find_one({}, {"_id": 0}) if settings_coll is not None else None
         threshold = settings.get('expiry_threshold', 30) if settings else 30
         exchange_rate = settings.get('exchange_rate', 1.0) if settings else 1.0
 
@@ -108,7 +108,7 @@ def get_dashboard():
         
         # Calculate today's revenue (in GHS) from sales collection
         today_str = datetime.datetime.utcnow().strftime('%Y-%m-%d')
-        today_sales = list(sales.find({"timestamp": {"$regex": f"^{today_str}"}})) if sales else []
+        today_sales = list(sales.find({"timestamp": {"$regex": f"^{today_str}"}})) if sales is not None else []
         today_rev = round(sum(s.get('total_ghs', 0) for s in today_sales), 2)
 
         # Classify all risks
