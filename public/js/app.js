@@ -111,18 +111,30 @@ async function handleLogoutBinding() {
     }
 }
 
-function updateProfileDisplay(role) {
+async function updateProfileDisplay(role) {
     const roleTexts = document.querySelectorAll('.user-role-text');
     const nameTexts = document.querySelectorAll('.user-name-text');
     
     roleTexts.forEach(el => el.textContent = role === 'admin' ? 'System Admin' : 'Pharmacist');
-    nameTexts.forEach(el => el.textContent = localStorage.getItem('medai_username') || 'User');
-    
-    // Update Profile Image
-    const profilePic = localStorage.getItem('medai_profile_pic');
-    const profileImgs = document.querySelectorAll('.user-profile img, .user-profile-img');
     const username = localStorage.getItem('medai_username') || 'User';
+    nameTexts.forEach(el => el.textContent = username);
     
+    // Fetch live profile details from database to avoid stale localStorage!
+    let profilePic = localStorage.getItem('medai_profile_pic');
+    try {
+        const users = await fetchAPI('/users');
+        if (users) {
+            const currentUser = users.find(u => u.username === username);
+            if (currentUser && currentUser.profile_pic) {
+                profilePic = currentUser.profile_pic;
+                localStorage.setItem('medai_profile_pic', profilePic);
+            }
+        }
+    } catch (e) {
+        console.error("Error fetching live profile picture:", e);
+    }
+    
+    const profileImgs = document.querySelectorAll('.user-profile img, .user-profile-img');
     profileImgs.forEach(img => {
         if (profilePic && profilePic !== 'null') {
             img.src = profilePic;
@@ -667,7 +679,7 @@ async function loadUsers() {
             <td><span class="badge ${u.role.toLowerCase() === 'admin' ? 'low' : 'medium'}">${u.role.charAt(0).toUpperCase() + u.role.slice(1)}</span></td>
             <td><span style="color:var(--success); font-size:0.85rem;"><i class="fa-solid fa-circle-check"></i> Active</span></td>
             <td>
-                <button class="btn-small btn-secondary" onclick="openUserModal('${u.username}', '${u.role}')"><i class="fa-solid fa-user-pen"></i> Edit</button>
+                <button class="btn-small btn-secondary" onclick="openUserModal('${u.username}', '${u.role}', '${u.profile_pic || ''}')"><i class="fa-solid fa-user-pen"></i> Edit</button>
                 <button class="btn-small" style="background:var(--danger); color:white;" onclick="removeUser('${u.username}')"><i class="fa-solid fa-user-minus"></i> Remove</button>
             </td>
         </tr>
@@ -677,7 +689,7 @@ async function loadUsers() {
 // Staff Management Logic
 let currentEditUser = null;
 
-function openUserModal(username = null, role = 'pharmacist') {
+function openUserModal(username = null, role = 'pharmacist', profilePic = '') {
     const modal = document.getElementById('user-modal');
     const title = document.getElementById('modal-title');
     const usernameInput = document.getElementById('staff-username');
@@ -708,9 +720,15 @@ function openUserModal(username = null, role = 'pharmacist') {
     
     modal.style.display = 'flex';
 
-    // Reset image preview
+    // Reset or populate image preview
     const preview = document.getElementById('image-preview');
-    if (preview) preview.innerHTML = '<i class="fa-solid fa-user"></i>';
+    if (preview) {
+        if (profilePic && profilePic !== 'null' && profilePic !== '') {
+            preview.innerHTML = `<img src="${profilePic}" style="width:100%; height:100%; object-fit:cover;">`;
+        } else {
+            preview.innerHTML = '<i class="fa-solid fa-user"></i>';
+        }
+    }
     const fileInput = document.getElementById('staff-image');
     if (fileInput) {
         fileInput.value = '';
