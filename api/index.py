@@ -457,8 +457,12 @@ def manage_users():
             return jsonify({"success": True})
             
         elif action == 'delete':
-            if username == 'admin':
-                return jsonify({"success": False, "message": "Cannot delete primary administrator"}), 400
+            # Prevent removing the last admin account
+            target = users.find_one({"username": username})
+            if target and target.get('role') == 'admin':
+                admin_count = users.count_documents({"role": "admin"})
+                if admin_count <= 1:
+                    return jsonify({"success": False, "message": "Cannot remove the last administrator account."}), 400
             users.delete_one({"username": username})
             log_event('admin', 'Staff Removed', f"Deleted user account: {username}.")
             return jsonify({"success": True})

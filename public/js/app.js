@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     handleLogoutBinding();
 
+    // Collapsible sidebar
+    initSidebarToggle();
+
     // Determine which page we are on
     if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
         loadDashboardData();
@@ -79,6 +82,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 30000); // 30 seconds
 });
+
+// ──────────────────────────────────────────────
+// COLLAPSIBLE SIDEBAR
+// ──────────────────────────────────────────────
+function initSidebarToggle() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+
+    // Wrap bare text nodes inside nav links with <span class="nav-label">
+    // so CSS can hide them without affecting the icon
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                const span = document.createElement('span');
+                span.className = 'nav-label';
+                span.textContent = node.textContent;
+                node.replaceWith(span);
+            }
+        });
+    });
+
+    // Create toggle button and inject it into the sidebar
+    const toggleBtn = document.createElement('button');
+    toggleBtn.id = 'sidebar-toggle';
+    toggleBtn.setAttribute('title', 'Toggle sidebar');
+    toggleBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+    sidebar.appendChild(toggleBtn);
+
+    // Apply saved collapsed state
+    const isCollapsed = localStorage.getItem('sidebar_collapsed') === 'true';
+    const mainContent = document.querySelector('.main-content');
+    if (isCollapsed) {
+        sidebar.classList.add('collapsed');
+        if (mainContent) mainContent.classList.add('sidebar-collapsed');
+        toggleBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+    }
+
+    // Toggle on click
+    toggleBtn.addEventListener('click', () => {
+        const collapsed = sidebar.classList.toggle('collapsed');
+        if (mainContent) mainContent.classList.toggle('sidebar-collapsed', collapsed);
+        toggleBtn.innerHTML = collapsed
+            ? '<i class="fa-solid fa-chevron-right"></i>'
+            : '<i class="fa-solid fa-chevron-left"></i>';
+        localStorage.setItem('sidebar_collapsed', collapsed);
+    });
+}
 
 function toggleTheme() {
     document.body.classList.toggle('dark-theme');
@@ -659,6 +709,9 @@ async function loadForecasting(searchQuery = '') {
 
 // ---------------- ADMIN ONLY PAGES ----------------
 
+// Cache for loaded users (avoids embedding large base64 data in onclick attrs)
+let _usersCache = [];
+
 async function loadUsers() {
     const tbody = document.getElementById('users-body');
     if (!tbody) return;
@@ -666,30 +719,41 @@ async function loadUsers() {
     tbody.innerHTML = '<tr><td colspan="4" class="loading-td"><div class="spinner"></div> Updating staff registry...</td></tr>';
     
     const users = await fetchAPI('/users');
-    if (!users) return;
+    if (!users || users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:2rem; color:var(--text-muted);">No staff members found.</td></tr>';
+        return;
+    }
     
-    tbody.innerHTML = users.map(u => `
+    // Store in cache so onclick handlers can look up profile_pic safely
+    _usersCache = users;
+    
+    tbody.innerHTML = users.map(u => {
+        const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(u.username)}&background=random&color=fff`;
+        const imgSrc = (u.profile_pic && u.profile_pic !== 'null') ? u.profile_pic : avatarUrl;
+        const roleBadge = u.role.toLowerCase() === 'admin' ? 'low' : 'medium';
+        const roleLabel = u.role.charAt(0).toUpperCase() + u.role.slice(1);
+        return `
         <tr>
             <td>
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <img src="${u.profile_pic ? u.profile_pic : `https://ui-avatars.com/api/?name=${u.username}&background=random`}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+                    <img src="${imgSrc}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;" onerror="this.src='${avatarUrl}'">
                     <strong>${u.username}</strong>
                 </div>
             </td>
-            <td><span class="badge ${u.role.toLowerCase() === 'admin' ? 'low' : 'medium'}">${u.role.charAt(0).toUpperCase() + u.role.slice(1)}</span></td>
+            <td><span class="badge ${roleBadge}">${roleLabel}</span></td>
             <td><span style="color:var(--success); font-size:0.85rem;"><i class="fa-solid fa-circle-check"></i> Active</span></td>
             <td>
-                <button class="btn-small btn-secondary" onclick="openUserModal('${u.username}', '${u.role}', '${u.profile_pic || ''}')"><i class="fa-solid fa-user-pen"></i> Edit</button>
+                <button class="btn-small btn-secondary" onclick="openUserModal('${u.username}')"><i class="fa-solid fa-user-pen"></i> Edit</button>
                 <button class="btn-small" style="background:var(--danger); color:white;" onclick="removeUser('${u.username}')"><i class="fa-solid fa-user-minus"></i> Remove</button>
             </td>
-        </tr>
-    `).join('');
+        </tr>`;
+    }).join('');
 }
 
 // Staff Management Logic
 let currentEditUser = null;
 
-function openUserModal(username = null, role = 'pharmacist', profilePic = '') {
+function openUserModal(username = null) {
     const modal = document.getElementById('user-modal');
     const title = document.getElementById('modal-title');
     const usernameInput = document.getElementById('staff-username');
@@ -703,12 +767,27 @@ function openUserModal(username = null, role = 'pharmacist', profilePic = '') {
     currentEditUser = username;
     
     if (username) {
+        // Look up user data from cache (avoids passing huge base64 data via onclick)
+        const userData = _usersCache.find(u => u.username === username);
+        const role = userData ? userData.role : 'pharmacist';
+        const profilePic = userData ? userData.profile_pic : '';
+
         title.innerText = 'Edit Staff Member';
         usernameInput.value = username;
         usernameInput.disabled = true;
         roleInput.value = role.toLowerCase();
-        passwordInput.value = ''; // Don't show password for security
+        passwordInput.value = '';
         passwordInput.placeholder = '(Leave blank to keep current)';
+
+        // Populate image preview from cache
+        const preview = document.getElementById('image-preview');
+        if (preview) {
+            if (profilePic && profilePic !== 'null' && profilePic !== '') {
+                preview.innerHTML = `<img src="${profilePic}" style="width:100%; height:100%; object-fit:cover;">`;
+            } else {
+                preview.innerHTML = '<i class="fa-solid fa-user"></i>';
+            }
+        }
     } else {
         title.innerText = 'Add New Staff';
         usernameInput.value = '';
@@ -716,28 +795,23 @@ function openUserModal(username = null, role = 'pharmacist', profilePic = '') {
         roleInput.value = 'pharmacist';
         passwordInput.value = '';
         passwordInput.placeholder = 'Set secure password...';
+
+        const preview = document.getElementById('image-preview');
+        if (preview) preview.innerHTML = '<i class="fa-solid fa-user"></i>';
     }
     
     modal.style.display = 'flex';
 
-    // Reset or populate image preview
-    const preview = document.getElementById('image-preview');
-    if (preview) {
-        if (profilePic && profilePic !== 'null' && profilePic !== '') {
-            preview.innerHTML = `<img src="${profilePic}" style="width:100%; height:100%; object-fit:cover;">`;
-        } else {
-            preview.innerHTML = '<i class="fa-solid fa-user"></i>';
-        }
-    }
     const fileInput = document.getElementById('staff-image');
     if (fileInput) {
         fileInput.value = '';
+        const preview = document.getElementById('image-preview');
         fileInput.onchange = (e) => {
             const [file] = e.target.files;
-            if (file) {
+            if (file && preview) {
                 preview.innerHTML = `<img src="${URL.createObjectURL(file)}" style="width:100%; height:100%; object-fit:cover;">`;
             }
-        }
+        };
     }
 }
 
@@ -746,47 +820,81 @@ function closeUserModal() {
     if (modal) modal.style.display = 'none';
 }
 
+// Helper: compress an image File to a small JPEG blob using Canvas
+function compressImage(file, maxSize = 300, quality = 0.75) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
+                canvas.width  = Math.round(img.width  * scale);
+                canvas.height = Math.round(img.height * scale);
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob) => resolve(blob), 'image/jpeg', quality);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
 async function saveUser() {
-    const username = document.getElementById('staff-username').value;
-    const role = document.getElementById('staff-role').value;
-    const password = document.getElementById('staff-password').value;
-    const errorDiv = document.getElementById('modal-error');
-    
+    const username  = document.getElementById('staff-username').value;
+    const role      = document.getElementById('staff-role').value;
+    const password  = document.getElementById('staff-password').value;
+    const errorDiv  = document.getElementById('modal-error');
+    const saveBtn   = document.getElementById('modal-save-btn');
+
     if (!username || (!currentEditUser && !password)) {
         errorDiv.innerText = 'Please fill all required fields.';
         errorDiv.style.display = 'block';
         return;
     }
-    
-    const action = currentEditUser ? 'edit' : 'add';
-    const fileInput = document.getElementById('staff-image');
-    
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('role', role);
-    formData.append('password', password);
-    formData.append('action', action);
-    if (fileInput.files[0]) {
-        formData.append('profile_pic', fileInput.files[0]);
-    }
 
-    const res = await fetch(`${API_URL}/admin/users`, {
-        method: 'POST',
-        body: formData
-    });
-    
-    const result = await res.json();
-    if (result.success) {
-        closeUserModal();
-        loadUsers();
-    } else {
-        errorDiv.innerText = result.message || 'Error saving user.';
+    // Show loading state
+    errorDiv.style.display = 'none';
+    if (saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...'; }
+
+    try {
+        const action    = currentEditUser ? 'edit' : 'add';
+        const fileInput = document.getElementById('staff-image');
+
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('role', role);
+        formData.append('password', password);
+        formData.append('action', action);
+
+        // Compress image before uploading (prevents large-file server errors)
+        if (fileInput.files[0]) {
+            const compressed = await compressImage(fileInput.files[0], 300, 0.75);
+            formData.append('profile_pic', compressed, 'avatar.jpg');
+        }
+
+        const res    = await fetch(`${API_URL}/admin/users`, { method: 'POST', body: formData });
+        const result = await res.json();
+
+        if (result.success) {
+            closeUserModal();
+            loadUsers();
+        } else {
+            errorDiv.innerText = result.message || 'Error saving user.';
+            errorDiv.style.display = 'block';
+        }
+    } catch (err) {
+        console.error('saveUser error:', err);
+        errorDiv.innerText = 'Network error — please check your connection and try again.';
         errorDiv.style.display = 'block';
+    } finally {
+        if (saveBtn) { saveBtn.disabled = false; saveBtn.innerHTML = 'Confirm &amp; Save'; }
     }
 }
 
 async function removeUser(username) {
-    if (username === 'admin') return alert('Cannot remove primary administrator.');
+    const currentUser = localStorage.getItem('medai_username');
+    if (username === currentUser) return alert('You cannot remove your own account.');
     if (!confirm(`Are you sure you want to remove staff member "${username}"? This action is permanent.`)) return;
     
     const res = await fetch(`${API_URL}/admin/users`, {
