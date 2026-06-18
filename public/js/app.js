@@ -1,5 +1,31 @@
 const API_URL = '/api';
 console.log('app.js v7 loaded');
+
+// Helper to generate dynamic local SVG avatar when offline
+function getLocalAvatarUrl(name, bgColor = '0D8ABC') {
+    const parts = name.trim().split(/\s+/);
+    let initials = '';
+    if (parts.length > 0 && parts[0]) {
+        initials += parts[0][0];
+        if (parts.length > 1 && parts[parts.length - 1]) {
+            initials += parts[parts.length - 1][0];
+        }
+    }
+    initials = initials.toUpperCase() || 'U';
+    
+    // Choose dynamic color if bgColor is 'random'
+    if (bgColor === 'random') {
+        const colors = ['0D8ABC', '10b981', '6366f1', 'f59e0b', 'ef4444', 'ec4899', '8b5cf6'];
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        bgColor = colors[Math.abs(hash) % colors.length];
+    }
+    
+    const hexColor = bgColor.replace('#', '');
+    return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23${hexColor}'/><text x='50%' y='54%' font-family='sans-serif' font-weight='bold' font-size='38' fill='%23ffffff' dominant-baseline='middle' text-anchor='middle'>${initials}</text></svg>`;
+}
 let SYSTEM_SETTINGS = {
     hospital_name: 'Ghana National Hospital',
     nhis_id: 'GHA-NHIS-9921',
@@ -189,7 +215,7 @@ async function updateProfileDisplay(role) {
         if (profilePic && profilePic !== 'null') {
             img.src = profilePic;
         } else {
-            img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff`;
+            img.src = getLocalAvatarUrl(username, '0D8ABC');
         }
     });
     
@@ -728,7 +754,7 @@ async function loadUsers() {
     _usersCache = users;
     
     tbody.innerHTML = users.map(u => {
-        const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(u.username)}&background=random&color=fff`;
+        const avatarUrl = getLocalAvatarUrl(u.username, 'random');
         const imgSrc = (u.profile_pic && u.profile_pic !== 'null') ? u.profile_pic : avatarUrl;
         const roleBadge = u.role.toLowerCase() === 'admin' ? 'low' : 'medium';
         const roleLabel = u.role.charAt(0).toUpperCase() + u.role.slice(1);
@@ -999,7 +1025,7 @@ async function loadAuditLogs() {
         const color = s.username === 'admin' ? '#0D8ABC' : '#10b981';
         
         const sessionPic = userMap[s.username];
-        const avatarUrl = sessionPic ? sessionPic : `https://ui-avatars.com/api/?name=${s.username}&background=${color.replace('#', '')}&color=fff`;
+        const avatarUrl = sessionPic ? sessionPic : getLocalAvatarUrl(s.username, color);
 
         return `
         <div class="session-card">

@@ -5,11 +5,18 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 import datetime
 import certifi
+from ml_model import PharmacyIntelligenceLayer
 
 load_dotenv()
 
 app = Flask(__name__, static_folder='../public', static_url_path='')
 CORS(app)
+
+# Initialize ML Intelligence Layer
+intelligence = PharmacyIntelligenceLayer()
+model_loaded = intelligence.load_model()
+if not model_loaded:
+    print("Warning: ML Model failed to load. Will use simple heuristics fallback.")
 
 @app.route('/')
 def serve_index():
@@ -316,7 +323,9 @@ def get_inv():
             qty = int(data.get('qty', 0))
             reorder = int(data.get('reorder', 10))
             sales_30 = int(data.get('sales_last_30', 0))
-            rate = sales_30 / 30.0 if sales_30 > 0 else 0.1
+            cost = float(data.get('cost', 0.0))
+            category = data.get('category', 'General')
+            rate = intelligence.predict_single(category, cost, sales_30) if model_loaded else (sales_30 / 30.0 if sales_30 > 0 else 0.1)
             days_to_exhaust = int(qty / rate) if rate > 0 else 999
 
             new_item = {
@@ -356,7 +365,9 @@ def update_delete_inv(batch_id):
             qty = int(data.get('qty', 0))
             reorder = int(data.get('reorder', 10))
             sales_30 = int(data.get('sales_last_30', 0))
-            rate = sales_30 / 30.0 if sales_30 > 0 else 0.1
+            cost = float(data.get('cost', 0.0))
+            category = data.get('category', 'General')
+            rate = intelligence.predict_single(category, cost, sales_30) if model_loaded else (sales_30 / 30.0 if sales_30 > 0 else 0.1)
             days_to_exhaust = int(qty / rate) if rate > 0 else 999
 
             update_data = {

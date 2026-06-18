@@ -4,6 +4,35 @@ const Datastore = require('nedb-promises');
 const fs = require('fs');
 const csv = require('csv-parser');
 const path = require('path');
+const { execFile } = require('child_process');
+
+function getMLPrediction(category, unitCost, salesLast30) {
+    return new Promise((resolve) => {
+        const scriptPath = path.join(__dirname, 'predict.py');
+        execFile('python', [scriptPath, category, unitCost, salesLast30], (error, stdout, stderr) => {
+            if (error) {
+                console.error("ML Prediction Error: fallback to simple rate", error);
+                const fallbackRate = salesLast30 > 0 ? (salesLast30 / 30.0) : 0.1;
+                resolve(fallbackRate);
+                return;
+            }
+            try {
+                const result = JSON.parse(stdout.trim());
+                if (result.error) {
+                    console.error("ML Prediction Script Error:", result.error);
+                    const fallbackRate = salesLast30 > 0 ? (salesLast30 / 30.0) : 0.1;
+                    resolve(fallbackRate);
+                } else {
+                    resolve(result.predicted_rate);
+                }
+            } catch (e) {
+                console.error("ML Parsing Error: fallback to simple rate", e);
+                const fallbackRate = salesLast30 > 0 ? (salesLast30 / 30.0) : 0.1;
+                resolve(fallbackRate);
+            }
+        });
+    });
+}
 
 const app = express();
 app.use(cors());
@@ -161,7 +190,6 @@ app.get('/api/recommendations', async (req, res) => {
 // Get full inventory (with optional search)
 app.get('/api/inventory', async (req, res) => {
     try {
-        const query = req.query.search ? this.buildSearchQuery(req.query.search) : {};
         if (req.query.search) {
             const regex = new RegExp(req.query.search, 'i');
             const items = await db.find({ 
@@ -364,8 +392,8 @@ app.get('/api/my/sales', async (req, res) => {
     }
 });
 
-console.log('DEBUG: Registering /api/system-audit route');
-app.get('/api/system-audit', async (req, res) => {
+console.log('DEBUG: Registering /api/system-audit and /api/admin/audit routes');
+app.get(['/api/system-audit', '/api/admin/audit'], async (req, res) => {
     try {
         const logs = await auditDb.find({}).sort({ timestamp: -1 });
         res.json(logs);
@@ -458,6 +486,112 @@ app.post('/api/admin/db/import', async (req, res) => {
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
+    }
+});
+
+// POST: Add Product to Inventory
+app.post('/api/inventory', async (req, res) => {
+    try {
+        const data = req.body;
+        
+        let batch_id = `BATCH-${Math.floor(1000 + Math.random() * 9000)}`;
+        while (await db.findOne({ Batch_ID: batch_id })) {
+            batch_id = `BATCH-${Math.floor(1000 + Math.random() * 9000)}`;
+        }
+        
+        const days_to_expiry = parseInt(data.days_to_expiry, 10) || 365;
+        const qty = parseInt(data.qty, 10) || 0;
+        const reorder = parseInt(data.reorder, 10) || 10;
+        const sales_30 = parseInt(data.sales_last_30, 10) || 0;
+        
+        // Live ML Prediction call
+        const rate = await getMLPrediction(data.category || 'General', parseFloat(data.cost || 0.0), sales_30);
+        const days_to_exhaust = rate > 0 ? Math.floor(qty / rate) : 'Unlimited';
+        const riskLevel = await classifyExpiryRisk(days_to_expiry);
+
+        const new_item = {
+            Batch_ID: batch_id,
+            Medicine_Name: data.name,
+            Category: data.category || 'General',
+            Manufacturer: data.manufacturer,
+            Manufacturing_Date: data.manufacturing_date,
+            Quantity_In_Stock: qty,
+            Reorder_Level: reorder,
+            Unit_Cost_USD: parseFloat(data.cost || 0.0),
+            Selling_Price_USD: parseFloat(data.price || 0.0),
+            Days_to_Expiry: days_to_expiry,
+            Expiry_Date: data.expiry_date,
+            Sales_Last_30_Days: sales_30,
+            Daily_Consumption_Rate: rate,
+            ML_Predicted_Consumption: rate,
+            ML_Predicted_Days_To_Exhaust: days_to_exhaust,
+            Expiry_Risk_Level: riskLevel,
+            AI_Recommendation: qty <= reorder ? "Reorder stock soon" : "No immediate action required"
+        };
+
+        await db.insert(new_item);
+        await logEvent('admin', 'Product Added', `Added product ${new_item.Medicine_Name} (${batch_id}) to inventory.`);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+// PUT: Update Product in Inventory
+app.put('/api/inventory/:batch_id', async (req, res) => {
+    try {
+        const batch_id = req.params.batch_id;
+        const data = req.body;
+        
+        const days_to_expiry = parseInt(data.days_to_expiry, 10) || 365;
+        const qty = parseInt(data.qty, 10) || 0;
+        const reorder = parseInt(data.reorder, 10) || 10;
+        const sales_30 = parseInt(data.sales_last_30, 10) || 0;
+        
+        // Live ML Prediction call
+        const rate = await getMLPrediction(data.category || 'General', parseFloat(data.cost || 0.0), sales_30);
+        const days_to_exhaust = rate > 0 ? Math.floor(qty / rate) : 'Unlimited';
+        const riskLevel = await classifyExpiryRisk(days_to_expiry);
+
+        const update_data = {
+            Medicine_Name: data.name,
+            Category: data.category,
+            Manufacturer: data.manufacturer,
+            Manufacturing_Date: data.manufacturing_date,
+            Quantity_In_Stock: qty,
+            Reorder_Level: reorder,
+            Unit_Cost_USD: parseFloat(data.cost || 0.0),
+            Selling_Price_USD: parseFloat(data.price || 0.0),
+            Days_to_Expiry: days_to_expiry,
+            Expiry_Date: data.expiry_date,
+            Sales_Last_30_Days: sales_30,
+            Daily_Consumption_Rate: rate,
+            ML_Predicted_Consumption: rate,
+            ML_Predicted_Days_To_Exhaust: days_to_exhaust,
+            Expiry_Risk_Level: riskLevel,
+            AI_Recommendation: qty <= reorder ? "Reorder stock soon" : "No immediate action required"
+        };
+
+        await db.update({ Batch_ID: batch_id }, { $set: update_data });
+        await logEvent('admin', 'Product Updated', `Updated product ${update_data.Medicine_Name} (${batch_id}) details.`);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+// DELETE: Remove Product from Inventory
+app.delete('/api/inventory/:batch_id', async (req, res) => {
+    try {
+        const batch_id = req.params.batch_id;
+        const item = await db.findOne({ Batch_ID: batch_id });
+        const med_name = item ? item.Medicine_Name : 'Unknown';
+        
+        await db.remove({ Batch_ID: batch_id });
+        await logEvent('admin', 'Product Deleted', `Deleted product ${med_name} (${batch_id}) from inventory.`);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
     }
 });
 
