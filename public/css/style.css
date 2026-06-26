@@ -168,6 +168,12 @@ body {
 .nav-links {
     list-style: none;
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none; /* Firefox */
+}
+.nav-links::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .nav-links li {

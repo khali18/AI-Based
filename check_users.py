@@ -1,14 +1,18 @@
-import os
-from pymongo import MongoClient
-from dotenv import load_dotenv
+import sqlite3
 
-load_dotenv()
-MONGO_URI = os.getenv('MONGO_URI') or "mongodb+srv://sheripha2_db_user:Admin123@cluster0.xpjpg6o.mongodb.net/medai_gh?retryWrites=true&w=majority&appName=Cluster0"
+def check_users():
+    print("Users in SQLite database:")
+    try:
+        conn = sqlite3.connect('medai.db')
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users")
+        users = cursor.fetchall()
+        for user in users:
+            print(f"Username: {user['username']}, Role: {user['role']}")
+        conn.close()
+    except Exception as e:
+        print("Error reading database:", e)
 
-client = MongoClient(MONGO_URI)
-db = client.get_database("medai_gh")
-users_col = db["users"]
-
-print("Users in database:")
-for user in users_col.find():
-    print(f"ID: {user.get('_id')}, Username: {user.get('username')}, Role: {user.get('role')}, Status: {user.get('status')}")
+if __name__ == '__main__':
+    check_users()

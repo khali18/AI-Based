@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Refunds</title>
+    <!-- Google Fonts -->
+    <!-- Offline Mode: Google Fonts Disabled -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/vendor/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <style>
+        .refund-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .status-Pending { background: #f39c12; color: #fff; }
+        .status-Approved { background: #27ae60; color: #fff; }
+        .status-Rejected { background: #e74c3c; color: #fff; }
+        .refund-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .refund-table th, .refund-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+        </div>
+        <ul class="nav-links">
+            <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li class="pharm-only"><a href="/pharmacist.html"><i class="fa-solid fa-heart-pulse"></i> Tasks & Alerts</a></li>
+            <li class="pharm-only"><a href="/pos.html"><i class="fa-solid fa-cash-register"></i> Point of Sale</a></li>
+            <li><a href="/inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+            <li class="admin-only"><a href="/forecasting.html"><i class="fa-solid fa-arrow-trend-up"></i> Forecasting</a></li>
+            <li class="admin-only"><a href="/reports.html"><i class="fa-solid fa-file-invoice"></i> Reports</a></li>
+            <li class="admin-only"><a href="/users.html"><i class="fa-solid fa-users-gear"></i> Staff Management</a></li>
+            <li class="admin-only"><a href="/audit.html"><i class="fa-solid fa-shield-halved"></i> System Audit</a></li>
+            <li class="active"><a href="/refunds.html"><i class="fa-solid fa-money-bill-transfer"></i> Refunds</a></li>
+            <li class="admin-only"><a href="/settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+             <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D8ABC'/><text x='50%' y='54%' font-family='sans-serif' font-weight='bold' font-size='38' fill='%23ffffff' dominant-baseline='middle' text-anchor='middle'>U</text></svg>" alt="User">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">Loading...</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <h1>Refund Management</h1>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <button class="btn btn-primary pharm-only" onclick="openRefundModal()"><i class="fa-solid fa-plus"></i> Request Refund</button>
+                <button class="btn btn-secondary" onclick="loadRefunds()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Theme</button>
+            </div>
+        </header>
+
+        <div class="refund-card">
+            <table class="refund-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="admin-only">Pharmacist</th>
+                        <th>Medicine / Transaction</th>
+                        <th>Amount (GH₵)</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th class="admin-only">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="refunds-body">
+                    <tr><td colspan="6" style="text-align:center;">Loading refunds...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Request Refund Modal -->
+    <div id="refundModal" class="modal" style="display:none;">
+        <div class="modal-content glass" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Request Refund</h2>
+                <span class="close" onclick="closeRefundModal()">&times;</span>
+            </div>
+            <form id="refundForm" onsubmit="submitRefund(event)">
+                <div class="form-group">
+                    <label>Transaction / Medicine</label>
+                    <select id="refund-medicine" required>
+                        <option value="">Loading recent transactions...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount (GH₵)</label>
+                    <input type="number" id="refund-amount" step="0.01" min="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Reason</label>
+                    <textarea id="refund-reason" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait for app.js to initialize user state
+            setTimeout(loadRefunds, 500);
+        });
+
+        async function openRefundModal() {
+            document.getElementById('refundModal').style.display = 'flex';
+            const pharmacist = localStorage.getItem('medai_username') || localStorage.getItem('username');
+            const select = document.getElementById('refund-medicine');
+            try {
+                const res = await fetch(`/api/my/sales?pharmacist=${encodeURIComponent(pharmacist)}`);
+                const sales = await res.json();
+                select.innerHTML = '<option value="">-- Select Transaction --</option>';
+                if (sales && sales.length > 0) {
+                    sales.forEach(s => {
+                        const date = new Date(s.timestamp).toLocaleDateString();
+                        select.innerHTML += `<option value="${s.details}" data-amount="${s.total_ghs}">[${date}] ${s.details} - GH₵ ${s.total_ghs}</option>`;
+                    });
+                    select.innerHTML += '<option value="Other">Other / Not Listed</option>';
+                } else {
+                    select.innerHTML += '<option value="Other">Other / Not Listed</option>';
+                }
+            } catch (err) {
+                select.innerHTML = '<option value="Other">Other / Network Error</option>';
+            }
+            
+            // Auto-fill amount if selected
+            select.onchange = (e) => {
+                const selectedOption = e.target.options[e.target.selectedIndex];
+                if (selectedOption && selectedOption.dataset.amount) {
+                    document.getElementById('refund-amount').value = selectedOption.dataset.amount;
+                }
+            };
+        }
+
+        function closeRefundModal() {
+            document.getElementById('refundModal').style.display = 'none';
+        }
+
+        async function submitRefund(e) {
+            e.preventDefault();
+            const medicine = document.getElementById('refund-medicine').value;
+            const amount = document.getElementById('refund-amount').value;
+            const reason = document.getElementById('refund-reason').value;
+            const pharmacist = localStorage.getItem('medai_username') || localStorage.getItem('username');
+
+            try {
+                const res = await fetch('/api/refunds', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pharmacist_username: pharmacist, amount: amount, reason: reason, medicine_name: medicine })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Refund request submitted successfully!');
+                    closeRefundModal();
+                    document.getElementById('refundForm').reset();
+                    loadRefunds();
+                } else {
+                    alert('Error submitting refund: ' + data.error);
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        }
+
+        async function loadRefunds() {
+            const role = localStorage.getItem('medai_role') || localStorage.getItem('role');
+            const username = localStorage.getItem('medai_username') || localStorage.getItem('username');
+            let url = '/api/refunds';
+            
+            // If pharmacist, only fetch their own refunds
+            if (role === 'pharmacist') {
+                url += `?pharmacist=${username}`;
+            }
+
+            try {
+                const res = await fetch(url);
+                const refunds = await res.json();
+                const tbody = document.getElementById('refunds-body');
+                tbody.innerHTML = '';
+
+                if (refunds.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No refunds found.</td></tr>`;
+                    return;
+                }
+
+                refunds.forEach(r => {
+                    const date = new Date(r.timestamp).toLocaleString();
+                    const actionHtml = (role === 'admin' && r.status === 'Pending') ? 
+                        `<button class="btn" style="background:#27ae60; color:white; padding:4px 8px; font-size:12px;" onclick="updateRefund(${r.id}, 'Approved')"><i class="fa-solid fa-check"></i></button>
+                         <button class="btn" style="background:#e74c3c; color:white; padding:4px 8px; font-size:12px;" onclick="updateRefund(${r.id}, 'Rejected')"><i class="fa-solid fa-xmark"></i></button>` : 
+                        '';
+                    
+                    const adminColDisplay = role === 'admin' ? '' : 'display:none;';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${date}</td>
+                            <td class="admin-only" style="${adminColDisplay}">${r.pharmacist_username}</td>
+                            <td>${r.medicine_name || 'N/A'}</td>
+                            <td><strong>${r.amount.toFixed(2)}</strong></td>
+                            <td>${r.reason}</td>
+                            <td><span class="status-badge status-${r.status}">${r.status}</span></td>
+                            <td class="admin-only" style="${adminColDisplay}">${actionHtml}</td>
+                        </tr>
+                    `;
+                });
+                
+                // Ensure auth visibility rules apply dynamically
+                applyAuthRules();
+            } catch (err) {
+                console.error("Error loading refunds:", err);
+            }
+        }
+
+        async function updateRefund(id, status) {
+            if (!confirm(`Are you sure you want to mark this refund as ${status}?`)) return;
+            
+            try {
+                const admin_username = localStorage.getItem('medai_username') || localStorage.getItem('username');
+                const res = await fetch(`/api/refunds/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: status, admin_username: admin_username })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    loadRefunds();
+                } else {
+                    alert('Error updating refund: ' + data.error);
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        }
+    </script>
+</body>
+</html>

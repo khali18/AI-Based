@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // RBAC: Pharmacist Route Guards
     const path = window.location.pathname;
     if (userRole === 'pharmacist' && !isLogin) {
-        const allowedPharmacistPages = ['/pharmacist.html', '/pos.html', '/inventory.html'];
+        const allowedPharmacistPages = ['/pharmacist.html', '/pos.html', '/inventory.html', '/refunds.html'];
         if (!allowedPharmacistPages.includes(path) && path !== '/') { // if they try to access reports/index/settings/audit/users
             window.location.href = '/pharmacist.html';
             return;
@@ -194,6 +194,19 @@ async function updateProfileDisplay(role) {
     roleTexts.forEach(el => el.textContent = role === 'admin' ? 'System Admin' : 'Pharmacist');
     const username = localStorage.getItem('medai_username') || 'User';
     nameTexts.forEach(el => el.textContent = username);
+
+    // NAVIGATION VISIBILITY Logic (Executed Synchronously)
+    const adminOnlyEls = document.querySelectorAll('.admin-only');
+    const pharmOnlyEls = document.querySelectorAll('.pharm-only');
+    
+    if (role === 'pharmacist') {
+        adminOnlyEls.forEach(el => el.style.display = 'none');
+        pharmOnlyEls.forEach(el => el.style.display = 'block');
+    } else {
+        // Admin oversees management, but operational tasks are for pharmacists
+        adminOnlyEls.forEach(el => el.style.display = 'block');
+        pharmOnlyEls.forEach(el => el.style.display = 'none');
+    }
     
     // Fetch live profile details from database to avoid stale localStorage!
     let profilePic = localStorage.getItem('medai_profile_pic');
@@ -218,19 +231,6 @@ async function updateProfileDisplay(role) {
             img.src = getLocalAvatarUrl(username, '0D8ABC');
         }
     });
-    
-    // NAVIGATION VISIBILITY Logic
-    const adminOnlyEls = document.querySelectorAll('.admin-only');
-    const pharmOnlyEls = document.querySelectorAll('.pharm-only');
-    
-    if (role === 'pharmacist') {
-        adminOnlyEls.forEach(el => el.style.display = 'none');
-        pharmOnlyEls.forEach(el => el.style.display = 'block');
-    } else {
-        // Admin oversees management, but operational tasks are for pharmacists
-        adminOnlyEls.forEach(el => el.style.display = 'block');
-        pharmOnlyEls.forEach(el => el.style.display = 'none');
-    }
 }
 
 async function loadGlobalSettings() {
@@ -1701,9 +1701,10 @@ async function confirmSMSBroadcast() {
 
     try {
         if (apikey) {
-            const fetchUrl = `https://api.callmebot.com/whatsapp.php?phone=+${phoneInput}&text=${textMsg}&apikey=${apikey}`;
-            await fetch(fetchUrl, { mode: 'no-cors' }); 
-            showToast(`API invoked! The real WhatsApp message should arrive in a few seconds.`, "success");
+            // Offline Mode Enforced: The following external API call is disabled.
+            // const fetchUrl = `https://api.callmebot.com/whatsapp.php?phone=+${phoneInput}&text=${textMsg}&apikey=${apikey}`;
+            // await fetch(fetchUrl, { mode: 'no-cors' }); 
+            showToast(`Offline Mode: WhatsApp integration is disabled. Alert simulated.`, "success");
         } else {
             // Presentation Simulation Mode
             showToast(`Alerts transmitted to WhatsApp Gateway for delivery to +${phoneInput}.`, "success");
