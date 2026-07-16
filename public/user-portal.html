@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedAI - Patient Portal & Verification</title>
+    <!-- PWA Meta Elements -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0ea5e9">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/icon-192.svg">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/vendor/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css?v=3">
@@ -1273,6 +1279,15 @@
             }
             loadHistoryList();
         });
+
+        // Service Worker registration for PWA mobile installation support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker registered.'))
+                    .catch(err => console.log('Service worker registration failed: ', err));
+            });
+        }
     </script>
 </body>
 </html>

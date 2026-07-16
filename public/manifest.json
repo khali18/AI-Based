@@ -1,0 +1,24 @@
+{
+  "name": "MedAI GH - Hospital Pharmacy",
+  "short_name": "MedAI GH",
+  "description": "AI-Based Medicine Stock & Expiry Prediction System",
+  "start_url": "/user-portal.html",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
