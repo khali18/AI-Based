@@ -49,7 +49,7 @@
         <div class="logo">
             <i class="fa-solid fa-notes-medical"></i>
             <h2>MedAI GH</h2>
-            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Offline Mode</div>
         </div>
         <ul class="nav-links">
             <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
@@ -76,10 +76,11 @@
     <main class="main-content">
         <header>
             <h1>Point of Sale (Dispensing)</h1>
-            <div style="display:flex; gap: 1rem;">
-                <div class="search-bar" style="border: 2px solid var(--primary);">
+            <div style="display:flex; gap: 1rem; align-items: center;">
+                <div class="search-bar" style="border: 2px solid var(--primary); display: flex; align-items: center; justify-content: space-between; gap: 5px;">
                     <i class="fa-solid fa-barcode"></i>
-                    <input type="text" id="barcode-scan" placeholder="Quick Scan (Barcode ID)..." autofocus>
+                    <input type="text" id="barcode-scan" placeholder="Quick Scan (Barcode ID)..." autofocus style="flex: 1; border: none; background: transparent; outline: none; color: var(--text-main); font-family: 'Outfit';">
+                    <button type="button" id="pos-scanner-btn" onclick="togglePosCameraScanner()" title="Scan QR / Barcode with Camera" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:0 10px; font-size:1.2rem; outline:none; transition:color 0.3s;"><i class="fa-solid fa-camera"></i></button>
                 </div>
                 <div class="search-bar">
                     <i class="fa-solid fa-search"></i>
@@ -87,6 +88,16 @@
                 </div>
             </div>
         </header>
+
+        <!-- POS Barcode Camera Scanner Panel -->
+        <div id="pos-scanner-panel" class="glass" style="display: none; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; border: 1px solid rgba(14, 165, 233, 0.25); border-radius:12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h4 style="margin: 0; font-family: 'Outfit'; font-weight: 700; color:var(--text-main);"><i class="fa-solid fa-camera"></i> Live Pharmacist POS Camera Scanner</h4>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="closePosCameraScanner()" style="color: var(--danger); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2);">Close Camera</button>
+            </div>
+            <div id="pos-reader" style="width: 100%; max-width: 450px; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #000; border:1px solid var(--card-border);"></div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;"><i class="fa-solid fa-info-circle"></i> Place the barcode or QR code of the medication in front of the camera to dispense it.</p>
+        </div>
 
         <section class="pos-grid">
             <!-- Product List -->
@@ -145,9 +156,10 @@
         </div>
     </div>
 
+    <script src="/js/html5-qrcode.min.js"></script>
     <script src="/js/app.js?v=10"></script>
     <script>
-        // Scanner logic
+        // Hardware Scanner input logic
         const scanner = document.getElementById('barcode-scan');
         scanner.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
@@ -156,6 +168,98 @@
                 e.target.value = ''; // clear
             }
         });
+
+        // POS Camera Scanner Logic
+        let posHtml5QrScanner = null;
+
+        function togglePosCameraScanner() {
+            const panel = document.getElementById('pos-scanner-panel');
+            if (!panel) return;
+            
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                startPosCameraScanner();
+            } else {
+                closePosCameraScanner();
+            }
+        }
+
+        function startPosCameraScanner() {
+            if (!posHtml5QrScanner) {
+                posHtml5QrScanner = new Html5Qrcode("pos-reader");
+            }
+            
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                // Throttle scans to avoid double-adding in quick succession
+                throttleScan(decodedText);
+            };
+            
+            const config = { fps: 15, qrbox: { width: 250, height: 250 } };
+            
+            posHtml5QrScanner.start(
+                { facingMode: "environment" }, 
+                config, 
+                qrCodeSuccessCallback
+            )
+            .then(() => {
+                document.getElementById('pos-scanner-btn').style.color = 'var(--success)';
+            })
+            .catch(err => {
+                console.error("Camera access error: ", err);
+                alert("Unable to access camera. Please check permissions.");
+                closePosCameraScanner();
+            });
+        }
+
+        let lastScannedCode = '';
+        let lastScannedTime = 0;
+        
+        function throttleScan(code) {
+            const now = Date.now();
+            // Suppress duplicate scans of the same item within 2.5 seconds
+            if (code === lastScannedCode && (now - lastScannedTime) < 2500) {
+                return;
+            }
+            lastScannedCode = code;
+            lastScannedTime = now;
+            
+            // Play a standard checkout success beep sound offline
+            playBeepSound();
+            
+            // Dispatch to the dispensing handler
+            handleBarcodeScan(code);
+        }
+
+        function playBeepSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(950, ctx.currentTime); // Professional 950Hz beep frequency
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.12);
+            } catch(e) {
+                console.warn("Offline beep play failed: ", e);
+            }
+        }
+
+        function closePosCameraScanner() {
+            const panel = document.getElementById('pos-scanner-panel');
+            if (panel) panel.style.display = 'none';
+            
+            const btn = document.getElementById('pos-scanner-btn');
+            if (btn) btn.style.color = 'var(--text-muted)';
+            
+            if (posHtml5QrScanner && posHtml5QrScanner.isScanning) {
+                posHtml5QrScanner.stop()
+                    .catch(err => console.error("Error stopping POS scanner: ", err));
+            }
+        }
     </script>
 </body>
 </html>

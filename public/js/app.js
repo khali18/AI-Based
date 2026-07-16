@@ -41,7 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (isLogin && userRole) {
         // Redirection Guard: If already logged in, skip the login page
-        window.location.href = userRole === 'pharmacist' ? '/pharmacist.html' : '/index.html';
+        if (userRole === 'pharmacist') {
+            window.location.href = '/pharmacist.html';
+        } else if (userRole === 'user') {
+            window.location.href = '/user-portal.html';
+        } else {
+            window.location.href = '/index.html';
+        }
         return;
     }
     
@@ -50,12 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    // RBAC: Pharmacist Route Guards
+    // RBAC: Pharmacist and User Route Guards
     const path = window.location.pathname;
     if (userRole === 'pharmacist' && !isLogin) {
         const allowedPharmacistPages = ['/pharmacist.html', '/pos.html', '/inventory.html', '/refunds.html'];
         if (!allowedPharmacistPages.includes(path) && path !== '/') { // if they try to access reports/index/settings/audit/users
             window.location.href = '/pharmacist.html';
+            return;
+        }
+    } else if (userRole === 'user' && !isLogin) {
+        const allowedUserPages = ['/user-portal.html'];
+        if (!allowedUserPages.includes(path)) {
+            window.location.href = '/user-portal.html';
             return;
         }
     }
@@ -191,7 +203,11 @@ async function updateProfileDisplay(role) {
     const roleTexts = document.querySelectorAll('.user-role-text');
     const nameTexts = document.querySelectorAll('.user-name-text');
     
-    roleTexts.forEach(el => el.textContent = role === 'admin' ? 'System Admin' : 'Pharmacist');
+    roleTexts.forEach(el => {
+        if (role === 'admin') el.textContent = 'System Admin';
+        else if (role === 'pharmacist') el.textContent = 'Pharmacist';
+        else if (role === 'user') el.textContent = 'Patient Portal';
+    });
     const username = localStorage.getItem('medai_username') || 'User';
     nameTexts.forEach(el => el.textContent = username);
 
@@ -202,6 +218,9 @@ async function updateProfileDisplay(role) {
     if (role === 'pharmacist') {
         adminOnlyEls.forEach(el => el.style.display = 'none');
         pharmOnlyEls.forEach(el => el.style.display = 'block');
+    } else if (role === 'user') {
+        adminOnlyEls.forEach(el => el.style.display = 'none');
+        pharmOnlyEls.forEach(el => el.style.display = 'none');
     } else {
         // Admin oversees management, but operational tasks are for pharmacists
         adminOnlyEls.forEach(el => el.style.display = 'block');
@@ -662,9 +681,12 @@ async function loadInventory(searchQuery = '') {
             </td>
             <td>
                 ${(() => {
-                    let d = new Date();
-                    d.setDate(d.getDate() + item.Days_to_Expiry);
-                    return d.toLocaleDateString();
+                    const parts = item.Expiry_Date ? item.Expiry_Date.split('-') : [];
+                    if (parts.length === 3) {
+                        const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+                        return d.toLocaleDateString();
+                    }
+                    return item.Expiry_Date ? new Date(item.Expiry_Date).toLocaleDateString() : 'N/A';
                 })()}
                 <br>
                 <small style="color:${item.Days_to_Expiry <= 30 ? 'var(--danger)' : 'var(--text-muted)'}">
@@ -1021,8 +1043,16 @@ async function loadAuditLogs() {
 
     // Render Sessions in Reverse Chronological Order
     container.innerHTML = sessions.reverse().map((s, idx) => {
-        const icon = s.username === 'admin' ? 'fa-user-tie' : 'fa-user-nurse';
-        const color = s.username === 'admin' ? '#0D8ABC' : '#10b981';
+        let icon = 'fa-user-nurse';
+        let color = '#10b981';
+        const userRole = s.role ? s.role.toLowerCase() : '';
+        if (userRole === 'admin' || s.username === 'admin') {
+            icon = 'fa-user-tie';
+            color = '#0D8ABC';
+        } else if (userRole === 'user' || s.username.startsWith('patient')) {
+            icon = 'fa-hospital-user';
+            color = '#6366f1';
+        }
         
         const sessionPic = userMap[s.username];
         const avatarUrl = sessionPic ? sessionPic : getLocalAvatarUrl(s.username, color);
@@ -1057,7 +1087,8 @@ async function loadAuditLogs() {
                         <tr>
                             <th>Time</th>
                             <th>Action</th>
-                            <th>Quantity</th>
+                            <th>Customer</th>
+                            <th>Qty</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -1065,17 +1096,20 @@ async function loadAuditLogs() {
                         ${s.actions.map(a => {
                             const isDispense = a.event === 'Dispensed Medicine' || a.event === 'Pharmacy Sale';
                             const cartItems = a.metadata?.cart || [];
+                            const customerName = a.metadata?.customer_name ||
+                                (a.details?.match(/Customer: ([^.]+)/)?.[1]) || 'Walk-in';
                             
                             // If it's a sale with items, list them
                             if (isDispense && cartItems.length > 0) {
-                                return cartItems.map(item => `
+                                return `
                                     <tr>
                                         <td><small>${new Date(a.timestamp).toLocaleTimeString()}</small></td>
-                                        <td><strong>${item.name}</strong><br><small style="color:var(--text-muted)">Dispensed</small></td>
-                                        <td>${item.qty} units</td>
-                                        <td><strong>${SYSTEM_SETTINGS.currency} ${(item.qty * (item.price || 0)).toFixed(2)}</strong></td>
+                                        <td><strong>${cartItems.map(i => i.name).join(', ')}</strong><br><small style="color:var(--text-muted)">Dispensed</small></td>
+                                        <td><span style="font-weight:600; color:var(--primary)">${customerName}</span></td>
+                                        <td>${cartItems.reduce((s,i)=>s+i.qty,0)} units</td>
+                                        <td><strong>${SYSTEM_SETTINGS.currency} ${parseFloat(a.metadata?.total||0).toFixed(2)}</strong></td>
                                     </tr>
-                                `).join('');
+                                `;
                             }
                             
                             // Fallback for general logs (Login, Logout, etc.)
@@ -1083,6 +1117,7 @@ async function loadAuditLogs() {
                                 <tr>
                                     <td><small>${new Date(a.timestamp).toLocaleTimeString()}</small></td>
                                     <td><strong>${a.event}</strong><br><small style="color:var(--text-muted)">${a.details || ''}</small></td>
+                                    <td>-</td>
                                     <td>${a.metadata?.items_count || '-'}</td>
                                     <td><strong>${a.metadata?.total ? `${SYSTEM_SETTINGS.currency} ${parseFloat(a.metadata.total).toFixed(2)}` : '-'}</strong></td>
                                 </tr>

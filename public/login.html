@@ -93,12 +93,43 @@
                 </div>
                 <button type="submit" class="btn">Login Securely</button>
             </form>
-
-
+            <div style="margin-top: 1.5rem; font-size: 0.95rem;">
+                <span style="color: var(--text-muted);">New patient?</span> 
+                <a href="#" onclick="openRegisterModal(event)" style="color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 5px;">Create Patient Account</a>
+            </div>
         </div>
     </div>
 
-    <script src="/js/app.js?v=4"></script>
+    <!-- Patient Registration Modal -->
+    <div id="register-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-user-plus" style="color:var(--primary);"></i> Patient Registration</h2>
+                <button style="background:none; border:none; font-size:1.5rem; cursor:pointer;" onclick="closeRegisterModal()">&times;</button>
+            </div>
+            <form id="register-form" onsubmit="submitRegistration(event)">
+                <div class="modal-body">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-fullname" placeholder="Enter your full name" required>
+
+                    <label>Desired Username</label>
+                    <input type="text" id="reg-username" placeholder="Choose a username" required>
+
+                    <label>Password (Min 6 characters)</label>
+                    <input type="password" id="reg-password" placeholder="Choose a password" required>
+
+                    <div id="register-error" style="color:var(--danger); margin-bottom:1rem; display:none;">Error goes here</div>
+                    <div id="register-success" style="color:var(--success); margin-bottom:1rem; display:none;">Registration successful! Redirecting...</div>
+                </div>
+                <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeRegisterModal()" style="width:auto; padding: 10px 20px;">Cancel</button>
+                    <button type="submit" class="btn" style="width:auto; padding: 10px 20px;">Register Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/app.js?v=5"></script>
     <script>
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -120,6 +151,8 @@
 
                     if (data.role === 'pharmacist') {
                         window.location.href = '/pharmacist.html';
+                    } else if (data.role === 'user') {
+                        window.location.href = '/user-portal.html';
                     } else {
                         window.location.href = '/index.html';
                     }
@@ -130,7 +163,58 @@
                 console.error(err);
             }
         });
+
+        // Registration Modal Handlers
+        function openRegisterModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('register-modal').style.display = 'flex';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('register-modal').style.display = 'none';
+            document.getElementById('reg-fullname').value = '';
+            document.getElementById('reg-username').value = '';
+            document.getElementById('reg-password').value = '';
+            document.getElementById('register-error').style.display = 'none';
+            document.getElementById('register-success').style.display = 'none';
+        }
+
+        async function submitRegistration(e) {
+            e.preventDefault();
+            const fullname = document.getElementById('reg-fullname').value.trim();
+            const username = document.getElementById('reg-username').value.trim();
+            const password = document.getElementById('reg-password').value;
+            
+            const errDiv = document.getElementById('register-error');
+            const successDiv = document.getElementById('register-success');
+            
+            errDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            try {
+                const res = await fetch('/api/register/user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, full_name: fullname })
+                });
+                
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.message || 'Registration failed.');
+                }
+                
+                successDiv.style.display = 'block';
+                setTimeout(() => {
+                    closeRegisterModal();
+                    document.getElementById('username').value = username;
+                    document.getElementById('password').value = password;
+                }, 1500);
+
+            } catch (err) {
+                errDiv.textContent = err.message;
+                errDiv.style.display = 'block';
+            }
+        }
     </script>
 </body>
-
 </html>

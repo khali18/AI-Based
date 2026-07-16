@@ -9,7 +9,7 @@ const { execFile } = require('child_process');
 function getMLPrediction(category, unitCost, salesLast30) {
     return new Promise((resolve) => {
         const scriptPath = path.join(__dirname, 'predict.py');
-        execFile('python', [scriptPath, category, unitCost, salesLast30], (error, stdout, stderr) => {
+        execFile('py', [scriptPath, category, unitCost, salesLast30], (error, stdout, stderr) => {
             if (error) {
                 console.error("ML Prediction Error: fallback to simple rate", error);
                 const fallbackRate = salesLast30 > 0 ? (salesLast30 / 30.0) : 0.1;

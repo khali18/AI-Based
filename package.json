@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "python app.py",
-    "dev": "python app.py",
+    "start": "py app.py",
+    "dev": "py app.py",
     "node-legacy": "node server.js"
   },
   "keywords": [],

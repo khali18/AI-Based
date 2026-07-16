@@ -45,7 +45,7 @@
         <div class="logo">
             <i class="fa-solid fa-notes-medical"></i>
             <h2>MedAI GH</h2>
-            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Live</div>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Offline Mode</div>
         </div>
         <ul class="nav-links">
             <li class="admin-only"><a href="/index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
@@ -75,6 +75,10 @@
             <h1>Staff Management</h1>
             <button class="btn" style="width: auto; padding: 10px 25px;" onclick="openUserModal()"><i class="fa-solid fa-user-plus"></i> Add New Staff Member</button>
         </header>
+        <div id="patient-count-bar" class="glass" style="padding: 1rem 1.5rem; display:flex; align-items:center; gap:15px; margin-bottom:1rem; color:var(--text-muted); font-size:0.95rem;">
+            <i class="fa-solid fa-users" style="color:var(--primary);"></i>
+            <span id="patient-count-text">Loading patient accounts...</span>
+        </div>
 
         <section class="table-section glass">
             <div class="table-container">
@@ -82,13 +86,13 @@
                     <thead>
                         <tr>
                             <th>Username</th>
-                            <th>Staff Role</th>
+                            <th>Role</th>
                             <th>Current Status</th>
                             <th>Administrative Actions</th>
                         </tr>
                     </thead>
                     <tbody id="users-body">
-                        <tr><td colspan="4" class="loading-td"><div class="spinner"></div> Loading staff...</td></tr>
+                        <tr><td colspan="4" class="loading-td"><div class="spinner"></div> Loading accounts...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -111,6 +115,7 @@
                     <select id="staff-role">
                         <option value="pharmacist">Pharmacist</option>
                         <option value="admin">System Admin</option>
+                        <option value="user">Patient (Portal User)</option>
                     </select>
                     
                     <label>Access Password</label>
@@ -136,6 +141,184 @@
         </div>
     </main>
 
-    <script src="/js/app.js?v=10"></script>
+    <script src="/js/app.js?v=11"></script>
+    <script>
+        let currentEditUser = null; // tracks which user is being edited
+
+        // ── MODAL OPEN/CLOSE ────────────────────────────────────────
+        function openUserModal() {
+            currentEditUser = null;
+            document.getElementById('modal-title').textContent = 'Add New User';
+            document.getElementById('staff-username').value = '';
+            document.getElementById('staff-username').disabled = false;
+            document.getElementById('staff-role').value = 'pharmacist';
+            document.getElementById('staff-password').value = '';
+            document.getElementById('image-preview').innerHTML = '<i class="fa-solid fa-user"></i>';
+            document.getElementById('staff-image').value = '';
+            document.getElementById('modal-error').style.display = 'none';
+            document.getElementById('user-modal').style.display = 'flex';
+        }
+
+        function closeUserModal() {
+            document.getElementById('user-modal').style.display = 'none';
+            document.getElementById('modal-error').style.display = 'none';
+        }
+
+        // ── EDIT USER (pre-fill modal) ──────────────────────────────
+        function editUser(username) {
+            currentEditUser = username;
+            document.getElementById('modal-title').textContent = `Edit: ${username}`;
+            document.getElementById('staff-username').value = username;
+            document.getElementById('staff-username').disabled = true; // username is the key, can't change it
+            document.getElementById('staff-password').value = '';
+            document.getElementById('modal-error').style.display = 'none';
+
+            // Fetch current role from the loaded table
+            fetch('/api/users')
+                .then(r => r.json())
+                .then(users => {
+                    const u = users.find(x => x.username === username);
+                    if (u) {
+                        document.getElementById('staff-role').value = u.role;
+                        if (u.profile_pic && u.profile_pic !== 'null') {
+                            document.getElementById('image-preview').innerHTML = `<img src="${u.profile_pic}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+                        } else {
+                            document.getElementById('image-preview').innerHTML = '<i class="fa-solid fa-user"></i>';
+                        }
+                    }
+                });
+
+            document.getElementById('user-modal').style.display = 'flex';
+        }
+
+        // ── DELETE USER ─────────────────────────────────────────────
+        function deleteUser(username) {
+            if (!confirm(`Remove user "${username}" from the system? This cannot be undone.`)) return;
+
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('username', username);
+
+            fetch('/api/admin/users', { method: 'POST', body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        loadUsers();
+                    } else {
+                        alert(data.message || 'Failed to delete user.');
+                    }
+                })
+                .catch(() => alert('Network error. Please try again.'));
+        }
+
+        // ── SAVE USER (add or edit) ─────────────────────────────────
+        async function saveUser() {
+            const username = document.getElementById('staff-username').value.trim();
+            const role     = document.getElementById('staff-role').value;
+            const password = document.getElementById('staff-password').value.trim();
+            const imageFile = document.getElementById('staff-image').files[0];
+            const errDiv   = document.getElementById('modal-error');
+
+            errDiv.style.display = 'none';
+
+            if (!username) {
+                errDiv.textContent = 'Username is required.';
+                errDiv.style.display = 'block';
+                return;
+            }
+            if (!currentEditUser && !password) {
+                errDiv.textContent = 'Password is required for new users.';
+                errDiv.style.display = 'block';
+                return;
+            }
+
+            const action = currentEditUser ? 'edit' : 'add';
+            const formData = new FormData();
+            formData.append('action', action);
+            formData.append('username', username);
+            formData.append('role', role);
+            if (password) formData.append('password', password);
+            if (imageFile) formData.append('profile_pic', imageFile);
+
+            try {
+                const res  = await fetch('/api/admin/users', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                if (data.success) {
+                    closeUserModal();
+                    loadUsers();
+                } else {
+                    errDiv.textContent = data.message || 'Operation failed.';
+                    errDiv.style.display = 'block';
+                }
+            } catch (e) {
+                errDiv.textContent = 'Network error. Please try again.';
+                errDiv.style.display = 'block';
+            }
+        }
+
+        // ── IMAGE PREVIEW ───────────────────────────────────────────
+        document.getElementById('staff-image').addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('image-preview').innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ── LOAD ALL USERS ──────────────────────────────────────────
+        async function loadUsers() {
+            try {
+                const res   = await fetch('/api/users');
+                const users = await res.json();
+
+                const staffOnly = users.filter(u => u.role !== 'user');
+                const patients  = users.filter(u => u.role === 'user');
+
+                const countBar = document.getElementById('patient-count-text');
+                if (countBar) {
+                    countBar.innerHTML = `<strong>${patients.length}</strong> registered patient account(s) in the system. Patients access the <a href="/user-portal.html" style="color:var(--primary);">Patient Portal</a> only.`;
+                }
+
+                const tbody = document.getElementById('users-body');
+                if (!tbody) return;
+
+                const allVisible = [...staffOnly, ...patients];
+                if (allVisible.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No users found.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = allVisible.map(u => {
+                    let roleBadge = '';
+                    if (u.role === 'admin') {
+                        roleBadge = `<span class="badge" style="background:rgba(239,68,68,0.15); color:var(--danger);"><i class="fa-solid fa-shield-halved"></i> System Admin</span>`;
+                    } else if (u.role === 'pharmacist') {
+                        roleBadge = `<span class="badge" style="background:rgba(14,165,233,0.15); color:var(--primary);"><i class="fa-solid fa-pills"></i> Pharmacist</span>`;
+                    } else {
+                        roleBadge = `<span class="badge" style="background:rgba(16,185,129,0.15); color:var(--success);"><i class="fa-solid fa-user-injured"></i> Patient</span>`;
+                    }
+
+                    const avatar = u.profile_pic && u.profile_pic !== 'null'
+                        ? `<img src="${u.profile_pic}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;">`
+                        : `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100' fill='%230D8ABC'/><text x='50%' y='54%' font-size='42' fill='white' text-anchor='middle' dominant-baseline='middle'>${u.username.charAt(0).toUpperCase()}</text></svg>" style="width:32px;height:32px;border-radius:50%;margin-right:8px;vertical-align:middle;">`;
+
+                    return `<tr>
+                        <td>${avatar} ${u.username}</td>
+                        <td>${roleBadge}</td>
+                        <td><span class="badge" style="background:rgba(16,185,129,0.15); color:var(--success);">Active</span></td>
+                        <td style="display:flex; gap:8px;">
+                            <button class="btn btn-secondary btn-small" onclick="editUser('${u.username}')"><i class="fa-solid fa-pen"></i> Edit</button>
+                            <button class="btn btn-small" style="background:var(--danger);" onclick="deleteUser('${u.username}')"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error('Failed to load users:', e);
+            }
+        }
+    </script>
 </body>
 </html>

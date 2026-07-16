@@ -92,6 +92,7 @@ def init_db():
     if cursor.fetchone()[0] == 0:
         cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ("sheripha", "admin123", "admin"))
         cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ("pharm", "pharm123", "pharmacist"))
+        cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", ("patient1", "user123", "user"))
         print("Default users seeded.")
 
     # Seed Inventory from CSV

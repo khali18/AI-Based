@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - Patient Portal & Verification</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/vendor/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=3">
+    <style>
+        .verifier-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1.5rem;
+        }
+        .search-container {
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .search-box-large {
+            display: flex;
+            align-items: center;
+            background: var(--sidebar-bg);
+            border: 2px solid var(--primary-light);
+            border-radius: 50px;
+            padding: 10px 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 1.5rem auto;
+            transition: all 0.3s;
+        }
+        .search-box-large:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+        .search-box-large i {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-right: 15px;
+        }
+        .search-box-large input {
+            border: none;
+            outline: none;
+            width: 100%;
+            background: transparent;
+            font-family: 'Outfit';
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+        .search-box-large button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .search-box-large button:hover {
+            background: var(--primary-hover);
+        }
+        .verdict-card {
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        .verdict-card.green {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+        }
+        .verdict-card.orange {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid var(--warning);
+        }
+        .verdict-card.red {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--danger);
+        }
+        .verdict-card.gray {
+            background: rgba(148, 163, 184, 0.1);
+            border: 2px solid var(--text-muted);
+        }
+        .verdict-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .verdict-header i {
+            font-size: 2.5rem;
+        }
+        .verdict-header.green { color: var(--success); }
+        .verdict-header.orange { color: var(--warning); }
+        .verdict-header.red { color: var(--danger); }
+        .verdict-header.gray { color: var(--text-muted); }
+
+        .verdict-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .medicine-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+        .detail-item h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .detail-item p {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .history-list {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .history-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            margin-bottom: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--text-muted);
+            transition: transform 0.2s;
+        }
+        .history-item:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .history-item.green { border-left-color: var(--success); }
+        .history-item.orange { border-left-color: var(--warning); }
+        .history-item.red { border-left-color: var(--danger); }
+        .history-item.gray { border-left-color: var(--text-muted); }
+
+        .guideline-card {
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        .guideline-card h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(15px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .purchases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .purchase-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--text-muted);
+        }
+        .purchase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+        }
+        .purchase-card.valid {
+            border-left-color: var(--success);
+        }
+        .purchase-card.near_expiry {
+            border-left-color: var(--warning);
+        }
+        .purchase-card.expired {
+            border-left-color: var(--danger);
+        }
+        .purchase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .purchase-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .purchase-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        .purchase-badge.valid {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        .purchase-badge.near_expiry {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        .purchase-badge.expired {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+        .purchase-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .purchase-detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .purchase-detail-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .purchase-detail-value {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .safety-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .safety-box i {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+        .safety-box.valid {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .safety-box.near_expiry {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        .safety-box.expired {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* Safety report dashboard styles */
+        .safety-report {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .safety-report-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+        .safety-report-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(3px);
+        }
+        .safety-report-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .safety-report-info i {
+            font-size: 1.4rem;
+        }
+        .safety-report-info.green i { color: var(--success); }
+        .safety-report-info.orange i { color: var(--warning); }
+        .safety-report-info.red i { color: var(--danger); }
+        .safety-report-info.gray i { color: var(--text-muted); }
+        
+        .safety-report-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .safety-report-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .safety-report-status-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+        .safety-report-status-badge.green {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        .safety-report-status-badge.orange {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        .safety-report-status-badge.red {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+        .safety-report-status-badge.gray {
+            background: rgba(148, 163, 184, 0.15);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-notes-medical"></i>
+            <h2>MedAI GH</h2>
+            <div class="sync-indicator"><i class="fa-solid fa-circle"></i> Offline Mode</div>
+        </div>
+        <ul class="nav-links">
+            <li class="active" id="nav-verifier"><a href="#" onclick="switchTab('verifier')"><i class="fa-solid fa-shield-halved"></i> Medicine Verifier</a></li>
+            <li id="nav-history"><a href="#" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i> My History</a></li>
+            <li id="nav-purchases"><a href="#" onclick="switchTab('purchases')"><i class="fa-solid fa-bag-shopping"></i> My Purchases</a></li>
+            <li id="nav-guidelines"><a href="#" onclick="switchTab('guidelines')"><i class="fa-solid fa-circle-info"></i> Health Guidelines</a></li>
+            <li><a href="#" id="logout-btn" style="color:var(--danger);"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+        <div class="user-profile">
+            <img src="" alt="User" class="user-profile-img">
+            <div>
+                <h4 class="user-name-text">Loading...</h4>
+                <p class="user-role-text">Patient Portal</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header>
+            <div>
+                <h1>Medicine Authenticity & Expiry Checker</h1>
+                <div class="sync-indicator">
+                    <i class="fa-solid fa-circle"></i>
+                    <span>Local Database: Active (Air-Gapped)</span>
+                </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="display:flex; gap:6px; align-items:center;">
+                    <i class="fa-solid fa-language" style="color: var(--primary); font-size: 1.2rem;"></i>
+                    <select id="portal-lang" onchange="changeLanguage()" style="background:rgba(255,255,255,0.05); color:var(--text-main); border:1px solid var(--card-border); padding:6px 12px; border-radius:8px; font-family:'Outfit'; font-weight:600; outline:none; cursor:pointer;">
+                        <option value="en">English</option>
+                        <option value="twi">Twi (Akan)</option>
+                        <option value="hausa">Hausa</option>
+                        <option value="dagbani">Dagbani</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i> Theme</button>
+            </div>
+        </header>
+
+        <!-- Tab 1: Medicine Verifier -->
+        <div id="verifier-tab" class="tab-content">
+
+            <!-- Search Bar Module -->
+            <section class="glass search-container">
+                <h3>Verify Purchased Medicine</h3>
+                <p style="color:var(--text-muted); margin-bottom:1rem;">Enter the Batch ID (e.g. BATCH-1004) or search by the medicine's name printed on the packet.</p>
+                
+                <form id="verify-form" onsubmit="performVerification(event)">
+                    <div class="search-box-large">
+                        <i class="fa-solid fa-barcode"></i>
+                        <input type="text" id="verify-query" placeholder="Enter Batch ID or Medicine Name..." required>
+                        <button type="button" id="scanner-toggle-btn" onclick="toggleCameraScanner()" title="Scan QR / Barcode" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:0 10px; font-size:1.2rem; outline:none; transition:color 0.3s;"><i class="fa-solid fa-camera"></i></button>
+                        <button type="submit">Verify Medicine</button>
+                    </div>
+                </form>
+
+                <!-- QR/Barcode Camera Scanner Panel -->
+                <div id="scanner-panel" class="glass" style="display: none; padding: 1.5rem; margin-top: 1rem; text-align: center; border: 1px solid rgba(14, 165, 233, 0.25); border-radius:12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; font-family: 'Outfit'; font-weight: 700; color:var(--text-main);"><i class="fa-solid fa-camera"></i> Live QR / Barcode Scanner</h4>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="closeCameraScanner()" style="color: var(--danger); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2);">Close Camera</button>
+                    </div>
+                    <div id="reader" style="width: 100%; max-width: 450px; margin: 0 auto; border-radius: 12px; overflow: hidden; background: #000; border:1px solid var(--card-border);"></div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;"><i class="fa-solid fa-info-circle"></i> Align the drug package barcode or QR code within the camera frame to scan automatically.</p>
+                </div>
+
+                <div id="verify-error" style="color:var(--danger); display:none; margin-top:10px;"></div>
+            </section>
+
+            <!-- Result Display -->
+            <div class="glass" style="padding: 1.5rem; min-height: 250px;">
+                <h3><i class="fa-solid fa-clipboard-check"></i> Verification Result</h3>
+                
+                <div id="verdict-placeholder" style="text-align:center; padding: 3rem 0; color:var(--text-muted);">
+                    <i class="fa-solid fa-magnifying-glass-chart" style="font-size:3.5rem; margin-bottom:1rem; color:var(--primary-light);"></i>
+                    <p>Waiting for medicine batch query...</p>
+                </div>
+
+                <!-- Verdict Card Output -->
+                <div id="verdict-output" class="verdict-card">
+                    <div id="verdict-header-icon" class="verdict-header">
+                        <!-- Injected icon -->
+                        <div class="verdict-title" id="verdict-title-text">Injected Title</div>
+                    </div>
+                    
+                    <p id="verdict-message" style="line-height:1.6; font-size:1.05rem; margin-bottom:1.5rem;"></p>
+
+                    <!-- Accessibility Voice Options -->
+                    <div id="verifier-audio-controls" style="margin-bottom: 1.5rem; display: flex; gap: 10px;">
+                        <button class="btn btn-sm btn-secondary" onclick="speakVerdict()" style="display: flex; align-items: center; gap: 8px; font-family: 'Outfit'; font-weight: 600;">
+                            <i class="fa-solid fa-volume-high"></i> Listen to Report (Audio)
+                        </button>
+                        <button class="btn btn-sm btn-secondary" onclick="stopSpeaking()" style="display: flex; align-items: center; gap: 8px; font-family: 'Outfit'; font-weight: 600; color: var(--danger); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2);">
+                            <i class="fa-solid fa-circle-stop"></i> Stop Audio
+                        </button>
+                    </div>
+
+                    <!-- Medicine Safety Checklist Dashboard -->
+                    <div class="safety-report" id="safety-report-block" style="display:none; margin-bottom: 1.5rem;"></div>
+
+                    <!-- Medicine Specs Block -->
+                    <div class="medicine-details" id="medicine-specs" style="display:none;">
+                        <div class="detail-item">
+                            <h5>Medicine Name</h5>
+                            <p id="med-name">N/A</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5>Batch ID</h5>
+                            <p id="med-batch">N/A</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5>Manufacturer</h5>
+                            <p id="med-mfr">N/A</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5>Expiry Date</h5>
+                            <p id="med-expiry">N/A</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5>Days Left</h5>
+                            <p id="med-days">N/A</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5>AI Risk Classification</h5>
+                            <p id="med-risk">N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: My History -->
+        <div id="history-tab" class="tab-content" style="display:none;">
+            <div class="glass" style="padding: 2rem;">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> My Recent Verifications</h3>
+                <p style="color:var(--text-muted); margin-bottom:1.5rem;">Below is the history of medicines you have verified on this device.</p>
+                <ul id="history-list" class="history-list">
+                    <li style="color:var(--text-muted); font-size:0.9rem; padding:10px;">No recent verification history found.</li>
+                </ul>
+                <button class="btn btn-secondary" onclick="clearVerificationHistory()" style="margin-top: 1.5rem;">Clear All Verification History</button>
+            </div>
+        </div>
+
+        <!-- Tab 4: My Purchases -->
+        <div id="purchases-tab" class="tab-content" style="display:none;">
+            <div class="glass" style="padding: 2rem;">
+                <h3><i class="fa-solid fa-bag-shopping"></i> My Purchased Medicines</h3>
+                <p style="color:var(--text-muted); margin-bottom:1.5rem;">Below is the history of medicines dispensed to you by our clinic pharmacy. You can check their authenticity, expiry risk, and safety status here.</p>
+                <div id="purchases-loading" style="text-align:center; padding: 2rem; display:none;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size:2rem; color:var(--primary);"></i>
+                    <p style="margin-top:10px;">Loading your purchases...</p>
+                </div>
+                <div id="purchases-list" class="purchases-grid">
+                    <!-- Dynamic purchase cards go here -->
+                </div>
+                <div id="purchases-empty" style="text-align:center; padding: 3rem 0; color:var(--text-muted); display:none;">
+                    <i class="fa-solid fa-prescription-bottle" style="font-size:3.5rem; margin-bottom:1rem; color:var(--primary-light);"></i>
+                    <p>No clinic purchases found for your account.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Health Guidelines -->
+        <div id="guidelines-tab" class="tab-content" style="display:none;">
+            <div class="glass" style="padding: 2rem;">
+                <h3><i class="fa-solid fa-circle-info"></i> Health & Safety Guidelines</h3>
+                <p style="color:var(--text-muted); margin-bottom:1.5rem;">Learn how to check for medicine safety, authenticity, and proper disposal.</p>
+                
+                <div class="glass guideline-card" style="margin-bottom: 1.5rem;">
+                    <h4><i class="fa-solid fa-shield-halved" style="color:var(--success);"></i> How to check authenticity</h4>
+                    <p style="color:var(--text-muted); line-height:1.6; margin-top: 0.5rem;">Every authentic drug dispensed through the clinic contains a unique Batch ID on its box. Always check to verify it matches our system record.</p>
+                </div>
+                
+                <div class="glass guideline-card" style="margin-bottom: 1.5rem;">
+                    <h4><i class="fa-solid fa-circle-exclamation" style="color:var(--warning);"></i> Expiry Risk Warning</h4>
+                    <p style="color:var(--text-muted); line-height:1.6; margin-top: 0.5rem;">Medicines close to expiry (less than 30 days) should be used under pharmacist guidance. Expired medicines should be discarded immediately and never consumed.</p>
+                </div>
+
+                <div class="glass guideline-card">
+                    <h4><i class="fa-solid fa-trash-can" style="color:var(--danger);"></i> Safe Disposal of Expired Medicines</h4>
+                    <p style="color:var(--text-muted); line-height:1.6; margin-top: 0.5rem;">Do not flush expired medicines down the toilet or throw them in open dustbins. Return them to Kumasi Technical University Clinic or any registered pharmacy for safe ecological disposal.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/html5-qrcode.min.js"></script>
+    <script src="/js/app.js?v=13"></script>
+    <script>
+        // Local translation mapping for visual/audio accessibility
+        const LOCAL_TRANSLATIONS = {
+            en: {
+                safe_title: "AUTHENTIC & SAFE",
+                safe_msg: "This medicine is verified authentic and safe to use as directed.",
+                caution_title: "NEAR EXPIRY — CAUTION",
+                caution_msg: "This medicine is authentic but expires soon. Consult your pharmacist.",
+                expired_title: "EXPIRED — DO NOT USE",
+                expired_msg: "This medicine has expired! It is dangerous to consume. Dispose of it safely.",
+                fake_title: "UNVERIFIED / SUSPECTED FAKE",
+                fake_msg: "This batch ID or drug name was not found. It may be counterfeit or fake. Do not consume!",
+                
+                auth_label: "Authenticity Verification",
+                auth_ok: "Original / Authentic",
+                auth_fake: "Unverified / Suspected Fake",
+                auth_desc_ok: "Dispensed by clinic registered pharmacy.",
+                auth_desc_fake: "No matching Batch ID or Medicine record in database.",
+                
+                exp_label: "Expiry Status Check",
+                exp_ok: "Valid / Good",
+                exp_warn: "Near Expiry",
+                exp_bad: "Expired",
+                exp_unknown: "Unverified Expiry",
+                exp_desc_ok: "Valid with remaining days.",
+                exp_desc_warn: "Expires soon. Caution advised.",
+                exp_desc_bad: "Expired! Do not use.",
+                exp_desc_unknown: "Expiry date cannot be validated.",
+                
+                safe_label: "Consumption Safety Verdict",
+                safe_ok: "Safe to Take",
+                safe_warn: "Use With Caution",
+                safe_bad: "Unsafe / Do Not Take",
+                safe_desc_ok: "Medicine is within safe usage period.",
+                safe_desc_warn: "Consult pharmacist before taking.",
+                safe_desc_bad: "Do not consume this drug."
+            },
+            twi: {
+                safe_title: "EYƐ PAPA & ƐYƐ DWOODWOO",
+                safe_msg: "Adurɔ yi yɛ papa na ɛsane yɛ dwoodwoo. Wotumi nom dɛn ara a yɛakyerɛ wo.",
+                caution_title: "REBƐSA PƐN DADU — HWƐ YIE",
+                caution_msg: "Adurɔ yi yɛ papa nanso rebɛsa pɛn dadu. Kasa kyerɛ dɔkta ansaana woanom.",
+                expired_title: "APORƆ — MMA NNOM KORAA",
+                expired_msg: "Adurɔ yi aporɔ! Ɛyɛ hu, mma nnom koraa! Tene gu gubea a ɛyɛ dwoodwoo.",
+                fake_title: "YƐANHUNU / EBIA ƐYƐ FADA",
+                fake_msg: "Yɛanhunu adurɔ yi wɔ yɛn nnurɔyebea mu. Ebia ɛyɛ adurɔ-fada, mma nnom koraa!",
+                
+                // Phonetic TTS texts for local Ghanaian language pronunciation
+                tts_safe: "Ah-dew-row yee yeh pah-pah, nah eh-sah-neh yeh dwoo-dwoo. Woe-too-mee noom den ah-rah ah yeh-ah-kyeh-reh woe.",
+                tts_caution: "Ah-dew-row yee yeh pah-pah, nan-soh reh-beh-sah pen dah-doo. Kah-sah kyeh-reh dok-tah an-sah-nah woe-ah-noom.",
+                tts_expired: "Ah-dew-row yee ah-poh-roh! Eh-yeh hoo, mmah noom koh-raa! Teh-neh goo goo-bey-ah eh-yeh dwoo-dwoo.",
+                tts_fake: "Yeh-an-hoo-noo ah-dew-row yee woe yen nnoo-row-yeh-bey-ah moo. Eh-bee-ah eh-yeh ah-dew-row-fah-dah, mmah noom koh-raa!",
+
+                auth_label: "Adurɔ Nokware Hwɛ",
+                auth_ok: "Papa / Nokware Adurɔ",
+                auth_fake: "Yɛanhunu / Ebia Ɛyɛ Fada",
+                auth_desc_ok: "Ayareble yareyebea nnurɔyebea na ɛdispenseyɛ.",
+                auth_desc_fake: "Nnyinasoɔ biara nni hɔ wɔ database no mu.",
+                
+                exp_label: "Expiry Nokware Hwɛ",
+                exp_ok: "Ɛyɛ Papa / Ɛyɛ Frɔmfrɔm",
+                exp_warn: "Rebɛsa Pɛn Dadu",
+                exp_bad: "Aporɔ / Awu",
+                exp_unknown: "Yɛntumi Nhunu Expiry",
+                exp_desc_ok: "Nna pii da so ara ka ho ansaana aporɔ.",
+                exp_desc_warn: "Ɛrebɛsa pɛn dadu. Hwɛ yie.",
+                exp_desc_bad: "Aporɔ! Mma nnom.",
+                exp_desc_unknown: "Yɛntumi nhunu Expiry da pɔtee.",
+                
+                safe_label: "Adurɔ Nomon Ho Nyinasoɔ",
+                safe_ok: "Wotumi Nom",
+                safe_warn: "Nom No Hwɛ Yie Mu",
+                safe_bad: "Ɛyɛ Hu / Mma Nnom",
+                safe_desc_ok: "Adurɔ no yɛ dwoodwoo sɛ wonom.",
+                safe_desc_warn: "Bisa dɔkta ansaana woanom.",
+                safe_desc_bad: "Mfa adurɔ yi mma wo ho koraa."
+            },
+            hausa: {
+                safe_title: "INGANTACCE KUMA LAFIYA",
+                safe_msg: "Wannan magani mai kyau ne kuma lafiya. Kana iya sha kamar yadda aka umarce ka.",
+                caution_title: "KUSAN KAREWA — HATTARA",
+                caution_msg: "Wannan magani mai kyau ne amma zai kare nan ba da dadewa ba. Tuntubi likitanka.",
+                expired_title: "YA LALACE — KADA KA SHA",
+                expired_msg: "Wannan magani ya lalace! Yana da hadari, kada ka sha shi kwata-kwata! Zubar da shi yadda ya kamata.",
+                fake_title: "JABU / BA A VERIFY BA",
+                fake_msg: "Ba mu sami wannan magani a gidan magani ba. Wataƙila jabu ne, kada ka sha shi!",
+                
+                // Phonetic TTS texts for Hausa language
+                tts_safe: "Wannan maganee my kyow neh koomah lafeeyah. Kanah eeyah shah kamar yaddah akah oomarcheh kah.",
+                tts_caution: "Wannan maganee my kyow neh ammah zye kareh nan bah dah dah-deh-wah bah. Toontoobee leekeetankah.",
+                tts_expired: "Wannan maganee yah lalacheh! Yanah dah hadaree, kadah kah shah shee kwata-kwata! Zoobar dah shee yaddah yah kamatah.",
+                tts_fake: "Bah moo sahmee wannan maganee ah geedan maganee bah. Watah-keelah jahboo neh, kadah kah shah shee!",
+
+                auth_label: "Tabbatar da Inganci",
+                auth_ok: "Na Asali / Ingantacce",
+                auth_fake: "Ba a Tabbatar Ba / Jabu",
+                auth_desc_ok: "Wanda rajistar gidan magani ta clinic ta samar.",
+                auth_desc_fake: "Babu irin wannan maganin a cikin database.",
+                
+                exp_label: "Duba Ranar Karewa",
+                exp_ok: "Lafiya / Yana Aiki",
+                exp_warn: "Kusan Karewa",
+                exp_bad: "Ya Lalace",
+                exp_unknown: "Ba a San Ranar Karewa Ba",
+                exp_desc_ok: "Sauran kwanaki kafin ya lalace.",
+                exp_desc_warn: "Zai lalace nan ba da dadewa ba.",
+                exp_desc_bad: "Ya kare! Kada a yi amfani da shi.",
+                exp_desc_unknown: "Ba za a iya tabbatar da ranar karewa ba.",
+                
+                safe_label: "Hukuncin Shan Magani",
+                safe_ok: "Lafiya Shan Shi",
+                safe_warn: "A Sha Da Hattara",
+                safe_bad: "Hadari / Kada A Sha",
+                safe_desc_ok: "Magani yana cikin lokacin da yake da lafiya.",
+                safe_desc_warn: "Tuntubi likita kafin ka sha.",
+                safe_desc_bad: "Kada ka sha wannan maganin kwata-kwata."
+            },
+            dagbani: {
+                safe_title: "TIBILI-VIƐLLI & GUBU",
+                safe_msg: "Tibili ŋɔ nyɛla tibili-viɛlli yaha n-nyɛ gubu. A ni toŋ nyu li kamani bini kpuɣi a.",
+                caution_title: "SANDA YOLI TOŊ SABIL — HATTARA",
+                caution_msg: "Tibili ŋɔ nyɛla viɛlli amaa di sanda yoli toŋ sabil. Gbaari dɔkta pɔi ka nyu li.",
+                expired_title: "SANDA SABIL — DI NYU LI",
+                expired_msg: "Tibili ŋɔ sanda sabil! Di nyɛla yɛla, di nyu li gba! Di toŋ barigi li viɛnyɛla.",
+                fake_title: "BI NYE / TIBILI-ƷIRI",
+                fake_msg: "Ti bi nye tibili ŋɔ ti tibili-viɛlli duu. Di toŋ nyɛla tibili-ʒiri, di nyu li!",
+                
+                // Phonetic TTS texts for Dagbani language
+                tts_safe: "Tee-mah nyeh-lah tee-vya-lee yah-hah n-nyeh goo-boo. Ah-nee-toe-noo nyoo lee kah-mah-nee bee-nee kpoo-yee ah.",
+                tts_caution: "Tee-mah n-gaw nyeh-lah tee-vya-lee ah-mah dee san-dah yoh-lee toe-noo sah-bil. Gbah-ree dok-tah poy kah nyoo lee.",
+                tts_expired: "Tee-mah n-gaw san-dah sah-bil! Dee nyeh-lah yeh-lah, dee nyoo lee gbah! Dee toe-noo bah-ree-gee lee vee-en-yeh-lah.",
+                tts_fake: "Tee bee nyeh tee-mah n-gaw tee tee-vya-lee doo-oo. Dee toe-noo nyeh-lah tee-bee-lee zee-ree, dee nyoo lee!",
+
+                auth_label: "Tibili Tabbatarbu",
+                auth_ok: "Asali / Tibili-Viɛlli",
+                auth_fake: "Bi Tabbatar / Tibili-Ʒiri",
+                auth_desc_ok: "Tibili-viɛlli duu din be clinic n-nyɛ din mali.",
+                auth_desc_fake: "Babu tibili ŋɔ ti database ni.",
+                
+                exp_label: "Duba Expiry Dabisi",
+                exp_ok: "Alafia / Di Mali Aiki",
+                exp_warn: "Sanda Yoli Sabil",
+                exp_bad: "Sanda Sabil",
+                exp_unknown: "Bi Dun Expiry Dabisi",
+                exp_desc_ok: "Dabisa din kpalim pɔi ka di sabil.",
+                exp_desc_warn: "Di sanda yoli sabil nan da kuli.",
+                exp_desc_bad: "Di sabil ya! Di zaŋ ku tum aiki.",
+                exp_desc_unknown: "Di ku toŋ tabbatar ni expiry dabisi.",
+                
+                safe_label: "Tibili Nyu Hukumu",
+                safe_ok: "Alafia Nyu Li",
+                safe_warn: "A Nyu Li Ni Hattara",
+                safe_bad: "Yɛla / Di Nyu Li",
+                safe_desc_ok: "Tibili be alafia saha ni.",
+                safe_desc_warn: "Gbaari dɔkta pɔi ka nyu li.",
+                safe_desc_bad: "Di nyu tibili ŋɔ gba."
+            }
+        };
+
+        // Change Language handler
+        function changeLanguage() {
+            const lang = document.getElementById('portal-lang').value;
+            localStorage.setItem('medai_lang', lang);
+            
+            // Cancel active audio
+            stopSpeaking();
+            
+            // Re-run verifier if active
+            const queryInput = document.getElementById('verify-query');
+            const output = document.getElementById('verdict-output');
+            if (output && output.style.display === 'block' && queryInput && queryInput.value) {
+                performVerification(new Event('submit'));
+            }
+            
+            // Reload purchases
+            loadPurchases();
+        }
+
+        // QR/Barcode Camera Scanner Controller
+        let html5QrScanner = null;
+
+        function toggleCameraScanner() {
+            const panel = document.getElementById('scanner-panel');
+            if (!panel) return;
+            
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                startCameraScanner();
+            } else {
+                closeCameraScanner();
+            }
+        }
+
+        function startCameraScanner() {
+            // Cancel speech synthesis
+            stopSpeaking();
+            
+            if (!html5QrScanner) {
+                html5QrScanner = new Html5Qrcode("reader");
+            }
+            
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                const queryInput = document.getElementById('verify-query');
+                if (queryInput) {
+                    queryInput.value = decodedText;
+                }
+                
+                // Stop scanner and close
+                closeCameraScanner();
+                
+                // Perform verification automatically
+                performVerification(new Event('submit'));
+            };
+            
+            const config = { fps: 15, qrbox: { width: 250, height: 250 } };
+            
+            html5QrScanner.start(
+                { facingMode: "environment" }, 
+                config, 
+                qrCodeSuccessCallback
+            )
+            .then(() => {
+                document.getElementById('scanner-toggle-btn').style.color = 'var(--success)';
+            })
+            .catch(err => {
+                console.error("Camera access error: ", err);
+                const errDiv = document.getElementById('verify-error');
+                if (errDiv) {
+                    errDiv.textContent = "Camera error: Make sure camera permissions are enabled.";
+                    errDiv.style.display = 'block';
+                }
+                closeCameraScanner();
+            });
+        }
+
+        function closeCameraScanner() {
+            const panel = document.getElementById('scanner-panel');
+            if (panel) panel.style.display = 'none';
+            
+            const btn = document.getElementById('scanner-toggle-btn');
+            if (btn) btn.style.color = 'var(--text-muted)';
+            
+            if (html5QrScanner && html5QrScanner.isScanning) {
+                html5QrScanner.stop()
+                    .catch(err => console.error("Error stopping scanner: ", err));
+            }
+        }
+
+        // Tab switching controller
+        function switchTab(tabId) {
+            // Cancel any ongoing voice report when switching tabs
+            stopSpeaking();
+            
+            // Turn off camera if running
+            closeCameraScanner();
+
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            // Show target tab content
+            document.getElementById(tabId + '-tab').style.display = 'block';
+
+            // Update active sidebar nav item
+            document.querySelectorAll('.nav-links li').forEach(el => el.classList.remove('active'));
+            document.getElementById('nav-' + tabId).classList.add('active');
+
+            if (tabId === 'purchases') {
+                loadPurchases();
+            }
+        }
+
+        // Fetch and display patient purchases
+        async function loadPurchases() {
+            const username = localStorage.getItem('medai_username') || 'patient';
+            const loading = document.getElementById('purchases-loading');
+            const list = document.getElementById('purchases-list');
+            const empty = document.getElementById('purchases-empty');
+
+            loading.style.display = 'block';
+            list.innerHTML = '';
+            empty.style.display = 'none';
+
+            try {
+                const res = await fetch(`/api/my/purchases?username=${encodeURIComponent(username)}`);
+                const data = await res.json();
+                
+                loading.style.display = 'none';
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Failed to fetch purchases');
+                }
+
+                if (!data || data.length === 0) {
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                const lang = localStorage.getItem('medai_lang') || 'en';
+                const trans = LOCAL_TRANSLATIONS[lang] || LOCAL_TRANSLATIONS.en;
+                const threshold = (typeof SYSTEM_SETTINGS !== 'undefined' && SYSTEM_SETTINGS.expiry_threshold) || 30;
+
+                list.innerHTML = data.map(p => {
+                    const days = p.days_to_expiry;
+                    let safetyClass = 'valid';
+                    let safetyLabel = trans.safe_title;
+                    let safetyMessage = trans.safe_msg;
+                    let badgeClass = 'valid';
+                    let badgeText = trans.exp_ok;
+
+                    if (days <= 0) {
+                        safetyClass = 'expired';
+                        safetyLabel = trans.expired_title;
+                        safetyMessage = trans.expired_msg;
+                        badgeClass = 'expired';
+                        badgeText = trans.exp_bad;
+                    } else if (days <= threshold) {
+                        safetyClass = 'near_expiry';
+                        safetyLabel = trans.caution_title;
+                        safetyMessage = `${trans.caution_msg} (${days} days left)`;
+                        badgeClass = 'near_expiry';
+                        badgeText = trans.exp_warn;
+                    }
+
+                    const purchaseDate = new Date(p.purchase_date).toLocaleDateString(undefined, {
+                        year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+                    const expiryDate = (() => {
+                        const parts = p.expiry_date ? p.expiry_date.split('-') : [];
+                        if (parts.length === 3) {
+                            const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+                            return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                        }
+                        return p.expiry_date ? new Date(p.expiry_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
+                    })();
+
+                    return `
+                        <div class="glass purchase-card ${safetyClass}">
+                            <div class="purchase-header">
+                                <div class="purchase-title">${p.name}</div>
+                                <span class="purchase-badge ${badgeClass}">${badgeText}</span>
+                            </div>
+                            <div class="purchase-details">
+                                <div class="purchase-detail-row">
+                                    <span class="purchase-detail-label">Batch ID:</span>
+                                    <span class="purchase-detail-value">${p.batch_id}</span>
+                                </div>
+                                <div class="purchase-detail-row">
+                                    <span class="purchase-detail-label">Manufacturer:</span>
+                                    <span class="purchase-detail-value">${p.manufacturer}</span>
+                                </div>
+                                <div class="purchase-detail-row">
+                                    <span class="purchase-detail-label">Purchase Date:</span>
+                                    <span class="purchase-detail-value">${purchaseDate}</span>
+                                </div>
+                                <div class="purchase-detail-row">
+                                    <span class="purchase-detail-label">Expiry Date:</span>
+                                    <span class="purchase-detail-value">${expiryDate}</span>
+                                </div>
+                            </div>
+                            <div class="safety-box ${safetyClass}">
+                                <i class="fa-solid ${days <= 0 ? 'fa-triangle-exclamation' : (days <= threshold ? 'fa-circle-exclamation' : 'fa-circle-check')}"></i>
+                                <div>
+                                    <strong>${safetyLabel}</strong>
+                                    <div style="font-size:0.75rem; margin-top:2px; opacity:0.9;">${safetyMessage}</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px; margin-top: 0.75rem; width: 100%;">
+                                <button class="btn btn-sm" onclick="quickVerify('${p.batch_id}')" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; font-family: 'Outfit'; background: var(--primary-light); color: var(--primary); border: 1px solid rgba(14, 165, 233, 0.25);">
+                                    <i class="fa-solid fa-shield-halved"></i> Verify safety
+                                </button>
+                                <button class="btn btn-sm btn-secondary" onclick="speakPurchase('${p.name}', ${days}, ${threshold})" style="display: flex; align-items: center; justify-content: center; width: 42px; padding: 0; border-radius: 8px;" title="Listen to safety status">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                loading.style.display = 'none';
+                list.innerHTML = `<div style="color:var(--danger); text-align:center; width:100%; padding:2rem;">Error: ${err.message}</div>`;
+            }
+        }
+
+        // Text-to-Speech (TTS) Voice accessibility helpers
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Cancel any ongoing speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.78; // Slower rate to make phonetic syllables extremely clear and distinct
+
+                // Dynamically look for an English female voice installed on the user's OS
+                const voices = window.speechSynthesis.getVoices();
+                let femaleVoice = voices.find(v => {
+                    const name = v.name.toLowerCase();
+                    return name.includes('zira') || name.includes('female') || name.includes('susan') || name.includes('hazel') || name.includes('haruka') || name.includes('en-us-x-sfg');
+                });
+
+                // Fallback to Microsoft Zira or Google US English female if not found directly
+                if (!femaleVoice) {
+                    femaleVoice = voices.find(v => v.lang.startsWith('en') && (v.name.toLowerCase().includes('google') || v.name.toLowerCase().includes('microsoft')));
+                }
+
+                if (femaleVoice) {
+                    utterance.voice = femaleVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.warn('Speech synthesis not supported on this browser.');
+            }
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        function speakVerdict() {
+            const lang = localStorage.getItem('medai_lang') || 'en';
+            const trans = LOCAL_TRANSLATIONS[lang] || LOCAL_TRANSLATIONS.en;
+            const output = document.getElementById('verdict-output');
+            const queryInput = document.getElementById('verify-query');
+            const medNameEl = document.getElementById('med-name');
+            
+            if (output && output.style.display === 'block') {
+                let medName = (medNameEl && medNameEl.innerText && medNameEl.innerText !== 'N/A') ? medNameEl.innerText : (queryInput ? queryInput.value : '');
+                
+                let ttsText = '';
+                if (output.classList.contains('green')) {
+                    ttsText = trans.tts_safe || trans.safe_msg;
+                } else if (output.classList.contains('orange')) {
+                    ttsText = trans.tts_caution || trans.caution_msg;
+                } else if (output.classList.contains('red')) {
+                    ttsText = trans.tts_expired || trans.expired_msg;
+                } else {
+                    ttsText = trans.tts_fake || trans.fake_msg;
+                }
+                
+                // Prepend the medicine name first for clear local understanding
+                speakText(`${medName}. ${ttsText}`);
+            }
+        }
+
+        function speakPurchase(medName, days, threshold) {
+            const lang = localStorage.getItem('medai_lang') || 'en';
+            const trans = LOCAL_TRANSLATIONS[lang] || LOCAL_TRANSLATIONS.en;
+            
+            let ttsText = '';
+            if (days <= 0) {
+                ttsText = trans.tts_expired || trans.expired_msg;
+            } else if (days <= threshold) {
+                ttsText = trans.tts_caution || trans.caution_msg;
+            } else {
+                ttsText = trans.tts_safe || trans.safe_msg;
+            }
+            
+            // Prepend the medicine name first for clear local understanding
+            speakText(`${medName}. ${ttsText}`);
+        }
+
+        // Quick verify linker function
+        function quickVerify(batchId) {
+            switchTab('verifier');
+            const queryInput = document.getElementById('verify-query');
+            if (queryInput) {
+                queryInput.value = batchId;
+            }
+            performVerification(new Event('submit'));
+        }
+
+        // Inline verification runner
+        async function performVerification(event) {
+            event.preventDefault();
+            const query = document.getElementById('verify-query').value.trim();
+            const errorDiv = document.getElementById('verify-error');
+            const output = document.getElementById('verdict-output');
+            const placeholder = document.getElementById('verdict-placeholder');
+            const reportBlock = document.getElementById('safety-report-block');
+            const username = localStorage.getItem('medai_username') || 'patient';
+            
+            if (!query) return;
+            errorDiv.style.display = 'none';
+            if (reportBlock) reportBlock.style.display = 'none';
+
+            try {
+                // Fetch verify endpoint
+                let url = `/api/verify?username=${encodeURIComponent(username)}`;
+                if (query.toUpperCase().startsWith('BATCH-')) {
+                    url += `&batch_id=${encodeURIComponent(query)}`;
+                } else {
+                    url += `&name=${encodeURIComponent(query)}`;
+                }
+
+                const res = await fetch(url);
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Failed to verify medicine.');
+                }
+
+                // Render Verification Results
+                placeholder.style.display = 'none';
+                output.style.display = 'block';
+                output.className = `verdict-card ${data.verdict_color}`;
+                
+                // Icon styling based on verdict_color
+                const headerIcon = document.getElementById('verdict-header-icon');
+                headerIcon.className = `verdict-header ${data.verdict_color}`;
+                
+                let iconHtml = '';
+                if (data.verdict_color === 'green') {
+                    iconHtml = '<i class="fa-solid fa-circle-check"></i>';
+                } else if (data.verdict_color === 'orange') {
+                    iconHtml = '<i class="fa-solid fa-circle-exclamation"></i>';
+                } else if (data.verdict_color === 'red') {
+                    iconHtml = '<i class="fa-solid fa-circle-xmark"></i>';
+                } else {
+                    iconHtml = '<i class="fa-solid fa-shield-halved"></i>';
+                }
+
+                // Resolve translation strings
+                const lang = localStorage.getItem('medai_lang') || 'en';
+                const trans = LOCAL_TRANSLATIONS[lang] || LOCAL_TRANSLATIONS.en;
+
+                let verdictText = data.verdict;
+                let verdictMsg = data.message;
+
+                if (lang !== 'en') {
+                    if (data.verdict_color === 'green') {
+                        verdictText = trans.safe_title;
+                        verdictMsg = trans.safe_msg;
+                    } else if (data.verdict_color === 'orange') {
+                        verdictText = trans.caution_title;
+                        verdictMsg = trans.caution_msg;
+                    } else if (data.verdict_color === 'red') {
+                        verdictText = trans.expired_title;
+                        verdictMsg = trans.expired_msg;
+                    } else {
+                        verdictText = trans.fake_title;
+                        verdictMsg = trans.fake_msg;
+                    }
+                }
+
+                headerIcon.innerHTML = `${iconHtml} <div class="verdict-title" id="verdict-title-text">${verdictText}</div>`;
+                document.getElementById('verdict-message').textContent = verdictMsg;
+
+                // Render Safety Report Card Dashboard
+                if (reportBlock) {
+                    reportBlock.style.display = 'flex';
+
+                    let authStatus = 'gray';
+                    let authLabel = trans.exp_unknown;
+                    let authDesc = trans.exp_desc_unknown;
+                    let authIcon = 'fa-shield-halved';
+
+                    let expStatus = 'gray';
+                    let expLabel = trans.exp_unknown;
+                    let expDesc = trans.exp_desc_unknown;
+                    let expIcon = 'fa-circle-question';
+
+                    let safeStatus = 'gray';
+                    let safeLabel = trans.exp_unknown;
+                    let safeDesc = trans.exp_desc_unknown;
+                    let safeIcon = 'fa-circle-question';
+
+                    if (data.found && data.medicine) {
+                        // Authentic
+                        authStatus = 'green';
+                        authLabel = trans.auth_ok;
+                        authDesc = trans.auth_desc_ok;
+                        authIcon = 'fa-circle-check';
+
+                        // Expiry check
+                        const days = data.medicine.days_to_expiry;
+                        const threshold = (typeof SYSTEM_SETTINGS !== 'undefined' && SYSTEM_SETTINGS.expiry_threshold) || 30;
+
+                        if (days <= 0) {
+                            expStatus = 'red';
+                            expLabel = trans.exp_bad;
+                            expDesc = `${trans.exp_desc_bad} (${new Date(data.medicine.expiry_date).toLocaleDateString()})`;
+                            expIcon = 'fa-circle-xmark';
+
+                            safeStatus = 'red';
+                            safeLabel = trans.safe_bad;
+                            safeDesc = trans.safe_desc_bad;
+                            safeIcon = 'fa-triangle-exclamation';
+                        } else if (days <= threshold) {
+                            expStatus = 'orange';
+                            expLabel = trans.exp_warn;
+                            expDesc = `${trans.exp_desc_warn} (${days} days left)`;
+                            expIcon = 'fa-circle-exclamation';
+
+                            safeStatus = 'orange';
+                            safeLabel = trans.safe_warn;
+                            safeDesc = trans.safe_desc_warn;
+                            safeIcon = 'fa-circle-exclamation';
+                        } else {
+                            expStatus = 'green';
+                            expLabel = trans.exp_ok;
+                            expDesc = `${trans.exp_desc_ok} (${days} days left)`;
+                            expIcon = 'fa-circle-check';
+
+                            safeStatus = 'green';
+                            safeLabel = trans.safe_ok;
+                            safeDesc = trans.safe_desc_ok;
+                            safeIcon = 'fa-circle-check';
+                        }
+                    } else {
+                        // Unverified (Possible counterfeit / fake)
+                        authStatus = 'red';
+                        authLabel = trans.auth_fake;
+                        authDesc = trans.auth_desc_fake;
+                        authIcon = 'fa-circle-xmark';
+
+                        expStatus = 'gray';
+                        expLabel = trans.exp_unknown;
+                        expDesc = trans.exp_desc_unknown;
+                        expIcon = 'fa-circle-question';
+
+                        safeStatus = 'red';
+                        safeLabel = trans.safe_bad;
+                        safeDesc = trans.safe_desc_bad;
+                        safeIcon = 'fa-triangle-exclamation';
+                    }
+
+                    reportBlock.innerHTML = `
+                        <div class="safety-report-item">
+                            <div class="safety-report-info ${authStatus}">
+                                <i class="fa-solid ${authIcon}"></i>
+                                <div>
+                                    <div class="safety-report-label">${trans.auth_label}</div>
+                                    <div class="safety-report-desc">${authDesc}</div>
+                                </div>
+                            </div>
+                            <span class="safety-report-status-badge ${authStatus}">${authLabel}</span>
+                        </div>
+                        <div class="safety-report-item">
+                            <div class="safety-report-info ${expStatus}">
+                                <i class="fa-solid ${expStatus === 'green' ? 'fa-circle-check' : (expStatus === 'orange' ? 'fa-circle-exclamation' : (expStatus === 'red' ? 'fa-circle-xmark' : 'fa-circle-question'))}"></i>
+                                <div>
+                                    <div class="safety-report-label">${trans.exp_label}</div>
+                                    <div class="safety-report-desc">${expDesc}</div>
+                                </div>
+                            </div>
+                            <span class="safety-report-status-badge ${expStatus}">${expLabel}</span>
+                        </div>
+                        <div class="safety-report-item">
+                            <div class="safety-report-info ${safeStatus}">
+                                <i class="fa-solid ${safeIcon}"></i>
+                                <div>
+                                    <div class="safety-report-label">${trans.safe_label}</div>
+                                    <div class="safety-report-desc">${safeDesc}</div>
+                                </div>
+                            </div>
+                            <span class="safety-report-status-badge ${safeStatus}">${safeLabel}</span>
+                        </div>
+                    `;
+                }
+
+                const specs = document.getElementById('medicine-specs');
+                if (data.found && data.medicine) {
+                    specs.style.display = 'grid';
+                    document.getElementById('med-name').textContent = data.medicine.name;
+                    document.getElementById('med-batch').textContent = data.medicine.batch_id;
+                    document.getElementById('med-mfr').textContent = data.medicine.manufacturer;
+                    document.getElementById('med-expiry').textContent = new Date(data.medicine.expiry_date).toLocaleDateString();
+                    document.getElementById('med-days').textContent = `${data.medicine.days_to_expiry} days remaining`;
+                    document.getElementById('med-risk').textContent = data.medicine.risk_level;
+                } else {
+                    specs.style.display = 'none';
+                }
+
+                // Save to local verification log
+                saveToHistory(query, data.verdict, data.verdict_color);
+            } catch (err) {
+                if (reportBlock) reportBlock.style.display = 'none';
+                errorDiv.textContent = err.message;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // Local Storage Verification History manager
+        function saveToHistory(query, verdict, color) {
+            let history = JSON.parse(localStorage.getItem('verification_history') || '[]');
+            // Avoid duplicates
+            history = history.filter(item => item.query.toUpperCase() !== query.toUpperCase());
+            history.unshift({
+                query,
+                verdict,
+                color,
+                timestamp: new Date().toISOString()
+            });
+            // Cap at 10 items
+            if (history.length > 10) history.pop();
+            localStorage.setItem('verification_history', JSON.stringify(history));
+            loadHistoryList();
+        }
+
+        // Correctly populate the UI list
+        function loadHistoryList() {
+            const list = document.getElementById('history-list');
+            if (!list) return;
+            const history = JSON.parse(localStorage.getItem('verification_history') || '[]');
+            if (history.length === 0) {
+                list.innerHTML = '<li style="color:var(--text-muted); font-size:0.9rem; padding:10px;">No recent verification history found.</li>';
+                return;
+            }
+
+            list.innerHTML = history.map(item => {
+                const timeStr = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                return `
+                    <li class="history-item ${item.color}">
+                        <div>
+                            <strong>${item.query}</strong>
+                            <br><small style="color:var(--text-muted);">${item.verdict}</small>
+                        </div>
+                        <span style="font-size:0.8rem; color:var(--text-muted);">${timeStr}</span>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        function clearVerificationHistory() {
+            localStorage.removeItem('verification_history');
+            loadHistoryList();
+        }
+
+        // Initialize history list on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            const lang = localStorage.getItem('medai_lang') || 'en';
+            const langSelect = document.getElementById('portal-lang');
+            if (langSelect) {
+                langSelect.value = lang;
+            }
+            loadHistoryList();
+        });
+    </script>
+</body>
+</html>

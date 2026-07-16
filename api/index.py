@@ -28,6 +28,59 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+def align_expiry_dates_in_db():
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        
+        # Check if database has inventory table
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='inventory'")
+        if not cursor.fetchone():
+            conn.close()
+            return
+            
+        # Get expiry threshold from settings
+        cursor.execute("SELECT expiry_threshold FROM settings LIMIT 1")
+        settings = cursor.fetchone()
+        threshold = settings['expiry_threshold'] if settings else 30
+        
+        cursor.execute("SELECT Batch_ID, Expiry_Date, Quantity_In_Stock, Reorder_Level FROM inventory")
+        rows = cursor.fetchall()
+        
+        today = datetime.date.today()
+        
+        for row in rows:
+            batch_id = row['Batch_ID']
+            expiry_date_str = row['Expiry_Date']
+            qty = row['Quantity_In_Stock']
+            reorder = row['Reorder_Level']
+            
+            if expiry_date_str:
+                try:
+                    expiry_date = datetime.datetime.strptime(expiry_date_str, '%Y-%m-%d').date()
+                    days_to_expiry = (expiry_date - today).days
+                    
+                    # Classify expiry risk level and AI recommendation
+                    risk_level = "High Risk" if days_to_expiry <= threshold else ("Medium Risk" if days_to_expiry <= threshold * 3 else "Low Risk")
+                    ai_rec = "Reorder stock soon" if qty <= reorder else "No immediate action required"
+                    
+                    cursor.execute('''UPDATE inventory SET 
+                        Days_to_Expiry = ?,
+                        Expiry_Risk_Level = ?,
+                        AI_Recommendation = ?
+                        WHERE Batch_ID = ?''', (days_to_expiry, risk_level, ai_rec, batch_id))
+                except Exception as ex:
+                    print(f"Error aligning batch {batch_id}: {ex}")
+                    
+        conn.commit()
+        conn.close()
+        print("Database inventory dates, risk levels, and AI recommendations successfully aligned with today's date.")
+    except Exception as e:
+        print(f"Error in align_expiry_dates_in_db: {e}")
+
+# Run alignment immediately on boot/import
+align_expiry_dates_in_db()
+
 # Helper: Log event to audit collection
 def log_event(username, event, details, metadata=None):
     try:
@@ -464,32 +517,6 @@ def manage_users():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-# ─── AUDIT ───────────────────────────────────────────────────────
-@app.route('/api/admin/audit')
-def get_audit():
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM audit ORDER BY timestamp DESC LIMIT 100")
-        logs = [dict(row) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(logs)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# ─── SALES ───────────────────────────────────────────────────────
-@app.route('/api/admin/sales', methods=['GET'])
-def get_sales():
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM sales ORDER BY timestamp DESC LIMIT 100")
-        sales = [dict(row) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(sales)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 # ─── PHARMACIST MY SALES ──────────────────────────────────────────
 @app.route('/api/my/sales', methods=['GET'])
 def get_my_sales():
@@ -507,6 +534,7 @@ def get_my_sales():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# ─── SALES TODAY ──────────────────────────────────────────────────
 @app.route('/api/sales/today', methods=['GET'])
 def sales_today():
     try:
@@ -540,7 +568,6 @@ def checkout():
         cursor = conn.cursor()
         
         total = 0
-        details = []
         for item in cart:
             cursor.execute("SELECT * FROM inventory WHERE Batch_ID = ?", (item.get('Batch_ID'),))
             db_item = cursor.fetchone()
@@ -553,8 +580,9 @@ def checkout():
             
             price = item.get('price', db_item['Selling_Price_USD'])
             total += item['qty'] * price
-            details.append(f"{item['qty']}x {item.get('name', db_item['Medicine_Name'])}")
 
+        import json
+        details_json = json.dumps(cart)
         cursor.execute('''INSERT INTO sales (timestamp, pharmacist, customer_name, items, total_ghs, details)
             VALUES (?, ?, ?, ?, ?, ?)''', (
                 datetime.datetime.utcnow().isoformat(),
@@ -562,16 +590,90 @@ def checkout():
                 customer_name,
                 len(cart),
                 round(total, 2),
-                ", ".join(details)
+                details_json
             ))
             
         conn.commit()
         conn.close()
         
-        log_event(staff_name, 'Dispensed Medicine', f"Customer: {customer_name}. Total: GH₵ {round(total, 2)}.", {"cart": cart, "total": total})
+        log_event(staff_name, 'Dispensed Medicine', f"Customer: {customer_name}. Total: GH\u20b5 {round(total, 2)}.", {"cart": cart, "total": total, "customer_name": customer_name})
         return jsonify({"success": True, "total": round(total, 2)})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+# ─── GET MY PURCHASES ───────────────────────────────────────────
+@app.route('/api/my/purchases')
+def get_my_purchases():
+    try:
+        username = request.args.get('username', '').strip()
+        if not username:
+            return jsonify([])
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        # Log the patient's check activity
+        log_event(username, 'Purchases Checked', 'Patient checked safety/expiry status of clinic-dispensed medicines.')
+
+        cursor.execute("SELECT * FROM sales WHERE customer_name = ? ORDER BY timestamp DESC", (username,))
+        rows = cursor.fetchall()
+
+        purchases = []
+        import json
+        for row in rows:
+            try:
+                items = json.loads(row['details'])
+                for item in items:
+                    batch_id = item.get('Batch_ID')
+                    cursor.execute("SELECT * FROM inventory WHERE Batch_ID = ?", (batch_id,))
+                    inv_item = cursor.fetchone()
+                    if inv_item:
+                        purchases.append({
+                            "batch_id": batch_id,
+                            "name": inv_item['Medicine_Name'],
+                            "manufacturer": inv_item['Manufacturer'],
+                            "expiry_date": inv_item['Expiry_Date'],
+                            "days_to_expiry": inv_item['Days_to_Expiry'],
+                            "risk_level": inv_item['Expiry_Risk_Level'],
+                            "purchase_date": row['timestamp']
+                        })
+            except Exception:
+                pass
+
+        conn.close()
+        return jsonify(purchases)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ─── ADMIN AUDIT LOG ─────────────────────────────────────────────
+@app.route('/api/admin/audit', methods=['GET'])
+def get_audit_logs():
+    try:
+        limit = request.args.get('limit', 500)
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM audit ORDER BY timestamp DESC LIMIT ?", (int(limit),))
+        rows = cursor.fetchall()
+        conn.close()
+
+        import json
+        logs = []
+        for row in rows:
+            entry = dict(row)
+            # Parse metadata string back into object so JS can do log.metadata?.role etc.
+            raw_meta = entry.get('metadata')
+            if raw_meta:
+                try:
+                    entry['metadata'] = json.loads(raw_meta.replace("'", '"'))
+                except Exception:
+                    entry['metadata'] = {}
+            else:
+                entry['metadata'] = {}
+            logs.append(entry)
+
+        return jsonify(logs)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # ─── REPORTS ─────────────────────────────────────────────────────
 @app.route('/api/admin/reports', methods=['GET'])
@@ -713,6 +815,122 @@ def update_refund_api(refund_id):
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+# ─── MEDICINE VERIFICATION (User/Patient Portal) ──────────────────────
+@app.route('/api/verify')
+def verify_medicine():
+    try:
+        batch_id = request.args.get('batch_id', '').strip()
+        name = request.args.get('name', '').strip()
+
+        if not batch_id and not name:
+            return jsonify({"error": "Please provide a batch_id or medicine name."}), 400
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        # Load expiry threshold from settings
+        cursor.execute("SELECT expiry_threshold FROM settings LIMIT 1")
+        settings = cursor.fetchone()
+        threshold = settings['expiry_threshold'] if settings else 30
+
+        if batch_id:
+            cursor.execute("SELECT * FROM inventory WHERE Batch_ID = ?", (batch_id,))
+            item = cursor.fetchone()
+        else:
+            cursor.execute("SELECT * FROM inventory WHERE Medicine_Name LIKE ? ORDER BY Days_to_Expiry ASC LIMIT 1", (f"%{name}%",))
+            item = cursor.fetchone()
+
+        conn.close()
+
+        username = request.args.get('username', 'anonymous')
+
+        if not item:
+            # Not found in database — possibly counterfeit or unregistered
+            log_event(username, 'Medicine Verification', f"Verification attempted for unknown item: batch='{batch_id}' name='{name}'. Result: UNVERIFIED.")
+            return jsonify({
+                "authentic": False,
+                "found": False,
+                "expiry_status": "UNKNOWN",
+                "verdict": "UNVERIFIED",
+                "verdict_color": "gray",
+                "message": "This batch ID or medicine name was NOT found in the registered pharmacy database. It may be counterfeit, from an unregistered source, or the Batch ID may be incorrect.",
+                "medicine": None
+            })
+
+        days = item['Days_to_Expiry']
+        if days <= 0:
+            expiry_status = "EXPIRED"
+            verdict = "AUTHENTIC — EXPIRED"
+            verdict_color = "red"
+            message = f"This medicine WAS dispensed by a registered pharmacy but has EXPIRED. Do not consume it. Dispose of it safely."
+        elif days <= threshold:
+            expiry_status = "NEAR_EXPIRY"
+            verdict = "AUTHENTIC — NEAR EXPIRY"
+            verdict_color = "orange"
+            message = f"This medicine is authentic but expires in only {days} day(s). Use with caution and consult your pharmacist."
+        else:
+            expiry_status = "VALID"
+            verdict = "AUTHENTIC — VALID"
+            verdict_color = "green"
+            message = f"This medicine is authentic and has {days} days remaining before expiry. It is safe to use as directed."
+
+        log_event(username, 'Medicine Verification', f"Verified {item['Medicine_Name']} ({item['Batch_ID']}). Result: {verdict}.")
+
+        return jsonify({
+            "authentic": True,
+            "found": True,
+            "expiry_status": expiry_status,
+            "verdict": verdict,
+            "verdict_color": verdict_color,
+            "message": message,
+            "medicine": {
+                "batch_id": item['Batch_ID'],
+                "name": item['Medicine_Name'],
+                "category": item['Category'],
+                "manufacturer": item['Manufacturer'],
+                "manufacturing_date": item['Manufacturing_Date'],
+                "expiry_date": item['Expiry_Date'],
+                "days_to_expiry": days,
+                "risk_level": item['Expiry_Risk_Level'],
+                "quantity_in_stock": item['Quantity_In_Stock'],
+                "ai_recommendation": item['AI_Recommendation']
+            }
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ─── USER SELF-REGISTRATION ────────────────────────────────────────────
+@app.route('/api/register/user', methods=['POST'])
+def register_public_user():
+    try:
+        data = request.get_json() or {}
+        username = data.get('username', '').strip()
+        password = data.get('password', '').strip()
+        full_name = data.get('full_name', '').strip()
+
+        if not username or not password:
+            return jsonify({"success": False, "message": "Username and password are required."}), 400
+
+        if len(password) < 6:
+            return jsonify({"success": False, "message": "Password must be at least 6 characters."}), 400
+
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
+        if cursor.fetchone():
+            conn.close()
+            return jsonify({"success": False, "message": "Username already exists. Please choose another."}), 400
+
+        cursor.execute("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", (username, password, 'user'))
+        conn.commit()
+        conn.close()
+
+        log_event(username, 'User Registration', f"New patient account registered: {username} ({full_name}).")
+        return jsonify({"success": True, "username": username, "role": "user"})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 # Required by Vercel
 if __name__ == '__main__':
