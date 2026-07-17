@@ -166,6 +166,30 @@ function initSidebarToggle() {
             : '<i class="fa-solid fa-chevron-left"></i>';
         localStorage.setItem('sidebar_collapsed', collapsed);
     });
+
+    // Create and inject mobile toggle button dynamically if it doesn't exist
+    let mobileToggle = document.getElementById('mobile-menu-toggle');
+    if (!mobileToggle) {
+        mobileToggle = document.createElement('button');
+        mobileToggle.id = 'mobile-menu-toggle';
+        mobileToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        document.body.appendChild(mobileToggle);
+    }
+
+    // Toggle sidebar on mobile when mobile menu toggle button is clicked
+    mobileToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('active');
+    });
+
+    // Close the sidebar when clicking outside of it on mobile screen widths
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== mobileToggle) {
+                sidebar.classList.remove('active');
+            }
+        }
+    });
 }
 
 function toggleTheme() {

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MedAI Mobile</string>
+    <string name="action_change_server">Change Server IP</string>
+</resources>

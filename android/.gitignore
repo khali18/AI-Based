@@ -1,0 +1,11 @@
+*.iml
+.gradle
+local.properties
+/.idea
+/build
+/app/build
+/.cxx
+/captures
+*.apk
+copy_icon.ps1
+build.ps1
