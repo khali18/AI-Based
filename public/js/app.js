@@ -12,7 +12,7 @@ function getLocalAvatarUrl(name, bgColor = '0D8ABC') {
         }
     }
     initials = initials.toUpperCase() || 'U';
-    
+
     // Choose dynamic color if bgColor is 'random'
     if (bgColor === 'random') {
         const colors = ['0D8ABC', '10b981', '6366f1', 'f59e0b', 'ef4444', 'ec4899', '8b5cf6'];
@@ -22,7 +22,7 @@ function getLocalAvatarUrl(name, bgColor = '0D8ABC') {
         }
         bgColor = colors[Math.abs(hash) % colors.length];
     }
-    
+
     const hexColor = bgColor.replace('#', '');
     return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23${hexColor}'/><text x='50%' y='54%' font-family='sans-serif' font-weight='bold' font-size='38' fill='%23ffffff' dominant-baseline='middle' text-anchor='middle'>${initials}</text></svg>`;
 }
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check Authentication
     const isLogin = window.location.pathname.endsWith('login.html');
     const userRole = localStorage.getItem('medai_role');
-    
+
     if (isLogin && userRole) {
         // Redirection Guard: If already logged in, skip the login page
         if (userRole === 'pharmacist') {
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return;
     }
-    
+
     if (!isLogin && !userRole) {
         window.location.href = '/login.html';
         return;
     }
-    
+
     // RBAC: Pharmacist and User Route Guards
     const path = window.location.pathname;
     if (userRole === 'pharmacist' && !isLogin) {
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
     }
-    
+
     // User Profile display update
     updateProfileDisplay(userRole);
 
@@ -196,12 +196,33 @@ function toggleTheme() {
     document.body.classList.toggle('dark-theme');
     const isDark = document.body.classList.contains('dark-theme');
     localStorage.setItem('medai_theme', isDark ? 'dark' : 'light');
+    updateThemeIcon(isDark);
 }
 
-// Check theme on load
-if (localStorage.getItem('medai_theme') === 'dark') {
-    document.body.classList.add('dark-theme');
+function updateThemeIcon(isDark) {
+    const themeBtns = document.querySelectorAll('button[onclick="toggleTheme()"]');
+    themeBtns.forEach(btn => {
+        if (isDark) {
+            btn.innerHTML = '<i class="fa-solid fa-sun"></i> Theme';
+        } else {
+            btn.innerHTML = '<i class="fa-solid fa-moon"></i> Theme';
+        }
+    });
 }
+
+// Check theme on load - Default to dark theme!
+if (localStorage.getItem('medai_theme') !== 'light') {
+    document.body.classList.add('dark-theme');
+    if (!localStorage.getItem('medai_theme')) {
+        localStorage.setItem('medai_theme', 'dark');
+    }
+}
+
+// Bind load event for initial theme icon matching
+window.addEventListener('DOMContentLoaded', () => {
+    updateThemeIcon(document.body.classList.contains('dark-theme'));
+});
+
 
 async function handleLogoutBinding() {
     const logoutBtn = document.getElementById('logout-btn');
@@ -217,7 +238,7 @@ async function handleLogoutBinding() {
                 });
             }
             // Exhaustive Session Clear
-            localStorage.clear(); 
+            localStorage.clear();
             window.location.href = '/login.html';
         });
     }
@@ -226,7 +247,7 @@ async function handleLogoutBinding() {
 async function updateProfileDisplay(role) {
     const roleTexts = document.querySelectorAll('.user-role-text');
     const nameTexts = document.querySelectorAll('.user-name-text');
-    
+
     roleTexts.forEach(el => {
         if (role === 'admin') el.textContent = 'System Admin';
         else if (role === 'pharmacist') el.textContent = 'Pharmacist';
@@ -238,7 +259,7 @@ async function updateProfileDisplay(role) {
     // NAVIGATION VISIBILITY Logic (Executed Synchronously)
     const adminOnlyEls = document.querySelectorAll('.admin-only');
     const pharmOnlyEls = document.querySelectorAll('.pharm-only');
-    
+
     if (role === 'pharmacist') {
         adminOnlyEls.forEach(el => el.style.display = 'none');
         pharmOnlyEls.forEach(el => el.style.display = 'block');
@@ -250,7 +271,7 @@ async function updateProfileDisplay(role) {
         adminOnlyEls.forEach(el => el.style.display = 'block');
         pharmOnlyEls.forEach(el => el.style.display = 'none');
     }
-    
+
     // Fetch live profile details from database to avoid stale localStorage!
     let profilePic = localStorage.getItem('medai_profile_pic');
     try {
@@ -265,7 +286,7 @@ async function updateProfileDisplay(role) {
     } catch (e) {
         console.error("Error fetching live profile picture:", e);
     }
-    
+
     const profileImgs = document.querySelectorAll('.user-profile img, .user-profile-img');
     profileImgs.forEach(img => {
         if (profilePic && profilePic !== 'null') {
@@ -319,7 +340,7 @@ function openAddProductModal() {
 function closeAddProductModal() {
     document.getElementById('add-product-modal').style.display = 'none';
     // Clear all fields
-    ['ap-name','ap-manufacturer','ap-mfg-date','ap-qty','ap-reorder','ap-cost','ap-price','ap-expiry-date','ap-sales'].forEach(id => {
+    ['ap-name', 'ap-manufacturer', 'ap-mfg-date', 'ap-qty', 'ap-reorder', 'ap-cost', 'ap-price', 'ap-expiry-date', 'ap-sales'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = id === 'ap-sales' ? '0' : '';
     });
@@ -328,16 +349,16 @@ function closeAddProductModal() {
 }
 
 async function saveNewProduct() {
-    const name     = document.getElementById('ap-name').value.trim();
+    const name = document.getElementById('ap-name').value.trim();
     const category = document.getElementById('ap-category').value;
-    const mfr      = document.getElementById('ap-manufacturer').value.trim();
-    const mfgDate  = document.getElementById('ap-mfg-date').value;
-    const qty      = parseInt(document.getElementById('ap-qty').value);
-    const reorder  = parseInt(document.getElementById('ap-reorder').value);
-    const cost     = parseFloat(document.getElementById('ap-cost').value);
-    const price    = parseFloat(document.getElementById('ap-price').value);
+    const mfr = document.getElementById('ap-manufacturer').value.trim();
+    const mfgDate = document.getElementById('ap-mfg-date').value;
+    const qty = parseInt(document.getElementById('ap-qty').value);
+    const reorder = parseInt(document.getElementById('ap-reorder').value);
+    const cost = parseFloat(document.getElementById('ap-cost').value);
+    const price = parseFloat(document.getElementById('ap-price').value);
     const expiryDate = document.getElementById('ap-expiry-date').value;
-    const sales    = parseInt(document.getElementById('ap-sales').value) || 0;
+    const sales = parseInt(document.getElementById('ap-sales').value) || 0;
 
     const errEl = document.getElementById('ap-error');
 
@@ -399,7 +420,7 @@ function openEditProductModal() {
 function closeEditProductModal() {
     document.getElementById('edit-product-modal').style.display = 'none';
     // Clear all fields
-    ['ep-batch-id','ep-name','ep-manufacturer','ep-mfg-date','ep-qty','ep-reorder','ep-cost','ep-price','ep-expiry-date','ep-sales'].forEach(id => {
+    ['ep-batch-id', 'ep-name', 'ep-manufacturer', 'ep-mfg-date', 'ep-qty', 'ep-reorder', 'ep-cost', 'ep-price', 'ep-expiry-date', 'ep-sales'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = id === 'ep-sales' ? '0' : '';
     });
@@ -431,16 +452,16 @@ async function editProduct(batchId) {
 
 async function saveEditedProduct() {
     const batchId = document.getElementById('ep-batch-id').value;
-    const name     = document.getElementById('ep-name').value.trim();
+    const name = document.getElementById('ep-name').value.trim();
     const category = document.getElementById('ep-category').value;
-    const mfr      = document.getElementById('ep-manufacturer').value.trim();
-    const mfgDate  = document.getElementById('ep-mfg-date').value;
-    const qty      = parseInt(document.getElementById('ep-qty').value);
-    const reorder  = parseInt(document.getElementById('ep-reorder').value);
-    const cost     = parseFloat(document.getElementById('ep-cost').value);
-    const price    = parseFloat(document.getElementById('ep-price').value);
+    const mfr = document.getElementById('ep-manufacturer').value.trim();
+    const mfgDate = document.getElementById('ep-mfg-date').value;
+    const qty = parseInt(document.getElementById('ep-qty').value);
+    const reorder = parseInt(document.getElementById('ep-reorder').value);
+    const cost = parseFloat(document.getElementById('ep-cost').value);
+    const price = parseFloat(document.getElementById('ep-price').value);
     const expiryDate = document.getElementById('ep-expiry-date').value;
-    const sales    = parseInt(document.getElementById('ep-sales').value) || 0;
+    const sales = parseInt(document.getElementById('ep-sales').value) || 0;
 
     const errEl = document.getElementById('ep-error');
 
@@ -515,20 +536,20 @@ async function deleteProduct(batchId) {
 async function loadDashboardData() {
     const data = await fetchAPI('/dashboard');
     if (!data) return;
-    
+
     // Populate KPI Cards
     document.getElementById('kpi-total').textContent = data.totalItems.toLocaleString();
-    
+
     // Revenue Display
     const revenueEl = document.getElementById('kpi-revenue-today');
     if (revenueEl) {
-        revenueEl.textContent = (SYSTEM_SETTINGS?.currency || 'GH₵') + ' ' + (data.todayRevenue || 0).toLocaleString(undefined, {minimumFractionDigits: 2});
+        revenueEl.textContent = (SYSTEM_SETTINGS?.currency || 'GH₵') + ' ' + (data.todayRevenue || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
     }
 
     // Correctly map Stock Value
     const stockValueGHS = (data.totalStockValue || 0) * (SYSTEM_SETTINGS?.exchange_rate || 1.0);
-    document.getElementById('kpi-value').textContent = (SYSTEM_SETTINGS?.currency || 'GH₵') + ' ' + stockValueGHS.toLocaleString(undefined, {minimumFractionDigits: 2});
-    
+    document.getElementById('kpi-value').textContent = (SYSTEM_SETTINGS?.currency || 'GH₵') + ' ' + stockValueGHS.toLocaleString(undefined, { minimumFractionDigits: 2 });
+
     document.getElementById('kpi-low-stock').textContent = data.lowStockCount.toLocaleString();
     document.getElementById('kpi-expiry').textContent = data.expiredOrNearExpiryCount.toLocaleString();
 
@@ -557,14 +578,14 @@ async function loadPharmacistPersonalDashboard() {
 
     // KPI: My Today's Revenue (filtered to this user only)
     const salesEl = document.getElementById('pharm-sales-today');
-    const txnEl   = document.getElementById('pharm-txn-count');
-    
+    const txnEl = document.getElementById('pharm-txn-count');
+
     try {
         const res = await fetch(`${API_URL}/sales/today?pharmacist=${encodeURIComponent(myUsername)}`);
         const data = await res.json();
-        if (salesEl) salesEl.textContent = 'GH\u20b5 ' + data.total_revenue_ghs.toLocaleString(undefined, {minimumFractionDigits: 2});
-        if (txnEl)   txnEl.textContent   = data.transaction_count + ' Transaction(s) Today';
-    } catch(e) {
+        if (salesEl) salesEl.textContent = 'GH\u20b5 ' + data.total_revenue_ghs.toLocaleString(undefined, { minimumFractionDigits: 2 });
+        if (txnEl) txnEl.textContent = data.transaction_count + ' Transaction(s) Today';
+    } catch (e) {
         if (salesEl) salesEl.textContent = 'GH\u20b5 0.00';
     }
 
@@ -577,12 +598,12 @@ async function loadPharmacistPersonalDashboard() {
     try {
         const res2 = await fetch(`${API_URL}/my/sales?pharmacist=${encodeURIComponent(myUsername)}`);
         const mySales = await res2.json();
-        
+
         if (!mySales || mySales.length === 0) {
             historyBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:2rem; color:var(--text-muted);"><i class="fa-solid fa-receipt" style="font-size:2rem; margin-bottom:0.5rem; display:block;"></i>No transactions recorded for your account yet.</td></tr>';
             return;
         }
-        
+
         historyBody.innerHTML = mySales.map(s => `
             <tr>
                 <td><small>${new Date(s.timestamp).toLocaleString()}</small></td>
@@ -591,7 +612,7 @@ async function loadPharmacistPersonalDashboard() {
                 <td><span class="badge low"><i class="fa-solid fa-circle-check"></i> Dispensed</span></td>
             </tr>
         `).join('');
-    } catch(e) {
+    } catch (e) {
         historyBody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Could not load your transactions.</td></tr>';
     }
 }
@@ -599,7 +620,7 @@ async function loadPharmacistPersonalDashboard() {
 async function loadRecommendations() {
     const items = await fetchAPI('/recommendations');
     const listEl = document.getElementById('ai-list');
-    
+
     if (!items || items.length === 0) {
         listEl.innerHTML = '<li>No high-risk items requiring immediate action.</li>';
         return;
@@ -609,7 +630,7 @@ async function loadRecommendations() {
         const raw_exhaust = item.ML_Predicted_Days_To_Exhaust;
         const exhaust = (raw_exhaust === "Unlimited" || !raw_exhaust) ? "Unlimited" : parseFloat(raw_exhaust).toFixed(1);
         const consume = parseFloat(item.ML_Predicted_Consumption || 0).toFixed(2);
-        
+
         return `
         <li class="rec-item">
             <div class="rec-item-title">
@@ -673,10 +694,10 @@ async function loadInventory(searchQuery = '') {
     if (!tbody) return;
 
     tbody.innerHTML = '<tr><td colspan="12" class="loading-td"><div class="spinner"></div> Loading inventory...</td></tr>';
-    
+
     const query = searchQuery ? `?search=${encodeURIComponent(searchQuery)}` : '';
     const items = await fetchAPI(`/inventory${query}`);
-    
+
     if (!items || items.length === 0) {
         tbody.innerHTML = '<tr><td colspan="12" style="text-align:center;">No items found.</td></tr>';
         return;
@@ -705,13 +726,13 @@ async function loadInventory(searchQuery = '') {
             </td>
             <td>
                 ${(() => {
-                    const parts = item.Expiry_Date ? item.Expiry_Date.split('-') : [];
-                    if (parts.length === 3) {
-                        const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-                        return d.toLocaleDateString();
-                    }
-                    return item.Expiry_Date ? new Date(item.Expiry_Date).toLocaleDateString() : 'N/A';
-                })()}
+            const parts = item.Expiry_Date ? item.Expiry_Date.split('-') : [];
+            if (parts.length === 3) {
+                const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+                return d.toLocaleDateString();
+            }
+            return item.Expiry_Date ? new Date(item.Expiry_Date).toLocaleDateString() : 'N/A';
+        })()}
                 <br>
                 <small style="color:${item.Days_to_Expiry <= 30 ? 'var(--danger)' : 'var(--text-muted)'}">
                     ${item.Days_to_Expiry} days left
@@ -721,12 +742,13 @@ async function loadInventory(searchQuery = '') {
             <td><small>${item.AI_Recommendation}</small></td>
             <td><svg id="barcode-${item.Batch_ID}"></svg></td>
             <td class="actions-col">
+                <button class="btn btn-sm" onclick="showQRModal('${item.Batch_ID}', '${item.Medicine_Name}', '${item.Category}', '${item.Quantity_In_Stock}', '${item.Expiry_Date}')" style="background:var(--primary);color:white;margin-right:5px;"><i class="fa-solid fa-qrcode"></i> QR</button>
                 <button class="btn btn-sm" onclick="editProduct('${item.Batch_ID}')" style="background:var(--warning);color:white;margin-right:5px;"><i class="fa-solid fa-edit"></i> Edit</button>
                 <button class="btn btn-sm" onclick="deleteProduct('${item.Batch_ID}')" style="background:var(--danger);color:white;"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
     `).join('');
-    
+
     // Generate barcodes for all items
     items.forEach(item => {
         try {
@@ -736,7 +758,7 @@ async function loadInventory(searchQuery = '') {
                 height: 30,
                 displayValue: false
             });
-        } catch(e) {}
+        } catch (e) { }
     });
 }
 
@@ -747,10 +769,10 @@ async function loadForecasting(searchQuery = '') {
     if (!tbody) return;
 
     tbody.innerHTML = '<tr><td colspan="7" class="loading-td"><div class="spinner"></div> Forecasting demand...</td></tr>';
-    
+
     const query = searchQuery ? `?search=${encodeURIComponent(searchQuery)}` : '';
     const items = await fetchAPI(`/forecast${query}`);
-    
+
     if (!items || items.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No items found.</td></tr>';
         return;
@@ -759,7 +781,7 @@ async function loadForecasting(searchQuery = '') {
     tbody.innerHTML = items.map(item => {
         let isUnlimited = item.Days_to_Exhaust_Stock === 'Unlimited' || item.Days_to_Exhaust_Stock === null || item.Days_to_Exhaust_Stock === 'Infinity';
         let daysValue = isUnlimited ? Infinity : item.Days_to_Exhaust_Stock;
-        
+
         let riskSpan = '';
         if (daysValue <= 30) riskSpan = '<span class="badge danger">High Exhaust Risk</span>';
         else if (daysValue <= 90) riskSpan = '<span class="badge medium">Moderate Risk</span>';
@@ -787,18 +809,18 @@ let _usersCache = [];
 async function loadUsers() {
     const tbody = document.getElementById('users-body');
     if (!tbody) return;
-    
+
     tbody.innerHTML = '<tr><td colspan="4" class="loading-td"><div class="spinner"></div> Updating staff registry...</td></tr>';
-    
+
     const users = await fetchAPI('/users');
     if (!users || users.length === 0) {
         tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:2rem; color:var(--text-muted);">No staff members found.</td></tr>';
         return;
     }
-    
+
     // Store in cache so onclick handlers can look up profile_pic safely
     _usersCache = users;
-    
+
     tbody.innerHTML = users.map(u => {
         const avatarUrl = getLocalAvatarUrl(u.username, 'random');
         const imgSrc = (u.profile_pic && u.profile_pic !== 'null') ? u.profile_pic : avatarUrl;
@@ -832,12 +854,12 @@ function openUserModal(username = null) {
     const roleInput = document.getElementById('staff-role');
     const passwordInput = document.getElementById('staff-password');
     const errorDiv = document.getElementById('modal-error');
-    
+
     if (!modal) return;
-    
+
     errorDiv.style.display = 'none';
     currentEditUser = username;
-    
+
     if (username) {
         // Look up user data from cache (avoids passing huge base64 data via onclick)
         const userData = _usersCache.find(u => u.username === username);
@@ -871,7 +893,7 @@ function openUserModal(username = null) {
         const preview = document.getElementById('image-preview');
         if (preview) preview.innerHTML = '<i class="fa-solid fa-user"></i>';
     }
-    
+
     modal.style.display = 'flex';
 
     const fileInput = document.getElementById('staff-image');
@@ -901,7 +923,7 @@ function compressImage(file, maxSize = 300, quality = 0.75) {
             img.onload = () => {
                 const canvas = document.createElement('canvas');
                 const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
-                canvas.width  = Math.round(img.width  * scale);
+                canvas.width = Math.round(img.width * scale);
                 canvas.height = Math.round(img.height * scale);
                 canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
                 canvas.toBlob((blob) => resolve(blob), 'image/jpeg', quality);
@@ -913,11 +935,11 @@ function compressImage(file, maxSize = 300, quality = 0.75) {
 }
 
 async function saveUser() {
-    const username  = document.getElementById('staff-username').value;
-    const role      = document.getElementById('staff-role').value;
-    const password  = document.getElementById('staff-password').value;
-    const errorDiv  = document.getElementById('modal-error');
-    const saveBtn   = document.getElementById('modal-save-btn');
+    const username = document.getElementById('staff-username').value;
+    const role = document.getElementById('staff-role').value;
+    const password = document.getElementById('staff-password').value;
+    const errorDiv = document.getElementById('modal-error');
+    const saveBtn = document.getElementById('modal-save-btn');
 
     if (!username || (!currentEditUser && !password)) {
         errorDiv.innerText = 'Please fill all required fields.';
@@ -930,7 +952,7 @@ async function saveUser() {
     if (saveBtn) { saveBtn.disabled = true; saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...'; }
 
     try {
-        const action    = currentEditUser ? 'edit' : 'add';
+        const action = currentEditUser ? 'edit' : 'add';
         const fileInput = document.getElementById('staff-image');
 
         const formData = new FormData();
@@ -945,7 +967,7 @@ async function saveUser() {
             formData.append('profile_pic', compressed, 'avatar.jpg');
         }
 
-        const res    = await fetch(`${API_URL}/admin/users`, { method: 'POST', body: formData });
+        const res = await fetch(`${API_URL}/admin/users`, { method: 'POST', body: formData });
         const result = await res.json();
 
         if (result.success) {
@@ -968,13 +990,13 @@ async function removeUser(username) {
     const currentUser = localStorage.getItem('medai_username');
     if (username === currentUser) return alert('You cannot remove your own account.');
     if (!confirm(`Are you sure you want to remove staff member "${username}"? This action is permanent.`)) return;
-    
+
     const res = await fetch(`${API_URL}/admin/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, action: 'delete' })
     });
-    
+
     const result = await res.json();
     if (result.success) {
         loadUsers();
@@ -986,9 +1008,9 @@ async function removeUser(username) {
 async function loadAuditLogs() {
     const container = document.getElementById('session-container');
     if (!container) return;
-    
+
     container.innerHTML = '<div style="text-align:center; padding: 40px; color:var(--text-muted);"><div class="spinner" style="margin: 0 auto 15px;"></div>Reconstructing system sessions...</div>';
-    
+
     const [logs, users] = await Promise.all([
         fetchAPI('/admin/audit'),
         fetchAPI('/users')
@@ -1038,7 +1060,7 @@ async function loadAuditLogs() {
         } else {
             // It's a general action - find or create a session
             let session = [...sessions].reverse().find(s => s.username === log.username && s.status === 'Active Session');
-            
+
             if (!session) {
                 // Orphaned action - Create a "Recovered/Ongoing" session
                 session = {
@@ -1054,7 +1076,7 @@ async function loadAuditLogs() {
                 };
                 sessions.push(session);
             }
-            
+
             session.actions.push(log);
             if (log.event === 'Dispensed Medicine' || log.event === 'Pharmacy Sale') {
                 session.transactions++;
@@ -1077,7 +1099,7 @@ async function loadAuditLogs() {
             icon = 'fa-hospital-user';
             color = '#6366f1';
         }
-        
+
         const sessionPic = userMap[s.username];
         const avatarUrl = sessionPic ? sessionPic : getLocalAvatarUrl(s.username, color);
 
@@ -1118,26 +1140,26 @@ async function loadAuditLogs() {
                     </thead>
                     <tbody>
                         ${s.actions.map(a => {
-                            const isDispense = a.event === 'Dispensed Medicine' || a.event === 'Pharmacy Sale';
-                            const cartItems = a.metadata?.cart || [];
-                            const customerName = a.metadata?.customer_name ||
-                                (a.details?.match(/Customer: ([^.]+)/)?.[1]) || 'Walk-in';
-                            
-                            // If it's a sale with items, list them
-                            if (isDispense && cartItems.length > 0) {
-                                return `
+            const isDispense = a.event === 'Dispensed Medicine' || a.event === 'Pharmacy Sale';
+            const cartItems = a.metadata?.cart || [];
+            const customerName = a.metadata?.customer_name ||
+                (a.details?.match(/Customer: ([^.]+)/)?.[1]) || 'Walk-in';
+
+            // If it's a sale with items, list them
+            if (isDispense && cartItems.length > 0) {
+                return `
                                     <tr>
                                         <td><small>${new Date(a.timestamp).toLocaleTimeString()}</small></td>
                                         <td><strong>${cartItems.map(i => i.name).join(', ')}</strong><br><small style="color:var(--text-muted)">Dispensed</small></td>
                                         <td><span style="font-weight:600; color:var(--primary)">${customerName}</span></td>
-                                        <td>${cartItems.reduce((s,i)=>s+i.qty,0)} units</td>
-                                        <td><strong>${SYSTEM_SETTINGS.currency} ${parseFloat(a.metadata?.total||0).toFixed(2)}</strong></td>
+                                        <td>${cartItems.reduce((s, i) => s + i.qty, 0)} units</td>
+                                        <td><strong>${SYSTEM_SETTINGS.currency} ${parseFloat(a.metadata?.total || 0).toFixed(2)}</strong></td>
                                     </tr>
                                 `;
-                            }
-                            
-                            // Fallback for general logs (Login, Logout, etc.)
-                            return `
+            }
+
+            // Fallback for general logs (Login, Logout, etc.)
+            return `
                                 <tr>
                                     <td><small>${new Date(a.timestamp).toLocaleTimeString()}</small></td>
                                     <td><strong>${a.event}</strong><br><small style="color:var(--text-muted)">${a.details || ''}</small></td>
@@ -1146,7 +1168,7 @@ async function loadAuditLogs() {
                                     <td><strong>${a.metadata?.total ? `${SYSTEM_SETTINGS.currency} ${parseFloat(a.metadata.total).toFixed(2)}` : '-'}</strong></td>
                                 </tr>
                             `;
-                        }).join('')}
+        }).join('')}
                     </tbody>
                 </table>
             </div>
@@ -1159,7 +1181,7 @@ function toggleAuditDetails(btn) {
     const card = btn.closest('.session-card');
     const content = card.querySelector('.details-content');
     const chevron = btn.querySelector('i');
-    
+
     content.classList.toggle('active');
     if (content.classList.contains('active')) {
         chevron.style.transform = 'rotate(180deg)';
@@ -1190,18 +1212,18 @@ async function loadForecasting(searchTerm = '') {
         const riskLevel = item.Expiry_Risk_Level || 'Low Risk';
         let badgeClass = 'badge-success';
         if (riskLevel === 'Medium Risk') badgeClass = 'badge-warning';
-        if (riskLevel === 'High Risk')   badgeClass = 'badge-danger';
+        if (riskLevel === 'High Risk') badgeClass = 'badge-danger';
 
         const stockoutStr = item.Predicted_Stockout_Date
-            ? new Date(item.Predicted_Stockout_Date).toLocaleDateString(undefined, {month:'short', day:'numeric'})
+            ? new Date(item.Predicted_Stockout_Date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
             : '<span style="color:var(--text-muted);font-size:0.8rem;">365+ days</span>';
 
         const arrivalStr = item.Manufacturing_Date
-            ? new Date(item.Manufacturing_Date).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
+            ? new Date(item.Manufacturing_Date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
             : 'N/A';
 
         const expiryStr = item.Expiry_Date
-            ? new Date(item.Expiry_Date).toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
+            ? new Date(item.Expiry_Date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
             : 'N/A';
 
         const isHighRisk = riskLevel === 'High Risk';
@@ -1242,7 +1264,7 @@ async function loadForecasting(searchTerm = '') {
 
 function toggleForecastDetail(safeId, idx) {
     const panel = document.getElementById('detail-panel-' + safeId);
-    const btn   = document.getElementById('btn-' + safeId);
+    const btn = document.getElementById('btn-' + safeId);
     if (!panel) return;
 
     const isOpen = panel.classList.contains('open');
@@ -1259,20 +1281,20 @@ function toggleForecastDetail(safeId, idx) {
         const riskClass = riskLevel === 'High Risk' ? 'high' : riskLevel === 'Medium Risk' ? 'medium' : 'low';
 
         // Stock gauge
-        const reorder  = item.Reorder_Level || 50;
-        const stock    = item.Quantity_In_Stock || 0;
+        const reorder = item.Reorder_Level || 50;
+        const stock = item.Quantity_In_Stock || 0;
         const maxStock = Math.max(reorder * 5, stock, 500);
         const stockPct = Math.min(100, Math.round((stock / maxStock) * 100));
         const stockColor = stockPct > 50 ? 'green' : stockPct > 20 ? 'yellow' : 'red';
 
         // Days-to-exhaust gauge
-        const days     = item.Days_to_Exhaust_Stock;
-        const daysPct  = (days === null || days === undefined) ? 100 : Math.min(100, Math.round((days / 365) * 100));
+        const days = item.Days_to_Exhaust_Stock;
+        const daysPct = (days === null || days === undefined) ? 100 : Math.min(100, Math.round((days / 365) * 100));
         const daysColor = daysPct > 50 ? 'green' : daysPct > 15 ? 'yellow' : 'red';
         const daysLabel = (days === null || days === undefined) ? '365+ days' : `${days} days`;
 
         const expiryFull = item.Expiry_Date
-            ? new Date(item.Expiry_Date).toLocaleDateString(undefined, {weekday:'short', year:'numeric', month:'long', day:'numeric'})
+            ? new Date(item.Expiry_Date).toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' })
             : 'N/A';
 
         const rec = item.AI_Recommendation || 'No immediate action required.';
@@ -1340,7 +1362,7 @@ async function switchReport(period, btn) {
     // UI Update
     document.querySelectorAll('.report-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    
+
     // Load Data
     loadReports(period);
 }
@@ -1349,14 +1371,14 @@ async function loadReports(period = 'today') {
     const reportBody = document.getElementById('report-body');
     const historyBody = document.getElementById('sales-history-body');
     const titleEl = document.getElementById('report-facility-title');
-    
+
     // UI Feedbacks
     if (reportBody) reportBody.innerHTML = '<tr><td colspan="2" class="loading-td"><div class="spinner"></div> Updating metrics...</td></tr>';
-    
+
     // Fetch aggregated report data
     const data = await fetchAPI(`/admin/reports?period=${period}`);
     const dashData = await fetchAPI('/dashboard'); // for inventory stats
-    
+
     if (!data || !dashData) return;
 
     // 1. Update Facility Title
@@ -1367,7 +1389,7 @@ async function loadReports(period = 'today') {
     }
 
     // 2. Update Summary Cards
-    document.getElementById('sum-revenue').textContent = `${SYSTEM_SETTINGS.currency} ${data.total_revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+    document.getElementById('sum-revenue').textContent = `${SYSTEM_SETTINGS.currency} ${data.total_revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
     document.getElementById('sum-txn').textContent = data.transaction_count.toLocaleString();
     document.getElementById('sum-items').textContent = data.items_sold.toLocaleString();
 
@@ -1376,7 +1398,7 @@ async function loadReports(period = 'today') {
         reportBody.innerHTML = `
             <tr>
                 <td>Total Inventory Valuation</td>
-                <td><strong>GH₵ ${parseFloat(dashData.totalStockValue).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong></td>
+                <td><strong>GH₵ ${parseFloat(dashData.totalStockValue).toLocaleString(undefined, { minimumFractionDigits: 2 })}</strong></td>
             </tr>
             <tr>
                 <td>Total Registered Medicines</td>
@@ -1452,12 +1474,12 @@ function loadPOSSearch() {
     const term = document.getElementById('pos-search')?.value.toLowerCase() || '';
     const list = document.getElementById('pos-inventory-list');
     if (!list || !allPosInventory) return;
-    
-    const filtered = allPosInventory.filter(i => 
-        i.Medicine_Name.toLowerCase().includes(term) || 
+
+    const filtered = allPosInventory.filter(i =>
+        i.Medicine_Name.toLowerCase().includes(term) ||
         i.Batch_ID.toLowerCase().includes(term)
     );
-    
+
     list.innerHTML = filtered.slice(0, 50).map(item => {
         const priceGHS = ((item.Selling_Price_USD || 0) * (SYSTEM_SETTINGS.exchange_rate || 1.0)).toFixed(2);
         return `
@@ -1500,13 +1522,13 @@ function renderCart() {
     const cartEl = document.getElementById('pos-cart-list');
     const totalEl = document.getElementById('pos-total');
     if (!cartEl) return;
-    
+
     if (posCart.length === 0) {
         cartEl.innerHTML = '<p style="color:var(--text-muted);">Cart is empty</p>';
         totalEl.textContent = `${SYSTEM_SETTINGS.currency} 0.00`;
         return;
     }
-    
+
     let total = 0;
     cartEl.innerHTML = posCart.map(i => {
         total += i.qty * i.price;
@@ -1528,19 +1550,19 @@ function renderCart() {
         </div>
         `;
     }).join('');
-    
+
     totalEl.textContent = SYSTEM_SETTINGS.currency + ' ' + total.toFixed(2);
 }
 
 async function checkoutPOS() {
     if (posCart.length === 0) return alert('Cart is empty.');
-    
+
     try {
         const customerName = document.getElementById('customer-name')?.value || '';
         const res = await fetch(`${API_URL}/checkout`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
                 cart: posCart,
                 staff_name: localStorage.getItem('medai_username') || 'Pharmacist',
                 customer_name: customerName
@@ -1552,12 +1574,12 @@ async function checkoutPOS() {
             const finalCart = [...posCart];
             const finalTotal = data.total;
             printReceipt(finalCart, finalTotal, customerName);
-            
+
             // 2. Clear Cart and Refresh UI immediately
             if (document.getElementById('customer-name')) document.getElementById('customer-name').value = '';
             posCart = [];
             renderCart();
-            initPOS(); 
+            initPOS();
 
             // 3. Show Success Alert AFTER triggering print (non-blocking for print engine)
             setTimeout(() => {
@@ -1566,7 +1588,7 @@ async function checkoutPOS() {
         } else {
             alert('Failed: ' + data.error);
         }
-    } catch(err) {
+    } catch (err) {
         alert('Checkout error');
     }
 }
@@ -1576,11 +1598,11 @@ function handleBarcodeScan(code) {
         alert('Inventory data is still loading. Please wait a moment.');
         return;
     }
-    
+
     // Case-insensitive matching for Batch ID
     const searchCode = code.trim().toLowerCase();
     const item = allPosInventory.find(i => i.Batch_ID.toLowerCase() === searchCode);
-    
+
     if (!item) {
         alert('Barcode not found: ' + code);
         return;
@@ -1600,7 +1622,7 @@ function printReceipt(cart, total, customerName = '') {
     const h2Receipt = document.querySelector('#receipt-container h2');
     const pNHIS = document.createElement('p');
     if (h2Receipt) h2Receipt.textContent = SYSTEM_SETTINGS.hospital_name;
-    
+
     // Clear previous NHIS if any
     const existingNHIS = document.getElementById('receipt-nhis');
     if (existingNHIS) existingNHIS.remove();
@@ -1609,12 +1631,12 @@ function printReceipt(cart, total, customerName = '') {
     pNHIS.textContent = 'NHIS ID: ' + SYSTEM_SETTINGS.nhis_id;
     pNHIS.style.fontSize = '0.75rem';
     if (h2Receipt) h2Receipt.parentNode.insertBefore(pNHIS, h2Receipt.nextSibling);
-    
+
     if (!listBody) return;
-    
+
     dateEl.textContent = 'Date: ' + new Date().toLocaleString();
     idEl.textContent = 'Transaction: TXN' + Math.random().toString(36).substr(2, 9).toUpperCase();
-    
+
     // Clear previous customer name if any
     const existingCust = document.getElementById('receipt-customer');
     if (existingCust) existingCust.remove();
@@ -1624,7 +1646,7 @@ function printReceipt(cart, total, customerName = '') {
         customerEl.innerHTML = `<strong>Customer: ${customerName}</strong>`;
         idEl.parentNode.insertBefore(customerEl, idEl.nextSibling);
     }
-    
+
     listBody.innerHTML = cart.map(i => `
         <tr>
             <td>${i.name}</td>
@@ -1632,9 +1654,9 @@ function printReceipt(cart, total, customerName = '') {
             <td>${SYSTEM_SETTINGS.currency} ${(i.qty * i.price).toFixed(2)}</td>
         </tr>
     `).join('');
-    
+
     totalEl.innerHTML = `Grand Total: ${SYSTEM_SETTINGS.currency} ${total.toFixed(2)}`;
-    
+
     // Generate barcode for transaction
     JsBarcode("#receipt-barcode", idEl.textContent.split(': ')[1], {
         format: "CODE128",
@@ -1642,7 +1664,7 @@ function printReceipt(cart, total, customerName = '') {
         height: 40,
         displayValue: true
     });
-    
+
     // Trigger Print
     setTimeout(() => {
         document.body.classList.add('receipt-mode');
@@ -1655,10 +1677,10 @@ function printReceipt(cart, total, customerName = '') {
 async function loadPharmacistDashboard() {
     const res = await fetchAPI('/sales/today');
     const salesVal = res ? res.total_revenue_ghs : 0;
-    
+
     const ui = document.getElementById('pharm-sales-today');
     if (ui) {
-        ui.textContent = SYSTEM_SETTINGS.currency + ' ' + parseFloat(salesVal).toLocaleString(undefined, {minimumFractionDigits: 2});
+        ui.textContent = SYSTEM_SETTINGS.currency + ' ' + parseFloat(salesVal).toLocaleString(undefined, { minimumFractionDigits: 2 });
     }
 }
 
@@ -1699,8 +1721,8 @@ async function exportToCSV() {
     document.body.removeChild(link);
 }
 function getRiskClass(level) {
-    if(level === 'High Risk') return 'danger';
-    if(level === 'Medium Risk') return 'medium';
+    if (level === 'High Risk') return 'danger';
+    if (level === 'Medium Risk') return 'medium';
     return 'low';
 }
 
@@ -1710,21 +1732,21 @@ function openXAIModal(name, batch, exhaust, expiryDays, consume, risk) {
     const modal = document.getElementById('xai-modal');
     const body = document.getElementById('xai-body');
     if (!modal || !body) return;
-    
+
     let explanation = `The MedAI Engine classified <strong>${name} (Batch: ${batch})</strong> as <span class="badge danger">${risk}</span> based on the Utilization Probability Formula:<br><br>`;
-    
+
     explanation += `<div style="background:rgba(0,0,0,0.05); padding:10px; border-radius:8px; font-family:monospace; margin:10px 0; border-left:3px solid var(--primary);">`;
     explanation += `Risk = (Current_Stock / Avg_Daily_Sales) > Days_to_Expiry<br>`;
     explanation += `Threshold: ${exhaust} days to sell > ${expiryDays} days left`;
     explanation += `</div>`;
-    
+
     if (exhaust === 'Unlimited') {
         explanation += `<p><strong>Analysis:</strong> The model predicts a daily consumption rate of ~${consume} units/day. Due to insufficient sales velocity, the system cannot mathematically guarantee the stock will be exhausted before expiration.</p>`;
     } else {
         explanation += `<p><strong>Analysis:</strong> Based on the predicted consumption rate of <strong>${consume} units/day</strong>, it will take <strong>${exhaust} days</strong> to logically exhaust this batch.</p>`;
         explanation += `<p>Because the predicted time to exhaust (${exhaust} days) physically exceeds the actual time remaining on the shelf (${expiryDays} days), the AI has proactively alerted this batch to prevent financial leak via medical waste.</p>`;
     }
-    
+
     body.innerHTML = explanation;
     modal.style.display = 'flex';
 }
@@ -1741,21 +1763,21 @@ function simulateSMSBroadcast() {
 async function confirmSMSBroadcast() {
     const phoneInput = document.getElementById('sms-phone').value.trim().replace(/\+/g, '');
     const apikey = document.getElementById('sms-apikey').value.trim();
-    
+
     if (!phoneInput) {
         alert("Please enter a Target Phone Number to send the alerts.");
         return;
     }
-    
+
     // Save to localstorage for convenience
     localStorage.setItem('sms_target_phone', document.getElementById('sms-phone').value.trim());
     localStorage.setItem('sms_api_key', apikey);
 
     const modal = document.getElementById('sms-modal');
     if (modal) modal.style.display = 'none';
-    
+
     showToast(`Pinging WhatsApp Gateway for ${document.getElementById('sms-phone').value}...`, "info");
-    
+
     const textMsg = encodeURIComponent("🚨 *MedAI Alert*\n\nHigh risk items detected in inventory! AI predicts they will not exhaust before expiry.\n\nPlease check Dashboard immediately.");
 
     try {
@@ -1768,7 +1790,7 @@ async function confirmSMSBroadcast() {
             // Presentation Simulation Mode
             showToast(`Alerts transmitted to WhatsApp Gateway for delivery to +${phoneInput}.`, "success");
         }
-        
+
         // Update the broadcast button text globally
         const btnTags = document.getElementsByTagName("button");
         for (let btn of btnTags) {
@@ -1777,15 +1799,15 @@ async function confirmSMSBroadcast() {
                 btn.style.background = "var(--text-muted)";
             }
         }
-    } catch(err) {
+    } catch (err) {
         showToast(`Failed to establish connection to the WhatsApp Gateway.`, "danger");
     }
 }
 
-function showToast(message, type="info") {
+function showToast(message, type = "info") {
     const container = document.getElementById('toast-container');
     if (!container) return;
-    
+
     const toast = document.createElement('div');
     toast.style.background = type === 'success' ? '#10b981' : 'var(--primary)';
     toast.style.color = 'white';
@@ -1797,10 +1819,10 @@ function showToast(message, type="info") {
     toast.style.gap = '10px';
     toast.style.animation = 'modalIn 0.3s ease-out';
     toast.style.backdropFilter = 'blur(10px)';
-    
+
     toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
     container.appendChild(toast);
-    
+
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transition = 'opacity 0.3s';
@@ -1810,4 +1832,71 @@ function showToast(message, type="info") {
 
 function printReport() {
     window.print();
+}
+
+// Global Dynamic QR Code Generator Modal
+function showQRModal(batchId, name, category, stock, expiry) {
+    let modal = document.getElementById('global-qr-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'global-qr-modal';
+        modal.className = 'modal-overlay';
+        modal.style.display = 'none';
+        modal.innerHTML = `
+            <div class="modal-content glass" style="max-width: 480px; text-align: center; border: 1px solid var(--primary-light);">
+                <div class="modal-header" style="border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+                    <h2 style="font-size: 1.3rem; margin: 0; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-qrcode" style="color: var(--primary);"></i> Batch QR Code Generator
+                    </h2>
+                    <button type="button" onclick="document.getElementById('global-qr-modal').style.display='none'" style="background: none; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div style="background: #ffffff; padding: 1.25rem; border-radius: 16px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 1.5rem;">
+                        <img id="gqr-img" src="" alt="QR Code" style="width: 220px; height: 220px; display: block; margin: 0 auto; border-radius: 8px;">
+                    </div>
+                    <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1rem; text-align: left; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-muted);">Batch ID:</span>
+                            <strong id="gqr-batch" style="color: var(--primary);">BATCH-1004</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-muted);">Medicine Name:</span>
+                            <strong id="gqr-name" style="color: var(--text-main);">Atorvastatin 20mg</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-muted);">Category:</span>
+                            <span id="gqr-category" style="color: var(--text-main);">Cardiology</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-muted);">Quantity In Stock:</span>
+                            <span id="gqr-stock" style="color: var(--text-main);">450 units</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: var(--text-muted);">Expiry Date:</span>
+                            <span id="gqr-expiry" style="color: var(--text-main);">2027-08-15</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-muted);">Status:</span>
+                            <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: var(--success); font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3);">Authentic & Verified</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button class="btn btn-primary" onclick="window.print()" style="display: flex; align-items: center; gap: 8px; font-weight: 600; background: var(--primary); color: white;">
+                            <i class="fa-solid fa-print"></i> Print QR Label
+                        </button>
+                        <button class="btn btn-secondary" onclick="document.getElementById('global-qr-modal').style.display='none'">Close</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    document.getElementById('gqr-batch').innerText = batchId || 'BATCH-1004';
+    document.getElementById('gqr-name').innerText = name || 'Atorvastatin 20mg';
+    document.getElementById('gqr-category').innerText = category || 'Cardiology';
+    document.getElementById('gqr-stock').innerText = (stock !== undefined ? stock : 450) + ' units';
+    document.getElementById('gqr-expiry').innerText = expiry || '2027-08-15';
+    document.getElementById('gqr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(batchId || 'BATCH-1004')}`;
+    modal.style.display = 'flex';
 }

@@ -932,6 +932,66 @@ def register_public_user():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+# ─── BACKEND TEXT TO SPEECH (Offline Caching) ──────────────────────
+@app.route('/api/tts')
+def text_to_speech():
+    try:
+        text = request.args.get('text', '').strip()
+        lang_input = request.args.get('lang', 'en').lower().strip()
+        
+        if not text:
+            return jsonify({"error": "No text provided"}), 400
+            
+        # Map frontend language to Google Translate language codes
+        lang_map = {
+            'en': 'en',
+            'twi': 'ak',
+            'hausa': 'ha',
+            'dagbani': 'dag'
+        }
+        lang = lang_map.get(lang_input, 'en')
+        
+        # Build local disk cache path
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        cache_dir = os.path.join(base_dir, '..', 'cache_audio')
+        os.makedirs(cache_dir, exist_ok=True)
+        
+        import hashlib
+        from urllib.parse import quote
+        
+        # Hash both text and language code for filename
+        hash_key = hashlib.md5(f"{lang}_{text}".encode('utf-8')).hexdigest()
+        cache_file = os.path.join(cache_dir, f"{hash_key}.mp3")
+        
+        if os.path.exists(cache_file):
+            from flask import send_file
+            return send_file(cache_file, mimetype='audio/mpeg')
+            
+        # Fetch from Google Translate TTS URL
+        url = f"https://translate.google.com/translate_tts?ie=UTF-8&q={quote(text)}&tl={lang}&client=tw-ob"
+        
+        import urllib.request
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        
+        try:
+            with urllib.request.urlopen(req, timeout=5) as response:
+                audio_bytes = response.read()
+                
+            # Write to cache
+            with open(cache_file, 'wb') as f:
+                f.write(audio_bytes)
+                
+            from flask import send_file
+            return send_file(cache_file, mimetype='audio/mpeg')
+            
+        except Exception as net_err:
+            print(f"TTS Offline Fallback triggered: {net_err}")
+            return jsonify({"error": "TTS offline fallback", "action": "fallback"}), 502
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 # Required by Vercel
 if __name__ == '__main__':
     from waitress import serve

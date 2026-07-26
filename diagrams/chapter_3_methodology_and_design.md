@@ -33,6 +33,19 @@ This system was built using the **Agile Development Methodology (Scrum)**. The i
 └───────────────┴─────────────────┴───────────────────────┘
 ```
 
+### 3.1.4 Data Mining and Machine Learning Lifecycle (CRISP-DM)
+To develop, evaluate, and deploy the Random Forest demand forecasting model, the project follows the **CRISP-DM (Cross-Industry Standard Process for Data Mining)** framework. This structured approach ensures that the machine learning intelligence aligns with pharmacy business goals and operates reliably in a local, offline environment.
+
+The system maps the six phases of CRISP-DM as follows:
+1. **Business Understanding**: Define the operational objective—reducing drug stockouts and minimizing expiry wastage in Ghanaian clinics.
+2. **Data Understanding**: Analyze the relationships between medicine attributes (categories, unit costs, historical 30-day consumption) and daily dispensing rates.
+3. **Data Preparation**: Clean and preprocess records, resolve string discrepancies, and perform label encoding using `LabelEncoder`.
+4. **Modeling**: Train the Random Forest Regressor engine locally (100 estimators) to predict daily consumption rates.
+5. **Evaluation**: Validate the model offline using metrics such as Root Mean Squared Error (RMSE) and R-squared ($R^2$).
+6. **Deployment**: Serialize the model (`model.pkl`) and label encoder (`encoder.pkl`) using joblib, embedding them into a local Flask/Waitress web server for live, offline inference queries.
+
+![Figure 3.0: CRISP-DM Lifecycle for MedAI GH](./crisp_dm_framework.png)
+
 ---
 
 ## 3.2 Requirements Analysis
@@ -147,6 +160,8 @@ graph TD
 
 ### 3.4.2 Use Case Diagram
 This diagram describes user access privileges and system interactions:
+
+![Figure 3.2: MedAI GH Use Case Diagram](./use_case_diagram.png)
 
 ```mermaid
 left_to_right_direction
@@ -265,6 +280,8 @@ erDiagram
 ### 3.4.4 Activity Diagram: POS Checkout Flow
 The operational steps taken when a pharmacist conducts a sale through the checkout interface:
 
+![Figure 3.4: MedAI GH POS Checkout Activity Flow](./activity_diagram.png)
+
 ```mermaid
 stateDiagram-v2
     [*] --> CartOpen: Add items to Cart
@@ -363,6 +380,39 @@ classDiagram
     Flask_Routes --> DatabaseHelper : Interacts with SQLite
     PharmacyIntelligenceLayer --> DatabaseHelper : Seeds predictions
 ```
+
+### 3.4.7 Input Design: Add Medicine Form
+The inventory control module relies on structured input validation to maintain database schema integrity. Pharmacists or Administrators input batch information via the **Add New Product** modal form interface. 
+
+The fields are mapped as follows:
+| Input Field | Data Type | Constraint / Validation | Rationale |
+|:---|:---|:---|:---|
+| **Medicine Name** | TEXT | Required, alphanumeric | Identifies the drug item on receipts and search queries. |
+| **Category** | SELECT | Required, list option | Dynamic menu matching pre-coded Random Forest input constraints. |
+| **Manufacturer** | TEXT | Required | Identifies source batches for recall management. |
+| **Mfg Date** | DATE | Required, ISO date | Used in combination with Expiry Date to calculate shelf status. |
+| **Quantity In Stock** | INTEGER | Required, $\ge 0$ | Establishes starting shelf inventory counts. |
+| **Reorder Level** | INTEGER | Required, $\ge 0$ | Determines thresholds for generating stock replenishing alerts. |
+| **Unit Cost (GH₵)** | REAL | Required, $\ge 0.00$ | Financial base representing batch acquisition price. |
+| **Selling Price (GH₵)** | REAL | Required, $\ge 0.00$ | Standard client retail rate; must exceed Unit Cost. |
+| **Expiry Date** | DATE | Required, $> \text{Mfg Date}$ | System critical parameter powering ML expiry and consumption flags. |
+| **Sales Last 30 Days**| INTEGER | $\ge 0$, Default: 0 | Seed rate used for establishing consumption regressions. |
+
+![Figure 3.7: MedAI GH Add Medicine Form Input Design](./add_medicine_form.png)
+
+### 3.4.8 Input Design: Pharmacist Checkout Form
+The dispensing operations rely on an interactive Point-of-Sale (POS) cart system. Pharmacists use barcodes or direct catalog queries to load drugs, adjust transaction quantities, and record patient names during checkout.
+
+The checkout controls are mapped as follows:
+| Input Section / Field | Control Type | Constraint / Validation | Rationale |
+|:---|:---|:---|:---|
+| **Barcode Scan** | TEXT input | Auto-submit, alphanumeric | Quick scanner input bypasses catalog search. |
+| **Search Catalog** | TEXT input | Character debounce (300ms) | Dynamic query filtering across names and batch IDs. |
+| **Cart Quantity** | NUMBER spinbox | $\ge 1$, $\le$ Live Inventory Stock | Restricts dispensing of items beyond available shelf stock. |
+| **Customer Name** | TEXT input | Optional, text only | Registers recipient details for NHIS/hospital auditing. |
+| **Process Dispense** | BUTTON | Disabled if Cart is empty | Triggers database deductions and prints local invoice. |
+
+![Figure 3.8: MedAI GH Pharmacist Checkout Form Input Design](./pharmacist_checkout_form.png)
 
 ---
 
@@ -466,21 +516,15 @@ To prepare the dataset for training, a pipeline of offline preprocessing steps w
 3. **Categorical Variable Transformation**: Since Random Forest Regressors cannot process raw strings, the categorical `Category` feature was transformed into numerical tokens (`Category_Encoded`) using `LabelEncoder`.
 4. **Serialization**: Saving the trained regressor model and label encoder mapping structure using joblib to enable offline startup times under 100 milliseconds.
 
+![Figure 3.11: MedAI GH Data Preprocessing Pipeline Flowchart](./preprocessing_flowchart.png)
+
 ---
 
 ## 3.7 Validation and Testing Plan
 
 A verification framework was established to test backend API endpoints, machine learning predictions, database concurrency, and offline operation.
 
-```
-                  ┌──────────────────────────────────────────────┐
-                  │           V E R I F I C A T I O N            │
-                  ├──────────────────────┬───────────────────────┤
-                  │ Unit Tests           │ Flask Route Responses │
-                  │ Integration Tests    │ POS to DB Live Sync   │
-                  │ Acceptance (UAT)     │ Offline Resilience    │
-                  └──────────────────────┴───────────────────────┘
-```
+![Figure 3.12: MedAI GH Verification and Testing Structure](./integration_testing_plan.png)
 
 ### 3.7.1 Automated Testing
 * **Backend Endpoint Verification**: Automated Python scripts run local requests targeting `/api/health`, `/api/inventory`, and `/api/dashboard` to verify that JSON objects return correct data and status codes (`200 OK`).
@@ -507,3 +551,43 @@ The system uses strict role-based authorization to prevent unauthorized access:
 * Only administrators have rights to create, edit, or delete accounts, configure system settings, and inspect system audit logs.
 * Pharmacists are restricted to POS dispensing, personal sales records, and refund requests.
 * The system keeps an immutable audit trail (`audit` table) of every checkout, login, configuration update, and database write. This prevents financial tampering and creates a reliable log of all actions.
+
+---
+
+## 3.9 Output Design: Dashboard Metrics
+The system outputs key operational metrics and AI risk projections onto a centralized dashboard for real-time monitoring and administrative oversight.
+
+The outputs are defined as:
+| Dashboard Widget | Display Format | Underlying Source | Purpose |
+|:---|:---|:---|:---|
+| **Total Items** | KPI Card (number) | SQLite count on `inventory` | Displays the total unique drug items currently cataloged. |
+| **Today's Revenue**| KPI Card (GHS) | Sum of sales for today's date | Displays sum of modern pharmacist cashier checkouts. |
+| **Stock Value** | KPI Card (GHS) | Sum(stock * price) | Aggregated capital value of all assets on hospital shelves. |
+| **Low Stock Alerts**| KPI Card (count) | Count(stock < reorder_level) | Highlights critical drug batches needing replenishment. |
+| **Critical Expiry**| KPI Card (count) | Live count of high-risk items | Sum of items designated as high risk by Classifier. |
+| **Category Chart** | Donut Chart (Canvas) | JSON data query on category stock | Visualizes warehouse distribution profile by therapy type. |
+| **Classifier Feed**| Dynamic List | Random Forest predicted risk levels | Lists predictive risk explanations and SMS alert links. |
+| **Audit Feed** | Log Table | Last 10 records from `audit` table | Interactive trace displaying logins, checkouts, and updates. |
+
+![Figure 3.9: MedAI GH Dashboard Metrics Output Design](./dashboard_metrics.png)
+
+---
+
+## 3.10 Output Design: Inventory Report
+The system prints administrative intelligence summaries detailing transaction volumes and financial valuations to guide logistics and budgeting actions.
+
+The report outputs are defined as:
+| Report Field | Data Type | Computation Logic | Purpose |
+|:---|:---|:---|:---|
+| **Total Revenue** | REAL (GHS) | Sum of sales prices for filtered period | Financial indicator of shop sales income. |
+| **Transactions** | INTEGER | Count of unique receipt IDs processed | Dispensing activity volume metric. |
+| **Items Sold** | INTEGER | Sum of quantities across item lines | Total volume of unit packages moved. |
+| **Total Registered**| INTEGER | Count of distinct batch items in table | Overall catalog size monitoring. |
+| **Low Stock Warnings**| INTEGER | Count of batches where stock < reorder | Identifies immediate replenishment needs. |
+| **Expired / Expiring**| INTEGER | Count of high-risk items | Quantifies stock risk value. |
+| **Est. Stock Value**| REAL (GHS) | Sum(stock * unit_cost) | Total assets capital inventory value. |
+| **Expected Margin** | REAL (GHS) | Sum(stock * (sell_price - cost)) | Expected overall profit yield at retail rates. |
+
+![Figure 3.10: MedAI GH Inventory Report Output Design](./inventory_report_mockup.png)
+
+
